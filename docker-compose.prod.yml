@@ -1,0 +1,54 @@
+version: '3'
+services:
+  backend:
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-11-february-2020/group-projects/capricorn/luna:master
+    env_file:
+      - ./envs/.prod.env
+    command: "sh ../scripts/run.sh"
+    depends_on:
+      - postgres
+    volumes:
+      - static-files:/static-files
+      - media-files:/media-files
+      - frontend:/frontend/build
+
+
+  postgres:
+    image: postgres:latest
+    env_file:
+      - ./envs/.prod.env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static-files:/static-files
+      - media-files:/media-files
+      - /etc/letsencrypt:/etc/letsencrypt
+      - frontend:/frontend
+
+  email:
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-11-february-2020/group-projects/capricorn/luna:master
+    restart: always
+    env_file:
+      - ./envs/.prod.env
+    command: 'python manage.py send_emails'
+    depends_on:
+      - postgres
+      - backend
+    volumes:
+      - media-files:/media-files
+      - static-files:/static-files
+
+
+volumes:
+  postgres:
+  media-files:
+  static-files:
+  frontend:
