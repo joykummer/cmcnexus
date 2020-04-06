@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     	height: 100%;
     	display: flex;
     	justify-content: center;
-		background-color: #808080;
+		background-color: #ffffff;
 		}
 `;
 

@@ -6,19 +6,30 @@ import Axios from '../../axios/not_authenticated';
 
 const Center = styled.div`
 display: flex;
+flex-direction: column;
 justify-content: center;
-align-content: center;
+align-items: center;
 `;
 
+const Offset = styled.div`
+padding: 40px 180px 40px 0;
+`;
+
+const Bold = styled.div`
+font-weight: 600;
+`;
 
 export default function UnderConstruction() {
 return (
 	<Center>
-		<PacmanLoader
-			size={150}
-			color={"#4A90E2"}
-			loading={true}
-		/>
+		<Bold>Under construction.</Bold>
+		<Offset>
+			<PacmanLoader
+				size={80}
+				color={"#CD0000"}
+				loading={true}
+			/>
+		</Offset>
 	</Center>
 )
 }

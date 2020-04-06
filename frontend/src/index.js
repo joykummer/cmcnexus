@@ -9,10 +9,7 @@ import {ThemeProvider} from 'styled-components';
 import {GlobalStyle, theme} from "./styles";
 
 import Routes from "./routes";
-import {getRestaurants} from './store/actions/Restaurants';
-import {loginAction} from './store/actions/Login';
-
-getRestaurants()(store.dispatch)
+import {loginAction} from './store/actions/loginActions';
 
 if (localStorage.getItem('token'))
   store.dispatch(loginAction({token: localStorage.getItem('token')}))

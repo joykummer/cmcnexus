@@ -8,11 +8,9 @@ import UnderConstruction from '../components/UnderConstruction'
 export default function Routes() {
     return (
       <Router>
-        <Body>
-          <Switch>
-            <Route path='/' component={UnderConstruction}/>
-          </Switch>
-        </Body>
+        <Switch>
+          <Route path='/' component={UnderConstruction}/>
+        </Switch>
       </Router>
     )
 }
