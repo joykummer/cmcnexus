@@ -33,19 +33,6 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - frontend:/frontend
 
-  email:
-    image: registry.gitlab.propulsion-home.ch/full-stack/batch-11-february-2020/group-projects/capricorn/luna:master
-    restart: always
-    env_file:
-      - ./envs/.prod.env
-    command: 'python manage.py send_emails'
-    depends_on:
-      - postgres
-      - backend
-    volumes:
-      - media-files:/media-files
-      - static-files:/static-files
-
 
 volumes:
   postgres:
