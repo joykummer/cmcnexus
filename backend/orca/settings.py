@@ -17,7 +17,7 @@ from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = os.environ.get("SECRET_KEY") # TODO : solve this more securely
+SECRET_KEY = os.environ.get("SECRET_KEY")  # TODO : solve this more securely
 
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
