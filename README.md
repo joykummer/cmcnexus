@@ -1,7 +1,7 @@
 # orca
 
 Team members:
-- Myriam
+- Myriam (scrum master)
 - Joy
 - Jannic
 - Karine
