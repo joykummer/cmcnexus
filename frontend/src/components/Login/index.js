@@ -7,6 +7,7 @@ import {useDispatch} from 'react-redux';
 
 import msf_logo from '../../assets/msf_logo.svg'
 import {login} from '../../store/actions/loginActions';
+import isEmail from '../../helpers/isEmail';
 
 
 const Background = styled.div`
@@ -66,7 +67,9 @@ export function Login() {
 
 	const LoginSubmitHandler = e => {
 		e.preventDefault();
-		login({email, password})(dispatch);
+		if (isEmail(email) && password) {
+			login({email, password})(dispatch);
+		}
 	}
 
 	return (
@@ -75,7 +78,7 @@ export function Login() {
 			<Card>
 				<form onSubmit={LoginSubmitHandler}>
 					<Text>Email address</Text>
-					<LoginInput name={'email'} type={'text'} value={email} onChange={e => setEmail(e.target.value)}/>
+					<LoginInput name={'email'} type={'email'} value={email} onChange={e => setEmail(e.target.value)}/>
 
 					<Text>Password</Text>
 					<LoginInput name={'password'} type={'password'} value={password} onChange={e => setPassword(e.target.value)}/>
