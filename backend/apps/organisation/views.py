@@ -12,7 +12,6 @@ class GetAllOrganisations(ListCreateAPIView):
         return Organisation.objects.filter(name__icontains=self.request.query_params.get('search', ''))
 
 
-
 class GetUpdateByIdView(RetrieveUpdateAPIView):
     queryset = Organisation.objects.all()
     serializer_class = OrganisationSerializer
