@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
-import { searchCasesFunction } from "../../store/actions/searchCasesAction";
-import { casesFunction } from "../../store/actions/casesAction";
+import { searchCasesFunction } from "../../store/actions/searchOrganisationAction";
+import { casesFunction } from "../../store/actions/organisationAction";
 
 const Container = styled.div`
   width: auto;
@@ -26,17 +26,12 @@ const SearchButton = styled(RedButton)`
 `;
 
 
-function ListCases(props) {
+function ListOrganisations(props) {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     props.dispatch(casesFunction());
   }, []);
-
-  const setSearchHandler = (e) => {
-    e.preventDefault();
-    setSearch(e.target.value);
-  };
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
@@ -46,7 +41,12 @@ function ListCases(props) {
     props.dispatch(searchCasesFunction(query));
   };
 
-  console.log("in the cases", props.cases);
+  const setSearchHandler = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  console.log("in the cases", props);
 
   return (
     <>
@@ -54,11 +54,11 @@ function ListCases(props) {
         <SearchInput name="search" onChange={setSearchHandler} value={search} />
         <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
         {props.cases
-          ? props.cases.map(test => {
+          ? props.cases.map(file => {
               return (
-                <div key={test.id}>
-                  <div>id: {test.id}</div>
-                  <div>name: {test.first_name}</div>
+                <div key={file.id}>
+                  <div>id: {file.id}</div>
+                  <div>name: {file.first_name}</div>
                 </div>
               );
             })
@@ -71,8 +71,8 @@ function ListCases(props) {
 const mapStateToProps = (state) => {
   console.log('in the statetoprops', state);
   return {
-    cases: state.cases,
+    cases: state.cases.cases,
   };
 };
 
-export default connect(mapStateToProps)(ListCases);
+export default connect(mapStateToProps)(ListOrganisations);

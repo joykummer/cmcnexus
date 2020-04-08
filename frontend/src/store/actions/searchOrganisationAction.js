@@ -5,6 +5,8 @@ export const searchCasesAction = (query) => ({
   payload: query,
 });
 
+
+
 export const searchCasesFunction = (query) => async (dispatch) => {
   console.log('in the search cases', query);
 //   try {
