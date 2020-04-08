@@ -2,9 +2,9 @@ from django.db import models
 
 
 class Case(models.Model):
-    SEXES = (
-        ('0', 'Female'),
-        ('1', 'Male'),
+    GENDER_CHOICES = (
+        (0, 'Female'),
+        (1, 'Male'),
     )
 
     title = models.CharField(max_length=160)
@@ -15,23 +15,16 @@ class Case(models.Model):
     category = models.CharField(max_length=200)
     consent = models.BooleanField(default=False)
     age = models.IntegerField(null=True)
-    sex = models.BooleanField(choices=SEXES, default=0)
+    sex = models.BooleanField(choices=GENDER_CHOICES, default=0)
     country = models.CharField(max_length=150)
-    comments = models.TextField()
-    outcome = models.CharField(max_length=160)
+    comments = models.TextField(blank=True)
+    outcome = models.CharField(max_length=160, blank=True)
     created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50)
-    
-
-
-    
-
-
-
-
-    country = CountryField(blank_label='(select country)')
-    street = models.CharField(max_length=270)
-    city = models.CharField(max_length=90)
+    status = models.CharField(max_length=50, blank=True)
+    assigned_partners = models.CharField(max_length=100, blank=True)
+    matched_partners = models.CharField(max_length=100, blank=True)
+    created_by = models.CharField(max_length=100)
 
     def __str__(self):
         return f'Case {self.id}: {self.title}'
+
