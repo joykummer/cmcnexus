@@ -18,4 +18,5 @@ from django.urls import path
 
 urlpatterns = [
     path('backend/admin/', admin.site.urls),
+    path('backend/api/users/', include('apps.users.urls'))
 ]
