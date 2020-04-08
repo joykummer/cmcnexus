@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
-import { searchCases } from "../../store/actions/searchAction";
+import { searchCasesFunction } from "../../store/actions/searchCasesAction";
 import { casesFunction } from "../../store/actions/casesAction";
 
 const Container = styled.div`
@@ -25,6 +25,7 @@ const SearchButton = styled(RedButton)`
   height: 30px;
 `;
 
+
 function ListCases(props) {
   const [search, setSearch] = useState("");
 
@@ -39,10 +40,10 @@ function ListCases(props) {
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
-    const data = {
+    const query = {
       first_name: search,
     };
-    props.dispatch(searchCases(data));
+    props.dispatch(searchCasesFunction(query));
   };
 
   console.log("in the cases", props.cases);
@@ -68,9 +69,9 @@ function ListCases(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('in the statetoprops', state.cases);
+  console.log('in the statetoprops', state);
   return {
-    cases: state.cases.cases,
+    cases: state.cases,
   };
 };
 
