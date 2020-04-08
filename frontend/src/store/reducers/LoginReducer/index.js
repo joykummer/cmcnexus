@@ -11,7 +11,6 @@ export default function login(state = init, action) {
 	switch(action.type) {
 		case LOGIN: {
 			return {
-				...state,
 				token: action.payload.token,
 				user: action.payload.user,
 				is_authenticated: true,
