@@ -35,7 +35,7 @@ class Organisation(models.Model):
     )
     matched_cases = models.CharField(
         max_length=100,
-        null = True
+        null=True
     )
     members = models.CharField(
         max_length=100,
