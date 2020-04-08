@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import login from './LoginReducer';
-import cases from './CasesReducer';
+import organisations from './OrganisationsReducer';
 
 const rootReducer = combineReducers({
 	login,
-	cases,
-})
+	organisations,
+});
 
 export default rootReducer

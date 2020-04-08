@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import {organisationsFunction} from "../../store/actions/organisationsAction";
+import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
-import { searchCasesFunction } from "../../store/actions/searchOrganisationAction";
-import { casesFunction } from "../../store/actions/organisationAction";
+
 
 const Container = styled.div`
   width: auto;
@@ -30,15 +31,15 @@ function ListOrganisations(props) {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    props.dispatch(casesFunction());
+    props.dispatch(organisationsFunction());
   }, []);
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
     const query = {
-      first_name: search,
+      name: search,
     };
-    props.dispatch(searchCasesFunction(query));
+    props.dispatch(searchOrganisationsFunction(query));
   };
 
   const setSearchHandler = (e) => {
@@ -46,19 +47,19 @@ function ListOrganisations(props) {
     setSearch(e.target.value);
   };
 
-  console.log("in the cases", props);
+  console.log("in the organisations!!", props);
 
   return (
     <>
       <Container>
         <SearchInput name="search" onChange={setSearchHandler} value={search} />
         <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
-        {props.cases
-          ? props.cases.map(file => {
+        {props.organisations
+          ? props.organisations.map(organisation => {
               return (
-                <div key={file.id}>
-                  <div>id: {file.id}</div>
-                  <div>name: {file.first_name}</div>
+                <div key={organisation.id}>
+                  <div>id: {organisation.id}</div>
+                  <div>name: {organisation.name}</div>
                 </div>
               );
             })
@@ -69,9 +70,8 @@ function ListOrganisations(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('in the statetoprops', state);
   return {
-    cases: state.cases.cases,
+    organisations: state.organisations,
   };
 };
 
