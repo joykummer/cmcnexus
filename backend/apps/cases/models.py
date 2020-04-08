@@ -1,6 +1,9 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 from apps.organisation.models import Organisation
+
+User = get_user_model()
 
 
 class Case(models.Model):
@@ -33,6 +36,12 @@ class Case(models.Model):
         to=Organisation,
         related_name='matched_cases',
         blank=True
+    )
+    created_by = models.ForeignKey(
+        to=User,
+        related_name="cases_created",
+        on_delete=models.CASCADE,
+        null=True,
     )
 
     def __str__(self):

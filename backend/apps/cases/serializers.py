@@ -1,14 +1,13 @@
 from rest_framework import serializers
 
 from apps.cases.models import Case
-from apps.organisation.serializer import OrganisationSerializer
+from apps.users.serializer import FullUserSerializer
 
 
 class CaseSerializer(serializers.ModelSerializer):
     sex = serializers.SerializerMethodField()
-    assigned_partners = OrganisationSerializer(read_only=True, many=True)
-    matched_partners = OrganisationSerializer(read_only=True, many=True)
-    created_by = serializers.SerializerMethodField()
+    created_by = FullUserSerializer(read_only=True)
+
 
     class Meta:
         model = Case
@@ -18,5 +17,4 @@ class CaseSerializer(serializers.ModelSerializer):
     def get_sex(case):
         return case.get_sex_display()
 
-    # def get_created_by(case):
-    #     return
+
