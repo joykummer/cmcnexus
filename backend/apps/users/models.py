@@ -62,4 +62,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'User {self.id}: {self.username}'
-
