@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'apps.users',
+    'apps.organisation',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = bool(os.environ.get("CORS_ORIGIN_ALLOW_ALL", default=0))
