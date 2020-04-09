@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from apps.cases.models import Case
 from apps.cases.serializers import CaseSerializer
@@ -9,7 +9,7 @@ class ListCreateCaseView(ListCreateAPIView):
     serializer_class = CaseSerializer
 
 
-class RetrieveUpdateCaseView(RetrieveUpdateAPIView):
+class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     lookup_url_kwarg = 'id'

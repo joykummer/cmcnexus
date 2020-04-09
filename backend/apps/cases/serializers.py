@@ -8,6 +8,7 @@ class CaseSerializer(serializers.ModelSerializer):
     sex = serializers.SerializerMethodField()
     created_by = FullUserSerializer(read_only=True)
 
+
     class Meta:
         model = Case
         fields = '__all__'
