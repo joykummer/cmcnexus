@@ -53,12 +53,6 @@ class User(AbstractUser):
         blank=False,
         null=True
     )
-    cases_created = models.CharField(
-        verbose_name='cases created',
-        max_length=200,
-        blank=False,
-        null=True
-    )
 
     def __str__(self):
         return f'User {self.id}: {self.username}'
