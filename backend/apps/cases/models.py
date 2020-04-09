@@ -14,17 +14,13 @@ class CaseWorkflow(xwf_models.Workflow):
     states = (
         ('created', _(u"Created")),
         ('validated', _(u"Validated")),
-        ('matched', _(u"Matched")),
-        ('assigned', _(u"Assigned")),
         ('closed', _(u"Closed")),
         ('rejected', _(u"Rejected"))
     )
     transitions = (
         ('validate_case', 'created', 'validated'),
-        ('match_partners', 'validated', 'matched'),
-        ('assign_partners', 'matched', 'assigned'),
         ('close_case', 'assigned', 'closed'),
-        ('reject_case', ('created', 'validated', 'matched', 'assigned'), 'rejected')
+        ('reject_case', ('created', 'validated'), 'rejected')
     )
     initial_state = 'created'
 

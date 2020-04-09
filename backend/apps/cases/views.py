@@ -34,28 +34,6 @@ class ValidateCaseView(UpdateAPIView):
         return Response(self.get_serializer(case).data)
 
 
-class MatchPartnersView(UpdateAPIView):
-    queryset = Case
-    serializer_class = CaseSerializer
-    lookup_url_kwarg = 'case_id'
-
-    def update(self, request, *args, **kwargs):
-        case = self.get_object()
-        case.match_partners()
-        return Response(self.get_serializer(case).data)
-
-
-class AssignPartnersView(UpdateAPIView):
-    queryset = Case
-    serializer_class = CaseSerializer
-    lookup_url_kwarg = 'case_id'
-
-    def update(self, request, *args, **kwargs):
-        case = self.get_object()
-        case.assign_partners()
-        return Response(self.get_serializer(case).data)
-
-
 class CloseCaseView(UpdateAPIView):
     queryset = Case
     serializer_class = CaseSerializer
