@@ -13,6 +13,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'description',
+            'services',
             'category',
             'tag',
             'members',

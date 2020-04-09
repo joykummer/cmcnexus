@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from apps.organisation_category.models import Category_Organisation
+from apps.organisation_category.models import Organisation_Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category_Organisation
-        fields = ['name']
+        model = Organisation_Category
+        fields = '__all__'

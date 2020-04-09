@@ -1,17 +1,17 @@
 from django.db import models
 
 
-class Category_Organisation(models.Model):
+class Organisation_Category(models.Model):
 
     CATEGORY_CHOICES = (
-        ("U", "Undefined"),
-        ("M", "Medical"),
-        ("A", "Administrative"),
-        ("L", "Logistics"),
+        (0, "Undefined"),
+        (1, "Medical"),
+        (2, "Administrative"),
+        (3, "Logistics"),
     )
 
-    name = models.CharField(
-        max_length=1,
+    id = models.IntegerField(
         choices=CATEGORY_CHOICES,
-        default="U"
+        default=0,
+        primary_key=True
     )

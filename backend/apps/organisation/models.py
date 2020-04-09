@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.organisation_category.models import Category_Organisation
+from apps.organisation_category.models import Organisation_Category
 
 
 class Organisation(models.Model):
@@ -14,10 +14,10 @@ class Organisation(models.Model):
         max_length=500
     )
     category = models.ForeignKey(
-        to=Category_Organisation,
+        to=Organisation_Category,
         on_delete=models.CASCADE,
         related_name='organisations',
-        default="undefined"
+        default=0
     )
     tag = models.CharField(
         max_length=100
