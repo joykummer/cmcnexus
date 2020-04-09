@@ -43,12 +43,10 @@ function ListOrganisations(props) {
   };
 
   const setSearchHandler = (e) => {
-    e.preventDefault();
     setSearch(e.target.value);
   };
 
   return (
-    <>
       <Container>
         <SearchInput name="search" onChange={setSearchHandler} value={search} />
         <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
@@ -63,7 +61,6 @@ function ListOrganisations(props) {
             })
           : null}
       </Container>
-    </>
   );
 }
 

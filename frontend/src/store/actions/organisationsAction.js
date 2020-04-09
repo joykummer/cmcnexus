@@ -1,9 +1,9 @@
-import { SETORGANISATIONS } from "./actionTypes";
+import { SET_ORGANISATIONS } from "./actionTypes";
 import Axios from "../../axios/not_authenticated";
 
 export const organisationsAction = organisations => {
   return {
-    type: SETORGANISATIONS,
+    type: SET_ORGANISATIONS,
     payload: organisations
   }
 };

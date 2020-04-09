@@ -1,16 +1,15 @@
-import { SETORGANISATIONS } from "./actionTypes";
+import { SET_ORGANISATIONS } from "./actionTypes";
 import Axios from "../../axios/not_authenticated";
 
-export const searchOrganisationsAction = organisation => {
+export const searchOrganisationsAction = organisations => {
   return {
-    type: SETORGANISATIONS,
-    payload: organisation
+    type: SET_ORGANISATIONS,
+    payload: organisations
   }
 };
 
 
 export const searchOrganisationsFunction = query => async dispatch => {
     const response = await Axios.get(`organisations/?search=${query.name}`);
-    console.log('RESPONSE', response);
     dispatch(searchOrganisationsAction(response.data));
 };
