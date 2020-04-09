@@ -9,7 +9,6 @@ export const searchOrganisationsAction = organisation => {
 };
 
 
-
 export const searchOrganisationsFunction = query => async dispatch => {
     const response = await Axios.get(`organisations/?search=${query.name}`);
     console.log('RESPONSE', response);
