@@ -8,7 +8,6 @@ class CaseSerializer(serializers.ModelSerializer):
     sex = serializers.SerializerMethodField()
     created_by = FullUserSerializer(read_only=True)
 
-
     class Meta:
         model = Case
         fields = '__all__'
@@ -16,5 +15,3 @@ class CaseSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_sex(case):
         return case.get_sex_display()
-
-

@@ -46,4 +46,3 @@ class Case(models.Model):
 
     def __str__(self):
         return f'Case {self.id}: {self.title}'
-

@@ -1,4 +1,3 @@
-from django.template import context
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 
 from apps.cases.models import Case
@@ -14,4 +13,3 @@ class RetrieveUpdateCaseView(RetrieveUpdateAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     lookup_url_kwarg = 'id'
-

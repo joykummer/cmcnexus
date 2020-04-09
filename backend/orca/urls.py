@@ -32,4 +32,3 @@ urlpatterns = [
     path('backend/api/', include(api_patterns))
 
 ]
-
