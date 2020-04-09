@@ -68,6 +68,7 @@ function ListOrganisations(props) {
 }
 
 const mapStateToProps = (state) => {
+  console.log('this is the mapstatetoprops', state);
   return {
     organisations: state.organisations,
   };
