@@ -1,5 +1,6 @@
 from django.db.models import Q
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView
+from rest_framework.response import Response
 
 from apps.cases.models import Case
 from apps.cases.serializers import CaseSerializer
@@ -20,3 +21,58 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     lookup_url_kwarg = 'id'
+
+
+class ValidateCaseView(UpdateAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    lookup_url_kwarg = 'case_id'
+
+    def update(self, request, *args, **kwargs):
+        case = self.get_object()
+        case.validate_case()
+        return Response(self.get_serializer(case).data)
+
+
+class MatchPartnersView(UpdateAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    lookup_url_kwarg = 'case_id'
+
+    def update(self, request, *args, **kwargs):
+        case = self.get_object()
+        case.match_partners()
+        return Response(self.get_serializer(case).data)
+
+
+class AssignPartnersView(UpdateAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    lookup_url_kwarg = 'case_id'
+
+    def update(self, request, *args, **kwargs):
+        case = self.get_object()
+        case.assign_partners()
+        return Response(self.get_serializer(case).data)
+
+
+class CloseCaseView(UpdateAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    lookup_url_kwarg = 'case_id'
+
+    def update(self, request, *args, **kwargs):
+        case = self.get_object()
+        case.close_case()
+        return Response(self.get_serializer(case).data)
+
+
+class RejectCaseView(UpdateAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    lookup_url_kwarg = 'case_id'
+
+    def update(self, request, *args, **kwargs):
+        case = self.get_object()
+        case.reject_case()
+        return Response(self.get_serializer(case).data)
