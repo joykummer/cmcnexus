@@ -19,7 +19,7 @@ class CaseWorkflow(xwf_models.Workflow):
     )
     transitions = (
         ('validate_case', 'created', 'validated'),
-        ('close_case', 'assigned', 'closed'),
+        ('close_case', 'validated', 'closed'),
         ('reject_case', ('created', 'validated'), 'rejected')
     )
     initial_state = 'created'
