@@ -11,7 +11,6 @@ class CaseSerializer(serializers.ModelSerializer):
     matched_partners = OrganisationSerializer(many=True, read_only=True)
     assigned_partners = OrganisationSerializer(many=True, read_only=True)
 
-
     class Meta:
         model = Case
         fields = '__all__'
