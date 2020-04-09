@@ -1,5 +1,5 @@
 import React from 'react';
-import CanI from '../Permission';
+import CanI from '../Permissions';
 
 export default function(props) {
 	return (

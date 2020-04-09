@@ -1,13 +1,27 @@
-import rules from "./rules";
+import React from 'react';
+import {useSelector} from 'react-redux';
 
-const check = (action, data) => {
-	const permissions = rules;
+const rules = [
+		"posts:list",
+		"posts:create",
+		"posts:edit",
+		"posts:delete",
+		"users:get",
+		"users:getSelf",
+		"home-page:visit",
+		"dashboard-page:visit"
+];
+
+
+const useGetRules = (action, data) => {
+	const user_permissions = useSelector(state => state.login.user ? state.login.user.permissions : null)
+	const permissions = user_permissions ? user_permissions : rules;
 	if (!permissions) {
 		// role is not present in the rules
 		return false;
 	}
 
-	const staticPermissions = permissions.static;
+	const staticPermissions = permissions;
 
 	if (staticPermissions && staticPermissions.includes(action)) {
 		// static rule not provided for action
@@ -29,8 +43,8 @@ const check = (action, data) => {
 };
 
 const CanI = props =>
-	check(props.perform, props.data)
-		? (props.yes() ? props.yes() : props.children)
+	useGetRules(props.perform, props.data)
+		? props.children
 		: props.no();
 
 CanI.defaultProps = {
