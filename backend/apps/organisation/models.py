@@ -29,14 +29,6 @@ class Organisation(models.Model):
         blank=True,
         null=True
     )
-    assigned_cases = models.CharField(
-        max_length=100,
-        null=True
-    )
-    matched_cases = models.CharField(
-        max_length=100,
-        null=True
-    )
     members = models.CharField(
         max_length=100,
         null=True
