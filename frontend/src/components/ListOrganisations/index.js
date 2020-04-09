@@ -47,8 +47,6 @@ function ListOrganisations(props) {
     setSearch(e.target.value);
   };
 
-  console.log("in the organisations!!", props);
-
   return (
     <>
       <Container>
