@@ -54,3 +54,33 @@ class RejectCaseView(UpdateAPIView):
         case = self.get_object()
         case.reject_case()
         return Response(self.get_serializer(case).data)
+
+
+class ToggleMatchPartner(GenericAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    lookup_url_kwarg = 'case_id'
+
+    def post(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_id = kwargs['partner_id']
+        if case.matched_partners.filter(id=partner_id):
+            case.matched_partners.remove(partner_id)
+        else:
+            case.matched_partners.add(partner_id)
+        return Response(self.get_serializer(case).data)
+
+
+class ToggleAssignPartner(GenericAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    lookup_url_kwarg = 'case_id'
+
+    def post(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_id = kwargs['partner_id']
+        if case.assigned_partners.filter(id=partner_id):
+            case.assigned_partners.remove(partner_id)
+        else:
+            case.assigned_partners.add(partner_id)
+        return Response(self.get_serializer(case).data)
