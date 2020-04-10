@@ -4,10 +4,10 @@ const init = {
 	token: null,
 	user: null,
 	is_authenticated: false,
-	error: null
+	error: null,
 }
 
-export default function login(state = init, action) {
+export default function auth(state = init, action) {
 	switch(action.type) {
 		case LOGIN: {
 			return {
@@ -30,7 +30,7 @@ export default function login(state = init, action) {
 			}
 		}
 		case SET_CURRENT_USER: {
-			console.log('in reducer', state.is_authenticated)
+			console.log(action)
 			if (state.is_authenticated) {
 				return {...state, user: action.payload}
 			}

@@ -8,15 +8,23 @@ import UnderConstruction from '../components/UnderConstruction';
 import ListOrganisations from '../components/ListOrganisations';
 import {Login} from '../components/Login';
 import AddOrganisation from "../components/AddOrganisation";
+import LandingPage from '../components/LandingPage'
+import Navigation from '../components/Navigation';
+
 
 
 export default function Routes() {
     return (
       <Router>
         <Switch>
-          <Route path='/organisations/add/' component={AddOrganisation}/>
-          <Route path='/organisations/' component={ListOrganisations}/>
           <Route path='/login' component={Login}/>
+
+          <Navigation>
+            <PrivateRoute path='/' exact component={LandingPage}/>
+            <PrivateRoute path='/organisations/add/' component={AddOrganisation}/>
+            <PrivateRoute path='/organisations/' component={ListOrganisations}/>
+          </Navigation>
+
           <Route path='/' component={UnderConstruction}/>
         </Switch>
       </Router>

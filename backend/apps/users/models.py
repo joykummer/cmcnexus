@@ -12,41 +12,18 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
-
-    first_name = models.CharField(
-        verbose_name='first name',
-        max_length=200,
-        blank=True,
-        null=True
-    )
-
-    last_name = models.CharField(
-        verbose_name='last name',
-        max_length=200,
-        blank=True,
-        null=True
-    )
-
     phone = models.CharField(
         verbose_name='phone',
         max_length=20,
         blank=True,
         null=True
     )
-
-    created = models.DateTimeField(
-        verbose_name='created',
-        auto_now_add=True,
-        null=True
-    )
-
     roles = models.CharField(
         verbose_name='roles',
         max_length=200,
         blank=False,
         null=True
     )
-
     organisation = models.CharField(
         verbose_name='organisation',
         max_length=200,

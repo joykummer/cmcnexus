@@ -50,13 +50,11 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         to=Organisation,
         related_name='assigned_cases',
         blank=True,
-        null=True
     )
     matched_partners = models.ManyToManyField(
         to=Organisation,
         related_name='matched_cases',
         blank=True,
-        null=True
     )
     created_by = models.ForeignKey(
         to=User,

@@ -8,8 +8,8 @@ import { RedButton } from "../../styles/Buttons";
 
 
 const Container = styled.div`
-  width: auto;
-  height: 100;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

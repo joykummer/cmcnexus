@@ -1,6 +1,6 @@
-export const LOGIN = 'login';
-export const LOGOUT = 'logout';
-export const LOGIN_ERROR = 'loginError';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
