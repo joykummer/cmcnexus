@@ -38,8 +38,10 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'django_xworkflows',
 
     'apps.users',
+    'apps.organisation_category',
     'apps.organisation',
     'apps.cases',
 ]

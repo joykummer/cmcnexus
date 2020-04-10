@@ -20,7 +20,8 @@ from django.urls import path, include
 api_patterns = [
     path('cases/', include('apps.cases.urls')),
     path('organisations/', include('apps.organisation.urls')),
-    path('users/', include('apps.users.urls')),
+    path('organisations/categories/', include('apps.organisation_category.urls')),
+    path('users/', include('apps.users.urls_me')),
     path('token/', include('apps.authentication.urls')),
 ]
 

@@ -12,4 +12,4 @@ dependencies:
       - flake8==3.7.9
       - pillow==7.0.0
       - coreapi==2.3.3
-      - xworkflows==1.0.4
+      - django-xworkflows==1.0.0
