@@ -1,21 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 
-const rules = [
-		"posts:list",
-		"posts:create",
-		"posts:edit",
-		"posts:delete",
-		"users:get",
-		"users:getSelf",
-		"home-page:visit",
-		"dashboard-page:visit"
-];
-
-
-const useGetRules = (action, data) => {
-	const user_permissions = useSelector(state => state.login.user ? state.login.user.permissions : null)
-	const permissions = user_permissions ? user_permissions : rules;
+const useGetRules = async (action, data) => {
+	const user_permissions = useSelector(state => state.auth.user ? state.auth.user.permissions : null)
+	const permissions = user_permissions ? user_permissions : [];
 	if (!permissions) {
 		// role is not present in the rules
 		return false;

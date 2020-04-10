@@ -7,7 +7,7 @@ const init = {
 	error: null,
 }
 
-export default function login(state = init, action) {
+export default function auth(state = init, action) {
 	switch(action.type) {
 		case LOGIN: {
 			return {
@@ -30,6 +30,7 @@ export default function login(state = init, action) {
 			}
 		}
 		case SET_CURRENT_USER: {
+			console.log(action)
 			if (state.is_authenticated) {
 				return {...state, user: action.payload}
 			}
