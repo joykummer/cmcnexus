@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {addOrganisationFunction} from "../../store/actions/addOrganisationAction";
 import {Dropdown} from "../../styles/Dropdowns";
+import {organisationsFunction} from "../../store/actions/organisationsAction";
+import {organisationCategoriesFunction} from "../../store/actions/organisationCategoriesAction";
 
 
 const Container = styled.div`
@@ -40,6 +42,9 @@ function AddOrganisation(props) {
     const [tag, setTag] = useState('');
     const [members, setMembers] = useState('');
 
+    useEffect(() => {
+        props.dispatch(organisationCategoriesFunction());
+    }, []);
 
     const setNameHandler = (e) => {
         e.preventDefault();
@@ -106,7 +111,7 @@ function AddOrganisation(props) {
               category:
           </div>
 
-          <CategoryDropdown>
+          <CategoryDropdown onChange={setCategoryHandler}>
               <option>Select a category...</option>
                             {/*{categories*/}
                             {/*    ? categories.map( (category,index) => {*/}
@@ -139,8 +144,10 @@ function AddOrganisation(props) {
 }
 
 const mapStateToProps = (state) => {
+    console.log('state in add', state);
   return {
-    organisations: state.organisations,
+      organisations: state.organisations,
+      organisationCategories: state.organisationCategories,
   };
 };
 

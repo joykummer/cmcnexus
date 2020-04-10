@@ -5,4 +5,5 @@ export const LOGIN_ERROR = 'loginError';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 export const SET_ORGANISATIONS = 'SET_ORGANISATIONS';
-export const SEARCH = 'search';
+
+export const SET_ORGANISATION_CATEGORIES = 'SET_ORGANISATION_CATEGORIES';
