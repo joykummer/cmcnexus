@@ -1,15 +1,15 @@
 import { SET_CATEGORIES } from "./actionTypes";
-import Axios from "../../axios/not_authenticated";
+import Axios from "../../axios/authenticated";
 
-export const organisationCategoriesAction = organisationCategories => {
+export const categoriesAction = categories => {
   return {
     type: SET_CATEGORIES,
-    payload: organisationCategories
+    payload: categories
   }
 };
 
 
-export const organisationCategoriesFunction = () => async dispatch => {
-    const response = await Axios.get('organisations/categories/', );
-    dispatch(organisationCategoriesAction(response.data));
+export const categoriesFunction = () => async dispatch => {
+    const response = await Axios.get('categories/', );
+    dispatch(categoriesAction(response.data));
 };

@@ -5,13 +5,12 @@ import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {addOrganisationFunction} from "../../store/actions/addOrganisationAction";
 import {Dropdown} from "../../styles/Dropdowns";
-import {organisationsFunction} from "../../store/actions/organisationsAction";
-import {organisationCategoriesFunction} from "../../store/actions/organisationCategoriesAction";
+import {categoriesFunction} from "../../store/actions/categoriesAction";
 
 
 const Container = styled.div`
-  width: auto;
-  height: 100;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,13 +36,13 @@ const AddButton = styled(RedButton)`
 function AddOrganisation(props) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    // const [services, setServices] = useState('');
-    const [category, setCategory] = useState('');
+    const [services, setServices] = useState('');
+    const [category, setCategory] = useState(null);
     const [tag, setTag] = useState('');
     const [members, setMembers] = useState('');
 
     useEffect(() => {
-        props.dispatch(organisationCategoriesFunction());
+        props.dispatch(categoriesFunction());
     }, []);
 
     const setNameHandler = (e) => {
@@ -55,14 +54,31 @@ function AddOrganisation(props) {
         e.preventDefault();
         setDescription(e.target.value);
     };
-    const setCategoryHandler = (e) => {
+
+    const setServicesHandler = (e) => {
         e.preventDefault();
-        setCategory(e.target.value);
+        setServices(e.target.value);
     };
+
+    const setCategoryHandler = (e) => {
+        console.log('this is the target', e.target);
+        e.preventDefault();
+        if (e.target.value === "Undefined") {
+            setCategory(0)
+        } else if (e.target.value === "Medical") {
+            setCategory(1)
+        } else if (e.target.value === "Administrative") {
+            setCategory(2)
+        } else
+            setCategory(3)
+        // setCategory(e.target.value)
+    };
+
     const setTagHandler = (e) => {
         e.preventDefault();
         setTag(e.target.value);
     };
+
     const setMembersHandler = (e) => {
         e.preventDefault();
         setMembers(e.target.value);
@@ -73,6 +89,7 @@ function AddOrganisation(props) {
         const data = {
             name: name,
             description: description,
+            services: services,
             category: category,
             tag: tag,
             members: members,
@@ -80,12 +97,14 @@ function AddOrganisation(props) {
         await props.dispatch(addOrganisationFunction(data));
         setName('');
         setDescription('');
-        setCategory('');
+        setServices('');
+        setCategory(null);
         setTag('');
         setMembers('');
         props.history.push("/organisations/");
     };
 
+    console.log(props.categories);
 
   return (
       <Container>
@@ -108,17 +127,26 @@ function AddOrganisation(props) {
             required
           />
           <div>
+              services:
+          </div>
+          <FieldInput
+            name="services"
+            onChange={setServicesHandler}
+            value={services}
+            required
+          />
+          <div>
               category:
           </div>
 
           <CategoryDropdown onChange={setCategoryHandler}>
               <option>Select a category...</option>
-                            {/*{categories*/}
-                            {/*    ? categories.map( (category,index) => {*/}
-                            {/*        return (*/}
-                            {/*            <option value={index+1} key={category}>{category}</option>*/}
-                            {/*        )*/}
-                            {/*}): null}*/}
+                            {props.categories
+                                ? props.categories.map( (category) => {
+                                    return (
+                                        <option key={category.id} id={category.id}>{category.name}</option>
+                                    )
+                            }): null}
           </CategoryDropdown>
           <div>
               tag:
