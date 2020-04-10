@@ -5,7 +5,7 @@ from ..categories.serializer import CategorySerializer
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    # category = CategorySerializer()
 
     class Meta:
         model = Organisation
