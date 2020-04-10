@@ -20,14 +20,12 @@ class Organisation(models.Model):
         default=0
     )
     tag = models.CharField(
-        max_length=100
-    )
-    accept = models.BooleanField(
-        blank=True,
-        null=True
+        max_length=100,
+        blank=True
     )
     members = models.CharField(
         max_length=100,
+        blank=True,
         null=True
     )
 
