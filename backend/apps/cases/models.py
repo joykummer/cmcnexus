@@ -18,9 +18,9 @@ class CaseWorkflow(xwf_models.Workflow):
         ('rejected', _(u"Rejected"))
     )
     transitions = (
-        ('validate_case', 'created', 'validated'),
-        ('close_case', 'validated', 'closed'),
-        ('reject_case', ('created', 'validated'), 'rejected')
+        ('validate', 'created', 'validated'),
+        ('close', 'validated', 'closed'),
+        ('reject', ('created', 'validated'), 'rejected')
     )
     initial_state = 'created'
 
@@ -61,7 +61,6 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         related_name="cases_created",
         on_delete=models.CASCADE,
         blank=True,
-        null=True
     )
 
     def __str__(self):

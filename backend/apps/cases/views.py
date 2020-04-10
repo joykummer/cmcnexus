@@ -30,7 +30,7 @@ class ValidateCaseView(UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         case = self.get_object()
-        case.validate_case()
+        case.validate()
         return Response(self.get_serializer(case).data)
 
 
@@ -41,7 +41,7 @@ class CloseCaseView(UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         case = self.get_object()
-        case.close_case()
+        case.close()
         return Response(self.get_serializer(case).data)
 
 
@@ -52,35 +52,37 @@ class RejectCaseView(UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         case = self.get_object()
-        case.reject_case()
+        case.reject()
         return Response(self.get_serializer(case).data)
 
 
-class ToggleMatchPartner(GenericAPIView):
+class MatchOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_id = kwargs['partner_id']
-        if case.matched_partners.filter(id=partner_id):
-            case.matched_partners.remove(partner_id)
-        else:
-            case.matched_partners.add(partner_id)
+        partners = self.request.data.get("partners")
+        for partner in partners:
+            if partner['should_assign']:
+                case.assigned_partners.add(partner['id'])
+            else:
+                case.assigned_partners.remove(partner['id'])
         return Response(self.get_serializer(case).data)
 
 
-class ToggleAssignPartner(GenericAPIView):
+class AssignOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_id = kwargs['partner_id']
-        if case.assigned_partners.filter(id=partner_id):
-            case.assigned_partners.remove(partner_id)
-        else:
-            case.assigned_partners.add(partner_id)
+        partners = self.request.data.get("partners")
+        for partner in partners:
+            if partner['should_assign']:
+                case.assigned_partners.add(partner['id'])
+            else:
+                case.assigned_partners.remove(partner['id'])
         return Response(self.get_serializer(case).data)
