@@ -1,11 +1,6 @@
 from django.db import models
 
-
-CATEGORY_CHOICES = (
-    ("M", "Medical"),
-    ("A", "Administrative"),
-    ("L", "Logistics"),
-)
+from apps.organisation_category.models import Organisation_Category
 
 
 class Organisation(models.Model):
@@ -18,9 +13,11 @@ class Organisation(models.Model):
     services = models.TextField(
         max_length=500
     )
-    category = models.CharField(
-        max_length=1,
-        choices=CATEGORY_CHOICES,
+    category = models.ForeignKey(
+        to=Organisation_Category,
+        on_delete=models.CASCADE,
+        related_name='organisations',
+        default=0
     )
     tag = models.CharField(
         max_length=100

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'apps.users',
+    'apps.organisation_category',
     'apps.organisation',
     'apps.cases',
 ]
