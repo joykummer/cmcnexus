@@ -11,17 +11,16 @@ import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation';
 
 
+
 export default function Routes() {
     return (
       <Router>
         <Switch>
           <Route path='/login' component={Login}/>
-
           <Navigation>
             <PrivateRoute path='/' exact component={LandingPage}/>
             <PrivateRoute path='/organisations/' component={ListOrganisations}/>
           </Navigation>
-
           <Route path='/' component={UnderConstruction}/>
         </Switch>
       </Router>
