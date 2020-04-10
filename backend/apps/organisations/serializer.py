@@ -18,3 +18,17 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'tag',
             'members',
         ]
+
+
+class CreateOrganisationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Organisation
+        fields = [
+            'name',
+            'description',
+            'services',
+            'category',
+            'tag',
+            'members',
+        ]

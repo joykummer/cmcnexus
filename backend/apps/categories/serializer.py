@@ -4,12 +4,12 @@ from apps.categories.models import Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    id = serializers.SerializerMethodField()
+    name = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ['id', 'name']
 
     @staticmethod
-    def get_id(category):
+    def get_name(category):
         return category.get_id_display()
