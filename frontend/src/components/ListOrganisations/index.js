@@ -26,6 +26,11 @@ const SearchButton = styled(RedButton)`
   height: 30px;
 `;
 
+const AddOrganisationButton = styled(RedButton)`
+width: 150px;
+height: 30px;
+`;
+
 
 function ListOrganisations(props) {
   const [search, setSearch] = useState("");
@@ -46,6 +51,11 @@ function ListOrganisations(props) {
     setSearch(e.target.value);
   };
 
+  const addOrganisationHandler = (e) => {
+    e.preventDefault();
+    props.history.push('/organisations/add/');
+  };
+
   return (
       <Container>
         <SearchInput name="search" onChange={setSearchHandler} value={search} />
@@ -60,6 +70,7 @@ function ListOrganisations(props) {
               );
             })
           : null}
+        <AddOrganisationButton onClick={addOrganisationHandler}>Add Organisation</AddOrganisationButton>
       </Container>
   );
 }
