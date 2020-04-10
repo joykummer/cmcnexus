@@ -30,7 +30,7 @@ class ValidateCaseView(UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         case = self.get_object()
-        case.validate_case()
+        case.validate()
         return Response(self.get_serializer(case).data)
 
 
@@ -41,7 +41,7 @@ class CloseCaseView(UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         case = self.get_object()
-        case.close_case()
+        case.close()
         return Response(self.get_serializer(case).data)
 
 
@@ -52,35 +52,45 @@ class RejectCaseView(UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         case = self.get_object()
-        case.reject_case()
+        case.reject()
         return Response(self.get_serializer(case).data)
 
 
-class ToggleMatchPartner(GenericAPIView):
+class MatchOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_id = kwargs['partner_id']
-        if case.matched_partners.filter(id=partner_id):
-            case.matched_partners.remove(partner_id)
-        else:
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
             case.matched_partners.add(partner_id)
         return Response(self.get_serializer(case).data)
 
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
+            case.matched_partners.remove(partner_id)
+        return Response(self.get_serializer(case).data)
 
-class ToggleAssignPartner(GenericAPIView):
+
+class AssignOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_id = kwargs['partner_id']
-        if case.assigned_partners.filter(id=partner_id):
-            case.assigned_partners.remove(partner_id)
-        else:
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
             case.assigned_partners.add(partner_id)
+        return Response(self.get_serializer(case).data)
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
+            case.assigned_partners.remove(partner_id)
         return Response(self.get_serializer(case).data)
