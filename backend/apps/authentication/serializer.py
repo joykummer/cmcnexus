@@ -9,6 +9,5 @@ class JWTSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
 
         user_logged_in.send(sender=self.user.__class__, request=self.context['request'], user=self.user)
-        print(data)
 
         return data
