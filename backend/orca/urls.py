@@ -21,7 +21,7 @@ api_patterns = [
     path('cases/', include('apps.cases.urls')),
     path('organisations/', include('apps.organisation.urls')),
     path('organisations/categories/', include('apps.organisation_category.urls')),
-    path('users/', include('apps.users.urls_me')),
+    path('users/', include('apps.users.urls')),
     path('token/', include('apps.authentication.urls')),
 ]
 
