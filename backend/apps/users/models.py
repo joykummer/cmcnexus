@@ -25,7 +25,7 @@ class User(AbstractUser):
         null=True
     )
     organisation = models.CharField(
-        verbose_name='organisation',
+        verbose_name='organisations',
         max_length=200,
         blank=False,
         null=True

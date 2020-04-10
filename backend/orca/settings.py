@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django_xworkflows',
 
     'apps.users',
-    'apps.organisation_category',
-    'apps.organisation',
+    'apps.categories',
+    'apps.organisations',
     'apps.cases',
 ]
 
