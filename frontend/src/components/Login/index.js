@@ -68,7 +68,7 @@ export function Login() {
 	const LoginSubmitHandler = e => {
 		e.preventDefault();
 		if (isEmail(email) && password) {
-			login({email, password})(dispatch);
+			login({email, password, rememberMe})(dispatch);
 		}
 	}
 

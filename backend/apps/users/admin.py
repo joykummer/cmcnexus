@@ -8,12 +8,12 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    readonly_fields = ('date_joined',)
+    readonly_fields = ('date_joined', 'last_login')
     # fields shown when creating a new instance
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'username', 'password1', 'password2')}
+            'fields': ('email', 'username', 'first_name', 'last_name', 'password1', 'password2')}
          ),
     )
     # fields when reading / updating an instance

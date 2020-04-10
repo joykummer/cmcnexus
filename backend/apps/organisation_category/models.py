@@ -15,3 +15,6 @@ class Organisation_Category(models.Model):
         default=0,
         primary_key=True
     )
+
+    def __str__(self):
+        return dict(self.CATEGORY_CHOICES)[self.id]

@@ -1,12 +1,31 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django_xworkflows import models as xwf_models
+from django.utils.translation import gettext as _
+
 
 from apps.organisation.models import Organisation
 
 User = get_user_model()
 
 
-class Case(models.Model):
+class CaseWorkflow(xwf_models.Workflow):
+    log_model = ''
+    states = (
+        ('created', _(u"Created")),
+        ('validated', _(u"Validated")),
+        ('closed', _(u"Closed")),
+        ('rejected', _(u"Rejected"))
+    )
+    transitions = (
+        ('validate_case', 'created', 'validated'),
+        ('close_case', 'validated', 'closed'),
+        ('reject_case', ('created', 'validated'), 'rejected')
+    )
+    initial_state = 'created'
+
+
+class Case(xwf_models.WorkflowEnabled, models.Model):
 
     GENDER_CHOICES = (
         (0, 'Female'),
@@ -26,18 +45,16 @@ class Case(models.Model):
     comments = models.TextField(blank=True, default='')
     outcome = models.CharField(max_length=100, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, blank=True, default='')
+    status = xwf_models.StateField(CaseWorkflow)
     assigned_partners = models.ManyToManyField(
         to=Organisation,
         related_name='assigned_cases',
         blank=True,
-        null=True
     )
     matched_partners = models.ManyToManyField(
         to=Organisation,
         related_name='matched_cases',
         blank=True,
-        null=True
     )
     created_by = models.ForeignKey(
         to=User,

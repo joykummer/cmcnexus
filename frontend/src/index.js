@@ -10,9 +10,13 @@ import {GlobalStyle, theme} from "./styles";
 
 import Routes from "./routes";
 import {loginAction} from './store/actions/loginActions';
+import {getCurrentUser} from './store/actions/userActions';
 
-if (localStorage.getItem('token'))
+if (localStorage.getItem('token')) {
   store.dispatch(loginAction({token: localStorage.getItem('token')}))
+  store.dispatch(getCurrentUser());
+}
+
 
 ReactDOM.render(
     <React.StrictMode>
