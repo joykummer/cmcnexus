@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, ListAPIView, CreateAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, CreateAPIView
 
 from .models import Organisation
 from .serializer import OrganisationSerializer, CreateOrganisationSerializer
@@ -6,6 +6,7 @@ from .serializer import OrganisationSerializer, CreateOrganisationSerializer
 
 class GetAllOrganisations(ListAPIView):
     serializer_class = OrganisationSerializer
+
     def get_queryset(self):
         return Organisation.objects.filter(name__icontains=self.request.query_params.get('search', ''))
 
