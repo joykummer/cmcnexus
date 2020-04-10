@@ -38,8 +38,10 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'django_xworkflows',
 
     'apps.users',
+    'apps.organisation_category',
     'apps.organisation',
     'apps.cases',
 ]
@@ -139,7 +141,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
