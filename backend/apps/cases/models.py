@@ -61,6 +61,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         related_name="cases_created",
         on_delete=models.CASCADE,
         blank=True,
+        null=True
     )
 
     def __str__(self):

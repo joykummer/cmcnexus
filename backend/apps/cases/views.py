@@ -63,12 +63,16 @@ class MatchOrganisation(GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partners = self.request.data.get("partners")
-        for partner in partners:
-            if partner['should_assign']:
-                case.assigned_partners.add(partner['id'])
-            else:
-                case.assigned_partners.remove(partner['id'])
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
+            case.matched_partners.add(partner_id)
+        return Response(self.get_serializer(case).data)
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
+            case.matched_partners.remove(partner_id)
         return Response(self.get_serializer(case).data)
 
 
@@ -79,10 +83,14 @@ class AssignOrganisation(GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partners = self.request.data.get("partners")
-        for partner in partners:
-            if partner['should_assign']:
-                case.assigned_partners.add(partner['id'])
-            else:
-                case.assigned_partners.remove(partner['id'])
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
+            case.assigned_partners.add(partner_id)
+        return Response(self.get_serializer(case).data)
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_ids = self.request.data.get("partner_ids")
+        for partner_id in partner_ids:
+            case.assigned_partners.remove(partner_id)
         return Response(self.get_serializer(case).data)
