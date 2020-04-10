@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {addOrganisationFunction} from "../../store/actions/addOrganisationAction";
+import {Dropdown} from "../../styles/Dropdowns";
 
 
 const Container = styled.div`
@@ -20,6 +21,11 @@ const FieldInput = styled(GreyRoundInput)`
   height: 30px;
 `;
 
+const CategoryDropdown = styled(Dropdown)`
+    width: 200px;
+    height: 30px;
+`;
+
 const AddButton = styled(RedButton)`
   width: 75px;
   height: 30px;
@@ -30,9 +36,9 @@ function AddOrganisation(props) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     // const [services, setServices] = useState('');
-    const [category, setCategory] = useState(null);
+    const [category, setCategory] = useState('');
     const [tag, setTag] = useState('');
-    const [members, setMembers] = useState('')
+    const [members, setMembers] = useState('');
 
 
     const setNameHandler = (e) => {
@@ -69,12 +75,11 @@ function AddOrganisation(props) {
         await props.dispatch(addOrganisationFunction(data));
         setName('');
         setDescription('');
-        setCategory(null);
+        setCategory('');
         setTag('');
         setMembers('');
         props.history.push("/organisations/");
     };
-
 
 
   return (
@@ -100,12 +105,16 @@ function AddOrganisation(props) {
           <div>
               category:
           </div>
-          <FieldInput
-            name="category"
-            onChange={setCategoryHandler}
-            value={category}
-            required
-          />
+
+          <CategoryDropdown>
+              <option>Select a category...</option>
+                            {/*{categories*/}
+                            {/*    ? categories.map( (category,index) => {*/}
+                            {/*        return (*/}
+                            {/*            <option value={index+1} key={category}>{category}</option>*/}
+                            {/*        )*/}
+                            {/*}): null}*/}
+          </CategoryDropdown>
           <div>
               tag:
           </div>
