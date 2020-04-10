@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.cases.models import Case
-from apps.organisation.serializer import OrganisationSerializer
+from apps.organisations.serializer import OrganisationSerializer
 from apps.users.serializer import FullUserSerializer
 
 

@@ -4,7 +4,7 @@ from django_xworkflows import models as xwf_models
 from django.utils.translation import gettext as _
 
 
-from apps.organisation.models import Organisation
+from apps.organisations.models import Organisation
 
 User = get_user_model()
 

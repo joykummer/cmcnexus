@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Organisation_Category(models.Model):
+class Category(models.Model):
 
     CATEGORY_CHOICES = (
         (0, "Undefined"),

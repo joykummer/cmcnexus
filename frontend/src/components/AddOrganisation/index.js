@@ -147,7 +147,7 @@ const mapStateToProps = (state) => {
     console.log('state in add', state);
   return {
       organisations: state.organisations,
-      organisationCategories: state.organisationCategories,
+      categories: state.categories,
   };
 };
 
