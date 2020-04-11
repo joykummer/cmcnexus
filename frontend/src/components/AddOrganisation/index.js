@@ -104,7 +104,7 @@ function AddOrganisation(props) {
         props.history.push("/organisations/");
     };
 
-    console.log(props.categories);
+    // console.log(props.categories);
 
   return (
       <Container>
