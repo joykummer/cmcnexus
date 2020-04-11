@@ -1,5 +1,4 @@
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, CreateAPIView
-from rest_framework.permissions import IsAuthenticated
 
 from .models import Organisation
 from .serializer import OrganisationSerializer, CreateOrganisationSerializer
