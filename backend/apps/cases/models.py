@@ -64,5 +64,12 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         null=True
     )
 
+    class Meta:
+        permissions = [
+            ("validate", "Can validate cases"),
+            ("close", "Can close cases"),
+            ("reject", "Can reject cases"),
+        ]
+
     def __str__(self):
         return f'Case {self.id}: {self.title}'

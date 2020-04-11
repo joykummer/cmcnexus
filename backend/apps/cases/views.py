@@ -3,6 +3,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.response import Response
 
 from apps.cases.models import Case
+from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
 
@@ -30,7 +31,7 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
 class ValidateCaseView(UpdateAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoModelPermission, ValidatePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -42,7 +43,7 @@ class ValidateCaseView(UpdateAPIView):
 class CloseCaseView(UpdateAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoModelPermission, ClosePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -54,7 +55,7 @@ class CloseCaseView(UpdateAPIView):
 class RejectCaseView(UpdateAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoModelPermission, RejectPermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
