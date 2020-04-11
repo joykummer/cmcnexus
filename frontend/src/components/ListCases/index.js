@@ -66,8 +66,13 @@ function ListCases(props) {
           ? props.cases.map(cases => {
               return (
                 <div key={cases.id}>
-                  <div>id: {cases.id}</div>
-                  <div>name: {cases.title}</div>
+                  <div>title {cases.title}</div>
+                  <div>status: {cases.status}</div>
+                  <div>assigned partner(s): {cases.assigned_partners.map((partner) => {
+                    return (
+                        <>{partner.name} </>
+                    )
+                  })}</div>
                 </div>
               );
             })

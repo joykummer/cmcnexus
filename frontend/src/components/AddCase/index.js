@@ -72,7 +72,6 @@ function AddCase(props) {
     };
 
     const setCategoryHandler = (e) => {
-        console.log('this is the target', e.target);
         e.preventDefault();
         if (e.target.value === "Undefined") {
             setCategory(0)
@@ -171,9 +170,8 @@ function AddCase(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log('state in add', state);
   return {
-      organisations: state.organisations,
+      cases: state.cases,
       categories: state.categories,
   };
 };
