@@ -66,9 +66,9 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
 
     class Meta:
         permissions = [
-            ("validate", "Can validate cases"),
-            ("close", "Can close cases"),
-            ("reject", "Can reject cases"),
+            ("validate_case", "Can validate cases"),
+            ("close_case", "Can close cases"),
+            ("reject_case", "Can reject cases"),
             ("assign_organizations", "Can assign a case to a matched and accepted organization"),
             ("match_organizations", "Can match organizations to cases"),
         ]
