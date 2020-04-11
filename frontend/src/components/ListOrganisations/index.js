@@ -5,6 +5,7 @@ import {organisationsFunction} from "../../store/actions/organisationsAction";
 import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
+import {Table, TableHeader, TableRow} from "../../styles/Tables";
 
 
 const Container = styled.div`
@@ -25,6 +26,13 @@ const SearchButton = styled(RedButton)`
   width: 75px;
   height: 30px;
 `;
+
+const OrganisationTable = styled(Table)`
+`;
+
+const OrganisationTableHeader = styled(TableHeader)``;
+
+const OrganisationTableRow = styled(TableRow)``;
 
 const AddOrganisationButton = styled(RedButton)`
 width: 150px;
@@ -56,20 +64,42 @@ function ListOrganisations(props) {
     props.history.push('/organisations/add/');
   };
 
+  const headers = [
+      'Name',
+      'Description',
+      'Category',
+      'Tag(s)'
+  ]
+
   return (
       <Container>
         <SearchInput name="search" onChange={setSearchHandler} value={search} />
         <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
+        <OrganisationTable>
+          <OrganisationTableHeader>
+            <OrganisationTableRow>
+              {headers.map((header) => {
+                return (
+                    <th height='50px'>{header}</th>
+                )
+              })}
+            </OrganisationTableRow>
+          </OrganisationTableHeader>
+          <tbody>
         {props.organisations
           ? props.organisations.map(organisation => {
               return (
-                <div key={organisation.id}>
-                  <div>id: {organisation.id}</div>
-                  <div>name: {organisation.name}</div>
-                </div>
+                <OrganisationTableRow key={organisation.id}>
+                  <td>{organisation.name}</td>
+                  <td>{organisation.description}</td>
+                  <td>{organisation.category}</td>
+                  <td>{organisation.tag}</td>
+                </OrganisationTableRow>
               );
             })
           : null}
+          </tbody>
+        </OrganisationTable>
         <AddOrganisationButton onClick={addOrganisationHandler}>Add Organisation</AddOrganisationButton>
       </Container>
   );
