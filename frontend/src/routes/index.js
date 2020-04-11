@@ -9,6 +9,7 @@ import {Login} from '../components/Login';
 import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation';
 import ListCases from "../components/ListCases";
+import AddCase from "../components/AddCase";
 import ListOrganisations from '../components/ListOrganisations';
 import AddOrganisation from "../components/AddOrganisation";
 
@@ -21,7 +22,7 @@ export default function Routes() {
           <Route path='/login' component={Login}/>
           <Navigation>
             <PrivateRoute path='/' exact component={LandingPage}/>
-            {/*<PrivateRoute exact path='/cases/add/' component={AddOrganisation}/>*/}
+            <PrivateRoute exact path='/cases/add/' component={AddCase}/>
             <PrivateRoute exact path='/cases/' component={ListCases}/>
             <PrivateRoute exact path='/organisations/add/' component={AddOrganisation}/>
             <PrivateRoute exact path='/organisations/' component={ListOrganisations}/>
