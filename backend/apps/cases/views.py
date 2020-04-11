@@ -3,7 +3,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.response import Response
 
 from apps.cases.models import Case
-from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission
+from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission, AssignOrganizationPermission, \
+    MatchOrganizationPermission
 from apps.cases.serializers import CaseSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
 
@@ -67,7 +68,7 @@ class RejectCaseView(UpdateAPIView):
 class MatchOrganisation(GenericAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoModelPermission, MatchOrganizationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
@@ -88,7 +89,7 @@ class MatchOrganisation(GenericAPIView):
 class AssignOrganisation(GenericAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
