@@ -6,4 +6,7 @@ export const RedButton = styled.button`
     padding: 10px;
     color: #FFFFFF;
     outline: none;
+    display: flex;
+    justify-content: center;
+    align-item: center;
 `;

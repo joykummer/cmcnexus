@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import ListOrganisationsTable from "./listOrganisationsTable";
 import {organisationsFunction} from "../../store/actions/organisationsAction";
 import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
-import {Table, TableHeader, TableRow} from "../../styles/Tables";
 
 
 const Container = styled.div`
@@ -17,26 +17,26 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const SearchWrapper = styled.div`
+width: 60%;
+display: flex;
+padding-bottom: 2%;
+`;
+
 const SearchInput = styled(GreyRoundInput)`
-  width: 250px;
-  height: 30px;
+  width: 80%;
+  height: 40px;
 `;
 
 const SearchButton = styled(RedButton)`
-  width: 75px;
-  height: 30px;
+  width: 20%;
+  height: 40px;
 `;
-
-const OrganisationTable = styled(Table)`
-`;
-
-const OrganisationTableHeader = styled(TableHeader)``;
-
-const OrganisationTableRow = styled(TableRow)``;
 
 const AddOrganisationButton = styled(RedButton)`
-width: 150px;
-height: 30px;
+width: 175px;
+height: 40px;
+margin-top: 2%;
 `;
 
 
@@ -64,42 +64,13 @@ function ListOrganisations(props) {
     props.history.push('/organisations/add/');
   };
 
-  const headers = [
-      'Name',
-      'Description',
-      'Category',
-      'Tag(s)'
-  ]
-
   return (
       <Container>
-        <SearchInput name="search" onChange={setSearchHandler} value={search} />
-        <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
-        <OrganisationTable>
-          <OrganisationTableHeader>
-            <OrganisationTableRow>
-              {headers.map((header) => {
-                return (
-                    <th height='50px'>{header}</th>
-                )
-              })}
-            </OrganisationTableRow>
-          </OrganisationTableHeader>
-          <tbody>
-        {props.organisations
-          ? props.organisations.map(organisation => {
-              return (
-                <OrganisationTableRow key={organisation.id}>
-                  <td>{organisation.name}</td>
-                  <td>{organisation.description}</td>
-                  <td>{organisation.category}</td>
-                  <td>{organisation.tag}</td>
-                </OrganisationTableRow>
-              );
-            })
-          : null}
-          </tbody>
-        </OrganisationTable>
+        <SearchWrapper>
+          <SearchInput name="search" onChange={setSearchHandler} value={search} />
+          <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
+        </SearchWrapper>
+          <ListOrganisationsTable/>
         <AddOrganisationButton onClick={addOrganisationHandler}>Add Organisation</AddOrganisationButton>
       </Container>
   );
@@ -107,7 +78,7 @@ function ListOrganisations(props) {
 
 const mapStateToProps = (state) => {
   return {
-    organisations: state.organisations,
+    organisations: state.organisations
   };
 };
 
