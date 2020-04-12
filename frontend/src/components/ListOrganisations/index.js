@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import ListOrganisationsTable from "./listOrganisationsTable";
-import {organisationsFunction} from "../../store/actions/organisationsAction";
-import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
+import { organisationsFunction } from "../../store/actions/organisationsAction";
+import { searchOrganisationsFunction } from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
-
 
 const Container = styled.div`
   width: 100%;
@@ -18,9 +17,9 @@ const Container = styled.div`
 `;
 
 const SearchWrapper = styled.div`
-width: 60%;
-display: flex;
-padding-bottom: 20px;
+  width: 60%;
+  display: flex;
+  padding-bottom: 20px;
 `;
 
 const SearchInput = styled(GreyRoundInput)`
@@ -34,11 +33,10 @@ const SearchButton = styled(RedButton)`
 `;
 
 const AddOrganisationButton = styled(RedButton)`
-width: 175px;
-height: 40px;
-margin-top: 20px;
+  width: 175px;
+  height: 40px;
+  margin-top: 20px;
 `;
-
 
 function ListOrganisations(props) {
   const [search, setSearch] = useState("");
@@ -61,24 +59,26 @@ function ListOrganisations(props) {
 
   const addOrganisationHandler = (e) => {
     e.preventDefault();
-    props.history.push('/organisations/add/');
+    props.history.push("/organisations/add/");
   };
 
   return (
-      <Container>
-        <SearchWrapper>
-          <SearchInput name="search" onChange={setSearchHandler} value={search} />
-          <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
-        </SearchWrapper>
-          <ListOrganisationsTable/>
-        <AddOrganisationButton onClick={addOrganisationHandler}>Add Organisation</AddOrganisationButton>
-      </Container>
+    <Container>
+      <SearchWrapper>
+        <SearchInput name="search" onChange={setSearchHandler} value={search} />
+        <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
+      </SearchWrapper>
+      <ListOrganisationsTable />
+      <AddOrganisationButton onClick={addOrganisationHandler}>
+        Add Organisation
+      </AddOrganisationButton>
+    </Container>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    organisations: state.organisations
+    organisations: state.organisations,
   };
 };
 

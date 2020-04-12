@@ -1,44 +1,35 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {organisationsFunction} from "../../store/actions/organisationsAction";
+import { organisationsFunction } from "../../store/actions/organisationsAction";
 import {
-    Table,
-    TableBody,
-    TableData,
-    TableHeader,
-    TableHeaderRow,
-    TableHeaderWrapper,
-    TableRow
+  Table,
+  TableBody,
+  TableData,
+  TableHeader,
+  TableHeaderRow,
+  TableHeaderWrapper,
+  TableRow,
 } from "../../styles/Tables";
 
-
 function ListOrganisationsTable(props) {
-
   useEffect(() => {
     props.dispatch(organisationsFunction());
   }, []);
 
-  const headers = [
-      'Name',
-      'Description',
-      'Category',
-      'Tag(s)'
-  ];
+  const headers = ["Name", "Description", "Category", "Tag(s)"];
 
   return (
-        <Table>
-          <TableHeaderWrapper>
-            <TableHeaderRow>
-              {headers.map((header) => {
-                return (
-                    <TableHeader>{header}</TableHeader>
-                )
-              })}
-            </TableHeaderRow>
-          </TableHeaderWrapper>
-          <TableBody>
+    <Table>
+      <TableHeaderWrapper>
+        <TableHeaderRow>
+          {headers.map((header) => {
+            return <TableHeader>{header}</TableHeader>;
+          })}
+        </TableHeaderRow>
+      </TableHeaderWrapper>
+      <TableBody>
         {props.organisations
-          ? props.organisations.map(organisation => {
+          ? props.organisations.map((organisation) => {
               return (
                 <TableRow key={organisation.id}>
                   <TableData>{organisation.name}</TableData>
@@ -49,14 +40,14 @@ function ListOrganisationsTable(props) {
               );
             })
           : null}
-          </TableBody>
-        </Table>
+      </TableBody>
+    </Table>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    organisations: state.organisations
+    organisations: state.organisations,
   };
 };
 
