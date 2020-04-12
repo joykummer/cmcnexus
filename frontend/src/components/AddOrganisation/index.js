@@ -43,24 +43,7 @@ function AddOrganisation(props) {
     props.dispatch(categoriesFunction());
   }, []);
 
-  const setNameHandler = (e) => {
-    e.preventDefault();
-    setName(e.target.value);
-  };
-
-  const setDescriptionHandler = (e) => {
-    e.preventDefault();
-    setDescription(e.target.value);
-  };
-
-  const setServicesHandler = (e) => {
-    e.preventDefault();
-    setServices(e.target.value);
-  };
-
   const setCategoryHandler = (e) => {
-    console.log("this is the target", e.target);
-    e.preventDefault();
     if (e.target.value === "Undefined") {
       setCategory(0);
     } else if (e.target.value === "Medical") {
@@ -70,18 +53,8 @@ function AddOrganisation(props) {
     } else setCategory(3);
   };
 
-  const setTagHandler = (e) => {
+  const addOrganisationHandler = async (e) => {
     e.preventDefault();
-    setTag(e.target.value);
-  };
-
-  const setMembersHandler = (e) => {
-    e.preventDefault();
-    setMembers(e.target.value);
-  };
-
-  const addOrganisationHandler = async (event) => {
-    event.preventDefault();
     const data = {
       name: name,
       description: description,
@@ -97,23 +70,12 @@ function AddOrganisation(props) {
   return (
     <Container>
       <div>name:</div>
-      <FieldInput name="name" onChange={setNameHandler} value={name} required />
+      <FieldInput name="name" onChange={(e) => setName(e.target.value)} value={name} required/>
       <div>description:</div>
-      <FieldInput
-        name="description"
-        onChange={setDescriptionHandler}
-        value={description}
-        required
-      />
+      <FieldInput name="description" onChange={(e) => setDescription(e.target.value)} value={description} required/>
       <div>services:</div>
-      <FieldInput
-        name="services"
-        onChange={setServicesHandler}
-        value={services}
-        required
-      />
+      <FieldInput name="services" onChange={(e) => setServices(e.target.value)} value={services} required/>
       <div>category:</div>
-
       <CategoryDropdown onChange={setCategoryHandler}>
         <option>Select a category...</option>
         {props.categories
@@ -127,21 +89,15 @@ function AddOrganisation(props) {
           : null}
       </CategoryDropdown>
       <div>tag:</div>
-      <FieldInput name="tag" onChange={setTagHandler} value={tag} required />
+      <FieldInput name="tag" onChange={(e) => setTag(e.target.value)} value={tag} required/>
       <div>members:</div>
-      <FieldInput
-        name="members"
-        onChange={setMembersHandler}
-        value={members}
-        required
-      />
+      <FieldInput name="members" onChange={(e) => setMembers(e.target.value)} value={members} required/>
       <AddButton onClick={addOrganisationHandler}>Add</AddButton>
     </Container>
   );
 }
 
 const mapStateToProps = (state) => {
-  console.log("state in add", state);
   return {
     organisations: state.organisations,
     categories: state.categories,
