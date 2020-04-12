@@ -20,7 +20,7 @@ const Container = styled.div`
 const SearchWrapper = styled.div`
 width: 60%;
 display: flex;
-padding-bottom: 2%;
+padding-bottom: 20px;
 `;
 
 const SearchInput = styled(GreyRoundInput)`
@@ -36,7 +36,7 @@ const SearchButton = styled(RedButton)`
 const AddOrganisationButton = styled(RedButton)`
 width: 175px;
 height: 40px;
-margin-top: 2%;
+margin-top: 20px;
 `;
 
 

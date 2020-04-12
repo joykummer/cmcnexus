@@ -71,7 +71,6 @@ function AddOrganisation(props) {
             setCategory(2)
         } else
             setCategory(3)
-        // setCategory(e.target.value)
     };
 
     const setTagHandler = (e) => {
@@ -103,8 +102,6 @@ function AddOrganisation(props) {
         setMembers('');
         props.history.push("/organisations/");
     };
-
-    // console.log(props.categories);
 
   return (
       <Container>
