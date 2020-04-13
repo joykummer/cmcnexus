@@ -90,6 +90,7 @@ export function Login() {
 						<Text>Password</Text>
 						<LoginInput name={'password'} type={'password'} value={password}
 												onChange={e => setPassword(e.target.value)}/>
+
 						<Controls>
 							<label>
 								<input type={'checkbox'} checked={rememberMe} onChange={e => setRememberMe(e.target.checked)}/>
