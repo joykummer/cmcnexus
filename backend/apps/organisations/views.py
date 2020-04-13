@@ -21,7 +21,7 @@ class CreateOrganisations(CreateAPIView):
 
 
 class GetUpdateByIdView(RetrieveUpdateAPIView):
-    queryset = Organisation.objects.none()
+    queryset = Organisation.objects.all()
     serializer_class = OrganisationSerializer
     lookup_url_kwarg = 'id'
     permission_classes = [CustomDjangoModelPermission]
