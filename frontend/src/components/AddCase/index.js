@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { GreyRoundInput } from "../../styles/Inputs";
-import { RedButton } from "../../styles/Buttons";
-import {addOrganisationFunction} from "../../store/actions/addOrganisationAction";
-import {Dropdown} from "../../styles/Dropdowns";
 import {categoriesFunction} from "../../store/actions/categoriesAction";
 import {addCaseFunction} from "../../store/actions/addCaseAction";
+import { GreyRoundInput } from "../../styles/Inputs";
+import { RedButton } from "../../styles/Buttons";
+import { Dropdown } from "../../styles/Dropdowns";
 
 
 const Container = styled.div`
@@ -24,8 +23,8 @@ const FieldInput = styled(GreyRoundInput)`
 `;
 
 const CategoryDropdown = styled(Dropdown)`
-    width: 200px;
-    height: 30px;
+  width: 200px;
+  height: 30px;
 `;
 
 const AddButton = styled(RedButton)`
@@ -44,35 +43,9 @@ function AddCase(props) {
 
     useEffect(() => {
         props.dispatch(categoriesFunction());
-    }, []);
-
-    const setTitleHandler = (e) => {
-        e.preventDefault();
-        setTitle(e.target.value);
-    };
-
-    const setDescriptionHandler = (e) => {
-        e.preventDefault();
-        setDescription(e.target.value);
-    };
-
-    const setDiagnosisHandler = (e) => {
-        e.preventDefault();
-        setDiagnosis(e.target.value);
-    };
-
-    const setJustificationHandler = (e) => {
-        e.preventDefault();
-        setJustification(e.target.value);
-    };
-
-    const setRecommendationHandler = (e) => {
-        e.preventDefault();
-        setRecommendation(e.target.value);
-    };
+    }, [])
 
     const setCategoryHandler = (e) => {
-        e.preventDefault();
         if (e.target.value === "Undefined") {
             setCategory(0)
         } else if (e.target.value === "Medical") {
@@ -81,11 +54,9 @@ function AddCase(props) {
             setCategory(2)
         } else
             setCategory(3)
-        // setCategory(e.target.value)
     };
 
-    const addCaseHandler = async event => {
-        event.preventDefault();
+    const addCaseHandler = async (e) => {
         const data = {
             title: title,
             description: description,
@@ -95,12 +66,6 @@ function AddCase(props) {
             category: category,
         };
         await props.dispatch(addCaseFunction(data));
-        setTitle('');
-        setDescription('');
-        setDiagnosis('');
-        setJustification('');
-        setRecommendation('');
-        setCategory(null);
         props.history.push("/cases/");
     };
 
@@ -109,60 +74,34 @@ function AddCase(props) {
           <div>
               title:
           </div>
-          <FieldInput
-            name="title"
-            onChange={setTitleHandler}
-            value={title}
-            required
-          />
+          <FieldInput name="title" onChange={(e) => setTitle(e.target.value)} value={title} required/>
           <div>
               description:
           </div>
-          <FieldInput
-            name="description"
-            onChange={setDescriptionHandler}
-            value={description}
-            required
-          />
+          <FieldInput name="description" onChange={(e) => setDescription(e.target.value)} value={description} required/>
           <div>
               diagnosis:
           </div>
-          <FieldInput
-            name="diagnosis"
-            onChange={setDiagnosisHandler}
-            value={diagnosis}
-            required
-          />
+          <FieldInput name="diagnosis" onChange={(e) => setDiagnosis(e.target.value)} value={diagnosis} required/>
           <div>
               justification:
           </div>
-          <FieldInput
-            name="justification"
-            onChange={setJustificationHandler}
-            value={justification}
-            required
-          />
+          <FieldInput name="justification" onChange={(e) => setJustification(e.target.value)} value={justification} required/>
           <div>
               recommendation:
           </div>
-          <FieldInput
-            name="recommendation"
-            onChange={setRecommendationHandler}
-            value={recommendation}
-            required
-          />
+          <FieldInput name="recommendation" onChange={(e) => setRecommendation(e.target.value)} value={recommendation} required/>
           <div>
               category:
           </div>
-
           <CategoryDropdown onChange={setCategoryHandler}>
               <option>Select a category...</option>
-                            {props.categories
-                                ? props.categories.map( (category) => {
-                                    return (
-                                        <option key={category.id} id={category.id}>{category.name}</option>
-                                    )
-                            }): null}
+                {props.categories
+                    ? props.categories.map( (category) => {
+                        return (
+                            <option key={category.id} id={category.id}>{category.name}</option>
+                        )
+                    }): null}
           </CategoryDropdown>
           <AddButton onClick={addCaseHandler}>Add</AddButton>
       </Container>
