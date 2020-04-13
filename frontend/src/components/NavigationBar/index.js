@@ -15,6 +15,7 @@ import CanI from '../Permissions';
 import {Empty} from '../../styles/GenericBoxes';
 import {CASES, DASHBOARD, ORGANISATIONS} from '../Navigation/states';
 import {setNavigationAction} from '../../store/actions/Navigation';
+import {VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
 
 
 function NavigationBar() {
@@ -43,14 +44,18 @@ function NavigationBar() {
           <img src={dashboard} alt="Dashboard" style={{paddingRight: 35, height: 45}}/>
           Dashboard
         </NavItem>
-        <NavItem selected={selected===CASES} onClick={() => onClickHandler(CASES)}>
-          <img src={folder} alt="Cases" style={{paddingRight: 35, height: 45}}/>
-          Cases
-        </NavItem>
-        <NavItem selected={selected===ORGANISATIONS} onClick={() => onClickHandler(ORGANISATIONS)}>
-          <img src={organisation} alt="Organisations" style={{paddingRight: 30, height: 45}}/>
-          Organisations
-        </NavItem>
+        <CanI perform={VIEW_CASE}>
+          <NavItem selected={selected===CASES} onClick={() => onClickHandler(CASES)}>
+            <img src={folder} alt="Cases" style={{paddingRight: 35, height: 45}}/>
+            Cases
+          </NavItem>
+        </CanI>
+        <CanI perform={VIEW_ORGANISATION}>
+          <NavItem selected={selected===ORGANISATIONS} onClick={() => onClickHandler(ORGANISATIONS)}>
+            <img src={organisation} alt="Organisations" style={{paddingRight: 30, height: 45}}/>
+            Organisations
+          </NavItem>
+        </CanI>
       </Options>
       <Empty/>
       <Button onClick={logoutHandler}>Log out</Button>

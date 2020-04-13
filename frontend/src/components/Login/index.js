@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
+
+import {login} from '../../store/actions/loginActions';
+import isEmail from '../../helpers/isEmail';
+
 import {CardBox} from '../../styles/GenericBoxes';
 import {GreyRoundInput} from '../../styles/Inputs';
 import {RedButton} from '../../styles/Buttons';
-import {useDispatch, useSelector} from 'react-redux';
-
 import msf_logo from '../../assets/MSF_logo_international.jpg'
-import {login} from '../../store/actions/loginActions';
-import isEmail from '../../helpers/isEmail';
-import Redirect from 'react-router-dom/es/Redirect';
 
 
 const Background = styled.div`
