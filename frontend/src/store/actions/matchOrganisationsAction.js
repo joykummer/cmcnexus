@@ -1,17 +1,19 @@
-/*
-import {MATCH_ORGANISATIONS} from "./actionTypes";
+import {UPDATE_CASE} from "./actionTypes";
 import Axios from "../../axios/authenticated";
 
-export const matchListOrganisationsAction = (organisations) => {
+const updateCaseAction = (file) => {
   return {
-    type: MATCH_ORGANISATION,
-    payload: organisations,
+    type: UPDATE_CASE,
+    payload: file,
   };
 };
 
-export const matchListOrganisationsFunction = () => async (dispatch) => {
-  const response = await Axios.get("organisations/category/1/");
-  console.log('THIS IS THE RESPONSE DATA', response.data)
-  dispatch(matchListOrganisationsAction(response.data));
+export const matchOrganisationsFunction = (caseId, orgId) => async (dispatch) => {
+  const response = await Axios.post(`cases/${caseId}/match/`, {partner_ids: [orgId]});
+  dispatch(updateCaseAction(response.data));
 };
-*/
+
+export const unmatchOrganisationsFunction = (caseId, orgId) => async (dispatch) => {
+  const response = await Axios.delete(`cases/${caseId}/match/`, {data: {partner_ids: [orgId]}});
+  dispatch(updateCaseAction(response.data));
+};

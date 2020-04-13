@@ -27,9 +27,9 @@ function CaseDetails(props) {
     props.dispatch(casesFunction());
   }, []);
 
-  const matchingHandler = () => {
+  const matchingHandler = (id) => {
         props.history.push({
-            pathname: `/organisations/match/`,
+            pathname: `/cases/match/${id}`,
           });
     };
 
@@ -70,7 +70,7 @@ function CaseDetails(props) {
                   }) : null
               }</div>
             <div>status: {caseDetails.status}</div>
-            <Match onClick={() => matchingHandler()}>Match Partner Organisation</Match>
+            <Match onClick={() => matchingHandler(caseDetails.id)}>Match Partner Organisation</Match>
           </>
           ): <div>No case to show</div>}
       </Container>

@@ -33,7 +33,7 @@ export default function Routes() {
               <PrivateRoutePerm exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
               <PrivateRoutePerm exact path='/organisations/add/' component={AddOrganisation} permission={ADD_ORGANISATION}/>
               <PrivateRoutePerm exact path='/organisations/' component={ListOrganisations} permission={VIEW_ORGANISATION}/>
-              <PrivateRoute exact path='/organisations/match' component={MatchOrganisations}/>
+              <PrivateRoute exact path='/cases/match/:id/' component={MatchOrganisations}/>
               <Route path="/" render={() => <Redirect to='/dashboard'/>} />
           </Navigation>
         </Switch>

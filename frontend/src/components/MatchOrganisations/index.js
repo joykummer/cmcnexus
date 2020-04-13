@@ -12,10 +12,11 @@ const Container = styled.div`
   align-items: center;
 `;
 
-function MatchOrganisations() {
+function MatchOrganisations(props) {
+    console.log(props.match);
     return (
     <Container>
-      <ListPotentialMatches />
+      <ListPotentialMatches caseId={parseInt(props.match.params.id)}/>
     </Container>
   );
 }

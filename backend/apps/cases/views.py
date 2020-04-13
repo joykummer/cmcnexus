@@ -66,9 +66,9 @@ class RejectCaseView(UpdateAPIView):
 
 
 class MatchOrganisation(GenericAPIView):
-    queryset = Case.objects.all()
+    queryset = Case
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission, MatchOrganizationPermission]
+    # permission_classes = [CustomDjangoModelPermission, MatchOrganizationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
@@ -87,9 +87,9 @@ class MatchOrganisation(GenericAPIView):
 
 
 class AssignOrganisation(GenericAPIView):
-    queryset = Case.objects.all()
+    queryset = Case
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
+    # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
