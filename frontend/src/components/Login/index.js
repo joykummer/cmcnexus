@@ -5,7 +5,7 @@ import {GreyRoundInput} from '../../styles/Inputs';
 import {RedButton} from '../../styles/Buttons';
 import {useDispatch, useSelector} from 'react-redux';
 
-import msf_logo from '../../assets/msf_logo.svg'
+import msf_logo from '../../assets/MSF_logo_international.jpg'
 import {login} from '../../store/actions/loginActions';
 import isEmail from '../../helpers/isEmail';
 import Redirect from 'react-router-dom/es/Redirect';
@@ -13,14 +13,15 @@ import Redirect from 'react-router-dom/es/Redirect';
 
 const Background = styled.div`
 width: 100%;
-background: #E5E5E5;
+background: #FFF;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+justify-content: flex-start;
 `;
 
 const Card = styled(CardBox)`
+box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
 padding: 60px;
 width: 50%;
 max-width: 500px;
@@ -56,7 +57,8 @@ margin-top: 50px;
 `;
 
 const Logo = styled.img`
-margin: 20px;
+height: 200px;
+margin: 40px;
 `;
 
 
@@ -64,7 +66,7 @@ export function Login() {
 	const is_authenticated = useSelector(state => state.auth.is_authenticated)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('');
-	const [rememberMe, setRememberMe] = useState(false);
+	const [rememberMe, setRememberMe] = useState(true);
 	const dispatch = useDispatch();
 
 	const LoginSubmitHandler = e => {
