@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import msf_logo from '../../assets/msf_logo.svg'
 import {login} from '../../store/actions/loginActions';
 import isEmail from '../../helpers/isEmail';
-import Redirect from 'react-router-dom/es/Redirect';
+import {Redirect} from 'react-router-dom';
 
 
 const Background = styled.div`
