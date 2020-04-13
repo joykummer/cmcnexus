@@ -13,6 +13,7 @@ import {
 } from "../../styles/Tables";
 
 function ListCasesTable(props) {
+
     const history = useHistory();
 
   useEffect(() => {

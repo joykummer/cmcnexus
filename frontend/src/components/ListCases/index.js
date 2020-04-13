@@ -36,7 +36,7 @@ const SearchButton = styled(RedButton)`
 `;
 
 const AddCaseButton = styled(RedButton)`
-  width: 125px;
+  width: 150px;
   height: 40px;
   margin-top: 20px;
 `;
