@@ -1,22 +1,27 @@
 import React from "react";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
 
 import dashboard from '../../assets/tachometer-alt-solid.svg'
 import folder from '../../assets/folder-open-regular.svg'
 import organisation from '../../assets/network-wired-solid.svg'
-import msf_logo from '../../assets/msf_logo.svg'
+import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 import {
-  NavigationContainer, Logo, Name, Options, 
+  NavigationContainer, Logo, Options,
   Button, NavItem
 } from './style';
 import {logoutAction} from '../../store/actions/loginActions';
 import CanI from '../Permissions';
+import {Empty} from '../../styles/GenericBoxes';
+import {CASES, DASHBOARD, ORGANISATIONS} from '../Navigation/states';
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
 
 
 function NavigationBar() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const selected = useSelector(state => state.navigation);
 
   const logoutHandler = () => {
     dispatch(logoutAction());
@@ -26,27 +31,36 @@ function NavigationBar() {
     });
   }
 
+  const onClickHandler = navigationTarget => {
+    dispatch(setNavigationAction(navigationTarget));
+    history.push(`/${navigationTarget}/`);
+  }
+
   return (
-        <NavigationContainer>
-          <Logo src ={msf_logo}/>
-          <Name>Name Placeholder</Name>
-          <Options>
-              <NavItem onClick={() => history.push("/dashboard/")}>
-                <img src={dashboard} alt="Dashboard" style={{paddingRight:35, height:45}}/>
-                Dashboard
-              </NavItem>
-              <NavItem onClick={() => history.push("/cases/")}>
-                <img src={folder} alt="Cases" style={{paddingRight:35, height: 45}}/>
-                Cases
-              </NavItem>
-              <NavItem onClick={() => history.push("/organisations/")}>
-                <img src={organisation} alt="Organisations" style={{paddingRight:30, height: 45}}/>
-                Organisations
-              </NavItem>
-          </Options>
-           <Button onClick={logoutHandler}>Log out</Button>
-        </NavigationContainer>
-  )
+    <NavigationContainer>
+      <Logo src={msf_logo}/>
+      <Options>
+        <NavItem selected={selected===DASHBOARD} onClick={() => onClickHandler(DASHBOARD)}>
+          <img src={dashboard} alt="Dashboard" style={{paddingRight: 35, height: 45}}/>
+          Dashboard
+        </NavItem>
+        <CanI perform={VIEW_CASE}>
+          <NavItem selected={selected===CASES} onClick={() => onClickHandler(CASES)}>
+            <img src={folder} alt="Cases" style={{paddingRight: 35, height: 45}}/>
+            Cases
+          </NavItem>
+        </CanI>
+        <CanI perform={VIEW_ORGANISATION}>
+          <NavItem selected={selected===ORGANISATIONS} onClick={() => onClickHandler(ORGANISATIONS)}>
+            <img src={organisation} alt="Organisations" style={{paddingRight: 30, height: 45}}/>
+            Organisations
+          </NavItem>
+        </CanI>
+      </Options>
+      <Empty/>
+      <Button onClick={logoutHandler}>Log out</Button>
+    </NavigationContainer>
+  );
 }
 
 export default NavigationBar;

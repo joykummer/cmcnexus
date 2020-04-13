@@ -34,7 +34,7 @@ function ListOrganisationsTable(props) {
                 <TableRow key={organisation.id}>
                   <TableData>{organisation.name}</TableData>
                   <TableData>{organisation.description}</TableData>
-                  <TableData>{organisation.category.name}</TableData>
+                  <TableData>{organisation.category ? organisation.category.name : ""}</TableData>
                   <TableData>{organisation.tag}</TableData>
                 </TableRow>
               );

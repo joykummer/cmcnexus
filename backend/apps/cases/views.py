@@ -23,14 +23,14 @@ class ListCreateCaseView(ListCreateAPIView):
 
 
 class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
-    queryset = Case.objects.none()
+    queryset = Case.objects.all()
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission]
     lookup_url_kwarg = 'id'
 
 
 class ValidateCaseView(UpdateAPIView):
-    queryset = Case.objects.none()
+    queryset = Case.objects.all()
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission, ValidatePermission]
     lookup_url_kwarg = 'case_id'
@@ -42,7 +42,7 @@ class ValidateCaseView(UpdateAPIView):
 
 
 class CloseCaseView(UpdateAPIView):
-    queryset = Case.objects.none()
+    queryset = Case.objects.all()
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission, ClosePermission]
     lookup_url_kwarg = 'case_id'
@@ -54,7 +54,7 @@ class CloseCaseView(UpdateAPIView):
 
 
 class RejectCaseView(UpdateAPIView):
-    queryset = Case.objects.none()
+    queryset = Case.objects.all()
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission, RejectPermission]
     lookup_url_kwarg = 'case_id'
@@ -66,7 +66,7 @@ class RejectCaseView(UpdateAPIView):
 
 
 class MatchOrganisation(GenericAPIView):
-    queryset = Case.objects.none()
+    queryset = Case.objects.all()
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission, MatchOrganizationPermission]
     lookup_url_kwarg = 'case_id'
@@ -87,7 +87,7 @@ class MatchOrganisation(GenericAPIView):
 
 
 class AssignOrganisation(GenericAPIView):
-    queryset = Case.objects.none()
+    queryset = Case.objects.all()
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
     lookup_url_kwarg = 'case_id'

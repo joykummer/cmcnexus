@@ -1,10 +1,12 @@
 import React from 'react';
 import CanI from '../Permissions';
+import {VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
 
 export default function(props) {
 	return (
 		<div>
-			<CanI perform="users:get">
+			Landingpage
+			<CanI perform={VIEW_ORGANISATION}>
 				<div>I can.</div>
 			</CanI>
 			<CanI perform="users:get" yes={() => console.log("Yes!")}>
