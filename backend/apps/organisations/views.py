@@ -2,9 +2,12 @@ from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, CreateAP
 
 from .models import Organisation
 from .serializer import OrganisationSerializer, CreateOrganisationSerializer
+from ..helpers.permissions import CustomDjangoModelPermission
 
 
 class GetAllOrganisations(ListAPIView):
+    queryset = Organisation.objects.none()
+    permission_classes = [CustomDjangoModelPermission]
     serializer_class = OrganisationSerializer
 
     def get_queryset(self):
@@ -12,18 +15,22 @@ class GetAllOrganisations(ListAPIView):
 
 
 class CreateOrganisations(CreateAPIView):
-    queryset = Organisation
+    queryset = Organisation.objects.none()
     serializer_class = CreateOrganisationSerializer
+    permission_classes = [CustomDjangoModelPermission]
 
 
 class GetUpdateByIdView(RetrieveUpdateAPIView):
-    queryset = Organisation
+    queryset = Organisation.objects.none()
     serializer_class = OrganisationSerializer
     lookup_url_kwarg = 'id'
+    permission_classes = [CustomDjangoModelPermission]
 
 
 class ListOrganisationsByCategory(ListAPIView):
+    queryset = Organisation.objects.none()
     serializer_class = OrganisationSerializer
+    permission_classes = [CustomDjangoModelPermission]
 
     def get_queryset(self):
         category = self.kwargs['category_id']
