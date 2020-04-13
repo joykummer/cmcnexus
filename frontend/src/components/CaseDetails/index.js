@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
+import { RedButton } from "../../styles/Buttons";
 
 
 const Container = styled.div`
@@ -13,6 +14,12 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Match = styled(RedButton)`
+  width: 175px;
+  height: 70px;
+  margin-top: 20px;
+`;
+
 
 function CaseDetails(props) {
 
@@ -20,6 +27,11 @@ function CaseDetails(props) {
     props.dispatch(casesFunction());
   }, []);
 
+  const matchingHandler = () => {
+        props.history.push({
+            pathname: `/organisations/match/`,
+          });
+    };
 
   const caseDetails =
       props.cases ?
@@ -58,6 +70,7 @@ function CaseDetails(props) {
                   }) : null
               }</div>
             <div>status: {caseDetails.status}</div>
+            <Match onClick={() => matchingHandler()}>Match Partner Organisation</Match>
           </>
           ): <div>No case to show</div>}
       </Container>

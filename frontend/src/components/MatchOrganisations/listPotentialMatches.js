@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { RedButton } from "../../styles/Buttons";
+import { matchListOrganisationsFunction } from "../../store/actions/matchListOrganisationsAction";
 import { matchOrganisationsFunction } from "../../store/actions/matchOrganisationsAction";
 import {
   Table,
@@ -14,17 +15,25 @@ import {
 import styled from "styled-components";
 
 
-const MatchButton = styled(RedButton)`
-  width: 150px;
-  height: 40px;
-  margin-top: 50px;
-  margin-left: 100px;
-`;
+  const MatchButton = styled(RedButton)`
+    width: 150px;
+    height: 40px;
+    margin-top: 50px;
+    margin-left: 100px;
+  `;
 
-function ListPotentialMatches(props) {
-  useEffect(() => {
-    props.dispatch(matchOrganisationsFunction());
-  }, []);
+  function ListPotentialMatches(props) {
+    useEffect(() => {
+      props.dispatch(matchListOrganisationsFunction());
+    }, []);
+
+
+  /*const matchButtonHandler = (e) => {
+    e.preventDefault();
+    useEffect(() => {
+      props.dispatch(matchOrganisationsFunction());
+    }, []);
+  };*/
 
   const headers = ["Name", "Description", "Category", "Tag(s)"];
 
@@ -48,7 +57,7 @@ function ListPotentialMatches(props) {
                     <TableData>{organisation.description}</TableData>
                     <TableData>{organisation.category.name}</TableData>
                     <TableData>{organisation.tag}</TableData>
-                    <MatchButton>MATCH</MatchButton>
+                    <MatchButton /*onClick={matchButtonHandler}*/ >MATCH</MatchButton>
                   </TableRow>
                 );
               })
