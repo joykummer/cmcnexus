@@ -120,6 +120,7 @@ function AddCase(props) {
               country:
           </div>
           <FieldInput name="country" onChange={(e) => setCountry(e.target.value)} value={country} required/>
+          <Checkbox name="consent" onChange={(e) => setConsent(true)} value="consent"/>
           <div>
               category:
           </div>
