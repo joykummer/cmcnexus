@@ -5,9 +5,8 @@ import {organisationsFunction} from "../../store/actions/organisationsAction";
 import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
-import {casesFunction} from "../../store/actions/casesAction";
-import {searchCasesFunction} from "../../store/actions/searchCasesAction";
-
+import { casesFunction } from "../../store/actions/casesAction";
+import { searchCasesFunction } from "../../store/actions/searchCasesAction";
 
 const Container = styled.div`
   width: 100%;
@@ -29,10 +28,9 @@ const SearchButton = styled(RedButton)`
 `;
 
 const AddCaseButton = styled(RedButton)`
-width: 150px;
-height: 30px;
+  width: 150px;
+  height: 30px;
 `;
-
 
 function ListCases(props) {
   const [search, setSearch] = useState("");
@@ -56,40 +54,43 @@ function ListCases(props) {
 
   const addCaseHandler = (e) => {
     e.preventDefault();
-    props.history.push('/cases/add/');
+    props.history.push("/cases/add/");
   };
 
-    console.log('this is the state to props', props);
+  console.log("this is the state to props", props);
 
   const caseDetailsHandler = (id) => {
-        props.history.push({
-            pathname: `/cases/details/${id}/`,
-          });
-    };
-
+    props.history.push({
+      pathname: `/cases/details/${id}/`,
+    });
+  };
 
   return (
-      <Container>
-        <SearchInput name="search" onChange={setSearchHandler} value={search} />
-        <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
-        {props.cases
-          ? props.cases.map(file => {
-              return (
-                <div key={file.id} file={file} onClick={() => caseDetailsHandler(file.id)}>
-                  <div>title: {file.title}</div>
-                  <div>county: {file.country}</div>
-                  <div>status: {file.status}</div>
-                  {/*<div>assigned partner(s): {cases.assigned_partners.map((partner) => {*/}
-                  {/*  return (*/}
-                  {/*      <>{partner.name} </>*/}
-                  {/*  )*/}
-                  {/*})}</div>*/}
-                </div>
-              );
-            })
-          : null}
-        <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
-      </Container>
+    <Container>
+      <SearchInput name="search" onChange={setSearchHandler} value={search} />
+      <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
+      {props.cases
+        ? props.cases.map((file) => {
+            return (
+              <div
+                key={file.id}
+                file={file}
+                onClick={() => caseDetailsHandler(file.id)}
+              >
+                <div>title: {file.title}</div>
+                <div>county: {file.country}</div>
+                <div>status: {file.status}</div>
+                {/*<div>assigned partner(s): {cases.assigned_partners.map((partner) => {*/}
+                {/*  return (*/}
+                {/*      <>{partner.name} </>*/}
+                {/*  )*/}
+                {/*})}</div>*/}
+              </div>
+            );
+          })
+        : null}
+      <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
+    </Container>
   );
 }
 

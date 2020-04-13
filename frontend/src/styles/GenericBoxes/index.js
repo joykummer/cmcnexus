@@ -8,5 +8,5 @@ export const CardBox = styled.div`
 `;
 
 export const Empty = styled.div`
-flex-grow: 1;
+  flex-grow: 1;
 `;
