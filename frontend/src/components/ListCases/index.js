@@ -7,6 +7,7 @@ import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {casesFunction} from "../../store/actions/casesAction";
 import {searchCasesFunction} from "../../store/actions/searchCasesAction";
+import ListCasesTable from "./listCasesTable";
 
 
 const Container = styled.div`
@@ -18,19 +19,26 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const SearchWrapper = styled.div`
+  width: 60%;
+  display: flex;
+  padding-bottom: 20px;
+`;
+
 const SearchInput = styled(GreyRoundInput)`
-  width: 250px;
+  width: 80%;
   height: 30px;
 `;
 
 const SearchButton = styled(RedButton)`
-  width: 75px;
+  width: 20%;
   height: 30px;
 `;
 
 const AddCaseButton = styled(RedButton)`
-width: 150px;
-height: 30px;
+  width: 150px;
+  height: 30px;
+  margin-top: 20px;
 `;
 
 
@@ -61,33 +69,15 @@ function ListCases(props) {
 
     console.log('this is the state to props', props);
 
-  const caseDetailsHandler = (id) => {
-        props.history.push({
-            pathname: `/cases/details/${id}/`,
-          });
-    };
 
 
   return (
       <Container>
-        <SearchInput name="search" onChange={setSearchHandler} value={search} />
-        <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
-        {props.cases
-          ? props.cases.map(file => {
-              return (
-                <div key={file.id} file={file} onClick={() => caseDetailsHandler(file.id)}>
-                  <div>title: {file.title}</div>
-                  <div>county: {file.country}</div>
-                  <div>status: {file.status}</div>
-                  {/*<div>assigned partner(s): {cases.assigned_partners.map((partner) => {*/}
-                  {/*  return (*/}
-                  {/*      <>{partner.name} </>*/}
-                  {/*  )*/}
-                  {/*})}</div>*/}
-                </div>
-              );
-            })
-          : null}
+        <SearchWrapper>
+          <SearchInput name="search" onChange={setSearchHandler} value={search} />
+          <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
+        </SearchWrapper>
+          <ListCasesTable/>
         <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
       </Container>
   );
