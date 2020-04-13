@@ -12,6 +12,7 @@ import ListCases from "../components/ListCases";
 import AddCase from "../components/AddCase";
 import ListOrganisations from '../components/ListOrganisations';
 import AddOrganisation from "../components/AddOrganisation";
+import CaseDetails from "../components/CaseDetails";
 
 
 
@@ -23,6 +24,7 @@ export default function Routes() {
           <Navigation>
             <PrivateRoute path='/' exact component={LandingPage}/>
             <PrivateRoute exact path='/cases/add/' component={AddCase}/>
+            <PrivateRoute exact path='/cases/details/:id/' component={CaseDetails}/>
             <PrivateRoute exact path='/cases/' component={ListCases}/>
             <PrivateRoute exact path='/organisations/add/' component={AddOrganisation}/>
             <PrivateRoute exact path='/organisations/' component={ListOrganisations}/>
