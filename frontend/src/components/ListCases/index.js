@@ -63,7 +63,7 @@ function ListCases(props) {
 
   const caseDetailsHandler = (id) => {
         props.history.push({
-            pathname: `/cases/${id}/`,
+            pathname: `/cases/details/${id}/`,
           });
     };
 

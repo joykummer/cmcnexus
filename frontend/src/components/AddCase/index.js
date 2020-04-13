@@ -29,7 +29,7 @@ const Checkbox = styled.input`
 
 const CategoryDropdown = styled(Dropdown)`
   width: 200px;
-  height: 100px;
+  height: auto;
 `;
 
 const AddButton = styled(RedButton)`
@@ -120,12 +120,11 @@ function AddCase(props) {
               country:
           </div>
           <FieldInput name="country" onChange={(e) => setCountry(e.target.value)} value={country} required/>
-          <Checkbox name="consent" onChange={(e) => setConsent(true)} value="consent"/>
           <div>
               category:
           </div>
           <CategoryDropdown onChange={setCategoryHandler} multiple="multiple">
-              <option>Select a category...</option>
+              {/*<option>Select a category...</option>*/}
                 {props.categories
                     ? props.categories.map( (category) => {
                         return (

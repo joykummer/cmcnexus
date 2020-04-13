@@ -24,7 +24,7 @@ export default function Routes() {
           <Navigation>
             <PrivateRoute path='/' exact component={LandingPage}/>
             <PrivateRoute exact path='/cases/add/' component={AddCase}/>
-            <PrivateRoute exact path='/cases/:id' component={CaseDetails}/>
+            <PrivateRoute exact path='/cases/details/:id/' component={CaseDetails}/>
             <PrivateRoute exact path='/cases/' component={ListCases}/>
             <PrivateRoute exact path='/organisations/add/' component={AddOrganisation}/>
             <PrivateRoute exact path='/organisations/' component={ListOrganisations}/>
