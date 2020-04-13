@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Table = styled.table`
   width: 60%;
-  height: 70%;
+  height: auto;
   border: 1px solid #ebebeb;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -25,4 +25,6 @@ export const TableRow = styled.tr`
   }
 `;
 
-export const TableData = styled.td``;
+export const TableData = styled.td`
+    height: 25px;
+`;
