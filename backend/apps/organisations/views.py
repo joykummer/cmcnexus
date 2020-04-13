@@ -34,4 +34,4 @@ class ListOrganisationsByCategory(ListAPIView):
 
     def get_queryset(self):
         category = self.kwargs['category_id']
-        return self.queryset.filter(category=category)
+        return Organisation.objects.filter(category=category)
