@@ -36,6 +36,7 @@ height: 30px;
 
 function ListCases(props) {
   const [search, setSearch] = useState("");
+  const [id, setId] = useState(null);
 
   useEffect(() => {
     props.dispatch(casesFunction());
@@ -58,21 +59,31 @@ function ListCases(props) {
     props.history.push('/cases/add/');
   };
 
+    console.log('this is the state to props', props);
+
+  const caseDetailsHandler = (id) => {
+        props.history.push({
+            pathname: `/cases/${id}/`,
+          });
+    };
+
+
   return (
       <Container>
         <SearchInput name="search" onChange={setSearchHandler} value={search} />
         <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
         {props.cases
-          ? props.cases.map(cases => {
+          ? props.cases.map(file => {
               return (
-                <div key={cases.id}>
-                  <div>title {cases.title}</div>
-                  <div>status: {cases.status}</div>
-                  <div>assigned partner(s): {cases.assigned_partners.map((partner) => {
-                    return (
-                        <>{partner.name} </>
-                    )
-                  })}</div>
+                <div key={file.id} file={file} onClick={() => caseDetailsHandler(file.id)}>
+                  <div>title: {file.title}</div>
+                  <div>county: {file.country}</div>
+                  <div>status: {file.status}</div>
+                  {/*<div>assigned partner(s): {cases.assigned_partners.map((partner) => {*/}
+                  {/*  return (*/}
+                  {/*      <>{partner.name} </>*/}
+                  {/*  )*/}
+                  {/*})}</div>*/}
                 </div>
               );
             })

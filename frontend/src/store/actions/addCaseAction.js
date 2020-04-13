@@ -11,7 +11,7 @@ export const addCaseAction = cases => {
 
 export const addCaseFunction = data => async dispatch => {
     try {
-        const response = await Axios.post('cases/add/', data);
+        const response = await Axios.post('cases/', data);
         dispatch(addCaseAction(response.data));
     } catch (e) {
         console.log('e', e)

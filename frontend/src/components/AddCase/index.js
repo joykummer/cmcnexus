@@ -29,7 +29,7 @@ const Checkbox = styled.input`
 
 const CategoryDropdown = styled(Dropdown)`
   width: 200px;
-  height: 30px;
+  height: 100px;
 `;
 
 const AddButton = styled(RedButton)`
@@ -45,6 +45,9 @@ function AddCase(props) {
     const [justification, setJustification] = useState('');
     const [recommendation, setRecommendation] = useState('');
     const [consent, setConsent] = useState(false);
+    const [age, setAge] = useState('');
+    const [sex, setSex] = useState('');
+    const [country, setCountry] = useState('');
     const [category, setCategory] = useState(null);
 
     useEffect(() => {
@@ -69,6 +72,10 @@ function AddCase(props) {
             diagnosis: diagnosis,
             justification: justification,
             recommendation: recommendation,
+            consent: consent,
+            age: age,
+            sex: sex,
+            country: country,
             category: category,
         };
         await props.dispatch(addCaseFunction(data));
@@ -100,11 +107,23 @@ function AddCase(props) {
           <div>
               patient's consent:
           </div>
-          <Checkbox name="consent" onChange={(e) => setConsent(true)} value="consent"/>
+          <Checkbox type="checkbox" name="consent" onChange={() => setConsent(true)} value="consent"/>
+          <div>
+              age:
+          </div>
+          <FieldInput name="age" onChange={(e) => setAge(e.target.value)} value={age} required/>
+          <div>
+              sex:
+          </div>
+          <FieldInput name="sex" onChange={(e) => setSex(e.target.value)} value={sex} required/>
+          <div>
+              country:
+          </div>
+          <FieldInput name="country" onChange={(e) => setCountry(e.target.value)} value={country} required/>
           <div>
               category:
           </div>
-          <CategoryDropdown onChange={setCategoryHandler}>
+          <CategoryDropdown onChange={setCategoryHandler} multiple="multiple">
               <option>Select a category...</option>
                 {props.categories
                     ? props.categories.map( (category) => {
