@@ -12,7 +12,7 @@ import ListCases from "../components/ListCases";
 import AddCase from "../components/AddCase";
 import ListOrganisations from '../components/ListOrganisations';
 import AddOrganisation from "../components/AddOrganisation";
-
+import UserProfile from "../components/UserProfile";
 
 
 export default function Routes() {
@@ -26,6 +26,7 @@ export default function Routes() {
             <PrivateRoute exact path='/cases/' component={ListCases}/>
             <PrivateRoute exact path='/organisations/add/' component={AddOrganisation}/>
             <PrivateRoute exact path='/organisations/' component={ListOrganisations}/>
+            <PrivateRoute exact path='/profile/' component={UserProfile}/>
           </Navigation>
           <Route path='/' component={UnderConstruction}/>
         </Switch>
