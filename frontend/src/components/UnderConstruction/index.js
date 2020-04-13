@@ -2,7 +2,6 @@ import React from 'react'
 
 import styled from 'styled-components'
 import PacmanLoader from "react-spinners/PacmanLoader";
-import Axios from '../../axios/not_authenticated';
 
 const Center = styled.div`
 display: flex;
