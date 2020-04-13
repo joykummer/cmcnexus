@@ -10,11 +10,18 @@ const Wrapper = styled.div`
 	flex-direction: row;
 `;
 
+const ChildrenBox = styled.div`
+flex-grow: 1;
+height: 100%;
+`;
+
 export default function (props) {
 	return (
 		<Wrapper>
 			<NavigationBar/>
-			{props.children}
+			<ChildrenBox>
+				{props.children}
+			</ChildrenBox>
 		</Wrapper>
 	);
 }
