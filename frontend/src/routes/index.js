@@ -27,11 +27,11 @@ export default function Routes() {
           <Navigation>
               <Route exact path="/" render={() => <Redirect to='/dashboard'/>} />
               <PrivateRoute path='/dashboard/' component={() => <div>Hallo Welt</div>}/>
-              <PrivateRoute exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
-              <PrivateRoute exact path='/cases/details/:id/' component={CaseDetails}/>
-              <PrivateRoute exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
-              <PrivateRoute exact path='/organisations/add/' component={AddOrganisation} permission={ADD_ORGANISATION}/>
-              <PrivateRoute exact path='/organisations/' component={ListOrganisations} permission={VIEW_ORGANISATION}/>
+              <PrivateRoutePerm exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
+              <PrivateRoutePerm exact path='/cases/details/:id/' component={CaseDetails} permission={VIEW_CASE}/>
+              <PrivateRoutePerm exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
+              <PrivateRoutePerm exact path='/organisations/add/' component={AddOrganisation} permission={ADD_ORGANISATION}/>
+              <PrivateRoutePerm exact path='/organisations/' component={ListOrganisations} permission={VIEW_ORGANISATION}/>
               <Route path="/" render={() => <Redirect to='/dashboard'/>} />
           </Navigation>
         </Switch>
