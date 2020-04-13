@@ -22,6 +22,11 @@ const FieldInput = styled(GreyRoundInput)`
   height: 30px;
 `;
 
+const Checkbox = styled.input`
+  width: 30px;
+  height: 30px;
+`;
+
 const CategoryDropdown = styled(Dropdown)`
   width: 200px;
   height: 30px;
@@ -39,6 +44,7 @@ function AddCase(props) {
     const [diagnosis, setDiagnosis] = useState('');
     const [justification, setJustification] = useState('');
     const [recommendation, setRecommendation] = useState('');
+    const [consent, setConsent] = useState(false);
     const [category, setCategory] = useState(null);
 
     useEffect(() => {
@@ -91,6 +97,10 @@ function AddCase(props) {
               recommendation:
           </div>
           <FieldInput name="recommendation" onChange={(e) => setRecommendation(e.target.value)} value={recommendation} required/>
+          <div>
+              patient's consent:
+          </div>
+          <Checkbox name="consent" onChange={(e) => setConsent(true)} value="consent"/>
           <div>
               category:
           </div>
