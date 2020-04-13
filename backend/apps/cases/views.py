@@ -3,8 +3,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.response import Response
 
 from apps.cases.models import Case
-from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission, AssignOrganizationPermission, \
-    MatchOrganizationPermission
+from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
 

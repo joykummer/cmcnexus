@@ -13,7 +13,6 @@ const Container = styled.div`
 `;
 
 function MatchOrganisations(props) {
-    console.log(props.match);
     return (
     <Container>
       <ListPotentialMatches caseId={parseInt(props.match.params.id)}/>
