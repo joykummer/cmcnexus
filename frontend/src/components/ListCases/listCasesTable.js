@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
+import {useHistory} from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -12,13 +13,14 @@ import {
 } from "../../styles/Tables";
 
 function ListCasesTable(props) {
+    const history = useHistory();
+
   useEffect(() => {
     props.dispatch(casesFunction());
   }, []);
 
-
   const caseDetailsHandler = (id) => {
-        props.history.push({
+        history.push({
             pathname: `/cases/details/${id}/`,
           });
     };

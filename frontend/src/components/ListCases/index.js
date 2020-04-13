@@ -27,24 +27,23 @@ const SearchWrapper = styled.div`
 
 const SearchInput = styled(GreyRoundInput)`
   width: 80%;
-  height: 30px;
+  height: 40px;
 `;
 
 const SearchButton = styled(RedButton)`
   width: 20%;
-  height: 30px;
+  height: 40px;
 `;
 
 const AddCaseButton = styled(RedButton)`
-  width: 150px;
-  height: 30px;
+  width: 125px;
+  height: 40px;
   margin-top: 20px;
 `;
 
 
 function ListCases(props) {
   const [search, setSearch] = useState("");
-  const [id, setId] = useState(null);
 
   useEffect(() => {
     props.dispatch(casesFunction());
@@ -66,10 +65,6 @@ function ListCases(props) {
     e.preventDefault();
     props.history.push('/cases/add/');
   };
-
-    console.log('this is the state to props', props);
-
-
 
   return (
       <Container>
