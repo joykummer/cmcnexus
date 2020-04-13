@@ -3,12 +3,12 @@ import {useSelector} from 'react-redux';
 
 
 const CanI = props => {
-	const permissions = useSelector(state => state.auth.user ? state.auth.user.permissions : null)
+	const permissions = useSelector(state => state.auth.user ? state.auth.user.permissions : null);
 
 	if (permissions && permissions.includes(props.perform)) {
 		return props.children;
 	}
-	return () => props.no();
+	return props.no();
 }
 
 CanI.defaultProps = {

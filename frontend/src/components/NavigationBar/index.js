@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import dashboard from '../../assets/tachometer-alt-solid.svg'
 import folder from '../../assets/folder-open-regular.svg'
 import organisation from '../../assets/network-wired-solid.svg'
-import msf_logo from '../../assets/MSF_logo_international.jpg'
+import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 import {
   NavigationContainer, Logo, Options,
   Button, NavItem

@@ -6,11 +6,12 @@ import {RedButton} from '../../styles/Buttons'
 export const NavigationContainer = styled.div`
 width: 350px;
 height: 100%;
-background: lightgrey;
+background: white;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
 align-items: center;
+box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
 `;
 
 export const Logo = styled.img`

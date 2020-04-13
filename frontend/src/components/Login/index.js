@@ -9,7 +9,7 @@ import isEmail from '../../helpers/isEmail';
 import {CardBox} from '../../styles/GenericBoxes';
 import {GreyRoundInput} from '../../styles/Inputs';
 import {RedButton} from '../../styles/Buttons';
-import msf_logo from '../../assets/MSF_logo_international.jpg'
+import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 
 
 const Background = styled.div`
@@ -90,7 +90,6 @@ export function Login() {
 						<Text>Password</Text>
 						<LoginInput name={'password'} type={'password'} value={password}
 												onChange={e => setPassword(e.target.value)}/>
-
 						<Controls>
 							<label>
 								<input type={'checkbox'} checked={rememberMe} onChange={e => setRememberMe(e.target.checked)}/>
