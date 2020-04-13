@@ -28,7 +28,6 @@ class GetUpdateByIdView(RetrieveUpdateAPIView):
 
 
 class ListOrganisationsByCategory(ListAPIView):
-    queryset = Organisation.objects.none()
     serializer_class = OrganisationSerializer
     permission_classes = [CustomDjangoModelPermission]
 
