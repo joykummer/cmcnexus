@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
+import Validation from "../Validation";
 
 
 const Container = styled.div`
@@ -58,6 +59,7 @@ function CaseDetails(props) {
                   }) : null
               }</div>
             <div>status: {caseDetails.status}</div>
+            <Validation id={caseDetails.id}></Validation>
           </>
           ): <div>No case to show</div>}
       </Container>

@@ -9,8 +9,7 @@ export const updateCaseAction = cases => {
     }
   };
 
-export const updateCaseFunction = () => async (dispatch) => {
-const response = await Axios.patch("cases/2/validate/")
-console.log("from the updateCaseFunction", response)
+export const updateCaseFunction = (case_id) => async (dispatch) => {
+const response = await Axios.patch(`cases/${case_id}/validate/`)
 dispatch(updateCaseAction(response.data))
 }

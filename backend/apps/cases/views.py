@@ -56,7 +56,7 @@ class CloseCaseView(UpdateAPIView):
 class RejectCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission, RejectPermission]
+    permission_classes = [CustomDjangoModelPermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):

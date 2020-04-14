@@ -11,4 +11,5 @@ export const ADD_ORGANISATION = 'ADD_ORGANISATION';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const UPDATE_CASE = 'UPDATE_CASE';
 export const SET_NAVIGATION = 'SET_NAVIGATION';
+export const REJECT_CASE = 'REJECT_CASE';
 
