@@ -35,7 +35,8 @@ function ListPotentialMatches(props) {
 
   const filteredOrganisations = () => {
     // TODO(Greta): Change 'case.category' to 'case.category_id' and make it an integer.
-    return getCase() ? props.organisations.filter((o) => o.category ? o.category.id === getCase().category : false) : []
+    return getCase() ? props.organisations.filter(
+      o => o.category ? o.category.id === Number(getCase().category) : false) : []
   }
 
   const match = (organisationId) => {

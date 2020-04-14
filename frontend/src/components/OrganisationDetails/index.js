@@ -19,7 +19,7 @@ function OrganisationDetails(props) {
 
   const organisationDetails = props.organisations
     ? props.organisations.find(
-        (organisation) => organisation.id == props.match.params.id
+        (organisation) => organisation.id === Number(props.match.params.id)
       )
     : null;
 
