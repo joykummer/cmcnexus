@@ -6,7 +6,7 @@ export default function organisations(state = [], action) {
       return action.payload;
     }
     case ADD_ORGANISATION: {
-      return [...state, action.payload]
+      return [...state, action.payload];
     }
     default:
       return state;

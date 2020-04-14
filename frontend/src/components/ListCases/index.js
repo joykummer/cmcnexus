@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import {organisationsFunction} from "../../store/actions/organisationsAction";
-import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {casesFunction} from "../../store/actions/casesAction";
 import {searchCasesFunction} from "../../store/actions/searchCasesAction";
+import ListCasesTable from "./listCasesTable";
+import CanI from '../Permissions';
+import {ADD_CASE} from '../Permissions/permissions';
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {CASES} from '../Navigation/states';
 
 
 const Container = styled.div`
@@ -14,33 +17,42 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  
+  padding: 40px;
+`;
+
+const SearchWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  padding-bottom: 20px;
 `;
 
 const SearchInput = styled(GreyRoundInput)`
-  width: 250px;
-  height: 30px;
+  width: 80%;
+  height: 40px;
 `;
 
 const SearchButton = styled(RedButton)`
-  width: 75px;
-  height: 30px;
+  width: 20%;
+  height: 40px;
 `;
 
 const AddCaseButton = styled(RedButton)`
-width: 150px;
-height: 30px;
+  width: 125px;
+  height: 40px;
+  margin-top: 20px;
 `;
-
 
 function ListCases(props) {
   const [search, setSearch] = useState("");
-  const [id, setId] = useState(null);
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(casesFunction());
-  }, []);
+    dispatch(setNavigationAction(CASES));
+    dispatch(casesFunction());
+  }, [dispatch]);
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
@@ -56,39 +68,19 @@ function ListCases(props) {
 
   const addCaseHandler = (e) => {
     e.preventDefault();
-    props.history.push('/cases/add/');
+    props.history.push("/cases/add/");
   };
-
-    console.log('this is the state to props', props);
-
-  const caseDetailsHandler = (id) => {
-        props.history.push({
-            pathname: `/cases/details/${id}/`,
-          });
-    };
-
 
   return (
       <Container>
-        <SearchInput name="search" onChange={setSearchHandler} value={search} />
-        <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
-        {props.cases
-          ? props.cases.map(file => {
-              return (
-                <div key={file.id} file={file} onClick={() => caseDetailsHandler(file.id)}>
-                  <div>title: {file.title}</div>
-                  <div>county: {file.country}</div>
-                  <div>status: {file.status}</div>
-                  {/*<div>assigned partner(s): {cases.assigned_partners.map((partner) => {*/}
-                  {/*  return (*/}
-                  {/*      <>{partner.name} </>*/}
-                  {/*  )*/}
-                  {/*})}</div>*/}
-                </div>
-              );
-            })
-          : null}
-        <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
+        <SearchWrapper>
+          <SearchInput name="search" onChange={setSearchHandler} value={search} />
+          <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
+        </SearchWrapper>
+        <ListCasesTable/>
+        <CanI perform={ADD_CASE}>
+          <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
+        </CanI>
       </Container>
   );
 }

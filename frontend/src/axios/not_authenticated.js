@@ -1,6 +1,5 @@
 import axios from 'axios';
 import baseUrl from "../constants";
-import { store } from '../store';
 
 
 // creating a custom instance of axios make fetches more convenient by giving custom defaults

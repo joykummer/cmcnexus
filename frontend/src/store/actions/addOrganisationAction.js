@@ -1,5 +1,5 @@
 import Axios from "../../axios/authenticated";
-import {ADD_ORGANISATION} from "./actionTypes";
+import { ADD_ORGANISATION } from "./actionTypes";
 
 export const addOrganisationAction = (organisations) => {
   return {
@@ -7,7 +7,6 @@ export const addOrganisationAction = (organisations) => {
     payload: organisations,
   };
 };
-
 
 export const addOrganisationFunction = (data) => async (dispatch) => {
   try {
