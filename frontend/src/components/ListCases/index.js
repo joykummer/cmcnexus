@@ -41,7 +41,6 @@ const AddCaseButton = styled(RedButton)`
   margin-top: 20px;
 `;
 
-
 function ListCases(props) {
   const [search, setSearch] = useState("");
 
@@ -63,7 +62,7 @@ function ListCases(props) {
 
   const addCaseHandler = (e) => {
     e.preventDefault();
-    props.history.push('/cases/add/');
+    props.history.push("/cases/add/");
   };
 
   return (
