@@ -1,15 +1,15 @@
 import Axios from "../../axios/authenticated";
-import {ACCEPT_CASE} from "./actionTypes";
+import {VALIDATE_CASE} from "./actionTypes";
 
 
-export const updateCaseAction = cases => {
+export const validateCaseAction = cases => {
     return {
-      type: ACCEPT_CASE,
+      type: VALIDATE_CASE,
       payload: cases
     }
   };
 
-export const updateCaseFunction = (case_id) => async (dispatch) => {
+export const validateCaseFunction = (case_id) => async (dispatch) => {
 const response = await Axios.patch(`cases/${case_id}/validate/`)
-dispatch(updateCaseAction(response.data))
+dispatch(validateCaseAction(response.data))
 }

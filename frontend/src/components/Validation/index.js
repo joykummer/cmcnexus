@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {casesFunction} from '../../store/actions/casesAction'
 import { connect } from "react-redux";
 import { RedButton } from '../../styles/Buttons';
 import styled from 'styled-components';
-import {updateCaseFunction} from '../../store/actions/updateCaseAction';
+import {validateCaseFunction} from '../../store/actions/updateCaseAction';
 import {rejectCaseFunction} from '../../store/actions/rejectCaseAction';
+
 
 const Button = styled(RedButton)`
  height: 50px;
@@ -15,10 +15,10 @@ const Button = styled(RedButton)`
 class Validation extends Component {
 
     acceptHandler = async() => {
-        await this.props.dispatch(updateCaseFunction(this.props.id))
+        await this.props.dispatch(validateCaseFunction(this.props.id))
     }
 
-    recetHandler = async() => {
+    rejectHandler = async() => {
         await this.props.dispatch(rejectCaseFunction(this.props.id))
     }
 
@@ -26,7 +26,7 @@ class Validation extends Component {
         return (
             <div>
                 <Button onClick={this.acceptHandler}>Accept</Button> 
-                <Button onClick ={this.recetHandler}>Reject</Button> 
+                <Button onClick ={this.rejectHandler}>Reject</Button> 
             </div>
         )
     }

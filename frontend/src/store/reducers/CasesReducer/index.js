@@ -1,4 +1,4 @@
-import { SET_CASES, ADD_CASE, UPDATE_CASE, REJECT_CASE, ACCEPT_CASE } from "../../actions/actionTypes";
+import { SET_CASES, ADD_CASE, UPDATE_CASE, REJECT_CASE, VALIDATE_CASE } from "../../actions/actionTypes";
 
 
 export default function cases(state = [], action) {
@@ -12,7 +12,7 @@ export default function cases(state = [], action) {
     case UPDATE_CASE: {
       return state.map((c) => c.id === action.payload.id ? action.payload : c)
     }
-    case ACCEPT_CASE:{
+    case VALIDATE_CASE:{
       const state_id = state.findIndex(cases => cases.id = action.payload.id)
       if(state_id === -1){
         return [...state, action.payload]
