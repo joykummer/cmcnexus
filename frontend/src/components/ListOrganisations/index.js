@@ -6,18 +6,22 @@ import { organisationsFunction } from "../../store/actions/organisationsAction";
 import { searchOrganisationsFunction } from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {CASES, ORGANISATIONS} from '../Navigation/states';
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  
+  padding: 40px;
 `;
 
 const SearchWrapper = styled.div`
-  width: 60%;
+  width: 100%;
   display: flex;
   padding-bottom: 20px;
 `;
@@ -43,6 +47,7 @@ function ListOrganisations(props) {
   const dispatch = props.dispatch;
 
   useEffect(() => {
+    dispatch(setNavigationAction(ORGANISATIONS));
     dispatch(organisationsFunction());
   }, [dispatch]);
 

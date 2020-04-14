@@ -36,6 +36,13 @@ const AddButton = styled(RedButton)`
   height: 30px;
 `;
 
+const FormEntry = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Label = styled.div``;
+
 function AddCase(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -82,13 +89,15 @@ function AddCase(props) {
 
   return (
     <Container>
-      <div>title:</div>
-      <FieldInput
-        name="title"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-        required
-      />
+      <FormEntry>
+        <Label>title:</Label>
+        <FieldInput
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          required
+        />
+      </FormEntry>
       <div>description:</div>
       <FieldInput
         name="description"

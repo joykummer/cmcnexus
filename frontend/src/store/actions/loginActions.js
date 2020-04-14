@@ -34,6 +34,7 @@ export const login = ({ email, password, rememberMe }) => async (dispatch) => {
 			dispatch(loginAction({token, user}));
 			if (rememberMe) {
 				localStorage.setItem('token', token);
+				localStorage.setItem('user', user);
 			}
 		}
 		return response

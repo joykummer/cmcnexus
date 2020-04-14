@@ -26,8 +26,8 @@ export default function Routes() {
         <PrivateRoute path='/404' component={UnderConstruction}/>
 
         <Navigation>
-          <Route exact path="/" render={() => <Redirect to='/dashboard'/>}/>
-          <PrivateRoute path='/dashboard/' component={() => <div>Hallo Welt</div>}/>
+          <Route exact path="/" render={() => <Redirect to='/cases'/>}/>
+          <PrivateRoute path='/dashboard/' component={UnderConstruction}/>
           <PrivateRoutePerm exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
           <PrivateRoutePerm exact path='/cases/details/:id/' component={CaseDetails} permission={VIEW_CASE}/>
           <PrivateRoutePerm exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
@@ -37,7 +37,7 @@ export default function Routes() {
                             component={OrganisationDetails} permission={VIEW_ORGANISATION}/>
           <PrivateRoute exact path='/cases/match/:id/' component={MatchOrganisations}/>
           <PrivateRoute exact path='/profile/' component={UserProfile}/>
-          <Route path="/" render={() => <Redirect to='/dashboard'/>}/>
+          <Route path="/" render={() => <Redirect to='/cases'/>}/>
         </Navigation>
       </Switch>
     </Router>
