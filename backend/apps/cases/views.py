@@ -105,6 +105,7 @@ class AssignOrganisation(GenericAPIView):
             case.assigned_partners.remove(partner_id)
         return Response(self.get_serializer(case).data)
 
+
 class AcceptRejectCase(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
