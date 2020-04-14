@@ -28,8 +28,8 @@ class CaseWorkflow(xwf_models.Workflow):
 class Case(xwf_models.WorkflowEnabled, models.Model):
 
     GENDER_CHOICES = (
-        (0, 'Female'),
-        (1, 'Male'),
+        ("F", 'Female'),
+        ("M", 'Male'),
     )
 
     title = models.CharField(max_length=100)
@@ -40,7 +40,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     category = models.CharField(max_length=100)
     consent = models.BooleanField(default=False)
     age = models.CharField(max_length=50)
-    sex = models.BooleanField(choices=GENDER_CHOICES, default=0)
+    sex = models.CharField(choices=GENDER_CHOICES, default="F", max_length=10)
     country = models.CharField(max_length=100)
     comments = models.TextField(blank=True, default='')
     outcome = models.CharField(max_length=100, blank=True, default='')

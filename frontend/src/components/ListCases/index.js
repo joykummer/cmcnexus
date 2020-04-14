@@ -7,6 +7,7 @@ import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {casesFunction} from "../../store/actions/casesAction";
 import {searchCasesFunction} from "../../store/actions/searchCasesAction";
+import ListCasesTable from "./listCasesTable";
 
 
 const Container = styled.div`
@@ -18,19 +19,26 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const SearchWrapper = styled.div`
+  width: 60%;
+  display: flex;
+  padding-bottom: 20px;
+`;
+
 const SearchInput = styled(GreyRoundInput)`
-  width: 250px;
-  height: 30px;
+  width: 80%;
+  height: 40px;
 `;
 
 const SearchButton = styled(RedButton)`
-  width: 75px;
-  height: 30px;
+  width: 20%;
+  height: 40px;
 `;
 
 const AddCaseButton = styled(RedButton)`
-width: 150px;
-height: 30px;
+  width: 125px;
+  height: 40px;
+  margin-top: 20px;
 `;
 
 
@@ -60,23 +68,11 @@ function ListCases(props) {
 
   return (
       <Container>
-        <SearchInput name="search" onChange={setSearchHandler} value={search} />
-        <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
-        {props.cases
-          ? props.cases.map(cases => {
-              return (
-                <div key={cases.id}>
-                  <div>title {cases.title}</div>
-                  <div>status: {cases.status}</div>
-                  <div>assigned partner(s): {cases.assigned_partners.map((partner) => {
-                    return (
-                        <>{partner.name} </>
-                    )
-                  })}</div>
-                </div>
-              );
-            })
-          : null}
+        <SearchWrapper>
+          <SearchInput name="search" onChange={setSearchHandler} value={search} />
+          <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
+        </SearchWrapper>
+          <ListCasesTable/>
         <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
       </Container>
   );

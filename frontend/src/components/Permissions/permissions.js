@@ -1,0 +1,17 @@
+export const ADD_CASE = "add_case";
+export const ASSIGN_ORGANIZATIONS = "assign_organizations";
+export const CHANGE_CASE = "change_case";
+export const CLOSE_CASE = "close_case";
+export const DELETE_CASE = "delete_case";
+export const MATCH_ORGANIZATIONS = "match_organizations";
+export const REJECT_CASE = "reject_case";
+export const VALIDATE_CASE = "validate_case";
+export const VIEW_CASE = "view_case";
+export const ADD_ORGANISATION = "add_organisation";
+export const CHANGE_ORGANISATION = "change_organisation";
+export const DELETE_ORGANISATION = "delete_organisation";
+export const VIEW_ORGANISATION = "view_organisation";
+export const ADD_USER = "add_user";
+export const CHANGE_USER = "change_user";
+export const DELETE_USER = "delete_user";
+export const VIEW_USER = "view_user";
