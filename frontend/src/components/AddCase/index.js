@@ -36,6 +36,13 @@ const AddButton = styled(RedButton)`
   height: 30px;
 `;
 
+const FormEntry = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Label = styled.div``;
+
 function AddCase(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -47,10 +54,11 @@ function AddCase(props) {
   const [sex, setSex] = useState("");
   const [country, setCountry] = useState("");
   const [category, setCategory] = useState(null);
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(categoriesFunction());
-  }, []);
+    dispatch(categoriesFunction());
+  }, [dispatch]);
 
   const setCategoryHandler = (e) => {
     if (e.target.value === "Undefined") {
@@ -75,19 +83,21 @@ function AddCase(props) {
       country: country,
       category: category,
     };
-    await props.dispatch(addCaseFunction(data));
+    await dispatch(addCaseFunction(data));
     props.history.push("/cases/");
   };
 
   return (
     <Container>
-      <div>title:</div>
-      <FieldInput
-        name="title"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-        required
-      />
+      <FormEntry>
+        <Label>title:</Label>
+        <FieldInput
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          required
+        />
+      </FormEntry>
       <div>description:</div>
       <FieldInput
         name="description"

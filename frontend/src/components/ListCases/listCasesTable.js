@@ -14,11 +14,12 @@ import {
 } from "../../styles/Tables";
 
 function ListCasesTable(props) {
-    const history = useHistory();
+  const history = useHistory();
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(casesFunction());
-  }, []);
+    dispatch(casesFunction());
+  }, [dispatch]);
 
   const caseDetailsHandler = (id) => {
         history.push({
@@ -32,8 +33,8 @@ function ListCasesTable(props) {
     <Table>
       <TableHeaderWrapper>
         <TableHeaderRow>
-          {headers.map((header) => {
-            return <TableHeader>{header}</TableHeader>;
+          {headers.map((header, id) => {
+            return <TableHeader key={id}>{header}</TableHeader>;
           })}
         </TableHeaderRow>
       </TableHeaderWrapper>

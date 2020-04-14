@@ -1,6 +1,6 @@
 import React from 'react';
 import CanI from '../Permissions';
-import {VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
+import {VIEW_ORGANISATION} from '../Permissions/permissions';
 
 export default function(props) {
 	return (

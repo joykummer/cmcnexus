@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import {organisationsFunction} from "../../store/actions/organisationsAction";
-import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {casesFunction} from "../../store/actions/casesAction";
 import {searchCasesFunction} from "../../store/actions/searchCasesAction";
 import ListCasesTable from "./listCasesTable";
+import CanI from '../Permissions';
+import {ADD_CASE} from '../Permissions/permissions';
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {CASES} from '../Navigation/states';
 
 
 const Container = styled.div`
@@ -15,12 +17,14 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  
+  padding: 40px;
 `;
 
 const SearchWrapper = styled.div`
-  width: 60%;
+  width: 100%;
   display: flex;
   padding-bottom: 20px;
 `;
@@ -43,10 +47,12 @@ const AddCaseButton = styled(RedButton)`
 
 function ListCases(props) {
   const [search, setSearch] = useState("");
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(casesFunction());
-  }, []);
+    dispatch(setNavigationAction(CASES));
+    dispatch(casesFunction());
+  }, [dispatch]);
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
@@ -71,8 +77,10 @@ function ListCases(props) {
           <SearchInput name="search" onChange={setSearchHandler} value={search} />
           <SearchButton onClick={searchButtonHandler}>Search</SearchButton>
         </SearchWrapper>
-          <ListCasesTable/>
-        <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
+        <ListCasesTable/>
+        <CanI perform={ADD_CASE}>
+          <AddCaseButton onClick={addCaseHandler}>Add Case</AddCaseButton>
+        </CanI>
       </Container>
   );
 }

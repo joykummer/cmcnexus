@@ -13,12 +13,12 @@ import {
 } from "../../styles/Tables";
 
 function ListOrganisationsTable(props) {
-
+  const dispatch = props.dispatch;
   const history = useHistory();
 
   useEffect(() => {
-    props.dispatch(organisationsFunction());
-  }, []);
+    dispatch(organisationsFunction());
+  }, [dispatch]);
 
   const organisationDetailsHandler = (id) => {
     history.push({
@@ -32,8 +32,8 @@ function ListOrganisationsTable(props) {
     <Table>
       <TableHeaderWrapper>
         <TableHeaderRow>
-          {headers.map((header) => {
-            return <TableHeader>{header}</TableHeader>;
+          {headers.map((header, id) => {
+            return <TableHeader key={id}>{header}</TableHeader>;
           })}
         </TableHeaderRow>
       </TableHeaderWrapper>

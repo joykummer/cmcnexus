@@ -30,7 +30,6 @@ export default function auth(state = init, action) {
 			}
 		}
 		case SET_CURRENT_USER: {
-			console.log(action)
 			if (state.is_authenticated) {
 				return {...state, user: action.payload}
 			}
