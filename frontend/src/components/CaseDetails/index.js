@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import {casesFunction} from "../../store/actions/casesAction";
+import { casesFunction } from "../../store/actions/casesAction";
 import { RedButton } from "../../styles/Buttons";
 
 
@@ -22,7 +22,6 @@ const Match = styled(RedButton)`
 
 
 function CaseDetails(props) {
-
   useEffect(() => {
     props.dispatch(casesFunction());
   }, []);

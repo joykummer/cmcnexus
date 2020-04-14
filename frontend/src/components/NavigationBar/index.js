@@ -2,9 +2,9 @@ import React from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import dashboard from '../../assets/tachometer-alt-solid.svg'
-import folder from '../../assets/folder-open-regular.svg'
-import organisation from '../../assets/network-wired-solid.svg'
+import dashboard from '../../assets/dashboard.png'
+import folder from '../../assets/cases.png'
+import organisation from '../../assets/organization.png'
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 import {
   NavigationContainer, Logo, Options,
