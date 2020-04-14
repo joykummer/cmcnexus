@@ -1,4 +1,4 @@
-import { SET_CASES, ADD_CASE } from "../../actions/actionTypes";
+import { SET_CASES, ADD_CASE, UPDATE_CASE } from "../../actions/actionTypes";
 
 export default function cases(state = [], action) {
   switch (action.type) {
@@ -7,6 +7,9 @@ export default function cases(state = [], action) {
     }
     case ADD_CASE: {
       return [...state, action.payload];
+    }
+    case UPDATE_CASE: {
+      return state.map((c) => c.id === action.payload.id ? action.payload : c)
     }
     default:
       return state;
