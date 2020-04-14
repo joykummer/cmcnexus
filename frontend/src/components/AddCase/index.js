@@ -47,10 +47,11 @@ function AddCase(props) {
   const [sex, setSex] = useState("");
   const [country, setCountry] = useState("");
   const [category, setCategory] = useState(null);
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(categoriesFunction());
-  }, []);
+    dispatch(categoriesFunction());
+  }, [dispatch]);
 
   const setCategoryHandler = (e) => {
     if (e.target.value === "Undefined") {
@@ -75,7 +76,7 @@ function AddCase(props) {
       country: country,
       category: category,
     };
-    await props.dispatch(addCaseFunction(data));
+    await dispatch(addCaseFunction(data));
     props.history.push("/cases/");
   };
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { RedButton } from "../../styles/Buttons";
 import { organisationsFunction } from "../../store/actions/organisationsAction";
@@ -23,9 +23,11 @@ import styled from "styled-components";
   `;
 
 function ListPotentialMatches(props) {
+  const dispatch = props.dispatch;
+
   useEffect(() => {
-    props.dispatch(organisationsFunction());
-  }, []);
+    dispatch(organisationsFunction());
+  }, [dispatch]);
 
   const getCase = () => {
     return props.cases.find((c) => c.id === props.caseId);
@@ -33,7 +35,7 @@ function ListPotentialMatches(props) {
 
   const filteredOrganisations = () => {
     // TODO(Greta): Change 'case.category' to 'case.category_id' and make it an integer.
-    return getCase() ? props.organisations.filter((o) => o.category.id == getCase().category) : []
+    return getCase() ? props.organisations.filter((o) => o.category ? o.category.id === getCase().category : false) : []
   }
 
   const match = (organisationId) => {

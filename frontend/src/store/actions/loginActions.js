@@ -27,7 +27,6 @@ export const logoutAction = () => {
 export const login = ({ email, password, rememberMe }) => async (dispatch) => {
 	try {
 		const response = await Axios.post('token/', { email, password });
-		console.log("LOGIN ACTION RES", response);
 
 		const token = response.data.access;
 		const user = response.data.user

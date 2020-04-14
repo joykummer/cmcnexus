@@ -6,7 +6,6 @@ import {PrivateRoute, PrivateRoutePerm} from '../components/PrivateRoute';
 
 import UnderConstruction from '../components/UnderConstruction';
 import {Login} from '../components/Login';
-import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation';
 import ListCases from "../components/ListCases";
 import AddCase from "../components/AddCase";

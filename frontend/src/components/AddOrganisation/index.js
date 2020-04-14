@@ -38,10 +38,11 @@ function AddOrganisation(props) {
   const [category, setCategory] = useState(null);
   const [tag, setTag] = useState("");
   const [members, setMembers] = useState("");
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(categoriesFunction());
-  }, []);
+    dispatch(categoriesFunction());
+  }, [dispatch]);
 
   const setCategoryHandler = (e) => {
     if (e.target.value === "Undefined") {

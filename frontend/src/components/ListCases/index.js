@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import {organisationsFunction} from "../../store/actions/organisationsAction";
-import {searchOrganisationsFunction} from "../../store/actions/searchOrganisationsAction";
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {casesFunction} from "../../store/actions/casesAction";
@@ -43,10 +41,11 @@ const AddCaseButton = styled(RedButton)`
 
 function ListCases(props) {
   const [search, setSearch] = useState("");
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(casesFunction());
-  }, []);
+    dispatch(casesFunction());
+  }, [dispatch]);
 
   const searchButtonHandler = (e) => {
     e.preventDefault();

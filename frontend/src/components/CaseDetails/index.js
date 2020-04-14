@@ -22,9 +22,11 @@ const Match = styled(RedButton)`
 
 
 function CaseDetails(props) {
+  const dispatch = props.dispatch;
+
   useEffect(() => {
-    props.dispatch(casesFunction());
-  }, []);
+    dispatch(casesFunction());
+  }, [dispatch]);
 
   const matchingHandler = (id) => {
         props.history.push({
@@ -34,7 +36,7 @@ function CaseDetails(props) {
 
   const caseDetails =
       props.cases ?
-      (props.cases.find(file => (file.id==props.match.params.id)))
+      (props.cases.find(file => (file.id === props.match.params.id)))
       : null;
 
   return (

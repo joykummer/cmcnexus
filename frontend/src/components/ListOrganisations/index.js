@@ -40,10 +40,11 @@ const AddOrganisationButton = styled(RedButton)`
 
 function ListOrganisations(props) {
   const [search, setSearch] = useState("");
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(organisationsFunction());
-  }, []);
+    dispatch(organisationsFunction());
+  }, [dispatch]);
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
