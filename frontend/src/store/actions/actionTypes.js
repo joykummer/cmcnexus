@@ -8,3 +8,4 @@ export const SET_ORGANISATIONS = 'SET_ORGANISATIONS';
 export const ADD_ORGANISATION = 'ADD_ORGANISATION';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const ADD_CASE = 'ADD_CASE';
+export const UPDATE_CASE = 'UPDATE_CASE';
