@@ -6,6 +6,7 @@ import dashboard from '../../assets/dashboard.png'
 import folder from '../../assets/cases.png'
 import organisation from '../../assets/organization.png'
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
+import userprofile from '../../assets/userprofile.png'
 import {
   NavigationContainer, Logo, Options,
   Button, NavItem
@@ -13,7 +14,7 @@ import {
 import {logoutAction} from '../../store/actions/loginActions';
 import CanI from '../Permissions';
 import {Empty} from '../../styles/GenericBoxes';
-import {CASES, DASHBOARD, ORGANISATIONS} from '../Navigation/states';
+import {CASES, DASHBOARD, ORGANISATIONS, USERPROFILE} from '../Navigation/states';
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
 
@@ -56,6 +57,10 @@ function NavigationBar() {
             Organisations
           </NavItem>
         </CanI>
+        <NavItem selected={selected===USERPROFILE} onClick={() => onClickHandler(USERPROFILE)}>
+          <img src={userprofile} alt="User Profile" style={{paddingRight: 30, height: 45}}/>
+          Profile
+        </NavItem>
       </Options>
       <Empty/>
       <Button onClick={logoutHandler}>Log out</Button>

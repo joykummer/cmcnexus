@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Time from "react-time";
 
 import {
   Button
@@ -9,6 +10,7 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 import Axios from '../../axios/not_authenticated';
 import {CardBox} from '../../styles/GenericBoxes';
 import {Table} from '../../styles/Tables'
+import {useSelector} from "react-redux";
 
 const Wrapper = styled.section`
 display: flex;
@@ -87,11 +89,19 @@ line-height: 21px;
 justify-content: center;
 `;
 
+const MissingElements = styled.div`
+color: red;
+font-weight: bold;
+;`
+
+
+
 
 
 
 export default function UserProfile() {
-return (
+	const user = useSelector(state => state.auth.user)
+return (user ?
 	<Wrapper>
 		<Rectangle>
 			<User>
@@ -105,7 +115,7 @@ return (
 					</Column>
 					<Column>
 						<MiniTab>
-							John
+							{user.first_name}
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -117,7 +127,7 @@ return (
 					</Column>
 					<Column>
 						<MiniTab>
-							Doe
+							{user.last_name}
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -129,19 +139,7 @@ return (
 					</Column>
 					<Column>
 						<MiniTab>
-							+41 22 849 84 84
-						</MiniTab>
-					</Column>
-				</GeneralElements>
-				<GeneralElements>
-					<Column>
-						<MiniTab>
-							Created
-						</MiniTab>
-					</Column>
-					<Column>
-						<MiniTab>
-							April 6 2020
+							{user.phone}
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -153,7 +151,9 @@ return (
 					</Column>
 					<Column>
 						<MiniTab>
-							Case Coordinator
+							<MissingElements>
+								RELATIONSHIP USER / ROLE
+							</MissingElements>
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -165,7 +165,21 @@ return (
 					</Column>
 					<Column>
 						<MiniTab>
-							Doctors Without Borders
+							<MissingElements>
+								RELATIONSHIP USER / ORG
+							</MissingElements>
+						</MiniTab>
+					</Column>
+				</GeneralElements>
+				<GeneralElements>
+					<Column>
+						<MiniTab>
+							Department
+						</MiniTab>
+					</Column>
+					<Column>
+						<MiniTab>
+								{user.department}
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -177,7 +191,23 @@ return (
 					</Column>
 					<Column>
 						<MiniTab>
-							7
+							<MissingElements>
+								RELATIONSHIP USER / CASE
+							</MissingElements>
+						</MiniTab>
+					</Column>
+				</GeneralElements>
+				<GeneralElements>
+					<Column>
+						<MiniTab>
+							Created
+						</MiniTab>
+					</Column>
+					<Column>
+						<MiniTab>
+							 <div id='time'>
+              					<Time value={user.date_joined} titleFormat="YYYY/MM/DD HH:mm" relative/>
+							 </div>
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -185,6 +215,6 @@ return (
 				Edit
 			</Button>
 		</Rectangle>
-	</Wrapper>
+	</Wrapper> : "user not found"
 )
 }
