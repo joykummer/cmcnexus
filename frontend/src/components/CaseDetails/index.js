@@ -38,7 +38,6 @@ function CaseDetails(props) {
       props.cases ?
       (props.cases.find(file => (file.id === Number(props.match.params.id))))
       : null;
-  console.log(caseDetails)
 
   return (
       <Container>
