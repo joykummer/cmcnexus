@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { organisationsFunction } from "../../store/actions/organisationsAction";
 import {
   Table,
@@ -12,9 +13,18 @@ import {
 } from "../../styles/Tables";
 
 function ListOrganisationsTable(props) {
+  const dispatch = props.dispatch;
+  const history = useHistory();
+
   useEffect(() => {
-    props.dispatch(organisationsFunction());
-  }, []);
+    dispatch(organisationsFunction());
+  }, [dispatch]);
+
+  const organisationDetailsHandler = (id) => {
+    history.push({
+      pathname: `/organisations/details/${id}/`,
+    });
+  };
 
   const headers = ["Name", "Description", "Category", "Tag(s)"];
 
@@ -22,8 +32,8 @@ function ListOrganisationsTable(props) {
     <Table>
       <TableHeaderWrapper>
         <TableHeaderRow>
-          {headers.map((header) => {
-            return <TableHeader>{header}</TableHeader>;
+          {headers.map((header, id) => {
+            return <TableHeader key={id}>{header}</TableHeader>;
           })}
         </TableHeaderRow>
       </TableHeaderWrapper>
@@ -31,10 +41,15 @@ function ListOrganisationsTable(props) {
         {props.organisations
           ? props.organisations.map((organisation) => {
               return (
-                <TableRow key={organisation.id}>
+                <TableRow
+                  key={organisation.id}
+                  onClick={() => organisationDetailsHandler(organisation.id)}
+                >
                   <TableData>{organisation.name}</TableData>
                   <TableData>{organisation.description}</TableData>
-                  <TableData>{organisation.category ? organisation.category.name : ""}</TableData>
+                  <TableData>
+                    {organisation.category ? organisation.category.name : ""}
+                  </TableData>
                   <TableData>{organisation.tag}</TableData>
                 </TableRow>
               );

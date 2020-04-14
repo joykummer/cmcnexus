@@ -5,10 +5,6 @@ import {
 } from './style';
 
 import styled from 'styled-components'
-import PacmanLoader from "react-spinners/PacmanLoader";
-import Axios from '../../axios/not_authenticated';
-import {CardBox} from '../../styles/GenericBoxes';
-import {Table} from '../../styles/Tables'
 
 const Wrapper = styled.section`
 display: flex;

@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
 import Validation from "../Validation";
-
+import { RedButton } from "../../styles/Buttons";
 
 const Container = styled.div`
   width: 100%;
@@ -14,17 +14,29 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Match = styled(RedButton)`
+  width: 175px;
+  height: 70px;
+  margin-top: 20px;
+`;
+
 
 function CaseDetails(props) {
+  const dispatch = props.dispatch;
 
   useEffect(() => {
-    props.dispatch(casesFunction());
-  }, []);
+    dispatch(casesFunction());
+  }, [dispatch]);
 
+  const matchingHandler = (id) => {
+        props.history.push({
+            pathname: `/cases/match/${id}`,
+          });
+    };
 
   const caseDetails =
       props.cases ?
-      (props.cases.find(file => (file.id==props.match.params.id)))
+      (props.cases.find(file => (file.id === Number(props.match.params.id))))
       : null;
 
   return (
@@ -60,6 +72,7 @@ function CaseDetails(props) {
               }</div>
             <div>status: {caseDetails.status}</div>
             <Validation id={caseDetails.id}></Validation>
+            <Match onClick={() => matchingHandler(caseDetails.id)}>Match Partner Organisation</Match>
           </>
           ): <div>No case to show</div>}
       </Container>
