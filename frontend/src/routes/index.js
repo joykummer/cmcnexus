@@ -12,6 +12,7 @@ import ListCases from "../components/ListCases";
 import AddCase from "../components/AddCase";
 import ListOrganisations from '../components/ListOrganisations';
 import AddOrganisation from "../components/AddOrganisation";
+import UserProfile from "../components/UserProfile";
 import CaseDetails from "../components/CaseDetails";
 import {ADD_CASE, ADD_ORGANISATION, VIEW_CASE, VIEW_ORGANISATION} from '../components/Permissions/permissions';
 
@@ -32,6 +33,7 @@ export default function Routes() {
               <PrivateRoutePerm exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
               <PrivateRoutePerm exact path='/organisations/add/' component={AddOrganisation} permission={ADD_ORGANISATION}/>
               <PrivateRoutePerm exact path='/organisations/' component={ListOrganisations} permission={VIEW_ORGANISATION}/>
+              <PrivateRoute exact path='/profile/' component={UserProfile}/>
               <Route path="/" render={() => <Redirect to='/dashboard'/>} />
           </Navigation>
         </Switch>

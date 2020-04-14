@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { organisationsFunction } from "../../store/actions/organisationsAction";
+import {casesFunction} from "../../store/actions/casesAction";
+import {useHistory} from 'react-router-dom';
+
 import {
   Table,
   TableBody,
@@ -11,12 +13,20 @@ import {
   TableRow,
 } from "../../styles/Tables";
 
-function ListOrganisationsTable(props) {
+function ListCasesTable(props) {
+    const history = useHistory();
+
   useEffect(() => {
-    props.dispatch(organisationsFunction());
+    props.dispatch(casesFunction());
   }, []);
 
-  const headers = ["Name", "Description", "Category", "Tag(s)"];
+  const caseDetailsHandler = (id) => {
+        history.push({
+            pathname: `/cases/details/${id}/`,
+          });
+    };
+
+  const headers = ["Title", "Age", "Country", "Status"];
 
   return (
     <Table>
@@ -28,14 +38,14 @@ function ListOrganisationsTable(props) {
         </TableHeaderRow>
       </TableHeaderWrapper>
       <TableBody>
-        {props.organisations
-          ? props.organisations.map((organisation) => {
+        {props.cases
+          ? props.cases.map((file) => {
               return (
-                <TableRow key={organisation.id}>
-                  <TableData>{organisation.name}</TableData>
-                  <TableData>{organisation.description}</TableData>
-                  <TableData>{organisation.category.name}</TableData>
-                  <TableData>{organisation.tag}</TableData>
+                <TableRow key={file.id} onClick={() => caseDetailsHandler(file.id)}>
+                  <TableData>{file.title}</TableData>
+                  <TableData>{file.age}</TableData>
+                  <TableData>{file.country}</TableData>
+                  <TableData>{file.status}</TableData>
                 </TableRow>
               );
             })
@@ -47,8 +57,8 @@ function ListOrganisationsTable(props) {
 
 const mapStateToProps = (state) => {
   return {
-    organisations: state.organisations,
+    cases: state.cases,
   };
 };
 
-export default connect(mapStateToProps)(ListOrganisationsTable);
+export default connect(mapStateToProps)(ListCasesTable);
