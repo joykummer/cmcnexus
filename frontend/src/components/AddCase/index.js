@@ -53,21 +53,20 @@ function AddCase(props) {
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("");
   const [country, setCountry] = useState("");
-  const [category, setCategory] = useState(null);
   const dispatch = props.dispatch;
 
   useEffect(() => {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
+  const categories = [];
+
   const setCategoryHandler = (e) => {
-    if (e.target.value === "Undefined") {
-      setCategory(0);
-    } else if (e.target.value === "Medical") {
-      setCategory(1);
-    } else if (e.target.value === "Administrative") {
-      setCategory(2);
-    } else setCategory(3);
+    const id = e.target.options.selectedIndex;
+    const categoryOption = e.target.options;
+    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
+        categories.push(id)
+    }
   };
 
   const addCaseHandler = async (e) => {
@@ -81,7 +80,7 @@ function AddCase(props) {
       age: age,
       sex: sex,
       country: country,
-      category: category,
+      category: categories,
     };
     await dispatch(addCaseFunction(data));
     props.history.push("/cases/");
@@ -155,8 +154,7 @@ function AddCase(props) {
         required
       />
       <div>category:</div>
-      <CategoryDropdown onChange={setCategoryHandler} multiple="multiple">
-        {/*<option>Select a category...</option>*/}
+      <CategoryDropdown onChange={setCategoryHandler} multiple={true}>
         {props.categories
           ? props.categories.map((category) => {
               return (
