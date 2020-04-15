@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import countryList from "react-select-country-list"
 import { connect } from "react-redux";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
 import { addCaseFunction } from "../../store/actions/addCaseAction";
@@ -24,6 +25,11 @@ const FieldInput = styled(GreyRoundInput)`
 const Checkbox = styled.input`
   width: 30px;
   height: 30px;
+`;
+
+const CountryDropdown = styled(Dropdown)`
+  width: 200px;
+  height: 40px;
 `;
 
 const CategoryDropdown = styled(Dropdown)`
@@ -52,6 +58,7 @@ function AddCase(props) {
   const [consent, setConsent] = useState(false);
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("");
+  const countries = countryList().getData();
   const [country, setCountry] = useState("");
   const dispatch = props.dispatch;
 
@@ -82,9 +89,11 @@ function AddCase(props) {
       country: country,
       category: categories,
     };
+    console.log('data', data);
     const response = await dispatch(addCaseFunction(data));
-    console.log('RESPONSE', response);
-    // props.history.push("/cases/");
+    if (response === undefined) {
+        props.history.push("/cases/");
+    }
   };
 
   return (
@@ -132,6 +141,7 @@ function AddCase(props) {
         name="consent"
         onChange={() => setConsent(true)}
         value="consent"
+        required
       />
       <div>age:</div>
       <FieldInput
@@ -148,12 +158,17 @@ function AddCase(props) {
         required
       />
       <div>country:</div>
-      <FieldInput
-        name="country"
-        onChange={(e) => setCountry(e.target.value)}
-        value={country}
-        required
-      />
+      <CountryDropdown onChange={(e) => setCountry(e.target.value)}>
+        {countries
+          ? countries.map((country) => {
+              return (
+                <option key={country.value}>
+                  {country.label}
+                </option>
+              );
+            })
+          : null}
+      </CountryDropdown>
       <div>category:</div>
       <CategoryDropdown onChange={setCategoryHandler} multiple={true}>
         {props.categories
