@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Validation from "../Validation";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
-import Validation from "../Validation";
 import {Container, Header, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
 MiddleContainer, Stripe, Match} from './styles'
 import CanI from "../Permissions";
