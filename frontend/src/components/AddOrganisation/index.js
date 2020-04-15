@@ -92,8 +92,8 @@ function AddOrganisation(props) {
         required
       />
       <div>category:</div>
-      <CategoryDropdown onChange={setCategoryHandler}>
-        <option>Select a category...</option>
+      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler}>
+        <option value={"default"} disabled>Select a category...</option>
         {props.categories
           ? props.categories.map((category) => {
               return (
