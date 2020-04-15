@@ -34,13 +34,21 @@ import styled from "styled-components";
     padding: 35px;
   `;
 
-  const hasStatus = (singleCase, organisationId, status) => {
-    return singleCase.partnered_organisations.filter(org => org.status === status)
+
+  const isMatch = (singleCase, organisationId) => {
+    return singleCase.partnered_organisations.filter(org => org.status === "matched")
         .some((org) => org.organisation.id === organisationId)
   }
-  const isMatch = (singleCase, organisationId) => { hasStatus(singleCase, organisationId,"matched") }
-  const isAccepted = (singleCase, organisationId) => { hasStatus(singleCase, organisationId,"accepted") }
-  const isAssigned = (singleCase, organisationId) => { hasStatus(singleCase, organisationId,"assigned") }
+
+  const isAccepted = (singleCase, organisationId) => {
+    return singleCase.partnered_organisations.filter(org => org.status === "accepted")
+        .some((org) => org.organisation.id === organisationId)
+  }
+
+  const isAssigned = (singleCase, organisationId) => {
+    return singleCase.partnered_organisations.filter(org => org.status === "assigned")
+        .some((org) => org.organisation.id === organisationId)
+  }
 
 function MatchActionable(props) {
   const match = () => {

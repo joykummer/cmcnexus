@@ -54,7 +54,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     organisations = models.ManyToManyField(
         to=Organisation,
         blank=True,
-        through='PartneredOrganisations',
+        through='Partnership',
     )
     created_by = models.ForeignKey(
         to=User,
@@ -94,7 +94,7 @@ class PartnerWorkflow(xwf_models.Workflow):
     initial_state = 'matched'
 
 
-class PartneredOrganisations(xwf_models.WorkflowEnabled, models.Model):
+class Partnership(xwf_models.WorkflowEnabled, models.Model):
     case = models.ForeignKey(
         to=Case,
         on_delete=models.CASCADE,
@@ -109,7 +109,4 @@ class PartneredOrganisations(xwf_models.WorkflowEnabled, models.Model):
 
     class Meta:
         unique_together = ('case', 'organisation')
-
-
-
 
