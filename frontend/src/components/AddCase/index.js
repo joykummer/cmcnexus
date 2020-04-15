@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Select from "react-select";
 import countryList from "react-select-country-list"
 import { connect } from "react-redux";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
