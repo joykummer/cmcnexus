@@ -13,6 +13,7 @@ export const addCaseFunction = (data) => async (dispatch) => {
     const response = await Axios.post("cases/", data);
     dispatch(addCaseAction(response.data));
   } catch (e) {
-    console.log("e", e);
+    console.log('hi', e.response);
+    return (e)
   }
 };

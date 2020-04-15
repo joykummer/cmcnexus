@@ -82,8 +82,9 @@ function AddCase(props) {
       country: country,
       category: categories,
     };
-    await dispatch(addCaseFunction(data));
-    props.history.push("/cases/");
+    const response = await dispatch(addCaseFunction(data));
+    console.log('RESPONSE', response);
+    // props.history.push("/cases/");
   };
 
   return (
@@ -174,6 +175,7 @@ const mapStateToProps = (state) => {
   return {
     cases: state.cases,
     categories: state.categories,
+
   };
 };
 
