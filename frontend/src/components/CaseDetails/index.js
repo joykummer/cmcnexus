@@ -9,6 +9,7 @@ import CanI from "../Permissions";
 import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
 
 
+
 function CaseDetails(props) {
   const dispatch = props.dispatch;
 
@@ -31,6 +32,7 @@ function CaseDetails(props) {
   return (
       <Container>
         {caseDetails ? (
+          <>
             <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle> 
             <Stripe>Patient's details</Stripe>
             <DetailsContainer>
@@ -76,12 +78,14 @@ function CaseDetails(props) {
             <DetailsHeader><DetailsKey>status:</DetailsKey>{caseDetails.status}</DetailsHeader>
             <DetailsHeader><DetailsKey>outcome:</DetailsKey>{caseDetails.outcome}</DetailsHeader>
             </DetailsContainer>
+            
             <CanI perform={VALIDATE_CASE}>
               <Validation id={caseDetails.id}/>
             </CanI>
             <CanI perform={MATCH_ORGANIZATIONS}>
             <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
             </CanI>
+          </>
           ): <div>No case to show</div>}
       </Container>
   );
