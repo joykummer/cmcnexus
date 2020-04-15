@@ -13,11 +13,19 @@ class CustomDjangoModelPermission(DjangoObjectPermissions):
 
     def __init__(self):
         self.perms_map = copy.deepcopy(self.perms_map)
-        self.perms_map['GET'] = ['%(app_label)s.view_%(model_name)s', '%(app_label)s.assign_organizations']
+        self.perms_map['GET'] = ['%(app_label)s.view_%(model_name)s']
         self.perms_map['OPTIONS'] = ['%(app_label)s.view_%(model_name)s']
         self.perms_map['HEAD'] = ['%(app_label)s.view_%(model_name)s']
 
     def has_object_permission(self, request, view, obj):
+        """
+        C  RUD
+        cases.view_cases
+        cases.is_creator
+        cases.is_connected_organisation
+        """
+
+
         # authentication checks have already executed via has_permission
         queryset = self._queryset(view)
         model_cls = queryset.model

@@ -6,26 +6,31 @@ default_groups_permissions = [
         "name": "MedCo",
         "permissions": [
             "view_case",
-            "add_case",
-            "estest"
+            "change_case",
+            "validate_case",
+            "reject_case"
         ]
     },
     {
         "name": "Partner Organisation",
         "permissions": [
-            "view_case",
+            "update_match"
         ]
     },
     {
         "name": "Case Coordinator",
         "permissions": [
             "view_case",
+            "change_case",
+            "close_case",
+            "match_organizations",
+            "assign_organizations",
         ]
     },
     {
         "name": "Doctor/Nurse",
         "permissions": [
-            "view_case",
+            "add_case",
         ]
     },
 ]

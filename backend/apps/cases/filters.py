@@ -16,14 +16,13 @@ class PermissionsFilter(BaseFilterBackend):
         from guardian.shortcuts import get_objects_for_user, get_perms_for_model
 
         user = request.user
-        permissions = get_perms_for_model(queryset.model).values_list('codename')
+        # permissions = get_perms_for_model(queryset.model).values_list('codename')
+        # *[f'{queryset.model._meta.app_label}.{perm[0]}' for perm in permissions]
 
         permission = [self.perm_format % {
             'app_label': queryset.model._meta.app_label,
             'model_name': queryset.model._meta.model_name,
-        },
-                      #*[f'{queryset.model._meta.app_label}.{perm[0]}' for perm in permissions]
-                      ]
+        }]
 
         return get_objects_for_user(
             user, permission, queryset,

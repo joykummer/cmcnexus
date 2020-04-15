@@ -29,6 +29,7 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
     permission_classes = [DjangoObjectPermissions]
+    filter_backends = [PermissionsFilter]
     lookup_url_kwarg = 'id'
 
 

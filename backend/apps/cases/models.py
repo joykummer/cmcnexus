@@ -69,9 +69,9 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
             ("validate_case", "Can validate cases"),
             ("close_case", "Can close cases"),
             ("reject_case", "Can reject cases"),
-            ("assign_organizations", "Can assign a case to a matched and accepted organization"),
-            ("match_organizations", "Can match organizations to cases"),
-            ("is_creator", "Can match organizations to cases"),
+            ("assign_organisations", "Can assign a case to a matched and accepted organisation"),
+            ("match_organisations", "Can match organisations to cases"),
+            ("update_match", "Can set a matched partnership to accepted/rejected"),
         ]
 
     def __str__(self):
