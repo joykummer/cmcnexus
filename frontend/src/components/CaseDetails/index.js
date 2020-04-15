@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import Validation from "../Validation";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
 import { RedButton } from "../../styles/Buttons";
