@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Select from "react-select"
 import arrow from "../../assets/arrow.svg";
 
 export const Dropdown = styled.select`
