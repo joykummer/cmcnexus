@@ -109,4 +109,3 @@ class Partnership(xwf_models.WorkflowEnabled, models.Model):
 
     class Meta:
         unique_together = ('case', 'organisation')
-

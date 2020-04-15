@@ -4,7 +4,7 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView,
 from rest_framework.response import Response
 
 from apps.cases.models import Case, Partnership
-#from apps.cases.permissions import ValidatePermission
+# from apps.cases.permissions import ValidatePermission
 from apps.cases.permissions import ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
