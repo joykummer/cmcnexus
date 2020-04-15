@@ -122,6 +122,9 @@ class PartneredOrganisations(xwf_models.WorkflowEnabled, models.Model):
     )
     status = xwf_models.StateField(PartnerWorkflow)
 
+    class Meta:
+        unique_together = ('case', 'organisation')
+
 
 
 

@@ -122,12 +122,11 @@ class AcceptRejectCase(GenericAPIView):
     # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
     lookup_url_kwarg = 'case_id'
 
-    def post(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_ids = self.request.data.get("partner_id")
-        for organisation_id in partner_ids:
-            match = PartneredOrganisations.objects.get(case_id=case.id, organisation_id=organisation_id)
-            match.accept()
+        organisation_id = self.request.data.get("partner_id")
+        match = PartneredOrganisations.objects.get(case_id=case.id, organisation_id=organisation_id)
+        match.accept()
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
