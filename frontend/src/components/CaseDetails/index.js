@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { casesFunction } from "../../store/actions/casesAction";
+import {casesFunction} from "../../store/actions/casesAction";
+import Validation from "../Validation";
 import { RedButton } from "../../styles/Buttons";
-
 
 const Container = styled.div`
   width: 100%;
