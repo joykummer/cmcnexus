@@ -1,7 +1,9 @@
 from django.db.models import Q
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView
+from rest_framework.permissions import DjangoObjectPermissions
 from rest_framework.response import Response
 
+from apps.cases.filters import PermissionsFilter
 from apps.cases.models import Case
 from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission, MatchOrganizationPermission, \
     AssignOrganizationPermission
@@ -12,7 +14,8 @@ from apps.helpers.permissions import CustomDjangoModelPermission
 class ListCreateCaseView(ListCreateAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [DjangoObjectPermissions]
+    filter_backends = [PermissionsFilter]
 
     def get_queryset(self):
         return Case.objects.filter(Q(title__icontains=self.request.query_params.get('search', '')) | Q(
@@ -25,7 +28,7 @@ class ListCreateCaseView(ListCreateAPIView):
 class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [DjangoObjectPermissions]
     lookup_url_kwarg = 'id'
 
 
