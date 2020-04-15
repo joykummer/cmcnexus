@@ -51,21 +51,26 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     outcome = models.CharField(max_length=100, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
     status = xwf_models.StateField(CaseWorkflow)
-    assigned_partners = models.ManyToManyField(
+    organisations = models.ManyToManyField(
         to=Organisation,
-        related_name='assigned_cases',
         blank=True,
+        through='PartneredOrganisations',
     )
-    accepted_partners = models.ManyToManyField(
-        to=Organisation,
-        related_name='accepted_cases',
-        blank=True,
-    )
-    matched_partners = models.ManyToManyField(
-        to=Organisation,
-        related_name='matched_cases',
-        blank=True,
-    )
+    # assigned_partners = models.ManyToManyField(
+    #     to=Organisation,
+    #     related_name='assigned_cases',
+    #     blank=True,
+    # )
+    # accepted_partners = models.ManyToManyField(
+    #     to=Organisation,
+    #     related_name='accepted_cases',
+    #     blank=True,
+    # )
+    # matched_partners = models.ManyToManyField(
+    #     to=Organisation,
+    #     related_name='matched_cases',
+    #     blank=True,
+    # )
     created_by = models.ForeignKey(
         to=User,
         related_name="cases_created",
@@ -85,3 +90,38 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
 
     def __str__(self):
         return f'Case {self.id}: {self.title}'
+
+
+class PartnerWorkflow(xwf_models.Workflow):
+    log_model = ''
+    states = (
+        ('matched', _(u"Matched")),
+        ('accepted', _(u"Accepted")),
+        ('assigned', _(u"Assigned")),
+        ('rejected', _(u"Rejected"))
+    )
+    transitions = (
+        ('downgrade', 'accepted', 'matched'),
+        ('accept', ('matched', 'assigned'), 'accepted'),
+        ('assign', 'accepted', 'assigned'),
+        ('reject', 'matched', 'rejected')
+    )
+    initial_state = 'matched'
+
+
+class PartneredOrganisations(xwf_models.WorkflowEnabled, models.Model):
+    case = models.ForeignKey(
+        to=Case,
+        on_delete=models.CASCADE,
+        related_name='partnered_organisations'
+    )
+    organisation = models.ForeignKey(
+        to=Organisation,
+        on_delete=models.CASCADE,
+        related_name='partnered_cases'
+    )
+    status = xwf_models.StateField(PartnerWorkflow)
+
+
+
+
