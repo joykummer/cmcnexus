@@ -32,6 +32,11 @@ const CountryDropdown = styled(Dropdown)`
   height: 40px;
 `;
 
+const SexDropdown = styled(Dropdown)`
+width: 200px;
+height: 40px;
+`;
+
 const CategoryDropdown = styled(Dropdown)`
   width: 200px;
   height: auto;
@@ -107,6 +112,7 @@ function AddCase(props) {
           required
         />
       </FormEntry>
+        <FormEntry>
       <div>description:</div>
       <FieldInput
         name="description"
@@ -114,6 +120,8 @@ function AddCase(props) {
         value={description}
         required
       />
+        </FormEntry>
+        <FormEntry>
       <div>diagnosis:</div>
       <FieldInput
         name="diagnosis"
@@ -121,6 +129,8 @@ function AddCase(props) {
         value={diagnosis}
         required
       />
+        </FormEntry>
+        <FormEntry>
       <div>justification:</div>
       <FieldInput
         name="justification"
@@ -128,6 +138,8 @@ function AddCase(props) {
         value={justification}
         required
       />
+        </FormEntry>
+        <FormEntry>
       <div>recommendation:</div>
       <FieldInput
         name="recommendation"
@@ -135,6 +147,8 @@ function AddCase(props) {
         value={recommendation}
         required
       />
+        </FormEntry>
+        <FormEntry>
       <div>patient's consent:</div>
       <Checkbox
         type="checkbox"
@@ -143,32 +157,45 @@ function AddCase(props) {
         value="consent"
         required
       />
+        </FormEntry>
+        <FormEntry>
       <div>age:</div>
       <FieldInput
         name="age"
+        type="number"
         onChange={(e) => setAge(e.target.value)}
         value={age}
         required
       />
+        </FormEntry>
+        <FormEntry>
       <div>sex:</div>
-      <FieldInput
+      <SexDropdown
         name="sex"
         onChange={(e) => setSex(e.target.value)}
         value={sex}
         required
-      />
+      >
+          <option value="" disabled>Please choose here...</option>
+          <option key={1}>F</option>
+          <option key={2}>M</option>
+      </SexDropdown>
+        </FormEntry>
+        <FormEntry>
       <div>country:</div>
-      <CountryDropdown onChange={(e) => setCountry(e.target.value)}>
-        {countries
+      <CountryDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
+          <option value="default" disabled>Please choose here...</option>
+          {countries
           ? countries.map((country) => {
               return (
-                <option key={country.value}>
-                  {country.label}
-                </option>
+                <option key={country.value}>{country.label}</option>
               );
             })
-          : null}
+          : null
+          }
       </CountryDropdown>
+        </FormEntry>
+        <FormEntry>
       <div>category:</div>
       <CategoryDropdown onChange={setCategoryHandler} multiple={true}>
         {props.categories
@@ -181,6 +208,7 @@ function AddCase(props) {
             })
           : null}
       </CategoryDropdown>
+        </FormEntry>
       <AddButton onClick={addCaseHandler}>Add</AddButton>
     </Container>
   );

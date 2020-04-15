@@ -13,9 +13,11 @@ const Container = styled.div`
 `;
 
 function OrganisationDetails(props) {
+  const dispatch = props.dispatch;
+
   useEffect(() => {
-    props.dispatch(organisationsFunction());
-  }, []);
+    dispatch(organisationsFunction());
+  }, [dispatch]);
 
   const organisationDetails = props.organisations
     ? props.organisations.find(

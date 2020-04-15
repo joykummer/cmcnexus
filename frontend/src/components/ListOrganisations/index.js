@@ -7,7 +7,7 @@ import { searchOrganisationsFunction } from "../../store/actions/searchOrganisat
 import { GreyRoundInput } from "../../styles/Inputs";
 import { RedButton } from "../../styles/Buttons";
 import {setNavigationAction} from '../../store/actions/Navigation';
-import {CASES, ORGANISATIONS} from '../Navigation/states';
+import {ORGANISATIONS} from '../Navigation/states';
 
 const Container = styled.div`
   width: 100%;
