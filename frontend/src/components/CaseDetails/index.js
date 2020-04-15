@@ -45,7 +45,7 @@ function CaseDetails(props) {
       <Container>
         {caseDetails ? (
           <>
-            <div>title: {caseDetails.title}{console.log(caseDetails)}</div>
+            <div>title: {caseDetails.title}}</div>
             <div>description: {caseDetails.description}</div>
             <div>diagnosis: {caseDetails.diagnosis}</div>
             <div>justification: {caseDetails.justification}</div>
