@@ -112,25 +112,40 @@ class AssignOrganisation(GenericAPIView):
         partner_ids = self.request.data.get("partner_ids")
         for organisation_id in partner_ids:
             match = PartneredOrganisations.objects.get(case_id=case.id, organisation_id=organisation_id)
-            match.downgrade()
+            match.accept()
         return Response(self.get_serializer(case).data)
 
 
-class AcceptRejectCase(GenericAPIView):
+class AcceptCase(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
     lookup_url_kwarg = 'case_id'
 
-    def update(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         case = self.get_object()
-        organisation_id = self.request.data.get("partner_id")
+        organisation_id = self.request.data.get("partner_ids")
         match = PartneredOrganisations.objects.get(case_id=case.id, organisation_id=organisation_id)
         match.accept()
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_id = self.request.data.get("partner_id")
-        case.reject()
+        organisation_id = self.request.data.get("partner_ids")
+        match = PartneredOrganisations.objects.get(case_id=case.id, organisation_id=organisation_id)
+        match.downgrade()
+        return Response(self.get_serializer(case).data)
+
+
+class RejectCase(GenericAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
+    lookup_url_kwarg = 'case_id'
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        organisation_id = self.request.data.get("partner_ids")
+        match = PartneredOrganisations.objects.get(case_id=case.id, organisation_id=organisation_id)
+        match.reject()
         return Response(self.get_serializer(case).data)
