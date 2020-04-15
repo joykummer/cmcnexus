@@ -37,7 +37,14 @@ function CaseDetails(props) {
                 <DetailsHeader><DetailsKey>sex:</DetailsKey> {caseDetails.sex}</DetailsHeader>
                 <DetailsHeader><DetailsKey>country:</DetailsKey> {caseDetails.country}</DetailsHeader>
                 <DetailsHeader><DetailsKey>consent:</DetailsKey> {caseDetails.consent ?"yes":"no"}</DetailsHeader>
-                <DetailsHeader><DetailsKey>category:</DetailsKey> {caseDetails.category}</DetailsHeader>
+                <DetailsHeader><DetailsKey>category:</DetailsKey> {
+              caseDetails ?
+                  caseDetails.category.map(category => {
+                    return (
+                        <div key={category.id}><b>{category.name}</b></div>
+                    )
+                  }) : null
+              }</DetailsHeader>
             </DetailsContainer>
             <Stripe>Medical details</Stripe>
             <MiddleContainer> 
@@ -48,7 +55,7 @@ function CaseDetails(props) {
             </MiddleContainer>
             <Stripe>Status</Stripe>
             <DetailsContainer> 
-            <DetailsHeader><DetailsKey>matched partners:</DetailsKey> {
+            <DetailsHeader><DetailsKey>matched partners:</DetailsKey>  {
               caseDetails ?
                   caseDetails.matched_partners.map(partner => {
                     return (
@@ -65,6 +72,7 @@ function CaseDetails(props) {
                   }) : null
               }</DetailsHeader>
             <DetailsHeader><DetailsKey>status:</DetailsKey>{caseDetails.status}</DetailsHeader>
+            <DetailsHeader><DetailsKey>outcome:</DetailsKey>{caseDetails.outcome}</DetailsHeader>
             </DetailsContainer>
             <Validation id={caseDetails.id}></Validation>
             <Match onClick={() => matchingHandler(caseDetails.id)}>Match Partner Organisation</Match>

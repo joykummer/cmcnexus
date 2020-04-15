@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 
 
 from apps.organisations.models import Organisation
+from apps.categories.models import Category
 
 User = get_user_model()
 
@@ -37,7 +38,11 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     diagnosis = models.TextField()
     justification = models.TextField()
     recommendation = models.TextField()
-    category = models.CharField(max_length=100)
+    category = models.ManyToManyField(
+        to=Category,
+        related_name='cases',
+        default=0
+    )
     consent = models.BooleanField(default=False)
     age = models.CharField(max_length=50)
     sex = models.CharField(choices=GENDER_CHOICES, default="F", max_length=10)
@@ -49,6 +54,11 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     assigned_partners = models.ManyToManyField(
         to=Organisation,
         related_name='assigned_cases',
+        blank=True,
+    )
+    accepted_partners = models.ManyToManyField(
+        to=Organisation,
+        related_name='accepted_cases',
         blank=True,
     )
     matched_partners = models.ManyToManyField(
