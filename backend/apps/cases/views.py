@@ -39,7 +39,7 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
 class ValidateCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission, ValidatePermission]
+    # permission_classes = [CustomDjangoModelPermission, ValidatePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
