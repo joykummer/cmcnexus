@@ -45,7 +45,7 @@ function CaseDetails(props) {
       <Container>
         {caseDetails ? (
           <>
-            <div>title: {caseDetails.title}}</div>
+            <div>title: {caseDetails.title}</div>
             <div>description: {caseDetails.description}</div>
             <div>diagnosis: {caseDetails.diagnosis}</div>
             <div>justification: {caseDetails.justification}</div>
@@ -63,22 +63,14 @@ function CaseDetails(props) {
                   }) : null
               }</div>
             <div>outcome: {caseDetails.outcome}</div>
-            {/*<div>matched partners: {*/}
-            {/*  caseDetails ?*/}
-            {/*      caseDetails.matched_partners.map(partner => {*/}
-            {/*        return (*/}
-            {/*            <div key={partner.id}><b>{partner.name}</b></div>*/}
-            {/*        )*/}
-            {/*      }) : null*/}
-            {/*  }</div>*/}
-            {/*<div>assigned partners: {*/}
-            {/*  caseDetails ?*/}
-            {/*      caseDetails.assigned_partners.map(partner => {*/}
-            {/*        return (*/}
-            {/*            <div key={partner.id}><b>{partner.name}</b></div>*/}
-            {/*        )*/}
-            {/*      }) : null*/}
-            {/*  }</div>*/}
+            <div>partnered organisations: {
+              caseDetails ?
+                  caseDetails.partnered_organisations.map(partner => {
+                    return (
+                        <div key={partner.organisation.id}><b>{partner.organisation.name}</b> <i>{partner.status}</i></div>
+                    )
+                  }) : null
+              }</div>
             <div>status: {caseDetails.status}</div>
             <CanI perform={VALIDATE_CASE}>
               <Validation id={caseDetails.id}/>
