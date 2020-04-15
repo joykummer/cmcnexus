@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
 import Validation from "../Validation";
 import { RedButton } from "../../styles/Buttons";
+import CanI from "../Permissions";
+import {MATCH_ORGANIZATIONS} from "../Permissions/permissions";
 
 const Container = styled.div`
   width: 100%;
@@ -78,7 +80,9 @@ function CaseDetails(props) {
                   }) : null
               }</div>
             <div>status: {caseDetails.status}</div>
+            <CanI perform={MATCH_ORGANIZATIONS}>
             <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
+            </CanI>
           </>
           ): <div>No case to show</div>}
       </Container>
