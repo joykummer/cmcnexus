@@ -5,6 +5,7 @@ import {casesFunction} from "../../store/actions/casesAction";
 import { RedButton } from "../../styles/Buttons";
 import CanI from "../Permissions";
 import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
+import Validation from "../Validation";
 
 const Container = styled.div`
   width: 100%;
@@ -55,7 +56,7 @@ function CaseDetails(props) {
             <div>country: {caseDetails.country}</div>
             <div>category: {
               caseDetails ?
-                  caseDetails.category.map(category => {
+                  caseDetails.categories.map(category => {
                     return (
                         <div key={category.id}><b>{category.name}</b></div>
                     )

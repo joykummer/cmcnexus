@@ -38,7 +38,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     diagnosis = models.TextField()
     justification = models.TextField()
     recommendation = models.TextField()
-    category = models.ManyToManyField(
+    categories = models.ManyToManyField(
         to=Category,
         related_name='cases',
         default=0

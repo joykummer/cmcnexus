@@ -67,16 +67,17 @@ function AssignActionable(props) {
 function MatchAssignOrg(props) {
   const dispatch = props.dispatch;
   const singleCase = props.cases.find((c) => c.id === props.caseId);
-  console.log(singleCase)
 
   useEffect(() => {
     dispatch(organisationsFunction());
   }, [dispatch]);
 
-
+  const commonCategories = (a, b) => {
+    return a.categories.filter((outer) => b.categories.some((inner) => inner.id === outer.id))
+  }
   const filteredOrganisations = () => {
-    return singleCase ? props.organisations.filter(
-      org => org.category ? org.category.id === Number(singleCase.category) : false) : []
+    if (!singleCase) return [];
+    return props.organisations.filter(org => commonCategories(org, singleCase).length !== 0)
   }
 
   const headers = ["Name", "Description", "Category", "Tag(s)"];
@@ -97,7 +98,7 @@ function MatchAssignOrg(props) {
                   <TableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
                     <TableData>{organisation.description}</TableData>
-                    <TableData>{organisation.category.name}</TableData>
+                    <TableData>{commonCategories(organisation, singleCase).map((cat) => cat.name).join(', ')}</TableData>
                     <TableData>{organisation.tag}</TableData>
                     <TableData>
                       <MatchActionable dispatch={props.dispatch} organisationId={organisation.id} singleCase={singleCase}/>

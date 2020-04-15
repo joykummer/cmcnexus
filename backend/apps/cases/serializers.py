@@ -8,7 +8,7 @@ from apps.categories.serializer import CategorySerializer
 
 
 class CaseSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
+    categories = CategorySerializer(many=True)
     created_by = FullUserSerializer(read_only=True)
     matched_partners = OrganisationSerializer(many=True, read_only=True)
     assigned_partners = OrganisationSerializer(many=True, read_only=True)
