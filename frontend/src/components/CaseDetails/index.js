@@ -63,22 +63,22 @@ function CaseDetails(props) {
                   }) : null
               }</div>
             <div>outcome: {caseDetails.outcome}</div>
-            <div>matched partners: {
-              caseDetails ?
-                  caseDetails.matched_partners.map(partner => {
-                    return (
-                        <div key={partner.id}><b>{partner.name}</b></div>
-                    )
-                  }) : null
-              }</div>
-            <div>assigned partners: {
-              caseDetails ?
-                  caseDetails.assigned_partners.map(partner => {
-                    return (
-                        <div key={partner.id}><b>{partner.name}</b></div>
-                    )
-                  }) : null
-              }</div>
+            {/*<div>matched partners: {*/}
+            {/*  caseDetails ?*/}
+            {/*      caseDetails.matched_partners.map(partner => {*/}
+            {/*        return (*/}
+            {/*            <div key={partner.id}><b>{partner.name}</b></div>*/}
+            {/*        )*/}
+            {/*      }) : null*/}
+            {/*  }</div>*/}
+            {/*<div>assigned partners: {*/}
+            {/*  caseDetails ?*/}
+            {/*      caseDetails.assigned_partners.map(partner => {*/}
+            {/*        return (*/}
+            {/*            <div key={partner.id}><b>{partner.name}</b></div>*/}
+            {/*        )*/}
+            {/*      }) : null*/}
+            {/*  }</div>*/}
             <div>status: {caseDetails.status}</div>
             <CanI perform={VALIDATE_CASE}>
               <Validation id={caseDetails.id}/>

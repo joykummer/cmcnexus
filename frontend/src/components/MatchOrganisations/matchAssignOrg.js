@@ -34,7 +34,11 @@ import styled from "styled-components";
     padding: 35px;
   `;
 
+
 function MatchActionable(props) {
+  const isMatch = () => {
+    return props.singleCase.partnered_organisations.filter(org => org.status === "matched")
+  }
   const match = () => {
     props.dispatch(matchOrganisationsFunction(props.singleCase.id, props.organisationId));
   };
@@ -42,13 +46,16 @@ function MatchActionable(props) {
     props.dispatch(unmatchOrganisationsFunction(props.singleCase.id, props.organisationId));
   };
   return <>{
-    props.singleCase.matched_partners.some((org) => org.id === props.organisationId)
+    isMatch().some((org) => org.id === props.organisationId)
         ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
         : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
   }</>;
 }
 
 function AssignActionable(props) {
+  const isAssigned = () => {
+    return props.singleCase.partnered_organisations.filter(org => org.status === "assigned")
+  }
   const assign = () => {
     props.dispatch(assignOrganisationsFunction(props.singleCase.id, props.organisationId));
   };
@@ -56,8 +63,8 @@ function AssignActionable(props) {
     props.dispatch(unassignOrganisationsFunction(props.singleCase.id, props.organisationId));
   };
   return <>{
-     props.singleCase.accepted_partners.some((org) => org.id === props.organisationId)
-      ? props.singleCase.assigned_partners.some((org) => org.id === props.organisationId)
+     isAssigned().some((org) => org.id === props.organisationId)
+      ? isAssigned().some((org) => org.id === props.organisationId)
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
         : <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
       : <NotAccepted>The case has not been accepted.</NotAccepted>
