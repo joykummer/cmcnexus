@@ -43,7 +43,7 @@ function CaseDetails(props) {
       <Container>
         {caseDetails ? (
           <>
-            <div>title: {caseDetails.title}</div>
+            <div>title: {caseDetails.title}{console.log(caseDetails)}</div>
             <div>description: {caseDetails.description}</div>
             <div>diagnosis: {caseDetails.diagnosis}</div>
             <div>justification: {caseDetails.justification}</div>
@@ -52,7 +52,14 @@ function CaseDetails(props) {
             <div>age: {caseDetails.age}</div>
             <div>sex: {caseDetails.sex}</div>
             <div>country: {caseDetails.country}</div>
-            <div>category: {caseDetails.category}</div>
+            <div>category: {
+              caseDetails ?
+                  caseDetails.category.map(category => {
+                    return (
+                        <div key={category.id}><b>{category.name}</b></div>
+                    )
+                  }) : null
+              }</div>
             <div>outcome: {caseDetails.outcome}</div>
             <div>matched partners: {
               caseDetails ?
