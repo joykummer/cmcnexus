@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-
 import {casesFunction} from "../../store/actions/casesAction";
 import Validation from "../Validation";
 import {Container, Header, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
