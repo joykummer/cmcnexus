@@ -104,3 +104,24 @@ class AssignOrganisation(GenericAPIView):
         for partner_id in partner_ids:
             case.assigned_partners.remove(partner_id)
         return Response(self.get_serializer(case).data)
+
+
+class AcceptRejectCase(GenericAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
+    lookup_url_kwarg = 'case_id'
+
+    def post(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_id = self.request.data.get("partner_id")
+        if not case.accepted_partners.filter(id=partner_id):
+            case.accepted_partners.add(partner_id)
+        return Response(self.get_serializer(case).data)
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_id = self.request.data.get("partner_id")
+        if case.accepted_partners.filter(id=partner_id):
+            case.accepted_partners.remove(partner_id)
+        return Response(self.get_serializer(case).data)

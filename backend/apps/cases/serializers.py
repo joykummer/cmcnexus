@@ -9,6 +9,7 @@ class CaseSerializer(serializers.ModelSerializer):
     created_by = FullUserSerializer(read_only=True)
     matched_partners = OrganisationSerializer(many=True, read_only=True)
     assigned_partners = OrganisationSerializer(many=True, read_only=True)
+    accepted_partners = OrganisationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Case

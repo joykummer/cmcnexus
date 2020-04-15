@@ -71,8 +71,7 @@ function CaseDetails(props) {
                   }) : null
               }</div>
             <div>status: {caseDetails.status}</div>
-            <Validation id={caseDetails.id}></Validation>
-            <Match onClick={() => matchingHandler(caseDetails.id)}>Match Partner Organisation</Match>
+            <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
           </>
           ): <div>No case to show</div>}
       </Container>
