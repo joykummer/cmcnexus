@@ -5,6 +5,8 @@ import {casesFunction} from "../../store/actions/casesAction";
 import Validation from "../Validation";
 import {Container, Header, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
 MiddleContainer, Stripe, Match} from './styles'
+import CanI from "../Permissions";
+import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
 
 
 function CaseDetails(props) {
@@ -25,10 +27,10 @@ function CaseDetails(props) {
       (props.cases.find(file => (file.id === Number(props.match.params.id))))
       : null;
 
+
   return (
       <Container>
         {caseDetails ? (
-          <>
             <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle> 
             <Stripe>Patient's details</Stripe>
             <DetailsContainer>
@@ -74,9 +76,12 @@ function CaseDetails(props) {
             <DetailsHeader><DetailsKey>status:</DetailsKey>{caseDetails.status}</DetailsHeader>
             <DetailsHeader><DetailsKey>outcome:</DetailsKey>{caseDetails.outcome}</DetailsHeader>
             </DetailsContainer>
-            <Validation id={caseDetails.id}></Validation>
-            <Match onClick={() => matchingHandler(caseDetails.id)}>Match Partner Organisation</Match>
-          </>
+            <CanI perform={VALIDATE_CASE}>
+              <Validation id={caseDetails.id}/>
+            </CanI>
+            <CanI perform={MATCH_ORGANIZATIONS}>
+            <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
+            </CanI>
           ): <div>No case to show</div>}
       </Container>
   );
