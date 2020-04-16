@@ -48,16 +48,17 @@ function AddOrganisation(props) {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
-
   const setCategoryHandler = (e) => {
-      const selectOptions = Array.from(e.target.options).filter(el => el.selected).map(el => el.id);
-      setCategories(selectOptions);
-    console.log('in case orgcat', selectOptions);
+    const selectOptions = Array.from(e.target.options)
+      .filter((el) => el.selected)
+      .map((el) => el.id);
+    setCategories(selectOptions);
+    console.log("in case orgcat", selectOptions);
     // };
   };
 
   const addOrganisationHandler = async (e) => {
-      console.log('IN ORG', categories);
+    console.log("IN ORG", categories);
     e.preventDefault();
     const data = {
       name: name,
@@ -72,15 +73,15 @@ function AddOrganisation(props) {
 
   return (
     <Container>
-        <FormEntry>
-      <div>name:</div>
-      <FieldInput
-        name="name"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-        required="required"
-      />
-        </FormEntry>
+      <FormEntry>
+        <div>name:</div>
+        <FieldInput
+          name="name"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          required="required"
+        />
+      </FormEntry>
       <div>description:</div>
       <FieldInput
         name="description"
@@ -96,18 +97,22 @@ function AddOrganisation(props) {
         required
       />
       <FormEntry>
-      <div>category:</div>
-      <CategoryDropdown defaultValue={[]} onChange={setCategoryHandler} multiple>
-        {props.categories
-          ? props.categories.map((category) => {
-              return (
-                <option key={category.id} id={category.id}>
-                  {category.name}
-                </option>
-              );
-            })
-          : null}
-      </CategoryDropdown>
+        <div>category:</div>
+        <CategoryDropdown
+          defaultValue={[]}
+          onChange={setCategoryHandler}
+          multiple
+        >
+          {props.categories
+            ? props.categories.map((category) => {
+                return (
+                  <option key={category.id} id={category.id}>
+                    {category.name}
+                  </option>
+                );
+              })
+            : null}
+        </CategoryDropdown>
       </FormEntry>
       <div>tag:</div>
       <FieldInput

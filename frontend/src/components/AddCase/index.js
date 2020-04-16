@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import countryList from "react-select-country-list"
+import countryList from "react-select-country-list";
 import { connect } from "react-redux";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
 import { addCaseFunction } from "../../store/actions/addCaseAction";
@@ -33,8 +33,8 @@ const CountryDropdown = styled(Dropdown)`
 `;
 
 const SexDropdown = styled(Dropdown)`
-    width: 200px;
-    height: 30px;
+  width: 200px;
+  height: 30px;
 `;
 
 const CategoryDropdown = styled(Dropdown)`
@@ -75,20 +75,22 @@ function AddCase(props) {
   // const categories = [];
 
   const setCategoryHandler = (e) => {
-      console.log('hi', e.target.options);
+    console.log("hi", e.target.options);
     // const id = e.target.options.selectedIndex;
     // const categoryOption = e.target.options;
-      const selectOptions = Array.from(e.target.options).filter(el => el.selected).map(el => el.id);
-      setCategories(selectOptions);
+    const selectOptions = Array.from(e.target.options)
+      .filter((el) => el.selected)
+      .map((el) => el.id);
+    setCategories(selectOptions);
     // if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
     //     categories.push(id)
-    console.log('in case setcate', selectOptions);
+    console.log("in case setcate", selectOptions);
     // };
   };
 
   const addCaseHandler = async (e) => {
-      e.preventDefault();
-      console.log('CASE CAT', categories);
+    e.preventDefault();
+    console.log("CASE CAT", categories);
     const data = {
       title: title,
       description: description,
@@ -116,104 +118,112 @@ function AddCase(props) {
           required
         />
       </FormEntry>
-        <FormEntry>
-      <div>description:</div>
-      <FieldInput
-        name="description"
-        onChange={(e) => setDescription(e.target.value)}
-        value={description}
-        required
-      />
-        </FormEntry>
-        <FormEntry>
-      <div>diagnosis:</div>
-      <FieldInput
-        name="diagnosis"
-        onChange={(e) => setDiagnosis(e.target.value)}
-        value={diagnosis}
-        required
-      />
-        </FormEntry>
-        <FormEntry>
-      <div>justification:</div>
-      <FieldInput
-        name="justification"
-        onChange={(e) => setJustification(e.target.value)}
-        value={justification}
-        required
-      />
-        </FormEntry>
-        <FormEntry>
-      <div>recommendation:</div>
-      <FieldInput
-        name="recommendation"
-        onChange={(e) => setRecommendation(e.target.value)}
-        value={recommendation}
-        required
-      />
-        </FormEntry>
-        <FormEntry>
-      <div>patient's consent:</div>
-      <Checkbox
-        type="checkbox"
-        name="consent"
-        onChange={() => setConsent(true)}
-        value="consent"
-        required
-      />
-        </FormEntry>
-        <FormEntry>
-      <div>age:</div>
-      <FieldInput
-        name="age"
-        type="number"
-        onChange={(e) => setAge(e.target.value)}
-        value={age}
-        required
-      />
-        </FormEntry>
-        <FormEntry>
-      <div>sex:</div>
-      <SexDropdown
-        name="sex"
-        onChange={(e) => setSex(e.target.value)}
-        value={sex}
-        required
-      >
-          <option value="" disabled>Please choose here...</option>
+      <FormEntry>
+        <div>description:</div>
+        <FieldInput
+          name="description"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          required
+        />
+      </FormEntry>
+      <FormEntry>
+        <div>diagnosis:</div>
+        <FieldInput
+          name="diagnosis"
+          onChange={(e) => setDiagnosis(e.target.value)}
+          value={diagnosis}
+          required
+        />
+      </FormEntry>
+      <FormEntry>
+        <div>justification:</div>
+        <FieldInput
+          name="justification"
+          onChange={(e) => setJustification(e.target.value)}
+          value={justification}
+          required
+        />
+      </FormEntry>
+      <FormEntry>
+        <div>recommendation:</div>
+        <FieldInput
+          name="recommendation"
+          onChange={(e) => setRecommendation(e.target.value)}
+          value={recommendation}
+          required
+        />
+      </FormEntry>
+      <FormEntry>
+        <div>patient's consent:</div>
+        <Checkbox
+          type="checkbox"
+          name="consent"
+          onChange={() => setConsent(true)}
+          value="consent"
+          required
+        />
+      </FormEntry>
+      <FormEntry>
+        <div>age:</div>
+        <FieldInput
+          name="age"
+          type="number"
+          onChange={(e) => setAge(e.target.value)}
+          value={age}
+          required
+        />
+      </FormEntry>
+      <FormEntry>
+        <div>sex:</div>
+        <SexDropdown
+          name="sex"
+          onChange={(e) => setSex(e.target.value)}
+          value={sex}
+          required
+        >
+          <option value="" disabled>
+            Please choose here...
+          </option>
           <option key={1}>F</option>
           <option key={2}>M</option>
-      </SexDropdown>
-        </FormEntry>
-        <FormEntry>
-      <div>country:</div>
-      <CountryDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
-          <option value="default" disabled>Please choose here...</option>
+        </SexDropdown>
+      </FormEntry>
+      <FormEntry>
+        <div>country:</div>
+        <CountryDropdown
+          defaultValue={"default"}
+          onChange={(e) => setCountry(e.target.value)}
+        >
+          <option value="default" disabled>
+            Please choose here...
+          </option>
           {countries
-          ? countries.map((country) => {
-              return (
-                <option key={country.value}>{country.label}</option>
-              );
-            })
-          : null
-          }
-      </CountryDropdown>
-        </FormEntry>
-        <FormEntry>
-      <div>category:</div>
-      <CategoryDropdown defaultValue={[]} onChange={setCategoryHandler} multiple>
+            ? countries.map((country) => {
+                return <option key={country.value}>{country.label}</option>;
+              })
+            : null}
+        </CountryDropdown>
+      </FormEntry>
+      <FormEntry>
+        <div>category:</div>
+        <CategoryDropdown
+          defaultValue={[]}
+          onChange={setCategoryHandler}
+          multiple
+        >
           {/*<option value="default" disabled>Please choose here...</option>*/}
-        {props.categories
-          ? props.categories.map((category) => {
-              return (
-                <option key={category.id} id={category.id}>
-                  {category.name}
-                </option>
-              );
-            })
-          : null}
-      </CategoryDropdown>
-        </FormEntry>
+          {props.categories
+            ? props.categories.map((category) => {
+                return (
+                  <option key={category.id} id={category.id}>
+                    {category.name}
+                  </option>
+                );
+              })
+            : null}
+        </CategoryDropdown>
+      </FormEntry>
       <AddButton onClick={addCaseHandler}>Add</AddButton>
     </Container>
   );

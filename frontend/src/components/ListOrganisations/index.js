@@ -5,12 +5,12 @@ import ListOrganisationsTable from "./listOrganisationsTable";
 import { organisationsFunction } from "../../store/actions/organisationsAction";
 import { searchOrganisationsFunction } from "../../store/actions/searchOrganisationsAction";
 import { RedButton } from "../../styles/Buttons";
-import {setNavigationAction} from '../../store/actions/Navigation';
-import {ORGANISATIONS} from '../Navigation/states';
-import {Dropdown} from "../../styles/Dropdowns";
-import {ADD_ORGANISATION} from "../Permissions/permissions";
+import { setNavigationAction } from "../../store/actions/Navigation";
+import { ORGANISATIONS } from "../Navigation/states";
+import { Dropdown } from "../../styles/Dropdowns";
+import { ADD_ORGANISATION } from "../Permissions/permissions";
 import CanI from "../Permissions";
-import {categoriesFunction} from "../../store/actions/categoriesAction";
+import { categoriesFunction } from "../../store/actions/categoriesAction";
 
 const Container = styled.div`
   width: 100%;
@@ -79,7 +79,7 @@ function ListOrganisations(props) {
   const [category, setCategory] = useState(null);
   const dispatch = props.dispatch;
 
-    const serviceOptions = ["test1", "test2", "test3", "test4"];
+  const serviceOptions = ["test1", "test2", "test3", "test4"];
 
   useEffect(() => {
     dispatch(setNavigationAction(ORGANISATIONS));
@@ -103,9 +103,9 @@ function ListOrganisations(props) {
   return (
     <Container>
       <CanI perform={ADD_ORGANISATION}>
-            <AddOrganisationButton onClick={addOrganisationHandler}>
-        ADD ORGANISATION
-      </AddOrganisationButton>
+        <AddOrganisationButton onClick={addOrganisationHandler}>
+          ADD ORGANISATION
+        </AddOrganisationButton>
       </CanI>
       <SearchContainer>
         <SearchWrapper>
@@ -151,12 +151,10 @@ function ListOrganisations(props) {
                 : null}
             </Filter>
           </Card>
-
         </SearchWrapper>
         <SearchButton onClick={searchButtonHandler}>APPLY FILTERS</SearchButton>
       </SearchContainer>
       <ListOrganisationsTable />
-
     </Container>
   );
 }
