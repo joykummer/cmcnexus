@@ -23,7 +23,7 @@ const FieldInput = styled(GreyRoundInput)`
 
 const CategoryDropdown = styled(Dropdown)`
   width: 200px;
-  height: 30px;
+  height: auto;
 `;
 
 const AddButton = styled(RedButton)`
@@ -35,34 +35,34 @@ function AddOrganisation(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
-  const [category, setCategory] = useState(null);
   const [tag, setTag] = useState("");
-  const [members, setMembers] = useState("");
   const dispatch = props.dispatch;
 
   useEffect(() => {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
+ const categories = [];
+
   const setCategoryHandler = (e) => {
-    if (e.target.value === "Undefined") {
-      setCategory(0);
-    } else if (e.target.value === "Medical") {
-      setCategory(1);
-    } else if (e.target.value === "Administrative") {
-      setCategory(2);
-    } else setCategory(3);
+    const id = e.target.options.selectedIndex;
+    const categoryOption = e.target.options;
+    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
+        categories.push(id)
+    }
+    console.log("IN CAT", categories)
   };
+
 
   const addOrganisationHandler = async (e) => {
     e.preventDefault();
+    console.log("IN ADDORG", categories)
     const data = {
       name: name,
       description: description,
       services: services,
-      category: category,
+      categories: categories,
       tag: tag,
-      members: members,
     };
     await props.dispatch(addOrganisationFunction(data));
     props.history.push("/organisations/");
@@ -92,8 +92,8 @@ function AddOrganisation(props) {
         required
       />
       <div>category:</div>
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler}>
-        <option value={"default"} disabled>Select a category...</option>
+      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
+        {/*<option value={"default"} disabled>Select a category...</option>*/}
         {props.categories
           ? props.categories.map((category) => {
               return (
@@ -109,13 +109,6 @@ function AddOrganisation(props) {
         name="tag"
         onChange={(e) => setTag(e.target.value)}
         value={tag}
-        required
-      />
-      <div>members:</div>
-      <FieldInput
-        name="members"
-        onChange={(e) => setMembers(e.target.value)}
-        value={members}
         required
       />
       <AddButton onClick={addOrganisationHandler}>Add</AddButton>
