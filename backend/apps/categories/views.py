@@ -8,4 +8,3 @@ from apps.helpers.permissions import CustomDjangoModelPermission
 class GetAllCategories(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [CustomDjangoModelPermission]
