@@ -65,20 +65,21 @@ function AddCase(props) {
   const [sex, setSex] = useState("");
   const countries = countryList().getData();
   const [country, setCountry] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [categoryIds, setCategoryIds] = useState([]);
   const dispatch = props.dispatch;
 
   useEffect(() => {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
-  const categories = [];
 
   const setCategoryHandler = (e) => {
-    const id = e.target.options.selectedIndex;
-    const categoryOption = e.target.options;
-    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
-        categories.push(id)
-    }
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    console.log(selectedOptions)
+    setCategories(selectedOptions.map(option => option.value));
+    setCategoryIds(selectedOptions.map(option => option.id));
+    console.log()
   };
 
   const addCaseHandler = async (e) => {
@@ -92,7 +93,7 @@ function AddCase(props) {
       age: age,
       sex: sex,
       country: country,
-      categories: categories,
+      categories: categoryIds,
     };
     console.log('data', data);
     const response = await dispatch(addCaseFunction(data));
@@ -197,7 +198,7 @@ function AddCase(props) {
         </FormEntry>
         <FormEntry>
       <div>category:</div>
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
+      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
           {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
           ? props.categories.map((category) => {

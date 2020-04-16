@@ -5,11 +5,10 @@ import { RedButton } from "../../styles/Buttons";
 
 export const Container = styled.div`
   width: 100%;
-  /* height: 100%; */
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   line-height: 1.5; 
   letter-spacing: initial; 
@@ -18,18 +17,14 @@ export const Container = styled.div`
 export const Header = styled.div`
 width: auto;
 height: auto; 
-padding-bottom: 0.5%; 
+padding-bottom: 5px;
 display: flex; 
-margin-top: 3%; 
+margin-top: 30px; 
 font-size: 20px; 
 `;
 
 export const HeaderTitle = styled.div`
-display: flex; 
-justify-content: center; 
 font-size: 30px; 
-margin-top: 5%; 
-margin-bottom: 3%; 
 border-bottom: 3px solid red; 
 `;
 
