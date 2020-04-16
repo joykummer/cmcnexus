@@ -77,7 +77,6 @@ function CaseDetails(props) {
             <CanI perform={MATCH_ORGANIZATIONS}>
             <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
             </CanI>
-            <AcceptRejectAsOrg id={caseDetails.id} />
           </>
           ): <div>No case to show</div>}
       </Container>
