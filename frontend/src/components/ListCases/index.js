@@ -5,10 +5,8 @@ import { RedButton } from "../../styles/Buttons";
 import { casesFunction } from "../../store/actions/casesAction";
 import {
   searchTitleFunction,
-  searchCategoriesFunction,
   searchStatusFunction
 } from "../../store/actions/searchCasesAction";
-import ListCasesTable from "./listCasesTable";
 import CanI from "../Permissions";
 import { ADD_CASE } from "../Permissions/permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
@@ -49,6 +47,7 @@ const SearchWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
 `;
 
 const Card = styled.div`
@@ -77,7 +76,7 @@ const Filter = styled(Dropdown)`
 const SearchButton = styled(RedButton)`
   width: 150px;
   height: 40px;
-  margin-top: 10px;
+  margin-right: 15px;
 `;
 
 const AddCaseButton = styled(RedButton)`
@@ -86,9 +85,21 @@ const AddCaseButton = styled(RedButton)`
   margin-bottom: 50px;
 `;
 
+const Wrapper = styled.div`
+display: flex;
+align-items: center;
+`;
+
+const Clear = styled.div`
+font-size: 14px;
+:hover {
+  color: red
+}
+`;
+
 function ListCases(props) {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
   const dispatch = props.dispatch;
 
@@ -100,12 +111,19 @@ function ListCases(props) {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
+  const clearSearchHandler = () => {
+    // setTitle("");
+    // setCategory("");
+    // setStatus("");
+    window.location.reload();
+  }
 
-function filterViaCategory(category) {
-  return props.cases.filter(obj => obj.categories.some(cat => cat.name === category));
-}
-
-console.log(filterViaCategory(category));
+// FOR REFERENCE. PLEASE DO NOT DELETE!
+// function filterViaCategory(category) {
+//   return props.cases.filter(obj => obj.categories.some(cat => cat.name === category));
+// }
+//
+// console.log(filterViaCategory(category));
 
 
   const searchButtonHandler = (e) => {
@@ -156,10 +174,10 @@ console.log(filterViaCategory(category));
           <Card>
             Category
             <Filter
-              defaultValue={"default"}
+              defaultValue="default"
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="default" disabled>
+              <option value={"default"} disabled>
                 Choose here
               </option>
               {props.categories
@@ -188,7 +206,8 @@ console.log(filterViaCategory(category));
             </Filter>
           </Card>
         </SearchWrapper>
-        <SearchButton onClick={searchButtonHandler}>APPLY FILTERS</SearchButton>
+        <Wrapper><SearchButton onClick={searchButtonHandler}>APPLY FILTERS</SearchButton>
+        <Clear onClick={clearSearchHandler}>clear</Clear></Wrapper>
       </SearchContainer>
           <Table>
       <TableHeaderWrapper>
