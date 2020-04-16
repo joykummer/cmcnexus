@@ -32,7 +32,12 @@ function OrganisationDetails(props) {
           <div>name: {organisationDetails.name}</div>
           <div>description: {organisationDetails.description}</div>
           <div>services: {organisationDetails.services}</div>
-          <div>category: {organisationDetails.category.name}</div>
+          <div>category: {organisationDetails.categories.map(category => {
+            return (
+                <div key={category.id}><b>{category.name}</b></div>
+                    )
+          })}
+          </div>
           <div>tag: {organisationDetails.tag}</div>
           <div>members: {organisationDetails.members}</div>
         </>

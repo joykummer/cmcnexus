@@ -34,6 +34,22 @@ import styled from "styled-components";
     padding: 35px;
   `;
 
+
+  const isMatch = (singleCase, organisationId) => {
+    return singleCase.partnered_organisations.filter(org => org.status === "matched")
+        .some((org) => org.organisation.id === organisationId)
+  }
+
+  const isAccepted = (singleCase, organisationId) => {
+    return singleCase.partnered_organisations.filter(org => org.status === "accepted")
+        .some((org) => org.organisation.id === organisationId)
+  }
+
+  const isAssigned = (singleCase, organisationId) => {
+    return singleCase.partnered_organisations.filter(org => org.status === "assigned")
+        .some((org) => org.organisation.id === organisationId)
+  }
+
 function MatchActionable(props) {
   const match = () => {
     props.dispatch(matchOrganisationsFunction(props.singleCase.id, props.organisationId));
@@ -42,9 +58,10 @@ function MatchActionable(props) {
     props.dispatch(unmatchOrganisationsFunction(props.singleCase.id, props.organisationId));
   };
   return <>{
-    props.singleCase.matched_partners.some((org) => org.id === props.organisationId)
-        ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
-        : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+    isMatch(props.singleCase, props.organisationId)
+      ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
+      : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+
   }</>;
 }
 
@@ -56,27 +73,28 @@ function AssignActionable(props) {
     props.dispatch(unassignOrganisationsFunction(props.singleCase.id, props.organisationId));
   };
   return <>{
-     props.singleCase.accepted_partners.some((org) => org.id === props.organisationId)
-      ? props.singleCase.assigned_partners.some((org) => org.id === props.organisationId)
+    isAccepted(props.singleCase, props.organisationId)
+      ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
+      : isAssigned(props.singleCase, props.organisationId)
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
-        : <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
-      : <NotAccepted>The case has not been accepted.</NotAccepted>
+        : <NotAccepted>The case has not been accepted.</NotAccepted>
   }</>;
 }
 
 function MatchAssignOrg(props) {
   const dispatch = props.dispatch;
   const singleCase = props.cases.find((c) => c.id === props.caseId);
-  console.log(singleCase)
 
   useEffect(() => {
     dispatch(organisationsFunction());
   }, [dispatch]);
 
-
+  const commonCategories = (a, b) => {
+    return a.categories.filter((outer) => b.categories.some((inner) => inner.id === outer.id))
+  }
   const filteredOrganisations = () => {
-    return singleCase ? props.organisations.filter(
-      org => org.category ? org.category.id === Number(singleCase.category) : false) : []
+    if (!singleCase) return [];
+    return props.organisations.filter(org => commonCategories(org, singleCase).length !== 0)
   }
 
   const headers = ["Name", "Description", "Category", "Tag(s)"];
@@ -97,7 +115,7 @@ function MatchAssignOrg(props) {
                   <TableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
                     <TableData>{organisation.description}</TableData>
-                    <TableData>{organisation.category.name}</TableData>
+                    <TableData>{commonCategories(organisation, singleCase).map((cat) => cat.name).join(', ')}</TableData>
                     <TableData>{organisation.tag}</TableData>
                     <TableData>
                       <MatchActionable dispatch={props.dispatch} organisationId={organisation.id} singleCase={singleCase}/>

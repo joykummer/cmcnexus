@@ -43,7 +43,7 @@ function CaseDetails(props) {
                 <DetailsHeader><DetailsKey>consent:</DetailsKey> {caseDetails.consent ?"yes":"no"}</DetailsHeader>
                 <DetailsHeader><DetailsKey>category:</DetailsKey> {
               caseDetails ?
-                  caseDetails.category.map(category => {
+                  caseDetails.categories.map(category => {
                     return (
                         <div key={category.id}><b>{category.name}</b></div>
                     )
@@ -61,17 +61,9 @@ function CaseDetails(props) {
             <DetailsContainer> 
             <DetailsHeader><DetailsKey>matched partners:</DetailsKey>  {
               caseDetails ?
-                  caseDetails.matched_partners.map(partner => {
+                  caseDetails.partnered_organisations.map(partner => {
                     return (
-                        <div key={partner.id}><b>{partner.name}</b></div>
-                    )
-                  }) : null
-              }</DetailsHeader>
-            <DetailsHeader><DetailsKey>assigned partners:</DetailsKey> {
-              caseDetails ?
-                  caseDetails.assigned_partners.map(partner => {
-                    return (
-                        <div key={partner.id}><b>{partner.name}</b></div>
+                        <div key={partner.organisation.id}><b>{partner.organisation.name}</b> <i>{partner.status}</i></div>
                     )
                   }) : null
               }</DetailsHeader>

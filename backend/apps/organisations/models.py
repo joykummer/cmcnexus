@@ -13,9 +13,8 @@ class Organisation(models.Model):
     services = models.TextField(
         max_length=500
     )
-    category = models.ForeignKey(
+    categories = models.ManyToManyField(
         to=Category,
-        on_delete=models.CASCADE,
         related_name='organisations',
         default=0
     )
