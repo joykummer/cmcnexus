@@ -6,9 +6,16 @@ import {validateCaseFunction} from '../../store/actions/updateCaseAction';
 import {rejectCaseFunction} from '../../store/actions/rejectCaseAction';
 
 
+const ButtonContainer = styled.div`
+display: flex; 
+justify-content: center; 
+margin-top: 3%; 
+`
+
 const Button = styled(RedButton)`
  height: 50px;
- width: 100px;    
+ width: 100px; 
+ margin: 3%;    
 `
 
 
@@ -24,10 +31,10 @@ class Validation extends Component {
 
     render() {
         return (
-            <div>
+            <ButtonContainer>
                 <Button onClick={this.acceptHandler}>Accept</Button> 
                 <Button onClick ={this.rejectHandler}>Reject</Button> 
-            </div>
+            </ButtonContainer>
         )
     }
 }
