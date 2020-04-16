@@ -59,7 +59,7 @@ function CaseDetails(props) {
             </MiddleContainer>
             <Stripe>Status</Stripe>
             <DetailsContainer> 
-            <DetailsHeader><DetailsKey>matched partners:</DetailsKey>  {
+            <DetailsHeader><DetailsKey>Partners:</DetailsKey>  {
               caseDetails ?
                   caseDetails.partnered_organisations.map(partner => {
                     return (
