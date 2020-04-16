@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Time from "react-time";
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
@@ -9,6 +9,8 @@ import {
 
 import styled from 'styled-components';
 import {CardBox} from '../../styles/GenericBoxes';
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {USERPROFILE} from '../Navigation/states';
 
 
 const Wrapper = styled.section`
@@ -80,8 +82,13 @@ padding: 30px;
 
 export default function UserProfile() {
 	const user = useSelector(state => state.auth.user);
+	const dispatch = useDispatch();
 
 	const history = useHistory();
+
+	useEffect(() => {
+		dispatch(setNavigationAction(USERPROFILE));
+	}, [dispatch]);
 
 	 const onClickHandler = () => {
     	history.push(`/profile/edit/`);

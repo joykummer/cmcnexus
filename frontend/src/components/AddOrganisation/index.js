@@ -6,6 +6,8 @@ import { RedButton } from "../../styles/Buttons";
 import { addOrganisationFunction } from "../../store/actions/addOrganisationAction";
 import { Dropdown } from "../../styles/Dropdowns";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {ORGANISATIONS} from '../Navigation/states';
 
 const Container = styled.div`
   width: 100%;
@@ -40,6 +42,7 @@ function AddOrganisation(props) {
 
   useEffect(() => {
     dispatch(categoriesFunction());
+    dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
  const categories = [];

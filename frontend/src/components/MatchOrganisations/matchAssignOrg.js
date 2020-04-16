@@ -14,6 +14,8 @@ import {
   TableRow,
 } from "../../styles/Tables";
 import styled from "styled-components";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {ORGANISATIONS} from '../Navigation/states';
 
 
   const MatchAssignButton = styled(RedButton)`
@@ -87,6 +89,7 @@ function MatchAssignOrg(props) {
 
   useEffect(() => {
     dispatch(organisationsFunction());
+    dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
   const commonCategories = (a, b) => {

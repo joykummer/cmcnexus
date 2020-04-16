@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { organisationsFunction } from "../../store/actions/organisationsAction";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {ORGANISATIONS, USERPROFILE} from '../Navigation/states';
 
 const Container = styled.div`
   width: 100%;
@@ -17,6 +19,7 @@ function OrganisationDetails(props) {
 
   useEffect(() => {
     dispatch(organisationsFunction());
+    dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
   const organisationDetails = props.organisations

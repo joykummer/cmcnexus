@@ -11,6 +11,9 @@ import styled from 'styled-components';
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {CardBox} from '../../styles/GenericBoxes';
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {USERPROFILE} from '../Navigation/states';
+import {organisationsFunction} from '../../store/actions/organisationsAction';
 
 
 const Wrapper = styled.section`
@@ -91,8 +94,9 @@ export default function EditUserProfile() {
 	const [phone, setPhone] = useState(user.phone);
 	const [department, setDepartment] = useState(user.department);
 
+
 	useEffect(() => {
-		dispatch(editUser());
+		dispatch(setNavigationAction(USERPROFILE));
 	}, [dispatch]);
 
 	const onClickHandler = async (e) => {
