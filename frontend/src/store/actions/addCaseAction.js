@@ -10,9 +10,10 @@ export const addCaseAction = (cases) => {
 
 export const addCaseFunction = (data) => async (dispatch) => {
   try {
-    const response = await Axios.post("cases/", data);
+    const response = await Axios.post("cases/add/", data);
     dispatch(addCaseAction(response.data));
   } catch (e) {
-    console.log("e", e);
+    console.log('hi', e.response);
+    return (e)
   }
 };

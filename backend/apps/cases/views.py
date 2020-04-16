@@ -1,17 +1,22 @@
 from django.db.models import Q
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView
 from rest_framework.permissions import DjangoObjectPermissions
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView, \
+    ListAPIView, CreateAPIView
 from rest_framework.response import Response
 
 from apps.cases.filters import PermissionsFilter
 from apps.cases.models import Case
 from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission, MatchOrganizationPermission, \
     AssignOrganizationPermission
+# from apps.cases.permissions import ValidatePermission
+from apps.cases.permissions import ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
+from apps.cases.serializers import CreateCaseSerializer
 
 
-class ListCreateCaseView(ListCreateAPIView):
+class ListCaseView(ListAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
     permission_classes = [DjangoObjectPermissions]
@@ -70,7 +75,7 @@ class RejectCaseView(UpdateAPIView):
 
 
 class MatchOrganisation(GenericAPIView):
-    queryset = Case.objects.all()
+    queryset = Case
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission, MatchOrganizationPermission]
     lookup_url_kwarg = 'case_id'
@@ -91,7 +96,7 @@ class MatchOrganisation(GenericAPIView):
 
 
 class AssignOrganisation(GenericAPIView):
-    queryset = Case.objects.all()
+    queryset = Case
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
     lookup_url_kwarg = 'case_id'
@@ -108,4 +113,25 @@ class AssignOrganisation(GenericAPIView):
         partner_ids = self.request.data.get("partner_ids")
         for partner_id in partner_ids:
             case.assigned_partners.remove(partner_id)
+        return Response(self.get_serializer(case).data)
+
+
+class AcceptRejectCase(GenericAPIView):
+    queryset = Case
+    serializer_class = CaseSerializer
+    # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
+    lookup_url_kwarg = 'case_id'
+
+    def post(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_id = self.request.data.get("partner_id")
+        if not case.accepted_partners.filter(id=partner_id):
+            case.accepted_partners.add(partner_id)
+        return Response(self.get_serializer(case).data)
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        partner_id = self.request.data.get("partner_id")
+        if case.accepted_partners.filter(id=partner_id):
+            case.accepted_partners.remove(partner_id)
         return Response(self.get_serializer(case).data)

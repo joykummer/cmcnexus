@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ListPotentialMatches from "./listPotentialMatches";
+import MatchAssignOrg from "./matchAssignOrg";
 
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Container = styled.div`
 function MatchOrganisations(props) {
     return (
     <Container>
-      <ListPotentialMatches caseId={parseInt(props.match.params.id)}/>
+      <MatchAssignOrg caseId={parseInt(props.match.params.id)}/>
     </Container>
   );
 }
