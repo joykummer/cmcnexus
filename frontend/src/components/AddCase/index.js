@@ -79,9 +79,11 @@ function AddCase(props) {
     if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
         categories.push(id)
     }
+    console.log('in case setcate', categories);
   };
 
   const addCaseHandler = async (e) => {
+      console.log('CASE CAT', categories);
     const data = {
       title: title,
       description: description,
@@ -94,10 +96,8 @@ function AddCase(props) {
       country: country,
       categories: categories,
     };
-    const response = await dispatch(addCaseFunction(data));
-    if (response === undefined) {
-        props.history.push("/cases/");
-    }
+    await dispatch(addCaseFunction(data));
+    props.history.push("/cases/");
   };
 
   return (
@@ -196,7 +196,7 @@ function AddCase(props) {
         </FormEntry>
         <FormEntry>
       <div>category:</div>
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
+      <CategoryDropdown defaultValue={[]} onChange={setCategoryHandler} multiple>
           {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
           ? props.categories.map((category) => {
@@ -218,7 +218,6 @@ const mapStateToProps = (state) => {
   return {
     cases: state.cases,
     categories: state.categories,
-
   };
 };
 

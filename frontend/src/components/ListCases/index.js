@@ -16,13 +16,13 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: #ebebeb;
+  padding: 50px;
   padding-top: 30px;
   overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-  padding: 50px;
 `;
 
 const SearchContainer = styled.div`
@@ -70,7 +70,7 @@ const SearchButton = styled(RedButton)`
 const AddCaseButton = styled(RedButton)`
   width: 125px;
   height: 40px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 `;
 
 function ListCases(props) {
