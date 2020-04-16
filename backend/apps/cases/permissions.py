@@ -19,13 +19,13 @@ class RejectPermission(BasePermission):
         return request.user.has_perm('cases.reject_case')
 
 
-class AssignOrganizationPermission(BasePermission):
+class AssignOrganisationPermission(BasePermission):
 
     def has_permission(self, request, view):
         return request.user.has_perm('cases.assign_organisations')
 
 
-class MatchOrganizationPermission(BasePermission):
+class MatchOrganisationPermission(BasePermission):
 
     def has_permission(self, request, view):
         return request.user.has_perm('cases.match_organisations')

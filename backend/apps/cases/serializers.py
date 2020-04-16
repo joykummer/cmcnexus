@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework_guardian.serializers import ObjectPermissionsAssignmentMixin
 
@@ -17,7 +18,7 @@ class PartnershipSerializer(serializers.ModelSerializer):
 
 
 class CaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
+    categories = CategorySerializer(many=True)
     created_by = FullUserSerializer(read_only=True)
     partnered_organisations = PartnershipSerializer(many=True)
 
@@ -28,9 +29,10 @@ class CaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializ
     def get_permissions_map(self, created):
         current_user = self.context['request'].user
 
+
         return {
-            'view_post': [current_user],
-            'change_post': [current_user]
+            'view_case': [current_user],
+            'change_case': [current_user]
         }
 
 
@@ -43,9 +45,12 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
 
     def get_permissions_map(self, created):
         current_user = self.context['request'].user
+        case_coordinator = Group.objects.get(name="Case Coordinator")
+        med_co = Group.objects.get(name="MedCo")
 
         return {
-            'view_post': [current_user],
-            'change_post': [current_user]
+            'view_case': [current_user, case_coordinator, med_co],
+            'change_case': [current_user, med_co],
+            'delete_case': [current_user],
         }
 
