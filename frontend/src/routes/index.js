@@ -12,6 +12,7 @@ import AddCase from "../components/AddCase";
 import ListOrganisations from '../components/ListOrganisations';
 import AddOrganisation from "../components/AddOrganisation";
 import UserProfile from "../components/UserProfile";
+import EditUserProfile from "../components/EditUserProfile";
 import CaseDetails from "../components/CaseDetails";
 import {ADD_CASE, ADD_ORGANISATION, VIEW_CASE, VIEW_ORGANISATION} from '../components/Permissions/permissions';
 import MatchOrganisations from '../components/MatchOrganisations';
@@ -37,6 +38,7 @@ export default function Routes() {
                             component={OrganisationDetails} permission={VIEW_ORGANISATION}/>
           <PrivateRoute exact path='/cases/match/:id/' component={MatchOrganisations}/>
           <PrivateRoute exact path='/profile/' component={UserProfile}/>
+          <PrivateRoute exact path='/profile/edit/' component={EditUserProfile}/>
           <Route path="/" render={() => <Redirect to='/cases'/>}/>
         </Navigation>
       </Switch>
