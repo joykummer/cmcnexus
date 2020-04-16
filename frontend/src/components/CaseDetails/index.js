@@ -7,6 +7,7 @@ import {Container, Header, HeaderTitle, DetailsContainer, DetailsHeader, Details
 MiddleContainer, Stripe, Match} from './styles'
 import CanI from "../Permissions";
 import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
+import AcceptRejectAsOrg from "../AcceptCase";
 
 
 
@@ -77,6 +78,7 @@ function CaseDetails(props) {
             <CanI perform={MATCH_ORGANIZATIONS}>
             <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
             </CanI>
+            <AcceptRejectAsOrg id={caseDetails.id} />
           </>
           ): <div>No case to show</div>}
       </Container>
