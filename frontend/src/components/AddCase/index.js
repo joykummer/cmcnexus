@@ -92,8 +92,9 @@ function AddCase(props) {
       age: age,
       sex: sex,
       country: country,
-      category: categories,
+      categories: categories,
     };
+    console.log('data', data);
     const response = await dispatch(addCaseFunction(data));
     if (response === undefined) {
         props.history.push("/cases/");
