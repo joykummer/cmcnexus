@@ -3,6 +3,7 @@ export const LOGOUT = 'LOGOUT';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const EDIT_CURRENT_USER = 'EDIT_CURRENT_USER';
 export const SET_CASES = 'SET_CASES';
 export const ADD_CASE = 'ADD_CASE';
 export const UPDATE_CASE = 'UPDATE_CASE';
