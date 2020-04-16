@@ -7,7 +7,6 @@ import {Container, Header, HeaderTitle, DetailsContainer, DetailsHeader, Details
 MiddleContainer, Stripe, Match} from './styles'
 import CanI from "../Permissions";
 import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
-import AcceptRejectAsOrg from "../AcceptCase";
 
 
 
