@@ -22,6 +22,7 @@ font-size: 30px;
 margin-top: 5%; 
 margin-bottom: 3%; 
 border-bottom: 3px solid red; 
+text-transform: uppercase; 
 `;
 
 export const DetailsContainer = styled.div`
