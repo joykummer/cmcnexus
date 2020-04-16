@@ -117,7 +117,7 @@ class AssignOrganisation(GenericAPIView):
         return Response(self.get_serializer(case).data)
 
 
-class AcceptCase(GenericAPIView):
+class AcceptCaseAsOrg(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
@@ -138,7 +138,7 @@ class AcceptCase(GenericAPIView):
         return Response(self.get_serializer(case).data)
 
 
-class RejectCase(GenericAPIView):
+class RefuseCaseAsOrg(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
     # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
