@@ -29,12 +29,12 @@ const Checkbox = styled.input`
 
 const CountryDropdown = styled(Dropdown)`
   width: 200px;
-  height: 40px;
+  height: 30px;
 `;
 
 const SexDropdown = styled(Dropdown)`
-width: 200px;
-height: 40px;
+    width: 200px;
+    height: 30px;
 `;
 
 const CategoryDropdown = styled(Dropdown)`
@@ -92,7 +92,7 @@ function AddCase(props) {
       age: age,
       sex: sex,
       country: country,
-      category: categories,
+      categories: categories,
     };
     console.log('data', data);
     const response = await dispatch(addCaseFunction(data));
@@ -197,7 +197,8 @@ function AddCase(props) {
         </FormEntry>
         <FormEntry>
       <div>category:</div>
-      <CategoryDropdown onChange={setCategoryHandler} multiple={true}>
+      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
+          {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
           ? props.categories.map((category) => {
               return (
