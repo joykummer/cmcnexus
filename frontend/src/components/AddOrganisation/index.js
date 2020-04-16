@@ -40,6 +40,7 @@ function AddOrganisation(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
+  const [categories, setCategories] = useState([]);
   const [tag, setTag] = useState("");
   const dispatch = props.dispatch;
 
@@ -47,15 +48,12 @@ function AddOrganisation(props) {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
- const categories = [];
 
   const setCategoryHandler = (e) => {
-    const id = e.target.options.selectedIndex;
-    const categoryOption = e.target.options;
-    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
-        categories.push(id)
-    }
-    console.log('SETCAT ORG', categories);
+      const selectOptions = Array.from(e.target.options).filter(el => el.selected).map(el => el.id);
+      setCategories(selectOptions);
+    console.log('in case orgcat', selectOptions);
+    // };
   };
 
   const addOrganisationHandler = async (e) => {
