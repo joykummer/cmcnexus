@@ -40,7 +40,7 @@ function AddOrganisation(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(null);
   const [tag, setTag] = useState("");
   const dispatch = props.dispatch;
 
@@ -53,12 +53,9 @@ function AddOrganisation(props) {
       .filter((el) => el.selected)
       .map((el) => el.id);
     setCategories(selectOptions);
-    console.log("in case orgcat", selectOptions);
-    // };
   };
 
   const addOrganisationHandler = async (e) => {
-    console.log("IN ORG", categories);
     e.preventDefault();
     const data = {
       name: name,
