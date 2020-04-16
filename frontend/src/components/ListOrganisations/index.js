@@ -10,6 +10,7 @@ import {ORGANISATIONS} from '../Navigation/states';
 import {Dropdown} from "../../styles/Dropdowns";
 import {ADD_ORGANISATION} from "../Permissions/permissions";
 import CanI from "../Permissions";
+import {categoriesFunction} from "../../store/actions/categoriesAction";
 
 const Container = styled.div`
   width: 100%;
@@ -83,6 +84,7 @@ function ListOrganisations(props) {
   useEffect(() => {
     dispatch(setNavigationAction(ORGANISATIONS));
     dispatch(organisationsFunction());
+    dispatch(categoriesFunction());
   }, [dispatch]);
 
   const searchButtonHandler = (e) => {
@@ -162,6 +164,7 @@ function ListOrganisations(props) {
 const mapStateToProps = (state) => {
   return {
     organisations: state.organisations,
+    categories: state.categories,
   };
 };
 

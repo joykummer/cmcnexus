@@ -41,14 +41,13 @@ function AddOrganisation(props) {
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
   const [tag, setTag] = useState("");
-  const [members, setMembers] = useState("");
   const dispatch = props.dispatch;
 
   useEffect(() => {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
-  const categories = [];
+ const categories = [];
 
   const setCategoryHandler = (e) => {
     const id = e.target.options.selectedIndex;
@@ -56,19 +55,20 @@ function AddOrganisation(props) {
     if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
         categories.push(id)
     }
+    console.log('SETCAT ORG', categories);
   };
 
   const addOrganisationHandler = async (e) => {
-      e.preventDefault();
+      console.log('IN ORG', categories);
+    e.preventDefault();
     const data = {
       name: name,
       description: description,
       services: services,
       categories: categories,
       tag: tag,
-      members: members,
     };
-    await dispatch(addOrganisationFunction(data));
+    dispatch(addOrganisationFunction(data));
     props.history.push("/organisations/");
   };
 
@@ -99,8 +99,7 @@ function AddOrganisation(props) {
       />
       <FormEntry>
       <div>category:</div>
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
-          {/*<option value="default" disabled>Please choose here...</option>*/}
+      <CategoryDropdown defaultValue={[]} onChange={setCategoryHandler} multiple>
         {props.categories
           ? props.categories.map((category) => {
               return (
@@ -117,13 +116,6 @@ function AddOrganisation(props) {
         name="tag"
         onChange={(e) => setTag(e.target.value)}
         value={tag}
-        required
-      />
-      <div>members:</div>
-      <FieldInput
-        name="members"
-        onChange={(e) => setMembers(e.target.value)}
-        value={members}
         required
       />
       <AddButton onClick={addOrganisationHandler}>Add</AddButton>

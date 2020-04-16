@@ -16,7 +16,6 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'services',
             'categories',
             'tag',
-            'members',
         ]
 
 
@@ -30,5 +29,4 @@ class CreateOrganisationSerializer(serializers.ModelSerializer):
             'services',
             'categories',
             'tag',
-            'members',
         ]

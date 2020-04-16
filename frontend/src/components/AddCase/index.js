@@ -65,24 +65,29 @@ function AddCase(props) {
   const [sex, setSex] = useState("");
   const countries = countryList().getData();
   const [country, setCountry] = useState("");
+  const [categories, setCategories] = useState([]);
   const dispatch = props.dispatch;
 
   useEffect(() => {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
-  const categories = [];
+  // const categories = [];
 
   const setCategoryHandler = (e) => {
-    const id = e.target.options.selectedIndex;
-    const categoryOption = e.target.options;
-    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
-        categories.push(id)
-    }
-    console.log('in case setcate', categories);
+      console.log('hi', e.target.options);
+    // const id = e.target.options.selectedIndex;
+    // const categoryOption = e.target.options;
+      const selectOptions = Array.from(e.target.options).filter(el => el.selected).map(el => el.id);
+      setCategories(selectOptions);
+    // if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
+    //     categories.push(id)
+    console.log('in case setcate', selectOptions);
+    // };
   };
 
   const addCaseHandler = async (e) => {
+      e.preventDefault();
       console.log('CASE CAT', categories);
     const data = {
       title: title,
@@ -96,7 +101,7 @@ function AddCase(props) {
       country: country,
       categories: categories,
     };
-    await dispatch(addCaseFunction(data));
+    dispatch(addCaseFunction(data));
     props.history.push("/cases/");
   };
 
