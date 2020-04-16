@@ -17,6 +17,7 @@ const Container = styled.div`
   height: 100%;
   background-color: #ebebeb;
   padding-top: 30px;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

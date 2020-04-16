@@ -94,7 +94,6 @@ function AddCase(props) {
       country: country,
       categories: categories,
     };
-    console.log('data', data);
     const response = await dispatch(addCaseFunction(data));
     if (response === undefined) {
         props.history.push("/cases/");
