@@ -2,9 +2,12 @@ from django.db.models import Q
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView, \
     ListAPIView, CreateAPIView
 from rest_framework.response import Response
+from rest_framework_guardian.filters import ObjectPermissionsFilter
 
+
+from apps.cases.permissions import ValidatePermission, MatchOrganisationPermission, \
+    AssignOrganisationPermission
 from apps.cases.models import Case, Partnership
-# from apps.cases.permissions import ValidatePermission
 from apps.cases.permissions import ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
@@ -15,6 +18,7 @@ class ListCaseView(ListAPIView):
     queryset = Case.objects.none()
     serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission]
+    filter_backends = [ObjectPermissionsFilter]
 
     def get_queryset(self):
         return Case.objects.filter(Q(title__icontains=self.request.query_params.get('search', '')) | Q(
@@ -40,7 +44,7 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
 class ValidateCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    # permission_classes = [CustomDjangoModelPermission, ValidatePermission]
+    permission_classes = [ValidatePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -52,7 +56,7 @@ class ValidateCaseView(UpdateAPIView):
 class CloseCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission, ClosePermission]
+    permission_classes = [ClosePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -64,7 +68,7 @@ class CloseCaseView(UpdateAPIView):
 class RejectCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [CustomDjangoModelPermission, RejectPermission]
+    permission_classes = [RejectPermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -76,20 +80,20 @@ class RejectCaseView(UpdateAPIView):
 class MatchOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    # permission_classes = [CustomDjangoModelPermission, MatchOrganizationPermission]
+    permission_classes = [MatchOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_ids = self.request.data.get("partner_ids")
-        for organisation_id in partner_ids:
+        organisation_ids = self.request.data.get("partner_ids")
+        for organisation_id in organisation_ids:
             Partnership(case_id=case.id, organisation_id=organisation_id).save()
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_ids = self.request.data.get("partner_ids")
-        for organisation_id in partner_ids:
+        organisation_ids = self.request.data.get("partner_ids")
+        for organisation_id in organisation_ids:
             Partnership.objects.get(case_id=case.id, organisation_id=organisation_id).delete()
         return Response(self.get_serializer(case).data)
 
@@ -97,21 +101,21 @@ class MatchOrganisation(GenericAPIView):
 class AssignOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
+    permission_classes = [AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_ids = self.request.data.get("partner_ids")
-        for organisation_id in partner_ids:
+        organisation_ids = self.request.data.get("partner_ids")
+        for organisation_id in organisation_ids:
             match = Partnership.objects.get(case_id=case.id, organisation_id=organisation_id)
             match.assign()
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
         case = self.get_object()
-        partner_ids = self.request.data.get("partner_ids")
-        for organisation_id in partner_ids:
+        organisation_ids = self.request.data.get("partner_ids")
+        for organisation_id in organisation_ids:
             match = Partnership.objects.get(case_id=case.id, organisation_id=organisation_id)
             match.accept()
         return Response(self.get_serializer(case).data)
@@ -120,7 +124,7 @@ class AssignOrganisation(GenericAPIView):
 class AcceptCaseAsOrg(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
+    permission_classes = [AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
@@ -141,7 +145,7 @@ class AcceptCaseAsOrg(GenericAPIView):
 class RefuseCaseAsOrg(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    # permission_classes = [CustomDjangoModelPermission, AssignOrganizationPermission]
+    permission_classes = [AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def delete(self, request, *args, **kwargs):
