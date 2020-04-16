@@ -1,17 +1,13 @@
 from django.db.models import Q
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView
-from rest_framework.permissions import DjangoObjectPermissions
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView, \
     ListAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework_guardian.filters import ObjectPermissionsFilter
 
-from apps.cases.filters import PermissionsFilter
-from apps.cases.models import Case
-from apps.cases.permissions import ValidatePermission, ClosePermission, RejectPermission, MatchOrganisationPermission, \
+
+from apps.cases.permissions import ValidatePermission, MatchOrganisationPermission, \
     AssignOrganisationPermission
 from apps.cases.models import Case, Partnership
-# from apps.cases.permissions import ValidatePermission
 from apps.cases.permissions import ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission

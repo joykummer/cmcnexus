@@ -29,7 +29,6 @@ class CaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializ
     def get_permissions_map(self, created):
         current_user = self.context['request'].user
 
-
         return {
             'view_case': [current_user],
             'change_case': [current_user]
@@ -53,4 +52,3 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
             'change_case': [current_user, med_co],
             'delete_case': [current_user],
         }
-
