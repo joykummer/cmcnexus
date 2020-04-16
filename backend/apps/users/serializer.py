@@ -7,7 +7,6 @@ User = get_user_model()
 class FullUserSerializer(serializers.ModelSerializer):
     permissions = serializers.SerializerMethodField()
 
-    @staticmethod
     def get_permissions(self, obj):
         return [perm.split('.')[1] for perm in obj.get_all_permissions()]
 
