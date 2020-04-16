@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { RedButton } from "../../styles/Buttons";
 import { casesFunction } from "../../store/actions/casesAction";
-import { searchCasesFunction } from "../../store/actions/searchCasesAction";
+import {
+  searchTitleFunction,
+  searchCategoriesFunction,
+  searchStatusFunction
+} from "../../store/actions/searchCasesAction";
 import ListCasesTable from "./listCasesTable";
 import CanI from "../Permissions";
 import { ADD_CASE } from "../Permissions/permissions";
@@ -11,6 +15,15 @@ import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
 import { Dropdown } from "../../styles/Dropdowns";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
+import {
+  Table,
+  TableBody,
+  TableData,
+  TableHeader,
+  TableHeaderRow,
+  TableHeaderWrapper,
+  TableRow
+} from "../../styles/Tables";
 
 const Container = styled.div`
   width: 100%;
@@ -74,7 +87,7 @@ const AddCaseButton = styled(RedButton)`
 `;
 
 function ListCases(props) {
-  const [search, setSearch] = useState("");
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState(null);
   const [status, setStatus] = useState("");
   const dispatch = props.dispatch;
@@ -87,13 +100,38 @@ function ListCases(props) {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
+
+function filterViaCategory(category) {
+  return props.cases.filter(obj => obj.categories.some(cat => cat.name === category));
+}
+
+console.log(filterViaCategory(category));
+
+
   const searchButtonHandler = (e) => {
     e.preventDefault();
-    const query = {
-      title: search,
-    };
-    props.dispatch(searchCasesFunction(query));
+    if (title) {
+      const query = {
+        title: title,
+      };
+      props.dispatch(searchTitleFunction(query));
+    }
+    if (status) {
+      const query = {
+        status: status,
+      };
+      props.dispatch(searchStatusFunction(query))
+    }
   };
+
+  const caseDetailsHandler = (id) => {
+        props.history.push({
+            pathname: `/cases/details/${id}/`,
+          });
+    };
+
+  const headers = ["Title", "Age", "Country", "Status"];
+
 
   const addCaseHandler = (e) => {
     e.preventDefault();
@@ -110,9 +148,9 @@ function ListCases(props) {
           <Card>
             Title
             <SearchInput
-              name="search"
-              onChange={(e) => setSearch(e.target.value)}
-              value={search}
+              name="title"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
             />
           </Card>
           <Card>
@@ -152,7 +190,27 @@ function ListCases(props) {
         </SearchWrapper>
         <SearchButton onClick={searchButtonHandler}>APPLY FILTERS</SearchButton>
       </SearchContainer>
-      <ListCasesTable />
+          <Table>
+      <TableHeaderWrapper>
+        <TableHeaderRow>
+          {headers.map((header, id) => {
+            return <TableHeader key={id}>{header}</TableHeader>;
+          })}
+        </TableHeaderRow>
+      </TableHeaderWrapper>
+      <TableBody>
+        {props.cases
+          ? props.cases.filter(file => !category || file.categories.some(cat => cat.name === category)).map((file) =>
+                <TableRow key={file.id} onClick={() => caseDetailsHandler(file.id)}>
+                  <TableData>{file.title}</TableData>
+                  <TableData>{file.age}</TableData>
+                  <TableData>{file.country}</TableData>
+                  <TableData>{file.status}</TableData>
+                </TableRow>
+            )
+          : null}
+      </TableBody>
+    </Table>
     </Container>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
 import {useHistory} from 'react-router-dom';
