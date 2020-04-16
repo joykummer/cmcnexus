@@ -48,7 +48,11 @@ function ListOrganisationsTable(props) {
                   <TableData>{organisation.name}</TableData>
                   <TableData>{organisation.description}</TableData>
                   <TableData>
-                    {organisation.category ? organisation.category.name : ""}
+                    {organisation.categories ? organisation.categories.map(category => {
+                      return (
+                        <div key={category.id}><b>{category.name}</b></div>
+                      )
+                    }):[]}
                   </TableData>
                   <TableData>{organisation.tag}</TableData>
                 </TableRow>
