@@ -4,7 +4,6 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView,
 from rest_framework.response import Response
 from rest_framework_guardian.filters import ObjectPermissionsFilter
 
-
 from apps.cases.permissions import ValidatePermission, MatchOrganisationPermission, \
     AssignOrganisationPermission
 from apps.cases.models import Case, Partnership

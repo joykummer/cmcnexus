@@ -5,6 +5,7 @@ import {RedButton} from '../../styles/Buttons'
 
 export const NavigationContainer = styled.div`
 width: 350px;
+min-width: 350px;
 height: 100%;
 background: white;
 display: flex;

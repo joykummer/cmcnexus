@@ -17,7 +17,6 @@ import styled from "styled-components";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {ORGANISATIONS} from '../Navigation/states';
 
-
   const MatchAssignButton = styled(RedButton)`
     width: 150px;
     height: 40px;
@@ -36,21 +35,20 @@ import {ORGANISATIONS} from '../Navigation/states';
     padding: 35px;
   `;
 
-
   const isMatch = (singleCase, organisationId) => {
     return singleCase.partnered_organisations.filter(org => org.status === "matched")
         .some((org) => org.organisation.id === organisationId)
-  }
+  };
 
   const isAccepted = (singleCase, organisationId) => {
     return singleCase.partnered_organisations.filter(org => org.status === "accepted")
         .some((org) => org.organisation.id === organisationId)
-  }
+  };
 
   const isAssigned = (singleCase, organisationId) => {
     return singleCase.partnered_organisations.filter(org => org.status === "assigned")
         .some((org) => org.organisation.id === organisationId)
-  }
+  };
 
 function MatchActionable(props) {
   const match = () => {
@@ -92,14 +90,15 @@ function MatchAssignOrg(props) {
     dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
-  const commonCategories = (a, b) => {
-    return a.categories.filter((outer) => b.categories.some((inner) => inner.id === outer.id))
-  }
+  const commonCategories = (organisation, casee) => {
+    return organisation.categories.filter(category1 => casee.categories.some(category => category.id === category1.id))
+  };
   const filteredOrganisations = () => {
     if (!singleCase) return [];
     return props.organisations.filter(org => commonCategories(org, singleCase).length !== 0)
-  }
+  };
 
+  const organisationsMatchingByCategory = filteredOrganisations()
   const headers = ["Name", "Description", "Category", "Tag(s)"];
 
   return (
@@ -112,8 +111,8 @@ function MatchAssignOrg(props) {
           </TableHeaderRow>
         </TableHeaderWrapper>
         <TableBody>
-          {props.organisations
-            ? props.organisations.map((organisation) => {
+          {organisationsMatchingByCategory
+            ? organisationsMatchingByCategory.map((organisation) => {
                 return (
                   <TableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
