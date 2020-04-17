@@ -3,20 +3,33 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { RedButton } from "../../styles/Buttons";
 import { casesFunction } from "../../store/actions/casesAction";
-import { searchCasesFunction } from "../../store/actions/searchCasesAction";
-import ListCasesTable from "./listCasesTable";
+import {
+  searchTitleFunction,
+  searchStatusFunction
+} from "../../store/actions/searchCasesAction";
 import CanI from "../Permissions";
 import { ADD_CASE } from "../Permissions/permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
 import { Dropdown } from "../../styles/Dropdowns";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
+import {
+  Table,
+  TableBody,
+  TableData,
+  TableHeader,
+  TableHeaderRow,
+  TableHeaderWrapper,
+  TableRow
+} from "../../styles/Tables";
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: #ebebeb;
+  padding: 50px;
   padding-top: 30px;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -71,12 +84,24 @@ const SearchButton = styled(RedButton)`
 const AddCaseButton = styled(RedButton)`
   width: 125px;
   height: 40px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
+`;
+
+const Wrapper = styled.div`
+display: flex;
+align-items: center;
+`;
+
+const Clear = styled.div`
+font-size: 14px;
+:hover {
+  color: red
+}
 `;
 
 function ListCases(props) {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState(null);
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
   const dispatch = props.dispatch;
 
@@ -88,13 +113,45 @@ function ListCases(props) {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
+  const clearSearchHandler = () => {
+    // setTitle("");
+    // setCategory("");
+    // setStatus("");
+    window.location.reload();
+  }
+
+// FOR REFERENCE. PLEASE DO NOT DELETE!
+// function filterViaCategory(category) {
+//   return props.cases.filter(obj => obj.categories.some(cat => cat.name === category));
+// }
+//
+// console.log(filterViaCategory(category));
+
+
   const searchButtonHandler = (e) => {
     e.preventDefault();
-    const query = {
-      title: search,
-    };
-    props.dispatch(searchCasesFunction(query));
+    if (title) {
+      const query = {
+        title: title,
+      };
+      props.dispatch(searchTitleFunction(query));
+    }
+    if (status) {
+      const query = {
+        status: status,
+      };
+      props.dispatch(searchStatusFunction(query))
+    }
   };
+
+  const caseDetailsHandler = (id) => {
+        props.history.push({
+            pathname: `/cases/details/${id}/`,
+          });
+    };
+
+  const headers = ["Title", "Age", "Country", "Status"];
+
 
   const addCaseHandler = (e) => {
     e.preventDefault();
@@ -108,18 +165,18 @@ function ListCases(props) {
           <Card>
             Title
             <SearchInput
-              name="search"
-              onChange={(e) => setSearch(e.target.value)}
-              value={search}
+              name="title"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
             />
           </Card>
           <Card>
             Category
             <Filter
-              defaultValue={"default"}
+              defaultValue="default"
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="default" disabled>
+              <option value={"default"} disabled>
                 Choose here
               </option>
               {props.categories
@@ -147,10 +204,31 @@ function ListCases(props) {
               })}
             </Filter>
           </Card>
-          <SearchButton onClick={searchButtonHandler}>APPLY FILTERS</SearchButton>
         </SearchWrapper>
+        <Wrapper><SearchButton onClick={searchButtonHandler}>APPLY FILTERS</SearchButton>
+        <Clear onClick={clearSearchHandler}>clear</Clear></Wrapper>
       </SearchContainer>
-      <ListCasesTable />
+          <Table>
+      <TableHeaderWrapper>
+        <TableHeaderRow>
+          {headers.map((header, id) => {
+            return <TableHeader key={id}>{header}</TableHeader>;
+          })}
+        </TableHeaderRow>
+      </TableHeaderWrapper>
+      <TableBody>
+        {props.cases
+          ? props.cases.filter(file => !category || file.categories.some(cat => cat.name === category)).map((file) =>
+                <TableRow key={file.id} onClick={() => caseDetailsHandler(file.id)}>
+                  <TableData>{file.title}</TableData>
+                  <TableData>{file.age}</TableData>
+                  <TableData>{file.country}</TableData>
+                  <TableData>{file.status}</TableData>
+                </TableRow>
+            )
+          : null}
+      </TableBody>
+    </Table>
     </Container>
   );
 }

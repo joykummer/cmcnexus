@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import arrow from "../../assets/arrow.svg";
 import caret from "../../assets/caret-down.svg";
 
 export const Dropdown = styled.select`

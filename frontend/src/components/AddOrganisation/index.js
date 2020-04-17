@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { addOrganisationFunction } from "../../store/actions/addOrganisationAction";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
@@ -21,8 +22,10 @@ function AddOrganisation(props) {
   }, [dispatch]);
 
   const setCategoryHandler = (e) => {
-    const categoryOption = Array.from(e.target.selectedOptions).map(opt => opt.id);
-    setCategories(categoryOption);
+    const selectOptions = Array.from(e.target.options)
+      .filter((el) => el.selected)
+      .map((el) => el.id);
+    setCategories(selectOptions);
   };
 
 
@@ -35,7 +38,7 @@ function AddOrganisation(props) {
       categories: categories,
       tag: tag,
     };
-    await props.dispatch(addOrganisationFunction(data));
+    dispatch(addOrganisationFunction(data));
     props.history.push("/organisations/");
   };
 
@@ -79,8 +82,9 @@ function AddOrganisation(props) {
           required
         />
       </Label>
-      <div>Category</div>
+      <Label>Category
       <CategoryDropdown value={categories} defaultValue={"default"} onChange={setCategoryHandler} multiple>
+        <option value={"default"} disabled>Select a category...</option>
         {props.categories
           ? props.categories.map((category) => {
               return (

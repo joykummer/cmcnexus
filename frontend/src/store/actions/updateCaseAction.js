@@ -10,7 +10,6 @@ export const validateCaseAction = cases => {
   };
 
 export const validateCaseFunction = (case_id) => async (dispatch) => {
-    console.log('RES', );
     const response = await Axios.patch(`cases/${case_id}/validate/`);
     dispatch(validateCaseAction(response.data))
 }
