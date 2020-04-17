@@ -15,15 +15,6 @@ export const Container = styled.div`
   letter-spacing: initial; 
 `;
 
-export const Header = styled.div`
-width: auto;
-height: auto; 
-padding-bottom: 0.5%; 
-display: flex; 
-margin-top: 3%; 
-font-size: 20px; 
-`;
-
 export const HeaderTitle = styled.div`
 display: flex; 
 justify-content: center; 
@@ -31,6 +22,7 @@ font-size: 30px;
 margin-top: 5%; 
 margin-bottom: 3%; 
 border-bottom: 3px solid red; 
+text-transform: uppercase; 
 `;
 
 export const DetailsContainer = styled.div`
@@ -42,7 +34,7 @@ padding: 20px;
 margin: 2%; 
 background-color: #ebebeb;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+/* transition: all 0.3s cubic-bezier(.25,.8,.25,1); */
 /* :hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 } */
@@ -51,22 +43,12 @@ transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 export const DetailsHeader = styled.div`
 display: flex; 
 text-transform: capitalize; 
+padding: 8px; 
 `;
 
 export const DetailsKey = styled.div`
-width: 15%; 
-min-width: 100px; 
-`;
-
-export const MiddleContainer = styled.div`
-display: flex; 
-width: 80%; 
-flex-wrap: wrap;  
-margin: 2%; 
-background-color: #ebebeb;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-padding: 20px;
+width: 10%; 
+min-width: 150px; 
 `;
 
 export const Stripe = styled.div`
