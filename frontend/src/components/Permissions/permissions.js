@@ -1,9 +1,9 @@
 export const ADD_CASE = "add_case";
-export const ASSIGN_ORGANIZATIONS = "assign_organizations";
+export const ASSIGN_ORGANISATIONS = "assign_organisations";
 export const CHANGE_CASE = "change_case";
 export const CLOSE_CASE = "close_case";
 export const DELETE_CASE = "delete_case";
-export const MATCH_ORGANIZATIONS = "match_organizations";
+export const MATCH_ORGANISATIONS = "match_organisations";
 export const REJECT_CASE = "reject_case";
 export const VALIDATE_CASE = "validate_case";
 export const VIEW_CASE = "view_case";

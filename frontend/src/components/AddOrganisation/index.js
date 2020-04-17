@@ -38,6 +38,7 @@ function AddOrganisation(props) {
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
   const [tag, setTag] = useState("");
+  const [categories, setCategories] = useState([]);
   const dispatch = props.dispatch;
 
   useEffect(() => {
@@ -45,21 +46,17 @@ function AddOrganisation(props) {
     dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
- const categories = [];
-
   const setCategoryHandler = (e) => {
-    const id = e.target.options.selectedIndex;
-    const categoryOption = e.target.options;
-    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
-        categories.push(id)
-    }
-    console.log("IN CAT", categories)
+    const categoryOption = Array.from(e.target.selectedOptions).map(opt => opt.id);
+    setCategories(categoryOption);
+    console.log("IN CAT", categories);
+    console.log("IN CAT", categoryOption);
   };
 
 
   const addOrganisationHandler = async (e) => {
     e.preventDefault();
-    console.log("IN ADDORG", categories)
+    console.log("IN ADDORG", categories);
     const data = {
       name: name,
       description: description,

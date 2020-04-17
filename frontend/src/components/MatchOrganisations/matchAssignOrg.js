@@ -112,13 +112,13 @@ function MatchAssignOrg(props) {
           </TableHeaderRow>
         </TableHeaderWrapper>
         <TableBody>
-          {filteredOrganisations()
-            ? filteredOrganisations().map((organisation) => {
+          {props.organisations
+            ? props.organisations.map((organisation) => {
                 return (
                   <TableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
                     <TableData>{organisation.description}</TableData>
-                    <TableData>{commonCategories(organisation, singleCase).map((cat) => cat.name).join(', ')}</TableData>
+                    <TableData>{organisation.categories.map((cat) => cat.name).join(', ')}</TableData>
                     <TableData>{organisation.tag}</TableData>
                     <TableData>
                       <MatchActionable dispatch={props.dispatch} organisationId={organisation.id} singleCase={singleCase}/>

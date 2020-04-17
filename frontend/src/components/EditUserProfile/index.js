@@ -13,7 +13,6 @@ import {useHistory} from "react-router-dom";
 import {CardBox} from '../../styles/GenericBoxes';
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {USERPROFILE} from '../Navigation/states';
-import {organisationsFunction} from '../../store/actions/organisationsAction';
 
 
 const Wrapper = styled.section`

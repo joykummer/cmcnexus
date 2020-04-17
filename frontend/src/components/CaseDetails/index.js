@@ -6,7 +6,7 @@ import {casesFunction} from "../../store/actions/casesAction";
 import {Container, Header, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
 MiddleContainer, Stripe, Match} from './styles'
 import CanI from "../Permissions";
-import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
+import {VALIDATE_CASE, MATCH_ORGANISATIONS} from "../Permissions/permissions";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES} from '../Navigation/states';
 
@@ -77,7 +77,7 @@ function CaseDetails(props) {
             <CanI perform={VALIDATE_CASE}>
               <Validation id={caseDetails.id}/>
             </CanI>
-            <CanI perform={MATCH_ORGANIZATIONS}>
+            <CanI perform={MATCH_ORGANISATIONS}>
             <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
             </CanI>
           </>

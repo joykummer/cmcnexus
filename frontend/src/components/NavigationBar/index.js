@@ -54,7 +54,7 @@ function NavigationBar() {
         </CanI>
         <CanI perform={ADD_CASE}>
           <NavItem selected={selected===CASES_ADD} onClick={() => onClickHandler(CASES_ADD)}>
-            <img src={virus} alt="Add Cases" style={{paddingRight: 35, height: 45, "-webkit-filter": "grayscale(1)"}} />
+            <img src={virus} alt="Add Cases" style={{paddingRight: 35, height: 45, WebkitFilter: "grayscale(1)"}} />
             Add Case
           </NavItem>
         </CanI>
