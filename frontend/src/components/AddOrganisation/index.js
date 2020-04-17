@@ -1,35 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
-import { GreyRoundInput } from "../../styles/Inputs";
-import { RedButton } from "../../styles/Buttons";
 import { addOrganisationFunction } from "../../store/actions/addOrganisationAction";
-import { Dropdown } from "../../styles/Dropdowns";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
+import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, 
+      FieldInputLarge, CategoryDropdown, AddButton} from "./styles"
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FieldInput = styled(GreyRoundInput)`
-  width: 100px;
-  height: 30px;
-`;
-
-const CategoryDropdown = styled(Dropdown)`
-  width: 200px;
-  height: auto;
-`;
-
-const AddButton = styled(RedButton)`
-  width: 75px;
-  height: 30px;
-`;
 
 function AddOrganisation(props) {
   const [name, setName] = useState("");
@@ -37,6 +12,9 @@ function AddOrganisation(props) {
   const [services, setServices] = useState("");
   const [tag, setTag] = useState("");
   const dispatch = props.dispatch;
+
+  
+  // const isEnabled = name.length > 0 && description.length > 0 && services.length > 0 
 
   useEffect(() => {
     dispatch(categoriesFunction());
@@ -68,30 +46,55 @@ function AddOrganisation(props) {
     props.history.push("/organisations/");
   };
 
+
   return (
     <Container>
-      <div>name:</div>
+      <HeaderTitle>Add organisation</HeaderTitle>
+      <DetailsContainer>
+        <Label>Name
       <FieldInput
         name="name"
+        type = "text"
         onChange={(e) => setName(e.target.value)}
         value={name}
-        required
       />
-      <div>description:</div>
-      <FieldInput
+      </Label>
+      <Label>Description
+      <FieldInputLarge
         name="description"
+        type = "textarea"
+        rows = '5'
         onChange={(e) => setDescription(e.target.value)}
         value={description}
         required
       />
-      <div>services:</div>
-      <FieldInput
+      </Label>
+      <Label>Services
+      <FieldInputLarge
         name="services"
+        type = "textarea"
         onChange={(e) => setServices(e.target.value)}
         value={services}
         required
       />
-      <div>category:</div>
+      </Label>
+      <Label>Tag
+      <FieldInput
+        name="tag"
+        onChange={(e) => setTag(e.target.value)}
+        value={tag}
+        required
+      />
+      </Label>
+      {/* <Label>Members
+      <FieldInput
+        name="members"
+        onChange={(e) => setMembers(e.target.value)}
+        value={members}
+        required
+      />
+      </Label>  */}
+      <Label>Category
       <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
         {/*<option value={"default"} disabled>Select a category...</option>*/}
         {props.categories
@@ -104,13 +107,8 @@ function AddOrganisation(props) {
             })
           : null}
       </CategoryDropdown>
-      <div>tag:</div>
-      <FieldInput
-        name="tag"
-        onChange={(e) => setTag(e.target.value)}
-        value={tag}
-        required
-      />
+      </Label>
+      </DetailsContainer>
       <AddButton onClick={addOrganisationHandler}>Add</AddButton>
     </Container>
   );
