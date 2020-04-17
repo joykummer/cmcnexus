@@ -41,7 +41,6 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     categories = models.ManyToManyField(
         to=Category,
         related_name='cases',
-        default=0
     )
     consent = models.BooleanField(default=False)
     age = models.CharField(max_length=50)
