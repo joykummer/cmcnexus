@@ -149,9 +149,16 @@ class RefuseCaseAsOrg(GenericAPIView):
     permission_classes = [AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
-    def delete(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         case = self.get_object()
         organisation_id = self.request.data.get("partner_ids")
         match = Partnership.objects.get(case_id=case.id, organisation_id=organisation_id)
         match.reject()
+        return Response(self.get_serializer(case).data)
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        organisation_id = self.request.data.get("partner_ids")
+        match = Partnership.objects.get(case_id=case.id, organisation_id=organisation_id)
+        match.unreject()
         return Response(self.get_serializer(case).data)
