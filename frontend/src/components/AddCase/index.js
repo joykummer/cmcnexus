@@ -7,7 +7,6 @@ import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, FieldInputL
 import {CategoryDropdown, AddButton, Checkbox, CountryDropdown, SexDropdown} from "./styles"
 
 
-
 function AddCase(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -46,7 +45,7 @@ function AddCase(props) {
       age: age,
       sex: sex,
       country: country,
-      category: categories,
+      categories: categories,
     };
     console.log('data', data);
     const response = await dispatch(addCaseFunction(data));
@@ -143,7 +142,8 @@ function AddCase(props) {
       </CountryDropdown>
         </Label>
       <Label>Category
-      <CategoryDropdown onChange={setCategoryHandler} multiple={true}>
+      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
+          {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
           ? props.categories.map((category) => {
               return (

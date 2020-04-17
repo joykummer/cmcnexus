@@ -1,8 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from guardian.mixins import GuardianUserMixin
+
+from apps.organisations.models import Organisation
 
 
-class User(AbstractUser):
+class User(GuardianUserMixin, AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
     email = models.EmailField(unique=True)
@@ -24,11 +27,11 @@ class User(AbstractUser):
         blank=False,
         null=True
     )
-    organisation = models.CharField(
-        verbose_name='organisations',
-        max_length=200,
-        blank=False,
-        null=True
+    organisation = models.ForeignKey(
+        to=Organisation,
+        related_name="member",
+        on_delete=models.CASCADE,
+        null=True,
     )
 
     def __str__(self):

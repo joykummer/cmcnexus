@@ -67,7 +67,7 @@ background-color: white;
 
 export const CategoryDropdown = styled(Dropdown)`
 width: 200px;
-height: 30px;
+height: auto;
 `;
 
 export const AddButton = styled(RedButton)`

@@ -6,7 +6,7 @@ import { Dropdown } from "../../styles/Dropdowns";
 
 export const CategoryDropdown = styled(Dropdown)`
 width: 300px;
-height: 100px;
+height: auto;
 `;
 
 export const AddButton = styled(RedButton)`

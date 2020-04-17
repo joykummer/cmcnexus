@@ -1,29 +1,54 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
+from rest_framework_guardian.serializers import ObjectPermissionsAssignmentMixin
 
-from apps.cases.models import Case
+from apps.cases.models import Case, Partnership
 from apps.organisations.serializer import OrganisationSerializer
 from apps.users.serializer import FullUserSerializer
 
 from apps.categories.serializer import CategorySerializer
 
 
-class CaseSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
+class PartnershipSerializer(serializers.ModelSerializer):
+    organisation = OrganisationSerializer(read_only=True)
+
+    class Meta:
+        model = Partnership
+        fields = ['status', 'organisation']
+
+
+class CaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):
+    categories = CategorySerializer(many=True)
     created_by = FullUserSerializer(read_only=True)
-    matched_partners = OrganisationSerializer(many=True, read_only=True)
-    assigned_partners = OrganisationSerializer(many=True, read_only=True)
+    partnered_organisations = PartnershipSerializer(many=True)
+
+    class Meta:
+        model = Case
+        exclude = ('organisations',)
+
+    def get_permissions_map(self, created):
+        current_user = self.context['request'].user
+
+        return {
+            'view_case': [current_user],
+            'change_case': [current_user]
+        }
+
+
+class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):
+    created_by = FullUserSerializer(read_only=True)
 
     class Meta:
         model = Case
         fields = '__all__'
 
+    def get_permissions_map(self, created):
+        current_user = self.context['request'].user
+        case_coordinator = Group.objects.get(name="Case Coordinator")
+        med_co = Group.objects.get(name="MedCo")
 
-class CreateCaseSerializer(serializers.ModelSerializer):
-    created_by = FullUserSerializer(read_only=True)
-    matched_partners = OrganisationSerializer(many=True, read_only=True)
-    assigned_partners = OrganisationSerializer(many=True, read_only=True)
-    accepted_partners = OrganisationSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Case
-        fields = '__all__'
+        return {
+            'view_case': [current_user, case_coordinator, med_co],
+            'change_case': [current_user, med_co],
+            'delete_case': [current_user],
+        }

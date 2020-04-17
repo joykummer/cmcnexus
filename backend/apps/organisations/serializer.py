@@ -5,7 +5,7 @@ from ..categories.serializer import CategorySerializer
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    categories = CategorySerializer(many=True)
 
     class Meta:
         model = Organisation
@@ -14,9 +14,8 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'services',
-            'category',
+            'categories',
             'tag',
-            'members',
         ]
 
 
@@ -28,7 +27,6 @@ class CreateOrganisationSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'services',
-            'category',
+            'categories',
             'tag',
-            'members',
         ]

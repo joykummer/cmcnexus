@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Time from "react-time";
-import {useDispatch, useSelector} from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { editUser } from "../../store/actions/editUserActions";
 
 import {
   Button
 } from './style';
 
 import styled from 'styled-components';
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 
 const Wrapper = styled.section`
@@ -92,14 +94,35 @@ color: red;
 font-weight: bold;
 ;`
 
-export default function UserProfile() {
+
+export default function EditUserProfile() {
 	const user = useSelector(state => state.auth.user)
 
 	const history = useHistory()
 
-	 const onClickHandler = () => {
-    	history.push(`/profile/edit/`);
+	const [first_name, setFirstName] = useState(user.first_name);
+  	const [last_name, setLastName] = useState(user.last_name);
+  	const [phone, setPhone] = useState(user.phone);
+  	const [department, setDepartment] = useState(user.department);
+  	const dispatch = useDispatch()
+
+	useEffect(() => {
+    dispatch(editUser());
+  }, [dispatch]);
+
+
+
+	 const onClickHandler = async (e) => {
+		const data = {
+		first_name: first_name,
+		last_name: last_name,
+		phone: phone,
+		department: department,
+    	};
+    	await dispatch(editUser(data));
+    	history.push(`/profile/`);
   }
+
 
 return (user ?
 	<Wrapper>
@@ -110,12 +133,18 @@ return (user ?
 				<GeneralElements>
 					<Column>
 						<MiniTab>
-							First Name
+								First Name
 						</MiniTab>
 					</Column>
 					<Column>
 						<MiniTab>
-							{user.first_name}
+							<input
+								type="text"
+								placeholder={user.first_name}
+								onChange={(e) => setFirstName(e.target.value)}
+          						value={first_name}
+          						required
+							/>
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -127,7 +156,13 @@ return (user ?
 					</Column>
 					<Column>
 						<MiniTab>
-							{user.last_name}
+							<input
+								type="text"
+								placeholder={user.last_name}
+								onChange={(e) => setLastName(e.target.value)}
+          						value={last_name}
+          						required
+							/>
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -139,7 +174,13 @@ return (user ?
 					</Column>
 					<Column>
 						<MiniTab>
-							{user.phone}
+							<input
+								type="tel"
+								placeholder={user.phone}
+								onChange={(e) => setPhone(e.target.value)}
+          						value={phone}
+          						required
+							/>
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -152,7 +193,7 @@ return (user ?
 					<Column>
 						<MiniTab>
 							<MissingElements>
-								{user.role}
+          						{user.role}
 							</MissingElements>
 						</MiniTab>
 					</Column>
@@ -166,7 +207,7 @@ return (user ?
 					<Column>
 						<MiniTab>
 							<MissingElements>
-								{user.organisation}
+          						{user.organisation}
 							</MissingElements>
 						</MiniTab>
 					</Column>
@@ -179,7 +220,13 @@ return (user ?
 					</Column>
 					<Column>
 						<MiniTab>
-								{user.department}
+							<input
+								type="text"
+								placeholder={user.department}
+								onChange={(e) => setDepartment(e.target.value)}
+          						value={department}
+          						required
+							/>
 						</MiniTab>
 					</Column>
 				</GeneralElements>
@@ -192,13 +239,16 @@ return (user ?
 					<Column>
 						<MiniTab>
 							 <div id='time'>
-              					<Time value={user.date_joined} titleFormat="YYYY/MM/DD HH:mm" relative/>
+              					<Time
+									value={user.date_joined}
+									titleFormat="YYYY/MM/DD HH:mm" relative
+								/>
 							 </div>
 						</MiniTab>
 					</Column>
 				</GeneralElements>
 			<Button onClick={onClickHandler}>
-				Edit
+				SUBMIT
 			</Button>
 		</Rectangle>
 	</Wrapper> : "user not found"

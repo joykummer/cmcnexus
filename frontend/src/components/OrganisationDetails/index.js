@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { organisationsFunction } from "../../store/actions/organisationsAction";
-
 import {HeaderTitle, Stripe, DetailsContainer} from "../CaseDetails/styles";
+
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +34,8 @@ padding: 20px;
 /* margin: 2%;  */
 background-color: #ebebeb;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-`
+`;
+
 
 function OrganisationDetails(props) {
   const dispatch = props.dispatch;
@@ -60,7 +61,11 @@ function OrganisationDetails(props) {
           <DetailsContainer>{organisationDetails.services}</DetailsContainer>
           <StripeSmall>category</StripeSmall>
           <DetailsContainerCategory>
-            <DetailsContainerSmall>{organisationDetails.category.name}</DetailsContainerSmall>
+            <DetailsContainerSmall>{organisationDetails.categories.map(category => {
+            return (
+                <div key={category.id}><b>{category.name}</b></div>
+                    )
+          })}</DetailsContainerSmall>
           </DetailsContainerCategory>
           <StripeSmall>tag</StripeSmall>
           <DetailsContainerCategory>
@@ -69,7 +74,7 @@ function OrganisationDetails(props) {
           <StripeSmall>members</StripeSmall>
           <DetailsContainerCategory>
             <DetailsContainerSmall>{organisationDetails.members}</DetailsContainerSmall>
-          </DetailsContainerCategory>
+          </DetailsContainerCategory>          
         </>
       ) : (
         <div>This organisation does not exist.</div>
