@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, CreateAPIView
 
 from .models import Organisation
@@ -11,7 +12,8 @@ class GetAllOrganisations(ListAPIView):
     serializer_class = OrganisationSerializer
 
     def get_queryset(self):
-        return Organisation.objects.filter(name__icontains=self.request.query_params.get('search', ''))
+        return Organisation.objects.filter(Q(name__icontains=self.request.query_params.get('search', '')) | Q(
+            tag__icontains=self.request.query_params.get('search', '')))
 
 
 class CreateOrganisations(CreateAPIView):

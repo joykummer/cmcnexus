@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Time from "react-time";
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
@@ -8,98 +8,91 @@ import {
 } from './style';
 
 import styled from 'styled-components';
+import {CardBox} from '../../styles/GenericBoxes';
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {USERPROFILE} from '../Navigation/states';
 
 
 const Wrapper = styled.section`
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: flex-start;
 align-items: center;
 width: 100%;
 height: 100%;
-background: #E5E5E5;
-;`
+background: #ebebeb;
+`;
 
-const Rectangle = styled.div`
+const Rectangle = styled(CardBox)`
 display: flex;
 flex-direction: column;
-justify-content: center;
-width: 850px;
-height: 90%;
-left: 0px;
-top: 0px;
-background: #FFFFFF;
-opacity: 0.7;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 5px;
+justify-content: flex-start;
+align-items: center;
+max-width: 850px;
+width: 80%;
+margin: 40px;
+padding: 40px;
 `;
 
 const Column = styled.div`
 display: flex;
-justify-content: flex-end;
-width: 50%;
-float: left;
-flex: 50%;
-//height: 90%;
-left: 0px;
-top: 0px;
-//background: #FFFFFF;
-opacity: 0.7;
-border-radius: 5px;
-`;
-
-const MiniTab = styled.div`
+justify-content: flex-start;
 width: 70%;
 `;
 
+const FieldName = styled.div`
+display: flex;
+justify-content: flex-start;
+width: 30%;
+min-width: 40px;
+`;
+
 const User = styled.div`
-position: absolute;
-margin-left: 237px;
-margin-right: 237px;
-width: 375px;
-//height: 56px;
-top: 100px;
-border-bottom: 3px solid #FF0000;
+display: flex;
 justify-content: center;
-font-family: Arial;
-font-style: normal;
-font-weight: bold;
-font-size: 48px;
+border-bottom: 3px solid #FF0000;
+font-size: 35px;
 line-height: 56px;
 color: #000000;
+padding: 0 10px;
 `;
 
 const GeneralElements = styled.div`
 display: flex;
-color: black;
-//width: 200px;
-//height: 21px;
-//left: 485px;
-//top: 267px;
-font-size: 1.5rem;
-margin-bottom: 1rem;
-font-family: Arial;
-font-style: normal;
-font-weight: normal;
-//font-size: 18px;
-line-height: 21px;
-/* identical to box height */
 justify-content: center;
+align-items: center;
+color: black;
+width: 100%;
+height: 22px;
+margin: 10px;
+font-size: 1.5rem;
 `;
 
 const MissingElements = styled.div`
 color: red;
 font-weight: bold;
-;`
+`;
+
+const InfoWrapper = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+padding: 30px;
+`;
 
 export default function UserProfile() {
-	const user = useSelector(state => state.auth.user)
+	const user = useSelector(state => state.auth.user);
+	const dispatch = useDispatch();
 
-	const history = useHistory()
+	const history = useHistory();
+
+	useEffect(() => {
+		dispatch(setNavigationAction(USERPROFILE));
+	}, [dispatch]);
 
 	 const onClickHandler = () => {
     	history.push(`/profile/edit/`);
-  }
+	};
 
 return (user ?
 	<Wrapper>
@@ -107,96 +100,70 @@ return (user ?
 			<User>
 			USER PROFILE
 			</User>
+			<InfoWrapper>
 				<GeneralElements>
-					<Column>
-						<MiniTab>
+					<FieldName>
 							First Name
-						</MiniTab>
-					</Column>
+					</FieldName>
 					<Column>
-						<MiniTab>
 							{user.first_name}
-						</MiniTab>
 					</Column>
 				</GeneralElements>
 				<GeneralElements>
-					<Column>
-						<MiniTab>
+					<FieldName>
 							Last Name
-						</MiniTab>
-					</Column>
+					</FieldName>
 					<Column>
-						<MiniTab>
 							{user.last_name}
-						</MiniTab>
 					</Column>
 				</GeneralElements>
 				<GeneralElements>
-					<Column>
-						<MiniTab>
+					<FieldName>
 							Phone
-						</MiniTab>
-					</Column>
+					</FieldName>
 					<Column>
-						<MiniTab>
 							{user.phone}
-						</MiniTab>
 					</Column>
 				</GeneralElements>
 				<GeneralElements>
-					<Column>
-						<MiniTab>
+					<FieldName>
 							Role
-						</MiniTab>
-					</Column>
+					</FieldName>
 					<Column>
-						<MiniTab>
 							<MissingElements>
 								{user.role}
 							</MissingElements>
-						</MiniTab>
 					</Column>
 				</GeneralElements>
 				<GeneralElements>
-					<Column>
-						<MiniTab>
+					<FieldName>
 							Organisation
-						</MiniTab>
-					</Column>
+					</FieldName>
 					<Column>
-						<MiniTab>
 							<MissingElements>
 								{user.organisation}
 							</MissingElements>
-						</MiniTab>
 					</Column>
 				</GeneralElements>
 				<GeneralElements>
-					<Column>
-						<MiniTab>
+					<FieldName>
 							Department
-						</MiniTab>
-					</Column>
+					</FieldName>
 					<Column>
-						<MiniTab>
 								{user.department}
-						</MiniTab>
 					</Column>
 				</GeneralElements>
 				<GeneralElements>
-					<Column>
-						<MiniTab>
+					<FieldName>
 							Created
-						</MiniTab>
-					</Column>
+					</FieldName>
 					<Column>
-						<MiniTab>
-							 <div id='time'>
-              					<Time value={user.date_joined} titleFormat="YYYY/MM/DD HH:mm" relative/>
-							 </div>
-						</MiniTab>
+						 <div id='time'>
+								<Time value={user ? user.date_joined : ""} format="DD/MM/YYYY" />
+						 </div>
 					</Column>
 				</GeneralElements>
+			</InfoWrapper>
 			<Button onClick={onClickHandler}>
 				Edit
 			</Button>

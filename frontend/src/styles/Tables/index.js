@@ -17,9 +17,12 @@ export const TableHeader = styled.th`
 
 export const TableHeaderRow = styled.tr``;
 
-export const TableBody = styled.tbody``;
+export const TableBody = styled.tbody`
+  width: 100%;
+`;
 
 export const TableRow = styled.tr`
+  width: 100%;
   :nth-child(odd) {
     background: #ebebeb;
   }
@@ -27,4 +30,5 @@ export const TableRow = styled.tr`
 
 export const TableData = styled.td`
     height: 25px;
+  max-width: 150px;
 `;

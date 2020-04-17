@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addOrganisationFunction } from "../../store/actions/addOrganisationAction";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {ORGANISATIONS} from '../Navigation/states';
 import {Container, HeaderTitle, DetailsContainer, Label, FieldInput,
       FieldInputLarge, CategoryDropdown, AddButton} from "./styles"
 
@@ -10,19 +12,20 @@ function AddOrganisation(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
-  const [categories, setCategories] = useState(null);
   const [tag, setTag] = useState("");
+  const [categories, setCategories] = useState(["default"]);
+  const [categoryIds, setCategoryIds] = useState([]);
   const dispatch = props.dispatch;
 
   useEffect(() => {
     dispatch(categoriesFunction());
+    dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
   const setCategoryHandler = (e) => {
-    const selectOptions = Array.from(e.target.options)
-      .filter((el) => el.selected)
-      .map((el) => el.id);
-    setCategories(selectOptions);
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    setCategories(selectedOptions.map(option => option.value));
+    setCategoryIds(selectedOptions.map(option => option.id));
   };
 
 
@@ -32,7 +35,7 @@ function AddOrganisation(props) {
       name: name,
       description: description,
       services: services,
-      categories: categories,
+      categories: categoryIds,
       tag: tag,
     };
     dispatch(addOrganisationFunction(data));
@@ -49,6 +52,7 @@ function AddOrganisation(props) {
         type = "text"
         onChange={(e) => setName(e.target.value)}
         value={name}
+        required
       />
       </Label>
       <Label>Description
@@ -71,23 +75,15 @@ function AddOrganisation(props) {
       />
       </Label>
       <Label>Tag
-      <FieldInput
-        name="tag"
-        onChange={(e) => setTag(e.target.value)}
-        value={tag}
-        required
-      />
+        <FieldInput
+          name="tag"
+          onChange={(e) => setTag(e.target.value)}
+          value={tag}
+          required
+        />
       </Label>
-      {/* <Label>Members
-      <FieldInput
-        name="members"
-        onChange={(e) => setMembers(e.target.value)}
-        value={members}
-        required
-      />
-      </Label>  */}
       <Label>Category
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
+      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
         <option value={"default"} disabled>Select a category...</option>
         {props.categories
           ? props.categories.map((category) => {

@@ -22,7 +22,7 @@ justify-content: flex-start;
 `;
 
 const Card = styled(CardBox)`
-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.15);
 padding: 60px;
 width: 50%;
 max-width: 500px;
@@ -54,7 +54,7 @@ justify-content: space-between;
 `;
 
 const ForgotBox = styled.div`
-margin-top: 50px;
+margin-top: 25px;
 `;
 
 const Logo = styled.img`

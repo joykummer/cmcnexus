@@ -7,6 +7,7 @@ import folder from '../../assets/cases.png'
 import organisation from '../../assets/organization.png'
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 import userprofile from '../../assets/userprofile.png'
+import virus from '../../assets/MSF_picto_virus.png'
 import {
   NavigationContainer, Logo, Options,
   Button, NavItem
@@ -14,9 +15,9 @@ import {
 import {logoutAction} from '../../store/actions/loginActions';
 import CanI from '../Permissions';
 import {Empty} from '../../styles/GenericBoxes';
-import {CASES, DASHBOARD, ORGANISATIONS, USERPROFILE} from '../Navigation/states';
+import {CASES, CASES_ADD, DASHBOARD, ORGANISATIONS, USERPROFILE} from '../Navigation/states';
 import {setNavigationAction} from '../../store/actions/Navigation';
-import {VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
+import {ADD_CASE, VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
 
 
 function NavigationBar() {
@@ -51,14 +52,20 @@ function NavigationBar() {
             Cases
           </NavItem>
         </CanI>
+        <CanI perform={ADD_CASE}>
+          <NavItem selected={selected===CASES_ADD} onClick={() => onClickHandler(CASES_ADD)}>
+            <img src={virus} alt="Add Cases" style={{paddingRight: 35, height: 45, WebkitFilter: "grayscale(1)"}} />
+            Add Case
+          </NavItem>
+        </CanI>
         <CanI perform={VIEW_ORGANISATION}>
           <NavItem selected={selected===ORGANISATIONS} onClick={() => onClickHandler(ORGANISATIONS)}>
-            <img src={organisation} alt="Organisations" style={{paddingRight: 30, height: 45}}/>
+            <img src={organisation} alt="Organisations" style={{paddingRight: 35, height: 45}}/>
             Organisations
           </NavItem>
         </CanI>
         <NavItem selected={selected===USERPROFILE} onClick={() => onClickHandler(USERPROFILE)}>
-          <img src={userprofile} alt="User Profile" style={{paddingRight: 30, height: 45}}/>
+          <img src={userprofile} alt="User Profile" style={{paddingRight: 35, height: 45}}/>
           Profile
         </NavItem>
       </Options>
