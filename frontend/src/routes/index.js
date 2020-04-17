@@ -26,9 +26,9 @@ export default function Routes() {
       <Switch>
         <Route path='/login' component={Login}/>
         <PrivateRoute path='/404' component={UnderConstruction}/>
-        <PrivateRoute path='/403' component={PermissionDenied}/>
 
         <Navigation>
+          <PrivateRoute path='/403' component={PermissionDenied}/>
           <Route exact path="/" render={() => <Redirect to='/cases/'/>}/>
           <PrivateRoute path='/dashboard/' component={UnderConstruction}/>
           <PrivateRoutePerm exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
