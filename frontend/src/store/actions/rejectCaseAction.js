@@ -1,10 +1,10 @@
 import Axios from "../../axios/authenticated";
-import {REJECT_CASE} from "./actionTypes";
+import {UPDATE_CASE} from "./actionTypes";
 
 
 export const rejectCaseAction = cases => {
     return {
-      type: REJECT_CASE,
+      type: UPDATE_CASE,
       payload: cases
     }
   };

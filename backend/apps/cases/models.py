@@ -14,14 +14,14 @@ class CaseWorkflow(xwf_models.Workflow):
     log_model = ''
     states = (
         ('created', _(u"Created")),
-        ('validated', _(u"Validated")),
+        ('open', _(u"Open")),
         ('closed', _(u"Closed")),
         ('rejected', _(u"Rejected"))
     )
     transitions = (
-        ('validate', 'created', 'validated'),
-        ('close', 'validated', 'closed'),
-        ('reject', ('created', 'validated'), 'rejected')
+        ('validate', 'created', 'open'),
+        ('close', 'open', 'closed'),
+        ('reject', ('created', 'open'), 'rejected')
     )
     initial_state = 'created'
 
@@ -41,7 +41,6 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     categories = models.ManyToManyField(
         to=Category,
         related_name='cases',
-        default=0
     )
     consent = models.BooleanField(default=False)
     age = models.CharField(max_length=50)

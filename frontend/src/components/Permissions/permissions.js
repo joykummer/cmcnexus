@@ -15,3 +15,4 @@ export const ADD_USER = "add_user";
 export const CHANGE_USER = "change_user";
 export const DELETE_USER = "delete_user";
 export const VIEW_USER = "view_user";
+export const UPDATE_MATCH = "update_match";

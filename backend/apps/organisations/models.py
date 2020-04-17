@@ -16,7 +16,6 @@ class Organisation(models.Model):
     categories = models.ManyToManyField(
         to=Category,
         related_name='organisations',
-        default=0
     )
     tag = models.CharField(
         max_length=100,

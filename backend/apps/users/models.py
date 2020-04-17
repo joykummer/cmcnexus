@@ -31,7 +31,8 @@ class User(GuardianUserMixin, AbstractUser):
         to=Organisation,
         related_name="member",
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
