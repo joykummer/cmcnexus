@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {Route, Redirect} from 'react-router-dom';
 import CanI from '../Permissions';
 
-export const PrivateRoute = ({component: Component, permission, ...rest}) => {
+export const PrivateRoute = ({component: Component, ...rest}) => {
 	const loggedIn = useSelector(state => state.auth.is_authenticated);
 
 	return (
@@ -18,11 +18,20 @@ export const PrivateRoute = ({component: Component, permission, ...rest}) => {
 	);
 };
 
+export const PrivateRoutePerm = ({component: Component, permission, ...rest}) => {
+	const loggedIn = useSelector(state => state.auth.is_authenticated);
 
-export const PrivateRoutePerm = ({permission, ...rest}) => {
 	return (
-		<CanI perform={permission}>
-			<PrivateRoute {...rest}/>
-		</CanI>
+		<Route {...rest} render={(props) => (
+			loggedIn === true
+				?
+				<CanI perform={permission} no={() => <Redirect to='/403' />}>
+					<Component {...props} />
+				</CanI>
+				: <Redirect to={{
+					pathname: '/login',
+					state: {from: props.location}
+				}}/>
+		)}/>
 	);
 };
