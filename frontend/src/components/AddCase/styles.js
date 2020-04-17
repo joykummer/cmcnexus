@@ -7,6 +7,7 @@ import { Dropdown } from "../../styles/Dropdowns";
 export const CategoryDropdown = styled(Dropdown)`
 width: 300px;
 height: auto;
+margin-top: 5px;
 `;
 
 export const AddButton = styled(RedButton)`
@@ -22,11 +23,13 @@ margin-top: 5px;
 `;
 
 export const CountryDropdown = styled(Dropdown)`
-  width: 200px;
-  height: 40px;
+width: 200px;
+height: 40px;
+margin-top: 5px;
 `;
 
 export const SexDropdown = styled(Dropdown)`
 width: 200px;
 height: 40px;
+margin-top: 5px;
 `;

@@ -42,6 +42,9 @@ function AddOrganisation(props) {
       categories: categories,
       tag: tag,
     };
+    if (data[name] ===0){
+      alert("Name is missing")
+    }
     await props.dispatch(addOrganisationFunction(data));
     props.history.push("/organisations/");
   };
