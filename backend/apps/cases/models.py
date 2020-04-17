@@ -90,7 +90,9 @@ class PartnerWorkflow(xwf_models.Workflow):
         ('downgrade', 'accepted', 'matched'),
         ('accept', ('matched', 'assigned'), 'accepted'),
         ('assign', 'accepted', 'assigned'),
-        ('reject', 'matched', 'rejected')
+        ('reject', 'matched', 'rejected'),
+        ('unreject', 'rejected', 'matched')
+
     )
     initial_state = 'matched'
 
