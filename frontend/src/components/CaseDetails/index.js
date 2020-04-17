@@ -12,6 +12,7 @@ import RejectCase from "../RejectCase";
 
 function CaseDetails(props) {
   const dispatch = props.dispatch;
+
   useEffect(() => {
     dispatch(casesFunction());
   }, [dispatch]);

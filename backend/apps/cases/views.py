@@ -22,7 +22,8 @@ class ListCaseView(ListAPIView):
 
     def get_queryset(self):
         return Case.objects.filter(Q(title__icontains=self.request.query_params.get('search', '')) | Q(
-            description__icontains=self.request.query_params.get('search', '')))
+            description__icontains=self.request.query_params.get('search', '')) | Q(
+            status__icontains=self.request.query_params.get('search', '')))
 
 
 class CreateCaseView(CreateAPIView):

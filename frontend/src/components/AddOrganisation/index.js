@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addOrganisationFunction } from "../../store/actions/addOrganisationAction";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
-import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, 
+import {Container, HeaderTitle, DetailsContainer, Label, FieldInput,
       FieldInputLarge, CategoryDropdown, AddButton} from "./styles"
 
 
@@ -10,31 +10,24 @@ function AddOrganisation(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
+  const [categories, setCategories] = useState(null);
   const [tag, setTag] = useState("");
   const dispatch = props.dispatch;
-
-  
-  // const isEnabled = name.length > 0 && description.length > 0 && services.length > 0 
 
   useEffect(() => {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
- const categories = [];
-
   const setCategoryHandler = (e) => {
-    const id = e.target.options.selectedIndex;
-    const categoryOption = e.target.options;
-    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
-        categories.push(id)
-    }
-    console.log("IN CAT", categories)
+    const selectOptions = Array.from(e.target.options)
+      .filter((el) => el.selected)
+      .map((el) => el.id);
+    setCategories(selectOptions);
   };
 
 
   const addOrganisationHandler = async (e) => {
     e.preventDefault();
-    console.log("IN ADDORG", categories)
     const data = {
       name: name,
       description: description,
@@ -42,10 +35,9 @@ function AddOrganisation(props) {
       categories: categories,
       tag: tag,
     };
-    await props.dispatch(addOrganisationFunction(data));
+    dispatch(addOrganisationFunction(data));
     props.history.push("/organisations/");
   };
-
 
   return (
     <Container>
@@ -96,7 +88,7 @@ function AddOrganisation(props) {
       </Label>  */}
       <Label>Category
       <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
-        {/*<option value={"default"} disabled>Select a category...</option>*/}
+        <option value={"default"} disabled>Select a category...</option>
         {props.categories
           ? props.categories.map((category) => {
               return (
