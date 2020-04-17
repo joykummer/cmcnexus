@@ -49,6 +49,7 @@ export const FieldInput = styled(GreyRoundInput)`
 width: 100%;
 height: 35px;
 margin-top: 5px; 
+background-color: white;
 `;
 
 export const FieldInputLarge = styled.textarea`
@@ -61,6 +62,7 @@ border-radius: 5px;
 outline: none;
 height: 170px;
 padding: 10px;
+background-color: white;
 `;
 
 export const CategoryDropdown = styled(Dropdown)`
@@ -70,5 +72,6 @@ height: 30px;
 
 export const AddButton = styled(RedButton)`
 width: 75px;
-height: 30px;
+height: 50px;
+margin: 20px; 
 `;

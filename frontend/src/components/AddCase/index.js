@@ -1,58 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import countryList from "react-select-country-list"
 import { connect } from "react-redux";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
 import { addCaseFunction } from "../../store/actions/addCaseAction";
-import { GreyRoundInput } from "../../styles/Inputs";
-import { RedButton } from "../../styles/Buttons";
-import { Dropdown } from "../../styles/Dropdowns";
+import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, FieldInputLarge} from "../AddOrganisation/styles";
+import {CategoryDropdown, AddButton, Checkbox, CountryDropdown, SexDropdown} from "./styles"
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
-const FieldInput = styled(GreyRoundInput)`
-  width: 100px;
-  height: 30px;
-`;
-
-const Checkbox = styled.input`
-  width: 30px;
-  height: 30px;
-`;
-
-const CountryDropdown = styled(Dropdown)`
-  width: 200px;
-  height: 40px;
-`;
-
-const SexDropdown = styled(Dropdown)`
-width: 200px;
-height: 40px;
-`;
-
-const CategoryDropdown = styled(Dropdown)`
-  width: 200px;
-  height: auto;
-`;
-
-const AddButton = styled(RedButton)`
-  width: 75px;
-  height: 30px;
-`;
-
-const FormEntry = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Label = styled.div``;
 
 function AddCase(props) {
   const [title, setTitle] = useState("");
@@ -103,53 +57,49 @@ function AddCase(props) {
 
   return (
     <Container>
-      <FormEntry>
-        <Label>title:</Label>
+      <HeaderTitle>Add case</HeaderTitle>
+      <DetailsContainer>
+        <Label>Title
         <FieldInput
           name="title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
           required
         />
-      </FormEntry>
-        <FormEntry>
-      <div>description:</div>
-      <FieldInput
+        </Label>
+      <Label>Description
+      <FieldInputLarge
         name="description"
         onChange={(e) => setDescription(e.target.value)}
         value={description}
         required
       />
-        </FormEntry>
-        <FormEntry>
-      <div>diagnosis:</div>
-      <FieldInput
+      </Label>
+      <Label>Diagnosis
+      <FieldInputLarge
         name="diagnosis"
         onChange={(e) => setDiagnosis(e.target.value)}
         value={diagnosis}
         required
       />
-        </FormEntry>
-        <FormEntry>
-      <div>justification:</div>
-      <FieldInput
+      </Label>
+      <Label>Justification
+      <FieldInputLarge
         name="justification"
         onChange={(e) => setJustification(e.target.value)}
         value={justification}
         required
       />
-        </FormEntry>
-        <FormEntry>
-      <div>recommendation:</div>
-      <FieldInput
+      </Label>
+      <Label>Recommendation
+      <FieldInputLarge
         name="recommendation"
         onChange={(e) => setRecommendation(e.target.value)}
         value={recommendation}
         required
       />
-        </FormEntry>
-        <FormEntry>
-      <div>patient's consent:</div>
+      </Label>
+      <Label>Patient's consent
       <Checkbox
         type="checkbox"
         name="consent"
@@ -157,9 +107,8 @@ function AddCase(props) {
         value="consent"
         required
       />
-        </FormEntry>
-        <FormEntry>
-      <div>age:</div>
+      </Label>
+      <Label>Age
       <FieldInput
         name="age"
         type="number"
@@ -167,9 +116,8 @@ function AddCase(props) {
         value={age}
         required
       />
-        </FormEntry>
-        <FormEntry>
-      <div>sex:</div>
+      </Label>
+      <Label>Sex
       <SexDropdown
         name="sex"
         onChange={(e) => setSex(e.target.value)}
@@ -180,9 +128,8 @@ function AddCase(props) {
           <option key={1}>F</option>
           <option key={2}>M</option>
       </SexDropdown>
-        </FormEntry>
-        <FormEntry>
-      <div>country:</div>
+        </Label>
+      <Label>Country
       <CountryDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
           <option value="default" disabled>Please choose here...</option>
           {countries
@@ -194,9 +141,8 @@ function AddCase(props) {
           : null
           }
       </CountryDropdown>
-        </FormEntry>
-        <FormEntry>
-      <div>category:</div>
+        </Label>
+      <Label>Category
       <CategoryDropdown onChange={setCategoryHandler} multiple={true}>
         {props.categories
           ? props.categories.map((category) => {
@@ -208,7 +154,8 @@ function AddCase(props) {
             })
           : null}
       </CategoryDropdown>
-        </FormEntry>
+      </Label>
+        </DetailsContainer>
       <AddButton onClick={addCaseHandler}>Add</AddButton>
     </Container>
   );

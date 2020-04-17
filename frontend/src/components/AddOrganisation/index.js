@@ -15,6 +15,9 @@ function AddOrganisation(props) {
   const [members, setMembers] = useState("");
   const dispatch = props.dispatch;
 
+  
+  // const isEnabled = name.length > 0 && description.length > 0 && services.length > 0 
+
   useEffect(() => {
     dispatch(categoriesFunction());
   }, [dispatch]);
@@ -43,6 +46,7 @@ function AddOrganisation(props) {
     props.history.push("/organisations/");
   };
 
+
   return (
     <Container>
       <HeaderTitle>Add organisation</HeaderTitle>
@@ -53,7 +57,6 @@ function AddOrganisation(props) {
         type = "text"
         onChange={(e) => setName(e.target.value)}
         value={name}
-        required
       />
       </Label>
       <Label>Description
