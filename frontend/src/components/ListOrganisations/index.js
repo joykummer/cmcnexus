@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import ListOrganisationsTable from "./listOrganisationsTable";
 import { organisationsFunction } from "../../store/actions/organisationsAction";
-import { searchOrganisationsFunction } from "../../store/actions/searchOrganisationsAction";
+import {
+  searchNameFunction,
+  searchTagFunction
+} from "../../store/actions/searchOrganisationsAction";
 import { RedButton } from "../../styles/Buttons";
 import { setNavigationAction } from "../../store/actions/Navigation";
-import { ORGANISATIONS } from "../Navigation/states";
+import {ORGANISATIONS} from "../Navigation/states";
 import { Dropdown } from "../../styles/Dropdowns";
 import { ADD_ORGANISATION } from "../Permissions/permissions";
 import CanI from "../Permissions";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
-import organisations from "../../store/reducers/OrganisationsReducer";
+import {useHistory} from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableData,
+  TableHeader,
+  TableHeaderRow,
+  TableHeaderWrapper,
+  TableRow
+} from "../../styles/Tables";
+import {searchStatusFunction, searchTitleFunction} from "../../store/actions/searchCasesAction";
+
 
 const Container = styled.div`
   width: 100%;
@@ -76,13 +89,25 @@ const AddOrganisationButton = styled(RedButton)`
 `;
 
 function ListOrganisations(props) {
-  const [search, setSearch] = useState("");
-  const [services, setServices] = useState("");
-  const [category, setCategory] = useState(null);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [tag, setTag] = useState("");
   const dispatch = props.dispatch;
+  const history = useHistory();
 
+  useEffect(() => {
+    dispatch(setNavigationAction(ORGANISATIONS));
+    dispatch(organisationsFunction());
+    dispatch(categoriesFunction());
+  }, [dispatch]);
 
-  console.log("HII", props.organisations);
+  const organisationDetailsHandler = (id) => {
+    history.push({
+      pathname: `/organisations/details/${id}/`,
+    });
+  };
+
+  const headers = ["Name", "Category", "Tag"];
 
   useEffect(() => {
     dispatch(setNavigationAction(ORGANISATIONS));
@@ -92,15 +117,28 @@ function ListOrganisations(props) {
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
-    const query = {
-      name: search,
-    };
-    props.dispatch(searchOrganisationsFunction(query));
+    if (name) {
+      const query = {
+        name: name,
+      };
+      props.dispatch(searchNameFunction(query));
+    }
+    if (tag) {
+      const query = {
+        tag: tag,
+      };
+      console.log('TAG', tag);
+      props.dispatch(searchTagFunction(query))
+    }
   };
 
   const addOrganisationHandler = (e) => {
     e.preventDefault();
     props.history.push("/organisations/add/");
+  };
+
+    const clearSearchHandler = () => {
+    window.location.reload();
   };
 
   return (
@@ -115,9 +153,9 @@ function ListOrganisations(props) {
           <Card>
             Title
             <SearchInput
-              name="search"
-              onChange={(e) => setSearch(e.target.value)}
-              value={search}
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
             />
           </Card>
           <Card>
@@ -141,10 +179,10 @@ function ListOrganisations(props) {
             </Filter>
           </Card>
           <Card>
-            Services
+            Tag
             <Filter
               defaultValue={"default"}
-              onChange={(e) => setServices(e.target.value)}
+              onChange={(e) => setTag(e.target.value)}
             >
               <option value="default" disabled>
                 Choose here
@@ -158,7 +196,32 @@ function ListOrganisations(props) {
         </SearchWrapper>
         <SearchButton onClick={searchButtonHandler}>APPLY FILTERS</SearchButton>
       </SearchContainer>
-      <ListOrganisationsTable />
+      <Table>
+      <TableHeaderWrapper>
+        <TableHeaderRow>
+          {headers.map((header, id) => {
+            return <TableHeader key={id}>{header}</TableHeader>;
+          })}
+        </TableHeaderRow>
+      </TableHeaderWrapper>
+      <TableBody>
+        {props.organisations
+          ? props.organisations.filter(organisation => !category || organisation.categories.some(cat => cat.name === category)).map((organisation) =>
+                <TableRow key={organisation.id} onClick={() => organisationDetailsHandler(organisation.id)}>
+                  <TableData>{organisation.name}</TableData>
+                  <TableData>
+                    {organisation.categories ? organisation.categories.map(category => {
+                      return (
+                        <div key={category.id}><b>{category.name}</b></div>
+                      )
+                    }):[]}
+                  </TableData>
+                  <TableData>{organisation.tag}</TableData>
+                </TableRow>
+              )
+          : null}
+      </TableBody>
+    </Table>
     </Container>
   );
 }

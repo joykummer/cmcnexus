@@ -13,11 +13,6 @@ export const searchTitleFunction = (query) => async (dispatch) => {
   dispatch(searchCasesAction(response.data));
 };
 
-export const searchCategoriesFunction = (query) => async (dispatch) => {
-  const response = await Axios.get(`cases/?search=${query.categories}`);
-  dispatch(searchCasesAction(response.data));
-};
-
 export const searchStatusFunction = (query) => async (dispatch) => {
   const response = await Axios.get(`cases/?search=${query.status}`);
   dispatch(searchCasesAction(response.data));
