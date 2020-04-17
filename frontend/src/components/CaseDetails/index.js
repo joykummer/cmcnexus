@@ -5,6 +5,8 @@ import Validation from "../Validation";
 import {Container, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
 Stripe, Match} from './styles'
 import CanI from "../Permissions";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {CASES} from '../Navigation/states';
 import {VALIDATE_CASE, MATCH_ORGANISATIONS, UPDATE_MATCH} from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
@@ -15,6 +17,7 @@ function CaseDetails(props) {
 
   useEffect(() => {
     dispatch(casesFunction());
+    dispatch(setNavigationAction(CASES));
   }, [dispatch]);
 
   const matchingHandler = (id) => {
@@ -51,7 +54,7 @@ function CaseDetails(props) {
               }</DetailsHeader>
             </DetailsContainer>
             <Stripe>Medical details</Stripe>
-            <DetailsContainer> 
+            <DetailsContainer>
                 <DetailsHeader><DetailsKey>Description</DetailsKey>{caseDetails.description}</DetailsHeader>
                 <DetailsHeader><DetailsKey>Diagnosis</DetailsKey>{caseDetails.diagnosis}</DetailsHeader>
                 <DetailsHeader><DetailsKey>Justification</DetailsKey> {caseDetails.justification}</DetailsHeader>

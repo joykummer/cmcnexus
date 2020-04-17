@@ -4,6 +4,9 @@ import countryList from "react-select-country-list";
 import { connect } from "react-redux";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
 import { addCaseFunction } from "../../store/actions/addCaseAction";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {CASES_ADD} from '../Navigation/states';
+
 import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, FieldInputLarge} from "../AddOrganisation/styles";
 import {CategoryDropdown, AddButton, Checkbox, CountryDropdown, SexDropdown} from "./styles"
 
@@ -26,7 +29,8 @@ function AddCase(props) {
   const [sex, setSex] = useState("");
   const countries = countryList().getData();
   const [country, setCountry] = useState("");
-  const [categories, setCategories] = useState(null);
+  const [categories, setCategories] = useState(["default"]);
+  const [categoryIds, setCategoryIds] = useState([]);
   const [titleError, setTitleError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
   const [diagnosisError, setDiagnosisError] = useState("");
@@ -42,13 +46,13 @@ function AddCase(props) {
 
   useEffect(() => {
     dispatch(categoriesFunction());
+    dispatch(setNavigationAction(CASES_ADD));
   }, [dispatch]);
 
   const setCategoryHandler = (e) => {
-    const selectOptions = Array.from(e.target.options)
-      .filter((el) => el.selected)
-      .map((el) => el.id);
-    setCategories(selectOptions);
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    setCategories(selectedOptions.map(option => option.value));
+    setCategoryIds(selectedOptions.map(option => option.id));
   };
 
   const validate = () => {
@@ -122,7 +126,6 @@ function AddCase(props) {
   };
 
   const addCaseHandler = async (e) => {
-    e.preventDefault();
     const isValid = validate();
     if (isValid) {
       const data = {
@@ -135,8 +138,9 @@ function AddCase(props) {
         age: age,
         sex: sex,
         country: country,
-        categories: categories,
+        categories: categoryIds,
       };
+      console.log('data', data);
       dispatch(addCaseFunction(data));
       props.history.push("/cases/");
     }
@@ -219,12 +223,10 @@ function AddCase(props) {
         value={sex}
         required
       >
-          <option value="" disabled>
-            Please choose here...
-          </option>
+          <option value="" disabled>Please choose here...</option>
           <option key={1}>F</option>
           <option key={2}>M</option>
-        </SexDropdown>
+      </SexDropdown>
         </Label>
           <ErrorMessage>{sexError}</ErrorMessage>
       <Label>Country
@@ -242,7 +244,7 @@ function AddCase(props) {
         </Label>
           <ErrorMessage>{countryError}</ErrorMessage>
       <Label>Category
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
+      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
           {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
           ? props.categories.map((category) => {

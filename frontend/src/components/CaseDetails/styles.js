@@ -9,18 +9,14 @@ export const Container = styled.div`
   overflow: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   line-height: 1.5; 
   letter-spacing: initial; 
 `;
 
 export const HeaderTitle = styled.div`
-display: flex; 
-justify-content: center; 
 font-size: 30px; 
-margin-top: 5%; 
-margin-bottom: 3%; 
 border-bottom: 3px solid red; 
 text-transform: uppercase; 
 `;
@@ -34,10 +30,6 @@ padding: 20px;
 margin: 2%; 
 background-color: #ebebeb;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-/* transition: all 0.3s cubic-bezier(.25,.8,.25,1); */
-/* :hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-} */
 `;
 
 export const DetailsHeader = styled.div`

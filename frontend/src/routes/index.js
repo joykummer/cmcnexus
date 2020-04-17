@@ -39,7 +39,7 @@ export default function Routes() {
           <PrivateRoute exact path='/cases/match/:id/' component={MatchOrganisations}/>
           <PrivateRoute exact path='/profile/' component={UserProfile}/>
           <PrivateRoute exact path='/profile/edit/' component={EditUserProfile}/>
-          <Route path="/" render={() => <Redirect to='/cases'/>}/>
+          {/*<Route path="/" render={() => <Redirect to='/cases'/>}/>*/}
         </Navigation>
       </Switch>
     </Router>

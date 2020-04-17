@@ -33,7 +33,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: center;
+  padding: 50px;
 `;
 
 const SearchContainer = styled.div`
@@ -48,10 +49,12 @@ const SearchWrapper = styled.div`
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 `;
 
 const Card = styled.div`
-  width: 30%;
+  flex-grow: 1;
+  margin: 0 25px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -76,7 +79,7 @@ const Filter = styled(Dropdown)`
 const SearchButton = styled(RedButton)`
   width: 150px;
   height: 40px;
-  margin-right: 15px;
+  margin-top: 10px;
 `;
 
 const AddCaseButton = styled(RedButton)`
@@ -156,9 +159,6 @@ function ListCases(props) {
 
   return (
     <Container>
-      <CanI perform={ADD_CASE}>
-        <AddCaseButton onClick={addCaseHandler}>ADD CASE</AddCaseButton>
-      </CanI>
       <SearchContainer>
         <SearchWrapper>
           <Card>
