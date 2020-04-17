@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import Validation from "../Validation";
 import { connect } from "react-redux";
 import {casesFunction} from "../../store/actions/casesAction";
-import {Container, Header, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
-MiddleContainer, Stripe, Match} from './styles'
+import Validation from "../Validation";
+import {Container, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
+Stripe, Match} from './styles'
 import CanI from "../Permissions";
 import {VALIDATE_CASE, MATCH_ORGANISATIONS} from "../Permissions/permissions";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES} from '../Navigation/states';
-
+import AcceptCase from "../AcceptCase";
+import RejectCase from "../RejectCase";
 
 
 function CaseDetails(props) {
@@ -54,12 +54,12 @@ function CaseDetails(props) {
               }</DetailsHeader>
             </DetailsContainer>
             <Stripe>Medical details</Stripe>
-            <MiddleContainer> 
-                <Header>Description</Header>{caseDetails.description}
-                <Header>Diagnosis</Header>{caseDetails.diagnosis}
-                <Header>Justification</Header> {caseDetails.justification}
-                <Header>Recommendation</Header> {caseDetails.recommendation}
-            </MiddleContainer>
+            <DetailsContainer>
+                <DetailsHeader><DetailsKey>Description</DetailsKey>{caseDetails.description}</DetailsHeader>
+                <DetailsHeader><DetailsKey>Diagnosis</DetailsKey>{caseDetails.diagnosis}</DetailsHeader>
+                <DetailsHeader><DetailsKey>Justification</DetailsKey> {caseDetails.justification}</DetailsHeader>
+                <DetailsHeader><DetailsKey>Recommendation</DetailsKey>{caseDetails.recommendation}</DetailsHeader>
+            </DetailsContainer>
             <Stripe>Status</Stripe>
             <DetailsContainer> 
             <DetailsHeader><DetailsKey>Partners:</DetailsKey>  {
@@ -78,8 +78,10 @@ function CaseDetails(props) {
               <Validation id={caseDetails.id}/>
             </CanI>
             <CanI perform={MATCH_ORGANISATIONS}>
-            <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
+              <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
             </CanI>
+            <AcceptCase singleCase={caseDetails}/>
+            <RejectCase singleCase={caseDetails}/>
           </>
           ): <div>No case to show</div>}
       </Container>
