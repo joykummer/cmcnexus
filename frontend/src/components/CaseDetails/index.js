@@ -5,7 +5,7 @@ import Validation from "../Validation";
 import {Container, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
 Stripe, Match} from './styles'
 import CanI from "../Permissions";
-import {VALIDATE_CASE} from "../Permissions/permissions";
+import {VALIDATE_CASE, MATCH_ORGANISATIONS, UPDATE_MATCH} from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
 
@@ -74,13 +74,19 @@ function CaseDetails(props) {
             <CanI perform={VALIDATE_CASE}>
               <Validation id={caseDetails.id}/>
             </CanI>
-{/*
-            <CanI perform={MATCH_ORGANIZATIONS}>
-*/}
-            <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
-            {/*</CanI>*/}
-            <AcceptCase singleCase={caseDetails}/>
-            <RejectCase singleCase={caseDetails}/>
+            {
+              caseDetails.status === 'validated' ?
+                <>
+                  <CanI perform={MATCH_ORGANISATIONS}>
+                    <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
+                  </CanI>
+                  <CanI perform={UPDATE_MATCH}>
+                    <AcceptCase singleCase={caseDetails}/>
+                    <RejectCase singleCase={caseDetails}/>
+                  </CanI>
+                </>
+              : null
+            }
           </>
           ): <div>No case to show</div>}
       </Container>
