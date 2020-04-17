@@ -11,6 +11,7 @@ import { Dropdown } from "../../styles/Dropdowns";
 import { ADD_ORGANISATION } from "../Permissions/permissions";
 import CanI from "../Permissions";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
+import organisations from "../../store/reducers/OrganisationsReducer";
 
 const Container = styled.div`
   width: 100%;
@@ -34,6 +35,7 @@ const SearchContainer = styled.div`
 
 const SearchWrapper = styled.div`
   width: 100%;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
 `;
@@ -64,7 +66,7 @@ const Filter = styled(Dropdown)`
 const SearchButton = styled(RedButton)`
   width: 150px;
   height: 40px;
-  margin-top: 10px;
+  margin-right: 15px;
 `;
 
 const AddOrganisationButton = styled(RedButton)`
@@ -79,7 +81,8 @@ function ListOrganisations(props) {
   const [category, setCategory] = useState(null);
   const dispatch = props.dispatch;
 
-  const serviceOptions = ["test1", "test2", "test3", "test4"];
+
+  console.log("HII", props.organisations);
 
   useEffect(() => {
     dispatch(setNavigationAction(ORGANISATIONS));
@@ -118,20 +121,6 @@ function ListOrganisations(props) {
             />
           </Card>
           <Card>
-            Services
-            <Filter
-              defaultValue={"default"}
-              onChange={(e) => setServices(e.target.value)}
-            >
-              <option value="default" disabled>
-                Choose here
-              </option>
-              {serviceOptions.map((service) => {
-                return <option key={service}>{service}</option>;
-              })}
-            </Filter>
-          </Card>
-          <Card>
             Category
             <Filter
               defaultValue={"default"}
@@ -149,6 +138,21 @@ function ListOrganisations(props) {
                     );
                   })
                 : null}
+            </Filter>
+          </Card>
+          <Card>
+            Services
+            <Filter
+              defaultValue={"default"}
+              onChange={(e) => setServices(e.target.value)}
+            >
+              <option value="default" disabled>
+                Choose here
+              </option>
+              {props.organisations ?
+                props.organisations.map((organisation) => {
+                return <option key={organisation.id}>{organisation.tag}</option>;
+              }): null}
             </Filter>
           </Card>
         </SearchWrapper>

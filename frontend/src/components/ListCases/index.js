@@ -45,9 +45,9 @@ const SearchContainer = styled.div`
 
 const SearchWrapper = styled.div`
   width: 100%;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15px;
 `;
 
 const Card = styled.div`
@@ -103,7 +103,7 @@ function ListCases(props) {
   const [status, setStatus] = useState("");
   const dispatch = props.dispatch;
 
-  const statusOptions = ["created", "validated", "closed", "rejected"];
+  const statusOptions = ["Created", "Open", "Closed", "Rejected"];
 
   useEffect(() => {
     dispatch(setNavigationAction(CASES));
@@ -116,7 +116,7 @@ function ListCases(props) {
     // setCategory("");
     // setStatus("");
     window.location.reload();
-  }
+  };
 
 // FOR REFERENCE. PLEASE DO NOT DELETE!
 // function filterViaCategory(category) {
@@ -148,7 +148,7 @@ function ListCases(props) {
           });
     };
 
-  const headers = ["Title", "Age", "Country", "Status"];
+  const headers = ["Title", "Country", "Category", "Status"];
 
 
   const addCaseHandler = (e) => {
@@ -222,8 +222,14 @@ function ListCases(props) {
           ? props.cases.filter(file => !category || file.categories.some(cat => cat.name === category)).map((file) =>
                 <TableRow key={file.id} onClick={() => caseDetailsHandler(file.id)}>
                   <TableData>{file.title}</TableData>
-                  <TableData>{file.age}</TableData>
                   <TableData>{file.country}</TableData>
+                  <TableData>
+                    {file.categories ? file.categories.map(category => {
+                      return (
+                        <div key={category.id}><b>{category.name}</b></div>
+                      )
+                    }):[]}
+                  </TableData>
                   <TableData>{file.status}</TableData>
                 </TableRow>
             )

@@ -207,6 +207,7 @@ function AddCase(props) {
         type="number"
         onChange={(e) => setAge(e.target.value)}
         value={age}
+        min="0"
         required
       />
       </Label>

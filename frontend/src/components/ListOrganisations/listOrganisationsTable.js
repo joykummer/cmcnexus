@@ -26,7 +26,7 @@ function ListOrganisationsTable(props) {
     });
   };
 
-  const headers = ["Name", "Description", "Category", "Tag(s)"];
+  const headers = ["Name", "Category", "Tag(s)"];
 
   return (
     <Table>
@@ -46,7 +46,6 @@ function ListOrganisationsTable(props) {
                   onClick={() => organisationDetailsHandler(organisation.id)}
                 >
                   <TableData>{organisation.name}</TableData>
-                  <TableData>{organisation.description}</TableData>
                   <TableData>
                     {organisation.categories ? organisation.categories.map(category => {
                       return (
