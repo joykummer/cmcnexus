@@ -5,7 +5,7 @@ import Validation from "../Validation";
 import {Container, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
 Stripe, Match} from './styles'
 import CanI from "../Permissions";
-import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
+import {VALIDATE_CASE} from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
 
