@@ -6,11 +6,12 @@ import {Container, HeaderTitle, DetailsContainer, DetailsHeader, DetailsKey,
 Stripe, Match} from './styles'
 import CanI from "../Permissions";
 import {VALIDATE_CASE, MATCH_ORGANIZATIONS} from "../Permissions/permissions";
+import AcceptCase from "../AcceptCase";
+import RejectCase from "../RejectCase";
 
 
 function CaseDetails(props) {
   const dispatch = props.dispatch;
-
   useEffect(() => {
     dispatch(casesFunction());
   }, [dispatch]);
@@ -72,9 +73,13 @@ function CaseDetails(props) {
             <CanI perform={VALIDATE_CASE}>
               <Validation id={caseDetails.id}/>
             </CanI>
+{/*
             <CanI perform={MATCH_ORGANIZATIONS}>
+*/}
             <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
-            </CanI>
+            {/*</CanI>*/}
+            <AcceptCase singleCase={caseDetails}/>
+            <RejectCase singleCase={caseDetails}/>
           </>
           ): <div>No case to show</div>}
       </Container>
