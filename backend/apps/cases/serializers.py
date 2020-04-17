@@ -34,10 +34,6 @@ class CaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializ
             'change_case': [current_user]
         }
 
-    @staticmethod
-    def get_categories_name(self):
-        return self.categories.name
-
 
 class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):
     created_by = FullUserSerializer(read_only=True)
