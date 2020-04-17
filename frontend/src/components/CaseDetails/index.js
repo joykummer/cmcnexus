@@ -74,14 +74,19 @@ function CaseDetails(props) {
             <CanI perform={VALIDATE_CASE}>
               <Validation id={caseDetails.id}/>
             </CanI>
-
-            <CanI perform={MATCH_ORGANISATIONS}>
-              <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
-            </CanI>
-            <CanI perform={UPDATE_MATCH}>
-              <AcceptCase singleCase={caseDetails}/>
-              <RejectCase singleCase={caseDetails}/>
-            </CanI>
+            {
+              caseDetails.status === 'validated' ?
+                <>
+                  <CanI perform={MATCH_ORGANISATIONS}>
+                    <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>
+                  </CanI>
+                  <CanI perform={UPDATE_MATCH}>
+                    <AcceptCase singleCase={caseDetails}/>
+                    <RejectCase singleCase={caseDetails}/>
+                  </CanI>
+                </>
+              : null
+            }
           </>
           ): <div>No case to show</div>}
       </Container>
