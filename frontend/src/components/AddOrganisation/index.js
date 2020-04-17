@@ -13,7 +13,8 @@ function AddOrganisation(props) {
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
   const [tag, setTag] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(["default"]);
+  const [categoryIds, setCategoryIds] = useState([]);
   const dispatch = props.dispatch;
 
   useEffect(() => {
@@ -22,10 +23,9 @@ function AddOrganisation(props) {
   }, [dispatch]);
 
   const setCategoryHandler = (e) => {
-    const selectOptions = Array.from(e.target.options)
-      .filter((el) => el.selected)
-      .map((el) => el.id);
-    setCategories(selectOptions);
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    setCategories(selectedOptions.map(option => option.value));
+    setCategoryIds(selectedOptions.map(option => option.id));
   };
 
 
@@ -35,7 +35,7 @@ function AddOrganisation(props) {
       name: name,
       description: description,
       services: services,
-      categories: categories,
+      categories: categoryIds,
       tag: tag,
     };
     dispatch(addOrganisationFunction(data));
@@ -83,7 +83,7 @@ function AddOrganisation(props) {
         />
       </Label>
       <Label>Category
-      <CategoryDropdown value={categories} defaultValue={"default"} onChange={setCategoryHandler} multiple>
+      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
         <option value={"default"} disabled>Select a category...</option>
         {props.categories
           ? props.categories.map((category) => {

@@ -29,7 +29,7 @@ function AddCase(props) {
   const [sex, setSex] = useState("");
   const countries = countryList().getData();
   const [country, setCountry] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(["default"]);
   const [categoryIds, setCategoryIds] = useState([]);
   const [titleError, setTitleError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
@@ -243,7 +243,7 @@ function AddCase(props) {
         </Label>
           <ErrorMessage>{countryError}</ErrorMessage>
       <Label>Category
-      <CategoryDropdown value={categories} defaultValue={"default"} onChange={setCategoryHandler} multiple>
+      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
           {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
           ? props.categories.map((category) => {
