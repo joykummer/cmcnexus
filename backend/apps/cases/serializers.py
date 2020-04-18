@@ -54,7 +54,7 @@ class GeneralInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age', 'dob']
+        fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age', 'birth_date', 'categories', 'created_by', 'partnered_organisations']
 
 
 class MedicalInfoSerializer(serializers.ModelSerializer):
@@ -69,10 +69,14 @@ class MedicalInfoSerializer(serializers.ModelSerializer):
                   'comments', 'outcome', 'status']
 
 
-def get_serializer_class(self):
-    if self.request.user.has_perm("general_info", "medical_info"):
-        return CaseSerializer
-    elif self.request.user.has_perm("general_info"):
-        return GeneralInfoSerializer
-    elif self.request.user.has_perm("medical_info"):
-        return MedicalInfoSerializer
+def get_general_or_medical_info(request):
+    if request.method == 'GET':
+        if request.user.has_perm("cases.view_general_info", "cases.view_medical_info"):
+            return CaseSerializer
+        elif request.user.has_perm("cases.view_general_info"):
+            return GeneralInfoSerializer
+    else:
+        if request.user.has_perm("cases.update_general_info"):
+            return GeneralInfoSerializer
+        else:
+            return CaseSerializer

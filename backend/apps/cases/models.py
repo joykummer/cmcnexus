@@ -50,7 +50,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     location = models.CharField(max_length=200, default='')
     country = models.CharField(max_length=100)
     age = models.CharField(max_length=50, blank=True, default='')
-    dob = models.DateField(max_length=8, blank=True, null=True)
+    birth_date = models.CharField(max_length=50, blank=True, null=True)
     sex = models.CharField(choices=GENDER_CHOICES, default="F", max_length=10)
     description = models.TextField(blank=True, default='')
     history_description = models.TextField(blank=True, default='')
@@ -98,8 +98,9 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
             ("match_organisations", "Can match organisations to cases"),
             ("update_match", "Can set a matched partnership to accepted/rejected"),
             ("view_dashboard", "Can look at the dashboard to see statistics and insights."),
-            ("general_info", "Can view only general information about a case"),
-            ("medical_info", "Can view only medical information about a case"),
+            ("view_general_info", "Can view general information about a case"),
+            ("update_general_info", "Can view general information about a case"),
+            ("view_medical_info", "Can view medical information about a case"),
         ]
 
     def __str__(self):
