@@ -1,14 +1,12 @@
 import React from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
-
 import dashboard from '../../assets/output-onlinepngtools.png'
 import folder from '../../assets/cases.png'
 import organisation from '../../assets/organization.png'
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 import userprofile from '../../assets/userprofile.png'
 import addcase from '../../assets/addcase.png'
-import virus from '../../assets/MSF_picto_virus.png'
 import {
   NavigationContainer, Logo, Options,
   Button, NavItem

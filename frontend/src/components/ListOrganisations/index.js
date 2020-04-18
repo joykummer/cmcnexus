@@ -23,13 +23,13 @@ import {
   TableHeaderWrapper,
   TableRow,
 } from "../../styles/Tables";
+import {SearchContainer, SearchWrapper, SearchInput, SearchButton, Filter, Card, Wrapper, Clear} from "../ListCases/styles"
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: #ebebeb;
-  padding: 50px;
-  padding-top: 30px;
+  padding: 25px 50px 50px 50px;
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -37,66 +37,10 @@ const Container = styled.div`
   align-items: flex-end;
 `;
 
-const SearchContainer = styled.div`
-  width: 100%;
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const SearchWrapper = styled.div`
-  width: 100%;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Card = styled.div`
-  margin: 0 25px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-grow: 1;
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  height: 40px;
-  outline: none;
-  border: none;
-  background-color: #ebebeb;
-  border-bottom: 1px solid red;
-`;
-
-const Filter = styled(Dropdown)`
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid red;
-`;
-
-const SearchButton = styled(RedButton)`
-  width: 150px;
-  height: 40px;
-  margin-right: 15px;
-`;
-
 const AddOrganisationButton = styled(RedButton)`
   width: 200px;
   height: 40px;
-  margin-bottom: 50px;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Clear = styled.div`
-  font-size: 14px;
-  :hover {
-    color: red;
-  }
+  margin-bottom: 25px;
 `;
 
 function ListOrganisations(props) {
