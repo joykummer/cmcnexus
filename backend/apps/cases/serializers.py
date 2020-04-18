@@ -45,10 +45,11 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
     def get_permissions_map(self, created):
         current_user = self.context['request'].user
         case_coordinator = Group.objects.get(name="Case Coordinator")
-        med_co = Group.objects.get(name="MedCo")
+        med_co = Group.objects.get(name="Medical Coordinator")
+        expert = Group.objects.get(name="Expert")
 
         return {
-            'view_case': [current_user, case_coordinator, med_co],
+            'view_case': [current_user, case_coordinator, med_co, expert],
             'change_case': [current_user, med_co],
             'delete_case': [current_user],
         }

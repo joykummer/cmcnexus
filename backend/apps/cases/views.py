@@ -88,6 +88,7 @@ class MatchOrganisation(GenericAPIView):
         organisation_ids = self.request.data.get("partner_ids")
         for organisation_id in organisation_ids:
             Partnership(case_id=case.id, organisation_id=organisation_id).save()
+            assign_perm("view_case", request.user, case)
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):

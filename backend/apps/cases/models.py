@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django_xworkflows import models as xwf_models
 from django.utils.translation import gettext as _
-
+import xworkflows
 
 from apps.organisations.models import Organisation
 from apps.categories.models import Category
@@ -62,6 +62,13 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         blank=True,
         null=True
     )
+
+    @xworkflows.transition_check("reject")
+    def hook(self, *args, **kwargs):
+        if self.partnered_organisations.filter(status="assigned").exists():
+            return False
+        return True
+
 
     class Meta:
         permissions = [
