@@ -29,11 +29,11 @@ text-transform: uppercase;
 `;
 
 export const Options = styled.div`
-width: 100%;
+margin-top: 20px;
+width: 80%;
 border-bottom: 4px solid red; 
 border-top: 4px solid red; 
-padding: 6px 0;
-
+padding: 20px 0;
 display: flex; 
 flex-direction: column; 
 `;
@@ -41,16 +41,17 @@ flex-direction: column;
 export const NavItem = styled.div`
 display: flex;
 align-items: center; 
-
 font-size: 24px; 
-padding: 10px 20px; 
+padding: 15px 20px; 
 border: 1px solid transparent;
-${props => props.selected ? "background-color: lightgray; font-weight: bold;" : ""}
+opacity: .4;
+${props => props.selected ? "font-weight: bold; opacity: 1;" : ""}
 :hover {
        color: red;
        font-weight: bold;
        background-color: rgb(192,192,192);  
        cursor: pointer;
+       opacity: 1;
        box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
    }
 `;
