@@ -29,7 +29,7 @@ flex-direction: column;
 padding: 20px; 
 margin: 2%; 
 background-color: #ebebeb;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 
 export const DetailsHeader = styled.div`

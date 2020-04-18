@@ -2,11 +2,12 @@ import React from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import dashboard from '../../assets/dashboard.png'
+import dashboard from '../../assets/output-onlinepngtools.png'
 import folder from '../../assets/cases.png'
 import organisation from '../../assets/organization.png'
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 import userprofile from '../../assets/userprofile.png'
+import addcase from '../../assets/addcase.png'
 import virus from '../../assets/MSF_picto_virus.png'
 import {
   NavigationContainer, Logo, Options,
@@ -54,7 +55,7 @@ function NavigationBar() {
         </CanI>
         <CanI perform={ADD_CASE}>
           <NavItem selected={selected===CASES_ADD} onClick={() => onClickHandler(CASES_ADD)}>
-            <img src={virus} alt="Add Cases" style={{paddingRight: 35, height: 45, WebkitFilter: "grayscale(1)"}} />
+            <img src={addcase} alt="Add Cases" style={{paddingRight: 35, height: 45, WebkitFilter: "grayscale(1)"}} />
             Add Case
           </NavItem>
         </CanI>
