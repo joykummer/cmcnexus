@@ -45,3 +45,34 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
             'change_case': [doctor, med_co, case_coordinator],
             'delete_case': [doctor],
         }
+
+
+class GeneralInfoSerializer(serializers.ModelSerializer):
+    categories = CategorySerializer(many=True)
+    created_by = FullUserSerializer(read_only=True)
+    partnered_organisations = PartnershipSerializer(many=True)
+
+    class Meta:
+        model = Case
+        fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age', 'dob']
+
+
+class MedicalInfoSerializer(serializers.ModelSerializer):
+    categories = CategorySerializer(many=True)
+    created_by = FullUserSerializer(read_only=True)
+    partnered_organisations = PartnershipSerializer(many=True)
+
+    class Meta:
+        model = Case
+        fields = ['description', 'history_description', 'diagnosis', 'past_medical_history', 'physical_examination',
+                  'investigations', 'current_treatment', 'justification', 'recommendation', 'consent', 'sex',
+                  'comments', 'outcome', 'status']
+
+
+def get_serializer_class(self):
+    if self.request.user.has_perm("general_info", "medical_info"):
+        return CaseSerializer
+    elif self.request.user.has_perm("general_info"):
+        return GeneralInfoSerializer
+    elif self.request.user.has_perm("medical_info"):
+        return MedicalInfoSerializer

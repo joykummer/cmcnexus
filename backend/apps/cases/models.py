@@ -32,22 +32,42 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         ("F", 'Female'),
         ("M", 'Male'),
     )
+    LANGUAGE_CHOICES = (
+        ("German", "German"),
+        ("English", "English"),
+        ("Spanish", "Spanish")
+    )
+    NATURE_CHOICES = {
+        ("Emergency", "Emergency"),
+        ("Urgent", "Urgent"),
+        ("Life changing", "Life changing")
+    }
 
     title = models.CharField(max_length=100)
-    description = models.TextField()
-    diagnosis = models.TextField()
-    justification = models.TextField()
-    recommendation = models.TextField()
+    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=10, default='')
+    nature_of_referral = models.CharField(choices=NATURE_CHOICES, max_length=20, default='')
+    patient_id = models.IntegerField(default=0)
+    location = models.CharField(max_length=200, default='')
+    country = models.CharField(max_length=100)
+    age = models.CharField(max_length=50, blank=True, default='')
+    dob = models.DateField(max_length=8, blank=True, null=True)
+    sex = models.CharField(choices=GENDER_CHOICES, default="F", max_length=10)
+    description = models.TextField(blank=True, default='')
+    history_description = models.TextField(blank=True, default='')
+    diagnosis = models.TextField(blank=True, default='')
+    past_medical_history = models.TextField(blank=True, default='')
+    physical_examination = models.TextField(blank=True, default='')
+    investigations = models.TextField(blank=True, default='')
+    current_treatment = models.TextField(blank=True, default='')
+    justification = models.TextField(blank=True, default='')
+    recommendation = models.TextField(blank=True, default='')
+    outcome = models.CharField(max_length=100, blank=True, default='')
+    comments = models.TextField(blank=True, default='')
     categories = models.ManyToManyField(
         to=Category,
         related_name='cases',
     )
     consent = models.BooleanField(default=False)
-    age = models.CharField(max_length=50)
-    sex = models.CharField(choices=GENDER_CHOICES, default="F", max_length=10)
-    country = models.CharField(max_length=100)
-    comments = models.TextField(blank=True, default='')
-    outcome = models.CharField(max_length=100, blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
     status = xwf_models.StateField(CaseWorkflow)
     organisations = models.ManyToManyField(
@@ -78,6 +98,8 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
             ("match_organisations", "Can match organisations to cases"),
             ("update_match", "Can set a matched partnership to accepted/rejected"),
             ("view_dashboard", "Can look at the dashboard to see statistics and insights."),
+            ("general_info", "Can view only general information about a case"),
+            ("medical_info", "Can view only medical information about a case"),
         ]
 
     def __str__(self):
