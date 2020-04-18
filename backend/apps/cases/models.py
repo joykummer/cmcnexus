@@ -33,7 +33,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         ("M", 'Male'),
     )
     LANGUAGE_CHOICES = (
-        ("German", "German"),
+        ("French", "French"),
         ("English", "English"),
         ("Spanish", "Spanish")
     )
