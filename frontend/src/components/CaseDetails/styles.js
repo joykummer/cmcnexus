@@ -5,14 +5,14 @@ import { RedButton } from "../../styles/Buttons";
 
 export const Container = styled.div`
   width: 100%;
-  /* height: 100%; */
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   line-height: 1.5; 
+  overflow-y: scroll;
   letter-spacing: initial; 
+  background-color:#ebebeb;
 `;
 
 export const HeaderTitle = styled.div`
@@ -32,7 +32,8 @@ display: flex;
 flex-direction: column; 
 padding: 20px; 
 margin: 2%; 
-background-color: #ebebeb;
+background-color: white;
+border-radius: 5px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 /* transition: all 0.3s cubic-bezier(.25,.8,.25,1); */
 /* :hover {

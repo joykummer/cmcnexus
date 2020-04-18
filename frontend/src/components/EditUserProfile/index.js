@@ -97,7 +97,6 @@ font-weight: bold;
 
 export default function EditUserProfile() {
 	const user = useSelector(state => state.auth.user)
-
 	const history = useHistory()
 
 	const [first_name, setFirstName] = useState(user.first_name);

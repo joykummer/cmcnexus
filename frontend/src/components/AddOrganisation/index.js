@@ -13,8 +13,6 @@ function AddOrganisation(props) {
   const [tag, setTag] = useState("");
   const dispatch = props.dispatch;
 
-  
-  // const isEnabled = name.length > 0 && description.length > 0 && services.length > 0 
 
   useEffect(() => {
     dispatch(categoriesFunction());
@@ -49,7 +47,7 @@ function AddOrganisation(props) {
     props.history.push("/organisations/");
   };
 
-
+  
   return (
     <Container>
       <HeaderTitle>Add organisation</HeaderTitle>
@@ -58,6 +56,8 @@ function AddOrganisation(props) {
       <FieldInput
         name="name"
         type = "text"
+        maxLength = "100"
+        // onkeydown = {lengthChecker}
         onChange={(e) => setName(e.target.value)}
         value={name}
       />
@@ -67,6 +67,7 @@ function AddOrganisation(props) {
         name="description"
         type = "textarea"
         rows = '5'
+        maxLength = "500"
         onChange={(e) => setDescription(e.target.value)}
         value={description}
         required
@@ -76,6 +77,7 @@ function AddOrganisation(props) {
       <FieldInputLarge
         name="services"
         type = "textarea"
+        maxLength = "500"
         onChange={(e) => setServices(e.target.value)}
         value={services}
         required
@@ -84,6 +86,7 @@ function AddOrganisation(props) {
       <Label>Tag
       <FieldInput
         name="tag"
+        maxLength = "100"
         onChange={(e) => setTag(e.target.value)}
         value={tag}
         required

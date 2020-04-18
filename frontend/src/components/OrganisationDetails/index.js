@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { Link, useHistory } from 'react-router-dom'
 import { organisationsFunction } from "../../store/actions/organisationsAction";
 import {HeaderTitle, Stripe, DetailsContainer} from "../CaseDetails/styles";
-
+import {AddButton} from "../AddOrganisation/styles"
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
+  overflow-y: scroll;
+  background-color:#ebebeb;
 `;
 
 const StripeSmall = styled(Stripe)`
@@ -20,19 +22,18 @@ font-size: 16px;
 `;
 
 const DetailsContainerCategory = styled(DetailsContainer)`
-background-color: white; 
 box-shadow: none; 
 padding: 0; 
+background-color: #ebebeb;
 `;
 
 const DetailsContainerSmall = styled.div`
 width: auto;
 display: flex; 
 align-self: flex-start;
-/* margin-left: 10%; */
 padding: 20px; 
-/* margin: 2%;  */
-background-color: #ebebeb;
+background-color: white;
+border-radius: 5px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `;
 
@@ -50,6 +51,12 @@ function OrganisationDetails(props) {
       )
     : null;
 
+    const history = useHistory()
+    const redirectHandler = () => {
+        history.push(`/organisations/edit/${organisationDetails.id}/`)
+    }
+
+    
   return (
     <Container>
       {organisationDetails ? (
@@ -79,6 +86,7 @@ function OrganisationDetails(props) {
       ) : (
         <div>This organisation does not exist.</div>
       )}
+      <AddButton onClick={redirectHandler}>Edit</AddButton>
     </Container>
   );
 }
