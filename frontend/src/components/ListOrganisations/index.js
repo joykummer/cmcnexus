@@ -52,11 +52,12 @@ const SearchWrapper = styled.div`
 `;
 
 const Card = styled.div`
-  width: 30%;
+  margin: 0 25px;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
 `;
 
 const SearchInput = styled.input`
@@ -241,7 +242,7 @@ function ListOrganisations(props) {
                         ? organisation.categories.map((category) => {
                             return (
                               <div key={category.id}>
-                                <b>{category.name}</b>
+                                {category.name}
                               </div>
                             );
                           })

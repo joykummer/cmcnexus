@@ -5,7 +5,7 @@ export const Table = styled.table`
   height: auto;
   border: 1px solid #ebebeb;
   background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 `;
 
@@ -23,6 +23,9 @@ export const TableBody = styled.tbody`
 
 export const TableRow = styled.tr`
   width: 100%;
+  :hover {
+    color: red;
+  }
   :nth-child(odd) {
     background: #ebebeb;
   }

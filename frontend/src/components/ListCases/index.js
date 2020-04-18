@@ -7,8 +7,6 @@ import {
   searchTitleFunction,
   searchStatusFunction,
 } from "../../store/actions/searchCasesAction";
-import CanI from "../Permissions";
-import { ADD_CASE } from "../Permissions/permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
 import { Dropdown } from "../../styles/Dropdowns";
@@ -49,16 +47,15 @@ const SearchWrapper = styled.div`
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
 `;
 
 const Card = styled.div`
-  flex-grow: 1;
   margin: 0 25px;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
 `;
 
 const SearchInput = styled.input`
@@ -79,13 +76,7 @@ const Filter = styled(Dropdown)`
 const SearchButton = styled(RedButton)`
   width: 150px;
   height: 40px;
-  margin-top: 10px;
-`;
-
-const AddCaseButton = styled(RedButton)`
-  width: 125px;
-  height: 40px;
-  margin-bottom: 50px;
+  margin-right: 15px;
 `;
 
 const Wrapper = styled.div`
@@ -151,11 +142,6 @@ function ListCases(props) {
   };
 
   const headers = ["Title", "Country", "Category", "Status"];
-
-  const addCaseHandler = (e) => {
-    e.preventDefault();
-    props.history.push("/cases/add/");
-  };
 
   return (
     <Container>
@@ -239,7 +225,7 @@ function ListCases(props) {
                         ? file.categories.map((category) => {
                             return (
                               <div key={category.id}>
-                                <b>{category.name}</b>
+                                {category.name}
                               </div>
                             );
                           })
