@@ -1,4 +1,5 @@
 from django.db.models import Q
+from guardian.shortcuts import assign_perm, remove_perm
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView, \
     ListAPIView, CreateAPIView
 from rest_framework.response import Response
@@ -88,6 +89,7 @@ class MatchOrganisation(GenericAPIView):
         organisation_ids = self.request.data.get("partner_ids")
         for organisation_id in organisation_ids:
             Partnership(case_id=case.id, organisation_id=organisation_id).save()
+            assign_perm("view_case", request.user, case)
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
@@ -95,6 +97,7 @@ class MatchOrganisation(GenericAPIView):
         organisation_ids = self.request.data.get("partner_ids")
         for organisation_id in organisation_ids:
             Partnership.objects.get(case_id=case.id, organisation_id=organisation_id).delete()
+            remove_perm("view_case", request.user, case)
         return Response(self.get_serializer(case).data)
 
 
