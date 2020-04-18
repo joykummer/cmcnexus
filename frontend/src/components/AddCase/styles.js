@@ -12,7 +12,8 @@ height: auto;
 export const AddButton = styled(RedButton)`
 width: 75px;
 height: 50px;
-margin: 20px; 
+margin-top: 20px;
+margin-bottom: 50px; 
 `;
 
 export const Checkbox = styled.input`

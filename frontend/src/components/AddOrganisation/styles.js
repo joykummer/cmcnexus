@@ -31,8 +31,6 @@ height: auto;
 display: flex; 
 flex-wrap: wrap; 
 flex-direction: column; 
-padding: 20px; 
-margin: 2%; 
 background-color: #ebebeb;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
 `;
@@ -42,9 +40,9 @@ display: flex;
 flex-direction: column;
 align-self: center; 
 color: #777;
-margin: 1.5%;
 position: relative;
 width: 90%;
+margin: 15px;
 `;
 
 export const FieldInput = styled(GreyRoundInput)`
@@ -75,5 +73,6 @@ height: auto;
 export const AddButton = styled(RedButton)`
 width: 75px;
 height: 50px;
-margin: 20px; 
+margin-top: 20px;
+margin-bottom: 50px; 
 `;
