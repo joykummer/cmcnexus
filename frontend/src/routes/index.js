@@ -18,6 +18,8 @@ import {ADD_CASE, ADD_ORGANISATION, VIEW_CASE, VIEW_ORGANISATION} from '../compo
 import MatchOrganisations from '../components/MatchOrganisations';
 import OrganisationDetails from '../components/OrganisationDetails';
 import EditOrganisation from '../components/EditOrganisation';
+import PermissionDenied from "../components/PermissionDenied";
+
 
 export default function Routes() {
   return (
@@ -27,7 +29,8 @@ export default function Routes() {
         <PrivateRoute path='/404' component={UnderConstruction}/>
 
         <Navigation>
-          <Route exact path="/" render={() => <Redirect to='/cases'/>}/>
+          <PrivateRoute path='/403' component={PermissionDenied}/>
+          <Route exact path="/" render={() => <Redirect to='/cases/'/>}/>
           <PrivateRoute path='/dashboard/' component={UnderConstruction}/>
           <PrivateRoutePerm exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
           <PrivateRoutePerm exact path='/cases/details/:id/' component={CaseDetails} permission={VIEW_CASE}/>
@@ -40,8 +43,9 @@ export default function Routes() {
           <PrivateRoute exact path='/cases/match/:id/' component={MatchOrganisations}/>
           <PrivateRoute exact path='/profile/' component={UserProfile}/>
           <PrivateRoute exact path='/profile/edit/' component={EditUserProfile}/>
-          <Route path="/" render={() => <Redirect to='/cases'/>}/>
         </Navigation>
+        <Route path="/" render={() => <Redirect to='/cases/'/>}/>
+        <Redirect to={'/404'} />
       </Switch>
     </Router>
   );

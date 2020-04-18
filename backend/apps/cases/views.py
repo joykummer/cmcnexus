@@ -1,9 +1,9 @@
 from django.db.models import Q
+from guardian.shortcuts import assign_perm, remove_perm
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView, \
     ListAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework_guardian.filters import ObjectPermissionsFilter
-
 
 from apps.cases.permissions import ValidatePermission, MatchOrganisationPermission, \
     AssignOrganisationPermission
@@ -22,7 +22,8 @@ class ListCaseView(ListAPIView):
 
     def get_queryset(self):
         return Case.objects.filter(Q(title__icontains=self.request.query_params.get('search', '')) | Q(
-            description__icontains=self.request.query_params.get('search', '')))
+            description__icontains=self.request.query_params.get('search', '')) | Q(
+            status__icontains=self.request.query_params.get('search', '')))
 
 
 class CreateCaseView(CreateAPIView):
@@ -88,6 +89,7 @@ class MatchOrganisation(GenericAPIView):
         organisation_ids = self.request.data.get("partner_ids")
         for organisation_id in organisation_ids:
             Partnership(case_id=case.id, organisation_id=organisation_id).save()
+            assign_perm("view_case", request.user, case)
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
@@ -95,6 +97,7 @@ class MatchOrganisation(GenericAPIView):
         organisation_ids = self.request.data.get("partner_ids")
         for organisation_id in organisation_ids:
             Partnership.objects.get(case_id=case.id, organisation_id=organisation_id).delete()
+            remove_perm("view_case", request.user, case)
         return Response(self.get_serializer(case).data)
 
 
@@ -148,9 +151,16 @@ class RefuseCaseAsOrg(GenericAPIView):
     permission_classes = [AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
-    def delete(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         case = self.get_object()
         organisation_id = self.request.data.get("partner_ids")
         match = Partnership.objects.get(case_id=case.id, organisation_id=organisation_id)
         match.reject()
+        return Response(self.get_serializer(case).data)
+
+    def delete(self, request, *args, **kwargs):
+        case = self.get_object()
+        organisation_id = self.request.data.get("partner_ids")
+        match = Partnership.objects.get(case_id=case.id, organisation_id=organisation_id)
+        match.unreject()
         return Response(self.get_serializer(case).data)

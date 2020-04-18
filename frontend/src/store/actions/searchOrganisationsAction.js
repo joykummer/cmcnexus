@@ -8,7 +8,12 @@ export const searchOrganisationsAction = (organisations) => {
   };
 };
 
-export const searchOrganisationsFunction = (query) => async (dispatch) => {
+export const searchNameFunction = (query) => async (dispatch) => {
   const response = await Axios.get(`organisations/?search=${query.name}`);
+  dispatch(searchOrganisationsAction(response.data));
+};
+
+export const searchTagFunction = (query) => async (dispatch) => {
+  const response = await Axios.get(`organisations/?search=${query.tag}`);
   dispatch(searchOrganisationsAction(response.data));
 };

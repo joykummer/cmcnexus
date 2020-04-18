@@ -8,7 +8,12 @@ export const searchCasesAction = (cases) => {
   };
 };
 
-export const searchCasesFunction = (query) => async (dispatch) => {
+export const searchTitleFunction = (query) => async (dispatch) => {
   const response = await Axios.get(`cases/?search=${query.title}`);
+  dispatch(searchCasesAction(response.data));
+};
+
+export const searchStatusFunction = (query) => async (dispatch) => {
+  const response = await Axios.get(`cases/?search=${query.status}`);
   dispatch(searchCasesAction(response.data));
 };

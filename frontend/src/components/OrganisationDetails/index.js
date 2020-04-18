@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 import { organisationsFunction } from "../../store/actions/organisationsAction";
 import {HeaderTitle, Stripe, DetailsContainer} from "../CaseDetails/styles";
-import {AddButton} from "../AddOrganisation/styles"
+import {AddButton} from "../AddOrganisation/styles";
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {ORGANISATIONS} from '../Navigation/states';
 
 const Container = styled.div`
   width: 100%;
@@ -43,6 +45,7 @@ function OrganisationDetails(props) {
 
   useEffect(() => {
     dispatch(organisationsFunction());
+    dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
   const organisationDetails = props.organisations
@@ -81,7 +84,7 @@ function OrganisationDetails(props) {
           <StripeSmall>members</StripeSmall>
           <DetailsContainerCategory>
             <DetailsContainerSmall>{organisationDetails.members}</DetailsContainerSmall>
-          </DetailsContainerCategory>          
+          </DetailsContainerCategory>
         </>
       ) : (
         <div>This organisation does not exist.</div>

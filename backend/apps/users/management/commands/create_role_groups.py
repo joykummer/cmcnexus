@@ -3,18 +3,20 @@ from django.core.management.base import BaseCommand
 
 default_groups_permissions = [
     {
-        "name": "MedCo",
+        "name": "Medical Coordinator",
         "permissions": [
             "view_case",
             "change_case",
             "validate_case",
             "reject_case",
+            "view_organisation",
         ]
     },
     {
         "name": "Partner Organisation",
         "permissions": [
             "view_case",
+            "update_match",
         ]
     },
     {
@@ -38,6 +40,13 @@ default_groups_permissions = [
             "view_case",
             "change_case",
             "delete_case",
+        ]
+    },
+    {
+        "name": "Expert",
+        "permissions": [
+            "view_case",
+            "reject_case",
         ]
     },
 ]

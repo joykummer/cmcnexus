@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django_xworkflows import models as xwf_models
 from django.utils.translation import gettext as _
-
+import xworkflows
 
 from apps.organisations.models import Organisation
 from apps.categories.models import Category
@@ -14,14 +14,14 @@ class CaseWorkflow(xwf_models.Workflow):
     log_model = ''
     states = (
         ('created', _(u"Created")),
-        ('validated', _(u"Validated")),
+        ('open', _(u"Open")),
         ('closed', _(u"Closed")),
         ('rejected', _(u"Rejected"))
     )
     transitions = (
-        ('validate', 'created', 'validated'),
-        ('close', 'validated', 'closed'),
-        ('reject', ('created', 'validated'), 'rejected')
+        ('validate', 'created', 'open'),
+        ('close', 'open', 'closed'),
+        ('reject', ('created', 'open'), 'rejected')
     )
     initial_state = 'created'
 
@@ -41,7 +41,6 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     categories = models.ManyToManyField(
         to=Category,
         related_name='cases',
-        default=0
     )
     consent = models.BooleanField(default=False)
     age = models.CharField(max_length=50)
@@ -63,6 +62,12 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         blank=True,
         null=True
     )
+
+    @xworkflows.transition_check("reject")
+    def hook(self, *args, **kwargs):
+        if self.partnered_organisations.filter(status="assigned").exists():
+            return False
+        return True
 
     class Meta:
         permissions = [
@@ -90,7 +95,9 @@ class PartnerWorkflow(xwf_models.Workflow):
         ('downgrade', 'accepted', 'matched'),
         ('accept', ('matched', 'assigned'), 'accepted'),
         ('assign', 'accepted', 'assigned'),
-        ('reject', 'matched', 'rejected')
+        ('reject', 'matched', 'rejected'),
+        ('unreject', 'rejected', 'matched')
+
     )
     initial_state = 'matched'
 

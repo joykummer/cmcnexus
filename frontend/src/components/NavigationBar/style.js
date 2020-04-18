@@ -5,6 +5,7 @@ import {RedButton} from '../../styles/Buttons'
 
 export const NavigationContainer = styled.div`
 width: 350px;
+min-width: 350px;
 height: 100%;
 background: white;
 display: flex;
@@ -44,9 +45,10 @@ align-items: center;
 font-size: 24px; 
 padding: 10px 20px; 
 border: 1px solid transparent;
-${props => props.selected ? "background-color: darkgray;" : ""}
+${props => props.selected ? "background-color: lightgray; font-weight: bold;" : ""}
 :hover {
        color: red;
+       font-weight: bold;
        background-color: rgb(192,192,192);  
        cursor: pointer;
        box-shadow: 0px 5px 6px rgba(0,0,0,0.3);

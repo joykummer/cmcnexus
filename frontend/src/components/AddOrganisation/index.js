@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addOrganisationFunction } from "../../store/actions/addOrganisationAction";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
-import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, 
+import {setNavigationAction} from '../../store/actions/Navigation';
+import {ORGANISATIONS} from '../Navigation/states';
+import {Container, HeaderTitle, DetailsContainer, Label, FieldInput,
       FieldInputLarge, CategoryDropdown, AddButton} from "./styles"
 
 
@@ -11,43 +13,36 @@ function AddOrganisation(props) {
   const [description, setDescription] = useState("");
   const [services, setServices] = useState("");
   const [tag, setTag] = useState("");
+  const [categories, setCategories] = useState(["default"]);
+  const [categoryIds, setCategoryIds] = useState([]);
   const dispatch = props.dispatch;
 
 
   useEffect(() => {
     dispatch(categoriesFunction());
+    dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 
- const categories = [];
-
   const setCategoryHandler = (e) => {
-    const id = e.target.options.selectedIndex;
-    const categoryOption = e.target.options;
-    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
-        categories.push(id)
-    }
-    console.log("IN CAT", categories)
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    setCategories(selectedOptions.map(option => option.value));
+    setCategoryIds(selectedOptions.map(option => option.id));
   };
 
 
   const addOrganisationHandler = async (e) => {
     e.preventDefault();
-    console.log("IN ADDORG", categories)
     const data = {
       name: name,
       description: description,
       services: services,
-      categories: categories,
+      categories: categoryIds,
       tag: tag,
     };
-    if (data[name] ===0){
-      alert("Name is missing")
-    }
-    await props.dispatch(addOrganisationFunction(data));
+    dispatch(addOrganisationFunction(data));
     props.history.push("/organisations/");
   };
 
-  
   return (
     <Container>
       <HeaderTitle>Add organisation</HeaderTitle>
@@ -60,6 +55,7 @@ function AddOrganisation(props) {
         // onkeydown = {lengthChecker}
         onChange={(e) => setName(e.target.value)}
         value={name}
+        required
       />
       </Label>
       <Label>Description
@@ -92,17 +88,9 @@ function AddOrganisation(props) {
         required
       />
       </Label>
-      {/* <Label>Members
-      <FieldInput
-        name="members"
-        onChange={(e) => setMembers(e.target.value)}
-        value={members}
-        required
-      />
-      </Label>  */}
       <Label>Category
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple>
-        {/*<option value={"default"} disabled>Select a category...</option>*/}
+      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
+        <option value={"default"} disabled>Select a category...</option>
         {props.categories
           ? props.categories.map((category) => {
               return (

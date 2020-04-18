@@ -11,24 +11,6 @@ export default function cases(state = [], action) {
     case UPDATE_CASE: {
       return state.map((c) => c.id === action.payload.id ? action.payload : c)
     }
-    case VALIDATE_CASE:{
-      const state_id = state.findIndex(cases => cases.id = action.payload.id)
-      if(state_id === -1){
-        return [...state, action.payload]
-      }else{
-        state.splice(state_id, 1);
-				return[...state, action.payload]
-      }
-    }
-    case REJECT_CASE: {
-      const state_id = state.findIndex(cases => cases.id = action.payload.id)
-      if(state_id === -1){
-        return [...state, action.payload]
-      }else{
-        state.splice(state_id, 1);
-				return[...state, action.payload]
-      }
-    }
     default:
       return state;
   }
