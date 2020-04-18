@@ -69,7 +69,6 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
             return False
         return True
 
-
     class Meta:
         permissions = [
             ("validate_case", "Can validate cases"),
