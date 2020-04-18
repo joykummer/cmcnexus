@@ -43,7 +43,7 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
         fields = '__all__'
 
     def get_permissions_map(self, created):
-        doctor = Group.objects.get(name="Case Coordinator")
+        doctor = Group.objects.get(name="Doctor/Nurse")
         case_coordinator = Group.objects.get(name="Case Coordinator")
         med_co = Group.objects.get(name="Medical Coordinator")
         expert = Group.objects.get(name="Expert")
