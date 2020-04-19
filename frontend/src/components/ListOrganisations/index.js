@@ -9,7 +9,6 @@ import {
 import { RedButton } from "../../styles/Buttons";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { ORGANISATIONS } from "../Navigation/states";
-import { Dropdown } from "../../styles/Dropdowns";
 import { ADD_ORGANISATION } from "../Permissions/permissions";
 import CanI from "../Permissions";
 import { categoriesFunction } from "../../store/actions/categoriesAction";

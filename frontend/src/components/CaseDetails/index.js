@@ -78,7 +78,7 @@ function CaseDetails(props) {
               <Validation id={caseDetails.id}/>
             </CanI>
             {
-              caseDetails.status === 'validated' ?
+              caseDetails.status === 'open' ?
                 <>
                   <CanI perform={MATCH_ORGANISATIONS}>
                     <Match onClick={() => matchingHandler(caseDetails.id)}>Potential Partner Organisations</Match>

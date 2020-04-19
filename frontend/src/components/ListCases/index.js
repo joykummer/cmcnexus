@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
-import { RedButton } from "../../styles/Buttons";
 import { casesFunction } from "../../store/actions/casesAction";
 import {
   searchTitleFunction,
@@ -9,7 +7,6 @@ import {
 } from "../../store/actions/searchCasesAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
-import { Dropdown } from "../../styles/Dropdowns";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
 import {
   Table,
