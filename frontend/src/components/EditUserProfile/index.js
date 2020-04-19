@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Time from "react-time";
 import { useDispatch } from 'react-redux';
-import { editUser } from "../../store/actions/editUserActions";
+import { editUser } from "../../store/actions/Authentication/editUserActions";
 
 import {
   Button

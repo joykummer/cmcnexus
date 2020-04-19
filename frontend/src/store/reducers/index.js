@@ -4,6 +4,7 @@ import cases from './CasesReducer';
 import organisations from './OrganisationsReducer';
 import categories from './CategoriesReducer';
 import navigation from './NavigationReducer';
+import stats from './StatisticsReducer';
 
 const rootReducer = combineReducers({
 	auth,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
 	organisations,
 	categories,
 	navigation,
+	stats,
 });
 
 export default rootReducer

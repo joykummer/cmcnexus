@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 
-import {login} from '../../store/actions/loginActions';
+import {login} from '../../store/actions/Authentication/loginActions';
 import isEmail from '../../helpers/isEmail';
 
 import {CardBox} from '../../styles/GenericBoxes';
