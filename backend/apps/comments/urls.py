@@ -1,0 +1,9 @@
+from django.urls import path
+
+from apps.comments.views import RetrieveUpdateDestroyComment, CreateComment, ListCaseComments
+
+urlpatterns = [
+    path('<int:comment_id/>', RetrieveUpdateDestroyComment.as_view()),
+    path('new/', CreateComment.as_view()),
+    path('<int:case_id>/', ListCaseComments.as_view()),
+]

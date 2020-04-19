@@ -62,7 +62,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     justification = models.TextField(blank=True, default='')
     recommendation = models.TextField(blank=True, default='')
     outcome = models.CharField(max_length=100, blank=True, default='')
-    comments = models.TextField(blank=True, default='')
+
     categories = models.ManyToManyField(
         to=Category,
         related_name='cases',

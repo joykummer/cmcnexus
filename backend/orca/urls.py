@@ -20,6 +20,7 @@ from apps.statistics.views import StatisticsBundleView
 
 api_patterns = [
     path('cases/', include('apps.cases.urls')),
+    path('comments/', include('apps.comments.urls')),
     path('organisations/', include('apps.organisations.urls')),
     path('categories/', include('apps.categories.urls')),
     path('users/', include('apps.users.urls')),
