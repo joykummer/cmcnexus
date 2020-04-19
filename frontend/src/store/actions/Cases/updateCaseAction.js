@@ -1,5 +1,5 @@
-import Axios from "../../axios/authenticated";
-import {UPDATE_CASE} from "./actionTypes";
+import Axios from "../../../axios/authenticated";
+import {UPDATE_CASE} from "../actionTypes";
 
 
 export const validateCaseAction = cases => {

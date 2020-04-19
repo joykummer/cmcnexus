@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { editOrganisationFunction } from "../../store/actions/editOrganisationAction";
-import { categoriesFunction } from "../../store/actions/categoriesAction";
+import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, 
       FieldInputLarge, CategoryDropdown, AddButton} from "../AddOrganisation/styles"
 
@@ -32,7 +32,6 @@ function EditOrganisation(props) {
     if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
         categories.push(id)
     }
-    console.log("IN CAT", categories)
   };
 
 
@@ -109,7 +108,6 @@ function EditOrganisation(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log("Myri state", state)
   return {
     organisations: state.organisations,
     categories: state.categories,

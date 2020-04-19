@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { organisationsFunction } from "../../store/actions/organisationsAction";
+import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import {
   searchNameFunction,
   searchTagFunction,
-} from "../../store/actions/searchOrganisationsAction";
+} from "../../store/actions/Organisations/searchOrganisationsAction";
 import { RedButton } from "../../styles/Buttons";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { ORGANISATIONS } from "../Navigation/states";
 import { ADD_ORGANISATION } from "../Permissions/permissions";
 import CanI from "../Permissions";
-import { categoriesFunction } from "../../store/actions/categoriesAction";
+import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import { useHistory } from "react-router-dom";
 import {
   Table,
@@ -90,7 +90,6 @@ function ListOrganisations(props) {
       const query = {
         tag: tag,
       };
-      console.log("TAG", tag);
       props.dispatch(searchTagFunction(query));
     }
   };

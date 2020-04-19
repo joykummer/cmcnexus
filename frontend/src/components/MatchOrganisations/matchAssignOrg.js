@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { RedButton } from "../../styles/Buttons";
-import { organisationsFunction } from "../../store/actions/organisationsAction";
-import { matchOrganisationsFunction, unmatchOrganisationsFunction } from "../../store/actions/matchOrganisationsAction";
-import { assignOrganisationsFunction, unassignOrganisationsFunction } from "../../store/actions/assignOrganisationsAction";
+import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
+import { matchOrganisationsFunction, unmatchOrganisationsFunction } from "../../store/actions/Cases/matchOrganisationsAction";
+import { assignOrganisationsFunction, unassignOrganisationsFunction } from "../../store/actions/Organisations/assignOrganisationsAction";
 import {
   Table,
   TableBody,

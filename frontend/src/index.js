@@ -9,8 +9,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "./styles";
 
 import Routes from "./routes";
-import { loginAction } from "./store/actions/loginActions";
-import {currentUserAction, getCurrentUser} from "./store/actions/userActions";
+import { loginAction } from "./store/actions/Authentication/loginActions";
+import {currentUserAction, getCurrentUser} from "./store/actions/Authentication/userActions";
 
 if (localStorage.getItem("token")) {
   store.dispatch(loginAction({ token: localStorage.getItem("token")}));

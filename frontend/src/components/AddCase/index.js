@@ -6,7 +6,6 @@ import { categoriesFunction } from "../../store/actions/categoriesAction";
 import { addCaseFunction } from "../../store/actions/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
-
 import {
   Container,
   HeaderTitle,
@@ -160,7 +159,6 @@ function AddCase(props) {
         country: country,
         categories: categoryIds,
       };
-      console.log("data", data);
       dispatch(addCaseFunction(data));
       props.history.push("/cases/");
     }

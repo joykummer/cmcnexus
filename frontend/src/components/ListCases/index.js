@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { casesFunction } from "../../store/actions/casesAction";
+import { casesFunction } from "../../store/actions/Cases/casesAction";
 import {
   searchTitleFunction,
   searchStatusFunction,
-} from "../../store/actions/searchCasesAction";
+} from "../../store/actions/Cases/searchCasesAction";
+import CanI from "../Permissions";
+import { ADD_CASE } from "../Permissions/permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
-import { categoriesFunction } from "../../store/actions/categoriesAction";
+import { Dropdown } from "../../styles/Dropdowns";
+import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import {
   Table,
   TableBody,

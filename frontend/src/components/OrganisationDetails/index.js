@@ -22,12 +22,12 @@ function OrganisationDetails(props) {
       )
     : null;
 
-    const history = useHistory()
+    const history = useHistory();
     const redirectHandler = () => {
         history.push(`/organisations/edit/${organisationDetails.id}/`)
-    }
+    };
 
-    
+
   return (
     <Container>
       {organisationDetails ? (
