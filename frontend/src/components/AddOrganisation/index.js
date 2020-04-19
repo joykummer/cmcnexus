@@ -47,7 +47,7 @@ function AddOrganisation(props) {
     <Container>
       <HeaderTitle>Add organisation</HeaderTitle>
       <DetailsContainer>
-        <Label>Name
+        <Label style={{"marginTop":"25px"}}>Name
       <FieldInput
         name="name"
         type = "text"
@@ -88,7 +88,7 @@ function AddOrganisation(props) {
         required
       />
       </Label>
-      <Label>Category
+      <Label style={{"marginBottom":"25px"}}>Category
       <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
         <option value={"default"} disabled>Select a category...</option>
         {props.categories

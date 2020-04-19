@@ -1,7 +1,6 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import PacmanLoader from "react-spinners/PacmanLoader";
 
 const Center = styled.div`
 display: flex;

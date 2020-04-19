@@ -7,6 +7,7 @@ import { RedButton } from "../../styles/Buttons";
 export const Container = styled.div`
 width: 100%;
 height: 100%;
+overflow: scroll;
 display: flex;
 flex-direction: column;
 background-color:#ebebeb;
@@ -27,6 +28,7 @@ text-transform: uppercase;
 export const DetailsContainer = styled.div`
 width: 80%;
 height: auto; 
+  border-radius: 5px;
 display: flex; 
 flex-wrap: wrap; 
 flex-direction: column; 
@@ -45,6 +47,7 @@ color: #777;
 margin: 10px;
 position: relative;
 width: 90%;
+margin: 15px;
 `;
 
 export const FieldInput = styled(GreyRoundInput)`
@@ -76,5 +79,6 @@ margin-top: 5px;
 export const AddButton = styled(RedButton)`
 width: 75px;
 height: 50px;
-margin: 20px; 
+margin-top: 20px;
+margin-bottom: 50px; 
 `;

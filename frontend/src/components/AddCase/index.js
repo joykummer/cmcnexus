@@ -150,7 +150,7 @@ function AddCase(props) {
     <Container>
       <HeaderTitle>Add case</HeaderTitle>
       <DetailsContainer>
-        <Label>Title
+        <Label style={{"marginTop":"25px"}}>Title
         <FieldInput
           name="title"
           onChange={(e) => setTitle(e.target.value)}
@@ -243,7 +243,7 @@ function AddCase(props) {
       </CountryDropdown>
         </Label>
           <ErrorMessage>{countryError}</ErrorMessage>
-      <Label>Category
+      <Label style={{"marginBottom":"25px"}}>Category
       <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
           {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
@@ -259,7 +259,7 @@ function AddCase(props) {
       </Label>
           <ErrorMessage>{categoriesError}</ErrorMessage>
         </DetailsContainer>
-      <AddButton onClick={addCaseHandler}>Add</AddButton>
+      <AddButton onClick={addCaseHandler}>Submit</AddButton>
     </Container>
   );
 }
