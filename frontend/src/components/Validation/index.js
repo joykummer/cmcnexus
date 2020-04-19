@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { RedButton } from '../../styles/Buttons';
 import styled from 'styled-components';
-import {validateCaseFunction} from '../../store/actions/updateCaseAction';
-import {rejectCaseFunction} from '../../store/actions/rejectCaseAction';
+import {validateCaseFunction} from '../../store/actions/Cases/updateCaseAction';
+import {rejectCaseFunction} from '../../store/actions/Cases/rejectCaseAction';
 
 
 const ButtonContainer = styled.div`

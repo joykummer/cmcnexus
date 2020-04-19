@@ -1,5 +1,5 @@
-import Axios from "../../axios/authenticated";
-import {SET_CURRENT_USER} from "./actionTypes";
+import Axios from "../../../axios/authenticated";
+import {SET_CURRENT_USER} from "../actionTypes";
 
 
 export const editUserAction = user => {

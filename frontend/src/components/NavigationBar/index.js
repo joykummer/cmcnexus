@@ -11,7 +11,7 @@ import {
   NavigationContainer, Logo, Options,
   Button, NavItem
 } from './style';
-import {logoutAction} from '../../store/actions/loginActions';
+import {logoutAction} from '../../store/actions/Authentication/loginActions';
 import CanI from '../Permissions';
 import {Empty} from '../../styles/GenericBoxes';
 import {CASES, CASES_ADD, DASHBOARD, ORGANISATIONS, USERPROFILE} from '../Navigation/states';

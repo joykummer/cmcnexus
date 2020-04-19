@@ -19,6 +19,7 @@ import MatchOrganisations from '../components/MatchOrganisations';
 import OrganisationDetails from '../components/OrganisationDetails';
 import EditOrganisation from '../components/EditOrganisation';
 import PermissionDenied from "../components/PermissionDenied";
+import Dashboard from "../components/Dashboard";
 
 
 export default function Routes() {
@@ -31,7 +32,7 @@ export default function Routes() {
         <Navigation>
           <PrivateRoute path='/403' component={PermissionDenied}/>
           <Route exact path="/" render={() => <Redirect to='/cases/'/>}/>
-          <PrivateRoute path='/dashboard/' component={UnderConstruction}/>
+          <PrivateRoute path='/dashboard/' component={Dashboard}/>
           <PrivateRoutePerm exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
           <PrivateRoutePerm exact path='/cases/details/:id/' component={CaseDetails} permission={VIEW_CASE}/>
           <PrivateRoutePerm exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
