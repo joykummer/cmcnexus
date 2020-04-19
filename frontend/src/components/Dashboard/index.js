@@ -11,9 +11,19 @@ import Counter from './Widgets/counter';
 
 
 const Wrapper = styled.div`
-	height: 100%;
   padding: 20px;
   background-color: #ebebeb;
+	height: 100%;
+  
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+`;
+
+const Container = styled.div`
+	height: 100%;
+	max-width: 1200px;
   
 	display: flex;
 	flex-direction: column;
@@ -24,8 +34,10 @@ const Wrapper = styled.div`
 `;
 
 const Horizontal = styled.div`
+width: 100%;
 display: flex;
-justify-content: space-between;
+flex-direction: row;
+justify-content: space-around;
 `;
 
 export default function Dashboard (props) {
@@ -42,7 +54,7 @@ export default function Dashboard (props) {
 	return (
 		<Wrapper>
 			{stats && stats.cases ?
-				<>
+				<Container>
 					<Counter data={{
 						total: stats.cases.total,
 						open: stats.cases.by_status.find(el => el.status === "open").count,
@@ -53,7 +65,7 @@ export default function Dashboard (props) {
 						<CaseCategoryWidget data={stats.cases.by_category}/>
 					</Horizontal>
 					<CaseYearlyWidget data={stats.cases.yearly}/>
-				</>
+				</Container>
 				: null}
 		</Wrapper>
 	)
