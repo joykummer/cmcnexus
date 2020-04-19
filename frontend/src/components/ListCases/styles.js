@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: #ebebeb;
-  padding: 50px 50px 50px 50px;
+  padding: 50px;
   overflow: scroll;
   display: flex;
   flex-direction: column;
