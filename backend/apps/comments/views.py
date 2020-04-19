@@ -9,7 +9,10 @@ from apps.comments.serializers import CommentSerializer
 class CreateComment(CreateAPIView):
     serializer_class = CommentSerializer
     lookup_url_kwarg = 'case_id'
+    queryset = Case
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user, case=Case.objects.get(id=self.kwargs['case_id']))
 
 
 class ListCaseComments(ListAPIView):
@@ -26,8 +29,3 @@ class RetrieveUpdateDestroyComment(RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     lookup_url_kwarg = 'comment_id'
 
-    def create(self, request, *args, **kwargs):
-        case = self.get_object()
-        comment = Comment(content=request.data['content'], author=request.user, case=case)
-        comment.save()
-        return Response()
