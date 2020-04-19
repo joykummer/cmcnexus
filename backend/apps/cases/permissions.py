@@ -29,3 +29,9 @@ class MatchOrganisationPermission(BasePermission):
 
     def has_permission(self, request, view):
         return request.user.has_perm('cases.match_organisations')
+
+
+class AcceptRejectCasePermission(BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user.has_perm('cases.update_match')
