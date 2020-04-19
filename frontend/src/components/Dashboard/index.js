@@ -19,6 +19,8 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
+	
+  overflow: auto;
 `;
 
 const Container = styled.div`
@@ -29,8 +31,6 @@ const Container = styled.div`
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	
-  overflow: auto;
 `;
 
 const Horizontal = styled.div`
