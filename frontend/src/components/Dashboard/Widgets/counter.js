@@ -32,7 +32,6 @@ const Number = styled.div`
 `;
 
 const LabelCounter = ({label, number, right_border}) => {
-	console.log("right_border", right_border)
 	return (
 		<Stack right_border={right_border}>
 			<Number>

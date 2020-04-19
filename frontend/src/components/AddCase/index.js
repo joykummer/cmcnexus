@@ -140,7 +140,6 @@ function AddCase(props) {
         country: country,
         categories: categoryIds,
       };
-      console.log('data', data);
       dispatch(addCaseFunction(data));
       props.history.push("/cases/");
     }

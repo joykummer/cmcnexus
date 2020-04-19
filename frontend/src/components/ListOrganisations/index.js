@@ -90,7 +90,6 @@ function ListOrganisations(props) {
       const query = {
         tag: tag,
       };
-      console.log("TAG", tag);
       props.dispatch(searchTagFunction(query));
     }
   };

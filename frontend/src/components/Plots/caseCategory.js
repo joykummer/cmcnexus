@@ -49,7 +49,6 @@ export default function(props) {
 			setData(props.data.map(entry => entry.count));
 			setShowChart(true);
 		}
-		console.log(getChart())
 	}, [props.data, categories]);
 
 

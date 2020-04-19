@@ -38,7 +38,6 @@ export default function(props) {
 			setData(props.data.map(entry => entry.cases_created));
 			setShowChart(true);
 		}
-		console.log(getChart())
 	}, [props.data]);
 
 

@@ -28,7 +28,6 @@ justify-content: center;
 `;
 
 export default function Widget (props) {
-	console.log(props)
 	return (
 		<Card space_right={props.space_right} fullWidth={props.fullWidth}>
 			<TitleBox>{props.title ? props.title : "Widget"}</TitleBox>

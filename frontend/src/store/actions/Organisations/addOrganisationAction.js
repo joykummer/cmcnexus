@@ -13,6 +13,6 @@ export const addOrganisationFunction = (data) => async (dispatch) => {
     const response = await Axios.post("organisations/add/", data);
     dispatch(addOrganisationAction(response.data));
   } catch (e) {
-    console.log(e.response);
+    return e;
   }
 };

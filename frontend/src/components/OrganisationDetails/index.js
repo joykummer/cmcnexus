@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
-import { Link, useHistory } from 'react-router-dom'
-import { organisationsFunction } from "../../store/actions/organisationsAction";
+import { useHistory } from 'react-router-dom'
 import {HeaderTitle, Stripe, DetailsContainer} from "../CaseDetails/styles";
 import {AddButton} from "../AddOrganisation/styles";
 import {setNavigationAction} from '../../store/actions/Navigation';

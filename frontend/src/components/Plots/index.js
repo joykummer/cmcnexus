@@ -8,7 +8,6 @@ width: 100%;
 `;
 
 export default function(props) {
-	console.log("Plot", props)
 	const chartRef = React.createRef();
 	const chartSpecification = props.chart;
 
@@ -16,7 +15,6 @@ export default function(props) {
 		const myChartRef = chartRef.current ? chartRef.current.getContext("2d") : null;
 
 		if (myChartRef && chartSpecification) {
-			console.log("Creating chart", chartSpecification)
 			new Chart(myChartRef, chartSpecification);
 		}
 	}, [chartRef, chartSpecification]);
