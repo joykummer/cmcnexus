@@ -48,7 +48,7 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
 
     def get_serializer_class(self):
         return get_general_or_medical_info(self.request)
-
+    
 
 class ValidateCaseView(UpdateAPIView):
     queryset = Case.objects.all()

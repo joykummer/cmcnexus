@@ -73,7 +73,7 @@ class MedicalInfoSerializer(serializers.ModelSerializer):
 
 def get_general_or_medical_info(request):
     if request.method == 'GET':
-        if request.user.has_perm("cases.view_general_info", "cases.view_medical_info"):
+        if request.user.has_perms("cases.view_general_info", "cases.view_medical_info"):
             return CaseSerializer
         elif request.user.has_perm("cases.view_general_info"):
             return GeneralInfoSerializer
