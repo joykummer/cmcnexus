@@ -19,8 +19,9 @@ import styled from "styled-components";
   `;
 
 const isRejected = (singleCase, user) => {
-    return singleCase.partnered_organisations.filter(org => org.status === "rejected")
-        .some((org) => org.organisation.id === user.organisation)
+    return singleCase.partnered_organisations ? singleCase.partnered_organisations
+        .filter(org => org.status === "rejected")
+        .some((org) => org.organisation.id === user.organisation) : false;
 }
 
 function RejectCase(props) {

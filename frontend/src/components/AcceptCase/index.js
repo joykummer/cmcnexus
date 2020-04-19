@@ -19,8 +19,9 @@ import styled from "styled-components";
   `;
 
 const isAccepted = (singleCase, user) => {
-    return singleCase.partnered_organisations.filter(org => org.status === "accepted")
-        .some((org) => org.organisation.id === user.organisation)
+    return singleCase.partnered_organisations ? singleCase.partnered_organisations
+        .filter(org => org.status === "accepted")
+        .some((org) => org.organisation.id === user.organisation) : false;
 }
 
 function AcceptCase(props) {
@@ -50,6 +51,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(AcceptCase);
-
-
-

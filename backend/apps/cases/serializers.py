@@ -2,25 +2,26 @@ from django.contrib.auth.models import Group
 from rest_framework import serializers
 from rest_framework_guardian.serializers import ObjectPermissionsAssignmentMixin
 
-from apps.cases.models import Case, Partnership
-from apps.organisations.serializer import OrganisationSerializer
-from apps.users.serializer import FullUserSerializer
+from apps.cases.models import Case, PartnerWorkflow
+from apps.users.serializer import UserForCaseSerializer
 
 from apps.categories.serializer import CategorySerializer
 
 
-class PartnershipSerializer(serializers.ModelSerializer):
-    organisation = OrganisationSerializer(read_only=True)
-
-    class Meta:
-        model = Partnership
-        fields = ['status', 'organisation']
-
-
 class CaseSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
-    created_by = FullUserSerializer(read_only=True)
-    partnered_organisations = PartnershipSerializer(many=True)
+    created_by = UserForCaseSerializer(read_only=True)
+    match_stats = serializers.SerializerMethodField()
+
+    def get_match_stats(self, obj):
+        status_count = []
+        for state in PartnerWorkflow.states:
+            count = obj.partnered_organisations.filter(status=state).count()
+            status_count.append({
+                "status": state.name,
+                "count": count
+            })
+        return status_count
 
     class Meta:
         model = Case
@@ -28,7 +29,7 @@ class CaseSerializer(serializers.ModelSerializer):
 
 
 class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):
-    created_by = FullUserSerializer(read_only=True)
+    created_by = UserForCaseSerializer(read_only=True)
 
     class Meta:
         model = Case

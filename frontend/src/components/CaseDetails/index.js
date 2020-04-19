@@ -63,7 +63,7 @@ function CaseDetails(props) {
             <Stripe>Status</Stripe>
             <DetailsContainer> 
             <DetailsHeader><DetailsKey>Partners:</DetailsKey>{
-              caseDetails ?
+              caseDetails && caseDetails.partnered_organisations ?
                   caseDetails.partnered_organisations.map(partner => {
                     return (
                         <div key={partner.organisation.id}><b>{partner.organisation.name}</b> <i>{partner.status}</i></div>

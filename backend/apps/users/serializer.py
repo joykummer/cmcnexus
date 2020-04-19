@@ -15,3 +15,10 @@ class FullUserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'department', 'organisation', 'first_name', 'last_name', 'phone', 'date_joined',
                   'permissions']
         read_only_fields = ['id', 'date_joined', 'email']
+
+
+class UserForCaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'username', 'first_name', 'last_name', 'phone']
+        read_only_fields = ['username', 'email', 'first_name', 'last_name', 'phone']
