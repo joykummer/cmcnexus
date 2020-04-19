@@ -10,10 +10,6 @@ class CreateComment(CreateAPIView):
     serializer_class = CommentSerializer
     lookup_url_kwarg = 'case_id'
 
-    def perform_create(self, serializer):
-        serializer.save(
-            case=Case.objects.get(pk=self.kwargs['case_id']),
-            author=self.request.user)
 
 
 class ListCaseComments(ListAPIView):
