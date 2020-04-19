@@ -23,6 +23,7 @@ export const TableBody = styled.tbody`
 
 export const TableRow = styled.tr`
   width: 100%;
+  text-transform: capitalize;
   :hover {
     color: red;
   }
@@ -32,6 +33,6 @@ export const TableRow = styled.tr`
 `;
 
 export const TableData = styled.td`
-    height: 25px;
+  height: 25px;
   max-width: 150px;
 `;

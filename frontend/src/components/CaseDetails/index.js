@@ -39,12 +39,12 @@ function CaseDetails(props) {
             <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle> 
             <Stripe>Patient's details</Stripe>
             <DetailsContainer>
-                <DetailsHeader><DetailsKey>name: </DetailsKey>{caseDetails.title}</DetailsHeader>
-                <DetailsHeader><DetailsKey>age:</DetailsKey> {caseDetails.age}</DetailsHeader>
-                <DetailsHeader><DetailsKey>sex:</DetailsKey> {caseDetails.sex}</DetailsHeader>
-                <DetailsHeader><DetailsKey>country:</DetailsKey> {caseDetails.country}</DetailsHeader>
-                <DetailsHeader><DetailsKey>consent:</DetailsKey> {caseDetails.consent ?"yes":"no"}</DetailsHeader>
-                <DetailsHeader><DetailsKey>category:</DetailsKey> {
+                <DetailsHeader><DetailsKey>name:</DetailsKey>{caseDetails.title}</DetailsHeader>
+                <DetailsHeader><DetailsKey>age:</DetailsKey>{caseDetails.age}</DetailsHeader>
+                <DetailsHeader><DetailsKey>sex:</DetailsKey>{caseDetails.sex}</DetailsHeader>
+                <DetailsHeader><DetailsKey>country:</DetailsKey>{caseDetails.country}</DetailsHeader>
+                <DetailsHeader><DetailsKey>consent:</DetailsKey>{caseDetails.consent ?"yes":"no"}</DetailsHeader>
+                <DetailsHeader><DetailsKey>category:</DetailsKey>{
               caseDetails ?
                   caseDetails.categories.map(category => {
                     return (
@@ -62,7 +62,7 @@ function CaseDetails(props) {
             </DetailsContainer>
             <Stripe>Status</Stripe>
             <DetailsContainer> 
-            <DetailsHeader><DetailsKey>Partners:</DetailsKey>  {
+            <DetailsHeader><DetailsKey>Partners:</DetailsKey>{
               caseDetails ?
                   caseDetails.partnered_organisations.map(partner => {
                     return (

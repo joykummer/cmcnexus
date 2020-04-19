@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {Dropdown} from "../../styles/Dropdowns";
-import {RedButton} from "../../styles/Buttons";
+import { Dropdown } from "../../styles/Dropdowns";
+import { RedButton } from "../../styles/Buttons";
 
 export const Container = styled.div`
   width: 100%;

@@ -22,7 +22,16 @@ import {
   TableHeaderWrapper,
   TableRow,
 } from "../../styles/Tables";
-import {SearchContainer, SearchWrapper, SearchInput, SearchButton, Filter, Card, Wrapper, Clear} from "../ListCases/styles"
+import {
+  SearchContainer,
+  SearchWrapper,
+  SearchInput,
+  SearchButton,
+  Filter,
+  Card,
+  Wrapper,
+  Clear,
+} from "../ListCases/styles";
 
 export const Container = styled.div`
   width: 100%;
@@ -183,11 +192,7 @@ function ListOrganisations(props) {
                     <TableData>
                       {organisation.categories
                         ? organisation.categories.map((category) => {
-                            return (
-                              <div key={category.id}>
-                                {category.name}
-                              </div>
-                            );
+                            return <div key={category.id}>{category.name}</div>;
                           })
                         : []}
                     </TableData>
