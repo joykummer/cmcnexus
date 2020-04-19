@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from apps.statistics.views import StatisticsBundleView
 
 api_patterns = [
     path('cases/', include('apps.cases.urls')),
@@ -23,6 +24,7 @@ api_patterns = [
     path('categories/', include('apps.categories.urls')),
     path('users/', include('apps.users.urls')),
     path('token/', include('apps.authentication.urls')),
+    path('dashboard/', StatisticsBundleView.as_view(), name='Dashboard')
 ]
 
 urlpatterns = [

@@ -1,5 +1,5 @@
-import { SET_CASES } from "./actionTypes";
-import Axios from "../../axios/authenticated";
+import { SET_CASES } from "../actionTypes";
+import Axios from "../../../axios/authenticated";
 
 export const casesAction = (organisations) => {
   return {

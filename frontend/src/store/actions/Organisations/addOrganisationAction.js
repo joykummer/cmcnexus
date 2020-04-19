@@ -1,5 +1,5 @@
-import Axios from "../../axios/authenticated";
-import { ADD_ORGANISATION } from "./actionTypes";
+import Axios from "../../../axios/authenticated";
+import { ADD_ORGANISATION } from "../actionTypes";
 
 export const addOrganisationAction = (organisations) => {
   return {

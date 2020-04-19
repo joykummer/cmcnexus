@@ -14,5 +14,4 @@ export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const VALIDATE_CASE = 'VALIDATE_CASE';
 export const SET_NAVIGATION = 'SET_NAVIGATION';
 export const REJECT_CASE = 'REJECT_CASE';
-
-
+export const SET_STATS = 'SET_STATS';

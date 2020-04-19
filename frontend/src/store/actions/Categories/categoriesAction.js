@@ -1,5 +1,5 @@
-import { SET_CATEGORIES } from "./actionTypes";
-import Axios from "../../axios/authenticated";
+import { SET_CATEGORIES } from "../actionTypes";
+import Axios from "../../../axios/authenticated";
 
 export const categoriesAction = (categories) => {
   return {

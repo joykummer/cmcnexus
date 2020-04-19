@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { organisationsFunction } from "../../store/actions/organisationsAction";
+import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import {HeaderTitle, Stripe, DetailsContainer} from "../CaseDetails/styles";
 
 import {setNavigationAction} from '../../store/actions/Navigation';

@@ -2,6 +2,7 @@ from django.db.models import Q
 from guardian.shortcuts import assign_perm, remove_perm
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView, GenericAPIView, \
     ListAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_guardian.filters import ObjectPermissionsFilter
 
@@ -45,7 +46,7 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
 class ValidateCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [ValidatePermission]
+    permission_classes = [IsAuthenticated, ValidatePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -57,7 +58,7 @@ class ValidateCaseView(UpdateAPIView):
 class CloseCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [ClosePermission]
+    permission_classes = [IsAuthenticated, ClosePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -69,7 +70,7 @@ class CloseCaseView(UpdateAPIView):
 class RejectCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
-    permission_classes = [RejectPermission]
+    permission_classes = [IsAuthenticated, RejectPermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
@@ -81,7 +82,7 @@ class RejectCaseView(UpdateAPIView):
 class MatchOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    permission_classes = [MatchOrganisationPermission]
+    permission_classes = [IsAuthenticated, MatchOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
@@ -104,7 +105,7 @@ class MatchOrganisation(GenericAPIView):
 class AssignOrganisation(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    permission_classes = [AssignOrganisationPermission]
+    permission_classes = [IsAuthenticated, AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
@@ -127,7 +128,7 @@ class AssignOrganisation(GenericAPIView):
 class AcceptCaseAsOrg(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    permission_classes = [AssignOrganisationPermission]
+    permission_classes = [IsAuthenticated, AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):
@@ -148,7 +149,7 @@ class AcceptCaseAsOrg(GenericAPIView):
 class RefuseCaseAsOrg(GenericAPIView):
     queryset = Case
     serializer_class = CaseSerializer
-    permission_classes = [AssignOrganisationPermission]
+    permission_classes = [IsAuthenticated, AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
     def post(self, request, *args, **kwargs):

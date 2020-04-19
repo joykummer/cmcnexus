@@ -1,5 +1,5 @@
-import {LOGIN, LOGIN_ERROR, LOGOUT} from './actionTypes';
-import Axios from '../../axios/not_authenticated';
+import {LOGIN, LOGIN_ERROR, LOGOUT} from '../actionTypes';
+import Axios from '../../../axios/not_authenticated';
 
 export const loginAction = ({token, user}) => {
 	return ({
