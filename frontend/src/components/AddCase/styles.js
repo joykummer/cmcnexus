@@ -7,12 +7,14 @@ import { Dropdown } from "../../styles/Dropdowns";
 export const CategoryDropdown = styled(Dropdown)`
 width: 300px;
 height: auto;
+margin-top: 5px;
 `;
 
 export const AddButton = styled(RedButton)`
 width: 75px;
 height: 50px;
-margin: 20px; 
+margin-top: 20px;
+margin-bottom: 50px; 
 `;
 
 export const Checkbox = styled.input`
@@ -22,11 +24,13 @@ margin-top: 5px;
 `;
 
 export const CountryDropdown = styled(Dropdown)`
-  width: 200px;
-  height: 40px;
+width: 200px;
+height: 40px;
+margin-top: 5px;
 `;
 
 export const SexDropdown = styled(Dropdown)`
 width: 200px;
 height: 40px;
+margin-top: 5px;
 `;
