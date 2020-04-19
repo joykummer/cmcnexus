@@ -18,7 +18,6 @@ from apps.organisations.models import Organisation
 
 class ListCaseView(ListAPIView):
     queryset = Case.objects.none()
-    serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission]
     filter_backends = [ObjectPermissionsFilter]
 
@@ -42,7 +41,6 @@ class CreateCaseView(CreateAPIView):
 
 class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
     queryset = Case.objects.all()
-    serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission]
     lookup_url_kwarg = 'id'
 

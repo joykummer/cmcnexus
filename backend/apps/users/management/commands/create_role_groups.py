@@ -11,7 +11,9 @@ default_groups_permissions = [
             "reject_case",
             "view_organisation",
             "view_general_info",
-            "view_medical_info"
+            "view_medical_info",
+            "update_general_info",
+            "update_medical_info"
         ]
     },
     {
@@ -48,7 +50,9 @@ default_groups_permissions = [
             "change_case",
             "delete_case",
             "view_medical_info",
-            "view_general_info"
+            "view_general_info",
+            "update_general_info",
+            "update_medical_info"
         ]
     },
     {

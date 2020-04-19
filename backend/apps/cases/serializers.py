@@ -50,7 +50,6 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
 
 
 class GeneralInfoSerializer(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True)
     created_by = FullUserSerializer(read_only=True)
     partnered_organisations = PartnershipSerializer(many=True)
 
@@ -60,7 +59,6 @@ class GeneralInfoSerializer(serializers.ModelSerializer):
 
 
 class MedicalInfoSerializer(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True)
     created_by = FullUserSerializer(read_only=True)
     partnered_organisations = PartnershipSerializer(many=True)
 
@@ -73,12 +71,12 @@ class MedicalInfoSerializer(serializers.ModelSerializer):
 
 def get_general_or_medical_info(request):
     if request.method == 'GET':
-        if request.user.has_perms("cases.view_general_info", "cases.view_medical_info"):
+        if request.user.has_perms(["cases.view_general_info", "cases.view_medical_info"]):
             return CaseSerializer
         elif request.user.has_perm("cases.view_general_info"):
             return GeneralInfoSerializer
     else:
-        if request.user.has_perm("cases.update_general_info"):
-            return GeneralInfoSerializer
+        if request.user.has_perms(["cases.update_general_info", "cases.update_medical_info"]):
+            return CreateCaseSerializer
         else:
-            return CaseSerializer
+            return GeneralInfoSerializer

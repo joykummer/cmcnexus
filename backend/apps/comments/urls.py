@@ -4,6 +4,6 @@ from apps.comments.views import RetrieveUpdateDestroyComment, CreateComment, Lis
 
 urlpatterns = [
     path('<int:comment_id/>', RetrieveUpdateDestroyComment.as_view()),
-    path('/new', CreateComment.as_view()),
+    path('new/<int:case_id>', CreateComment.as_view()),
     path('case/<int:case_id>/', ListCaseComments.as_view()),
 ]

@@ -45,7 +45,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
 
     title = models.CharField(max_length=100)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=10, default='')
-    nature_of_referral = models.CharField(choices=NATURE_CHOICES, max_length=20, default='')
+    nature_of_referral = models.CharField(choices=NATURE_CHOICES, max_length=20, default='Emergency')
     patient_id = models.IntegerField(default=0)
     location = models.CharField(max_length=200, default='')
     country = models.CharField(max_length=100)
@@ -101,6 +101,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
             ("view_general_info", "Can view general information about a case"),
             ("update_general_info", "Can update general information about a case"),
             ("view_medical_info", "Can view medical information about a case"),
+            ("update_medical_info", "Can update medical information about a case"),
         ]
 
     def __str__(self):

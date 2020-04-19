@@ -1,20 +1,19 @@
 from requests import Response
 from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 
+from apps.cases.models import Case
 from apps.comments.models import Comment
 from apps.comments.serializers import CommentSerializer
 
 
 class CreateComment(CreateAPIView):
     serializer_class = CommentSerializer
-    queryset = Comment
     lookup_url_kwarg = 'case_id'
 
-    def create(self, request, *args, **kwargs):
-        case = self.get_object()
-        comment = Comment(content=request.data['content'], author=request.user, case=case)
-        comment.save()
-        return Response()
+    def perform_create(self, serializer):
+        serializer.save(
+            case=Case.objects.get(pk=self.kwargs['case_id']),
+            author=self.request.user)
 
 
 class ListCaseComments(ListAPIView):
