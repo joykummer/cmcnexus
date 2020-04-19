@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from apps.cases.models import Case
 from apps.statistics.permissions import DashboardPermission
-from apps.statistics.serializers import StatCaseSerializer
+from apps.statistics.serializers import YearlyCasesSerializer, CasesCategorySerializer
 
 
 class StatisticsBundleView(APIView):
@@ -19,8 +19,22 @@ class StatisticsBundleView(APIView):
             .annotate(cases_created=Count('id'))\
             .order_by("-year")
 
+        cases_status = Case.objects.all()\
+            .values("status")\
+            .annotate(count=Count('id'))
+
+        cases_category = Case.objects.all()\
+            .values("categories")\
+            .annotate(count=Count('id'))
+
         statistics = {
-            "yearly_cases": StatCaseSerializer(cases, many=True).data,
+            "cases": {
+                "total": Case.objects.count(),
+                "yearly": YearlyCasesSerializer(cases, many=True).data,
+                "by_status": cases_status,
+                "by_category": cases_category,
+            },
+            "organisations": "to be implemented",
         }
 
         return Response(statistics)
