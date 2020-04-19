@@ -17,6 +17,7 @@ function AddOrganisation(props) {
   const [categoryIds, setCategoryIds] = useState([]);
   const dispatch = props.dispatch;
 
+
   useEffect(() => {
     dispatch(categoriesFunction());
     dispatch(setNavigationAction(ORGANISATIONS));
@@ -50,6 +51,8 @@ function AddOrganisation(props) {
       <FieldInput
         name="name"
         type = "text"
+        maxLength = "100"
+        // onkeydown = {lengthChecker}
         onChange={(e) => setName(e.target.value)}
         value={name}
         required
@@ -60,6 +63,7 @@ function AddOrganisation(props) {
         name="description"
         type = "textarea"
         rows = '5'
+        maxLength = "500"
         onChange={(e) => setDescription(e.target.value)}
         value={description}
         required
@@ -69,18 +73,20 @@ function AddOrganisation(props) {
       <FieldInputLarge
         name="services"
         type = "textarea"
+        maxLength = "500"
         onChange={(e) => setServices(e.target.value)}
         value={services}
         required
       />
       </Label>
       <Label>Tag
-        <FieldInput
-          name="tag"
-          onChange={(e) => setTag(e.target.value)}
-          value={tag}
-          required
-        />
+      <FieldInput
+        name="tag"
+        maxLength = "100"
+        onChange={(e) => setTag(e.target.value)}
+        value={tag}
+        required
+      />
       </Label>
       <Label style={{"marginBottom":"25px"}}>Category
       <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
