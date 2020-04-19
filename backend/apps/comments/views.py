@@ -1,4 +1,3 @@
-from requests import Response
 from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 
 from apps.cases.models import Case
@@ -28,4 +27,3 @@ class RetrieveUpdateDestroyComment(RetrieveUpdateDestroyAPIView):
     queryset = Comment
     serializer_class = CommentSerializer
     lookup_url_kwarg = 'comment_id'
-
