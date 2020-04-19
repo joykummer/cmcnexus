@@ -99,7 +99,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
             ("update_match", "Can set a matched partnership to accepted/rejected"),
             ("view_dashboard", "Can look at the dashboard to see statistics and insights."),
             ("view_general_info", "Can view general information about a case"),
-            ("update_general_info", "Can view general information about a case"),
+            ("update_general_info", "Can update general information about a case"),
             ("view_medical_info", "Can view medical information about a case"),
         ]
 
