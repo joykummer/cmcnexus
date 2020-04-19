@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
-import { RedButton } from "../../styles/Buttons";
 import { casesFunction } from "../../store/actions/casesAction";
 import {
   searchTitleFunction,
   searchStatusFunction,
 } from "../../store/actions/searchCasesAction";
-import CanI from "../Permissions";
-import { ADD_CASE } from "../Permissions/permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
-import { Dropdown } from "../../styles/Dropdowns";
 import { categoriesFunction } from "../../store/actions/categoriesAction";
 import {
   Table,
@@ -22,83 +17,17 @@ import {
   TableHeaderWrapper,
   TableRow,
 } from "../../styles/Tables";
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #ebebeb;
-  padding: 50px;
-  padding-top: 30px;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 50px;
-`;
-
-const SearchContainer = styled.div`
-  width: 100%;
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const SearchWrapper = styled.div`
-  width: 100%;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
-const Card = styled.div`
-  flex-grow: 1;
-  margin: 0 25px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  height: 40px;
-  outline: none;
-  border: none;
-  background-color: #ebebeb;
-  border-bottom: 1px solid red;
-`;
-
-const Filter = styled(Dropdown)`
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid red;
-`;
-
-const SearchButton = styled(RedButton)`
-  width: 150px;
-  height: 40px;
-  margin-top: 10px;
-`;
-
-const AddCaseButton = styled(RedButton)`
-  width: 125px;
-  height: 40px;
-  margin-bottom: 50px;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Clear = styled.div`
-  font-size: 14px;
-  :hover {
-    color: red;
-  }
-`;
+import {
+  Container,
+  SearchContainer,
+  SearchWrapper,
+  SearchInput,
+  SearchButton,
+  Filter,
+  Card,
+  Wrapper,
+  Clear,
+} from "./styles";
 
 function ListCases(props) {
   const [title, setTitle] = useState("");
@@ -151,11 +80,6 @@ function ListCases(props) {
   };
 
   const headers = ["Title", "Country", "Category", "Status"];
-
-  const addCaseHandler = (e) => {
-    e.preventDefault();
-    props.history.push("/cases/add/");
-  };
 
   return (
     <Container>
@@ -237,11 +161,7 @@ function ListCases(props) {
                     <TableData>
                       {file.categories
                         ? file.categories.map((category) => {
-                            return (
-                              <div key={category.id}>
-                                <b>{category.name}</b>
-                              </div>
-                            );
+                            return <div key={category.id}>{category.name}</div>;
                           })
                         : []}
                     </TableData>
