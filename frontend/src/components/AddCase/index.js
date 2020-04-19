@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import countryList from "react-select-country-list";
 import { connect } from "react-redux";
-import { categoriesFunction } from "../../store/actions/categoriesAction";
-import { addCaseFunction } from "../../store/actions/addCaseAction";
+import { categoriesFunction } from "../../store/actions/Categories/categoriesAction"
+import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
 import {

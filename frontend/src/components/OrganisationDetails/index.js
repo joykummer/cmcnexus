@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom'
-import { organisationsFunction } from "../../store/actions/organisationsAction";
+import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import {Container, HeaderTitle, Stripe, DetailsContainer, CategoryWrapper} from "../CaseDetails/styles";
 import {AddButton} from "../AddOrganisation/styles";
 import {setNavigationAction} from '../../store/actions/Navigation';
