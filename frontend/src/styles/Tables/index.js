@@ -13,6 +13,8 @@ export const TableHeaderWrapper = styled.thead``;
 
 export const TableHeader = styled.th`
   height: 40px;
+  text-align: left;
+    padding: 10px;
 `;
 
 export const TableHeaderRow = styled.tr``;
@@ -26,6 +28,7 @@ export const TableRow = styled.tr`
   text-transform: capitalize;
   :hover {
     color: red;
+    cursor: pointer;
   }
   :nth-child(odd) {
     background: #ebebeb;
@@ -35,6 +38,5 @@ export const TableRow = styled.tr`
 export const TableData = styled.td`
   height: 25px;
   max-width: 150px;
-  padding: 5px;
-  padding-left: 10px;
+  padding: 10px;
 `;

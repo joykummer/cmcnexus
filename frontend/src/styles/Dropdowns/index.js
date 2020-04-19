@@ -3,8 +3,8 @@ import caret from "../../assets/caret-down.svg";
 
 export const Dropdown = styled.select`
   font-size: 14px;
-  border-radius: 3px;
-  border: solid 1px #ebebeb;
+  border-radius: 5px;
+  border: solid 1px #777;
   text-align: left;
   outline: none;
   background-color: white;

@@ -28,6 +28,7 @@ import {
   Wrapper,
   Clear,
 } from "./styles";
+import {HeaderTitle} from "../AddOrganisation/styles";
 
 function ListCases(props) {
   const [title, setTitle] = useState("");
@@ -83,6 +84,7 @@ function ListCases(props) {
 
   return (
     <Container>
+      <HeaderTitle>CASES</HeaderTitle>
       <SearchContainer>
         <SearchWrapper>
           <Card>
@@ -132,7 +134,7 @@ function ListCases(props) {
           <SearchButton onClick={searchButtonHandler}>
             APPLY FILTERS
           </SearchButton>
-          <Clear onClick={clearSearchHandler}>clear</Clear>
+          <Clear onClick={clearSearchHandler}>CLEAR</Clear>
         </Wrapper>
       </SearchContainer>
       <Table>

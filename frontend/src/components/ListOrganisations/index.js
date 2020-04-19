@@ -163,7 +163,7 @@ function ListOrganisations(props) {
           <SearchButton onClick={searchButtonHandler}>
             APPLY FILTERS
           </SearchButton>
-          <Clear onClick={clearSearchHandler}>clear</Clear>
+          <Clear onClick={clearSearchHandler}>CLEAR</Clear>
         </Wrapper>
       </SearchContainer>
       <Table>

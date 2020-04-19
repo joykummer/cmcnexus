@@ -49,27 +49,27 @@ function CaseDetails(props) {
           <Stripe>Patient's details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>name:</DetailsKey>
+              <DetailsKey>name</DetailsKey>
               {caseDetails.title}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>age:</DetailsKey>
+              <DetailsKey>age</DetailsKey>
               {caseDetails.age}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>sex:</DetailsKey>
+              <DetailsKey>sex</DetailsKey>
               {caseDetails.sex}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>country:</DetailsKey>
+              <DetailsKey>country</DetailsKey>
               {caseDetails.country}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>consent:</DetailsKey>
+              <DetailsKey>consent</DetailsKey>
               {caseDetails.consent ? "yes" : "no"}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>category:</DetailsKey>
+              <DetailsKey>category</DetailsKey>
               <CategoryWrapper>
                 {caseDetails
                   ? caseDetails.categories.map((category) => {
@@ -100,7 +100,7 @@ function CaseDetails(props) {
           <Stripe>Status</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>Partners:</DetailsKey>
+              <DetailsKey>Partners</DetailsKey>
               {caseDetails
                 ? caseDetails.partnered_organisations.map((partner) => {
                     return (
@@ -113,11 +113,11 @@ function CaseDetails(props) {
                 : null}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>status:</DetailsKey>
+              <DetailsKey>status</DetailsKey>
               {caseDetails.status}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>outcome:</DetailsKey>
+              <DetailsKey>outcome</DetailsKey>
               {caseDetails.outcome}
             </DetailsHeader>
           </DetailsContainer>

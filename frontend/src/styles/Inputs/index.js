@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const GreyRoundInput = styled.input`
-  background: #f1f1f1;
-  border: 2px solid #c4c4c4;
+  background-color: white;
+  color: #777;
   box-sizing: border-box;
+  border: none;
   border-radius: 5px;
-  outline: none;
+  outline: solid 1px gray;
   height: 50px;
   padding-left: 10px;
 `;

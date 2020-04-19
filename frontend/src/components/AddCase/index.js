@@ -168,7 +168,7 @@ function AddCase(props) {
     <Container>
       <HeaderTitle>Add case</HeaderTitle>
       <DetailsContainer>
-        <Label style={{ marginTop: "25px" }}>
+        <Label>
           Title
           <FieldInput
             name="title"
@@ -244,6 +244,7 @@ function AddCase(props) {
             value={age}
             min="0"
             required
+            style={{"width":"75px"}}
           />
         </Label>
         <ErrorMessage>{ageError}</ErrorMessage>
@@ -280,7 +281,7 @@ function AddCase(props) {
           </CountryDropdown>
         </Label>
         <ErrorMessage>{countryError}</ErrorMessage>
-        <Label style={{ marginBottom: "25px" }}>
+        <Label>
           Category
           <CategoryDropdown
             value={categories}

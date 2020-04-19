@@ -5,27 +5,21 @@ import { RedButton } from "../../styles/Buttons";
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 50px;
-  overflow: scroll;
+  background-color: #EBEBEB;
+  padding: 40px 60px 40px 60px;
+  overflow: auto;
+  letter-spacing: initial;
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start; */
-  align-items: center;
-  line-height: 1.75;
-  overflow-y: scroll;
-  letter-spacing: initial;
-  background-color: #ebebeb;
 `;
 
 export const HeaderTitle = styled.div`
   font-size: 30px;
-  border-bottom: 3px solid red;
   text-transform: uppercase;
   margin-bottom: 25px;
 `;
 
 export const DetailsContainer = styled.div`
-  width: 80%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -54,16 +48,15 @@ export const CategoryWrapper = styled.div`
 `;
 
 export const Stripe = styled.div`
-  width: 30%;
+  width: auto;
   background: red;
-  display: flex;
-  align-self: end;
-  margin-left: 50px;
+  color: white;
   font-size: 20px;
   border-radius: 5px;
-  padding-left: 10px;
-  color: white;
+  padding: 5px 15px 5px 15px;
   text-transform: uppercase;
+  display: flex;
+  align-self: end;
 `;
 
 export const Match = styled(RedButton)`
