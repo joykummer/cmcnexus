@@ -35,4 +35,6 @@ export const TableRow = styled.tr`
 export const TableData = styled.td`
   height: 25px;
   max-width: 150px;
+  padding: 5px;
+  padding-left: 10px;
 `;
