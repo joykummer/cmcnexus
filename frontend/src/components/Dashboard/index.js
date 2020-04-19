@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 
 import CasePlot from '../Plots/caseStatus';
+import {getStats} from '../../store/actions/Statistics/getStatisticsAction';
+import {useDispatch, useSelector} from 'react-redux';
 
 
 const Wrapper = styled.div`
@@ -16,10 +18,16 @@ const Wrapper = styled.div`
 `;
 
 export default function Dashboard (props) {
+	const dispatch = useDispatch();
+	const stats = useSelector(state => state.stats)
+
+	useEffect(() => {
+		dispatch(getStats())
+	}, [dispatch]);
 
 	return (
 		<Wrapper>
-			<CasePlot/>
+			<CasePlot labels={['Proposed', 'Open', 'Assigned', 'Closed', 'Rejected']} data={[12, 19, 3, 5, 2, 3]}/>
 		</Wrapper>
 	)
 }

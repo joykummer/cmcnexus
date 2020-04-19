@@ -1,5 +1,6 @@
 import { SET_CASES } from "../actionTypes";
 import Axios from "../../../axios/authenticated";
+import {statsAction} from '../Statistics/getStatisticsAction';
 
 export const casesAction = (organisations) => {
   return {
@@ -9,6 +10,10 @@ export const casesAction = (organisations) => {
 };
 
 export const casesFunction = () => async (dispatch) => {
-  const response = await Axios.get("cases/");
-  dispatch(casesAction(response.data));
+  try {
+    const response = await Axios.get("cases/");
+    dispatch(casesAction(response.data));
+  } catch (e) {
+    return e;
+  }
 };
