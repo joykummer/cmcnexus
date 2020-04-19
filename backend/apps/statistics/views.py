@@ -10,7 +10,7 @@ from apps.statistics.serializers import YearlyCasesSerializer
 
 
 class StatisticsBundleView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, DashboardPermission]
 
     def get(self, request):
         cases = Case.objects.all()\
