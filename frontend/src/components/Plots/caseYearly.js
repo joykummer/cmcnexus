@@ -17,10 +17,10 @@ export default function(props) {
 				label: 'Cases',
 				data: data,
 				backgroundColor: [
-					'rgba(111,111,111,0.56)',
+					'rgba(111,111,111,0.16)',
 				],
 				borderColor: [
-					'rgb(111,111,111)',
+					'rgb(0,0,0)',
 				],
 				borderWidth: 1
 			}]
@@ -28,7 +28,16 @@ export default function(props) {
 		options: {
 			cutoutPercentage: 50,
 			legend: {position: 'right',},
-			responsive: false
+			responsive: false,
+			scales: {
+				yAxes: [{
+					ticks: {
+						min: 0,
+						stepSize: 1,
+					},
+				}]
+			}
+
 		},
 	});
 

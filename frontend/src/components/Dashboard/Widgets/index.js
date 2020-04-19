@@ -5,6 +5,7 @@ import {CardBox} from '../../../styles/GenericBoxes';
 
 
 export const Card = styled(CardBox)`
+	min-width: 340px;
   display: flex;
   flex-direction: column;
   margin: 10px 0;
@@ -25,6 +26,8 @@ padding: 20px;
 display: flex;
 flex-direction: row;
 justify-content: center;
+
+position: relative;
 `;
 
 export default function Widget (props) {
