@@ -19,7 +19,7 @@ import MatchOrganisations from '../components/MatchOrganisations';
 import OrganisationDetails from '../components/OrganisationDetails';
 import EditOrganisation from '../components/EditOrganisation';
 import PermissionDenied from "../components/PermissionDenied";
-
+import EditCases from "../components/EditCases";
 
 export default function Routes() {
   return (
@@ -33,6 +33,7 @@ export default function Routes() {
           <Route exact path="/" render={() => <Redirect to='/cases/'/>}/>
           <PrivateRoute path='/dashboard/' component={UnderConstruction}/>
           <PrivateRoutePerm exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
+          <PrivateRoutePerm exact path='/cases/edit/:id' component={EditCases} permission={ADD_CASE}/>
           <PrivateRoutePerm exact path='/cases/details/:id/' component={CaseDetails} permission={VIEW_CASE}/>
           <PrivateRoutePerm exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
           <PrivateRoutePerm exact path='/organisations/add/' component={AddOrganisation} permission={ADD_ORGANISATION}/>

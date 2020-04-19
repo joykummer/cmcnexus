@@ -109,7 +109,7 @@ function EditOrganisation(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log("Myri state", state)
+    console.log("Myri state1", state)
   return {
     organisations: state.organisations,
     categories: state.categories,

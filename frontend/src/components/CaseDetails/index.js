@@ -10,7 +10,7 @@ import {CASES} from '../Navigation/states';
 import {VALIDATE_CASE, MATCH_ORGANISATIONS, UPDATE_MATCH} from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
-
+import {AddButton} from "../AddOrganisation/styles";
 
 function CaseDetails(props) {
   const dispatch = props.dispatch;
@@ -25,6 +25,11 @@ function CaseDetails(props) {
             pathname: `/cases/match/${id}`,
           });
     };
+
+  // const history = useHistory()
+  const redirectHandler = () => {
+        props.history.push(`/cases/edit/${caseDetails.id}/`)
+    }  
 
   const caseDetails =
       props.cases ?
@@ -92,6 +97,7 @@ function CaseDetails(props) {
             }
           </>
           ): <div>No case to show</div>}
+        <AddButton onClick={redirectHandler}>Edit</AddButton>
       </Container>
   );
 }
