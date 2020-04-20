@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from guardian.admin import GuardedModelAdmin, UserManage
 
 from apps.cases.models import Case, Partnership
+from apps.comments.models import Comment
 
 
 class EmailUserManage(UserManage):
@@ -16,8 +17,13 @@ class PartnershipInline(admin.TabularInline):
     extra = 1  # how many rows to show
 
 
+class CommentInline(admin.TabularInline):
+    model = Comment
+    extra = 1  # how many rows to show
+
+
 class CustomGuardedModelAdmin(GuardedModelAdmin):
-    inlines = (PartnershipInline,)
+    inlines = (PartnershipInline,CommentInline)
 
     def get_obj_perms_user_select_form(self, request):
         return EmailUserManage
