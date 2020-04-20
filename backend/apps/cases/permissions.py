@@ -13,6 +13,12 @@ class ClosePermission(BasePermission):
         return request.user.has_perm('cases.close_case')
 
 
+class ReopenPermission(BasePermission):
+
+    def has_permission(self, request, view):
+        return request.user.has_perm('cases.reopen_case')
+
+
 class RejectPermission(BasePermission):
 
     def has_permission(self, request, view):

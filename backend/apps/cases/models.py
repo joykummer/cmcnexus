@@ -21,6 +21,7 @@ class CaseWorkflow(xwf_models.Workflow):
     transitions = (
         ('validate', 'created', 'open'),
         ('close', 'open', 'closed'),
+        ('reopen', 'closed', 'open'),
         ('reject', ('created', 'open'), 'rejected')
     )
     initial_state = 'created'
@@ -93,6 +94,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         permissions = [
             ("validate_case", "Can validate cases"),
             ("close_case", "Can close cases"),
+            ("reopen_case", "Can reopen cases"),
             ("reject_case", "Can reject cases"),
             ("assign_organisations", "Can assign a case to a matched and accepted organisation"),
             ("match_organisations", "Can match organisations to cases"),

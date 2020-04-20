@@ -30,6 +30,7 @@ default_groups_permissions = [
             "view_case",
             "change_case",
             "close_case",
+            "reopen_case",
             "assign_organisations",
             "match_organisations",
             "view_organisation",

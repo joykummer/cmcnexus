@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework_guardian.filters import ObjectPermissionsFilter
 
 from apps.cases.permissions import ValidatePermission, MatchOrganisationPermission, \
-    AssignOrganisationPermission, AcceptRejectCasePermission
+    AssignOrganisationPermission, AcceptRejectCasePermission, ReopenPermission
 from apps.cases.models import Case, Partnership
 from apps.cases.permissions import ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer, get_general_or_medical_info
@@ -69,6 +69,18 @@ class CloseCaseView(UpdateAPIView):
     def update(self, request, *args, **kwargs):
         case = self.get_object()
         case.close()
+        return Response(self.get_serializer(case).data)
+
+
+class ReopenCaseView(UpdateAPIView):
+    queryset = Case.objects.all()
+    serializer_class = CaseSerializer
+    permission_classes = [IsAuthenticated, ReopenPermission]
+    lookup_url_kwarg = 'case_id'
+
+    def update(self, request, *args, **kwargs):
+        case = self.get_object()
+        case.reopen()
         return Response(self.get_serializer(case).data)
 
 
