@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom'
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
-import { Container, HeaderTitle, Stripe, DetailsContainer, CategoryWrapper } from "../CaseDetails/styles";
-import { AddButton } from "../AddOrganisation/styles";
 import { setNavigationAction } from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
+import { AddButton } from "../../styles/Buttons";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
 
 
 function OrganisationDetails(props) {
@@ -33,29 +34,34 @@ function OrganisationDetails(props) {
       {organisationDetails ? (
         <>
           <HeaderTitle>Organisation Details of {organisationDetails.name}</HeaderTitle>
-          <Stripe>Name</Stripe>
-          <DetailsContainer>{organisationDetails.name}</DetailsContainer>
-          <Stripe>Description</Stripe>
-          <DetailsContainer>{organisationDetails.description}</DetailsContainer>
-          <Stripe>Service</Stripe>
-          <DetailsContainer>{organisationDetails.services}</DetailsContainer>
-          <Stripe>Category</Stripe>
+          <Stripe>General</Stripe>
           <DetailsContainer>
-              <CategoryWrapper>
-              {organisationDetails.categories.map(category => {
-            return (
-                <div key={category.id}>{category.name}</div>
-                    )
-          })}
-              </CategoryWrapper>
-          </DetailsContainer>
-          <Stripe>Tag</Stripe>
-          <DetailsContainer>
-            {organisationDetails.tag}
-          </DetailsContainer>
-          <Stripe>Members</Stripe>
-          <DetailsContainer>
-            {organisationDetails.members}
+            <DetailsHeader>
+              <DetailsKey>Name</DetailsKey>
+              {organisationDetails.name}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Description</DetailsKey>
+              {organisationDetails.description}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Services</DetailsKey>
+              {organisationDetails.services}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Category</DetailsKey>
+              {organisationDetails
+                  ? organisationDetails.categories.map((category) => category.name).join(', ')
+                  : null}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Tag</DetailsKey>
+              {organisationDetails.tag}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Members</DetailsKey>
+              {organisationDetails.members}
+            </DetailsHeader>
           </DetailsContainer>
         </>
       ) : (

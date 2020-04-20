@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "../../styles/Tables";
 import {
-  Container,
   SearchContainer,
   SearchWrapper,
   SearchInput,
@@ -27,8 +26,8 @@ import {
   Card,
   Wrapper,
   Clear,
-} from "./styles";
-import {HeaderTitle} from "../AddOrganisation/styles";
+} from "../../styles/SearchesFilters/index";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
 function ListCases(props) {
   const [title, setTitle] = useState("");
@@ -162,9 +161,7 @@ function ListCases(props) {
                     <TableData>{file.country}</TableData>
                     <TableData>
                       {file.categories
-                        ? file.categories.map((category) => {
-                            return <div key={category.id}>{category.name}</div>;
-                          })
+                        ? file.categories.map((category) => category.name).join(', ')
                         : []}
                     </TableData>
                     <TableData>{file.status}</TableData>
