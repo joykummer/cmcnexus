@@ -327,7 +327,7 @@ function AddCase(props) {
       <Label>Birth date
       <FieldInput
         name="birth_date"
-        type="number"
+        type="text"
         onChange={(e) => setBirthDate(e.target.value)}
         value={birth_date}
       />

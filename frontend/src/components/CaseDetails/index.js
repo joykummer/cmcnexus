@@ -70,7 +70,7 @@ function CaseDetails(props) {
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>date of birth:</DetailsKey>
-              {caseDetails.dob}
+              {caseDetails.birth_date}
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Sex</DetailsKey>
