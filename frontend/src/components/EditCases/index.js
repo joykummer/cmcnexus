@@ -8,7 +8,7 @@ import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES_ADD} from '../Navigation/states';
 
 import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, FieldInputLarge} from "../AddOrganisation/styles";
-import {CategoryDropdown, AddButton, Checkbox, CountryDropdown, SexDropdown} from "../AddCase/styles";
+import {CategoryDropdown, AddButton, Checkbox, CaseDropdown, SexDropdown} from "../AddCase/styles";
 
 
 const ErrorMessage = styled.div`
@@ -245,7 +245,7 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{ageError}</ErrorMessage>
       <Label>Sex
-      <SexDropdown
+      <CaseDropdown
         name="sex"
         placeholder ={caseDetails.sex}
         onChange={(e) => setSex(e.target.value)}
@@ -255,11 +255,11 @@ function EditCases(props) {
           <option value="" disabled>Please choose here...</option>
           <option key={1}>F</option>
           <option key={2}>M</option>
-      </SexDropdown>
+      </CaseDropdown>
         </Label>
           <ErrorMessage>{sexError}</ErrorMessage>
       <Label>Country
-      <CountryDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
+      <CaseDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
           <option value="default" disabled>Please choose here...</option>
           {countries
           ? countries.map((country) => {
@@ -269,7 +269,7 @@ function EditCases(props) {
             })
           : null
           }
-      </CountryDropdown>
+      </CaseDropdown>
         </Label>
           <ErrorMessage>{countryError}</ErrorMessage>
       <Label>Category
