@@ -7,7 +7,6 @@ export default function AcceptCase({singleCase}) {
   const dispatch = useDispatch();
   const organisation = useSelector(state => state.auth.user ? state.auth.user.organisation : null);
   const organisation_id = organisation ? organisation.id : null;
-  console.log('org', organisation);
   const status = (organisation && organisation.partnered_cases) ?
     organisation.partnered_cases.find(el => el.case === singleCase.id).status
     : null;

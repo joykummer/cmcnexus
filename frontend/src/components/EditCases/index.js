@@ -159,8 +159,7 @@ function EditCases(props) {
         country: country,
         // categories: categoryIds,
       };
-      const caseId = caseDetails.id
-      console.log('data', data);
+      const caseId = caseDetails.id;
       dispatch(editCaseFunction(data, caseId));
       props.history.push("/cases/");
     }
@@ -297,7 +296,6 @@ function EditCases(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log("This is the remix", state)
   return {
     cases: state.cases,
     categories: state.categories,
