@@ -22,7 +22,7 @@ justify-content: flex-start;
 `;
 
 const Card = styled(CardBox)`
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+border: solid 1px #EBEBEB;
 padding: 60px;
 width: 50%;
 max-width: 500px;

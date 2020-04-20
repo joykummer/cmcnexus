@@ -32,6 +32,7 @@ import {
   Wrapper,
   Clear,
 } from "../ListCases/styles";
+import {HeaderTitle} from "../AddOrganisation/styles";
 
 export const Container = styled.div`
   width: 100%;
@@ -42,13 +43,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-end;
 `;
 
-const AddOrganisationButton = styled(RedButton)`
-  width: 200px;
-  height: 40px;
+const AddOrganisation = styled.div`
+  font-size: 16px;
   margin-bottom: 25px;
+  color: red;
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+  }
 `;
 
 function ListOrganisations(props) {
@@ -105,10 +110,11 @@ function ListOrganisations(props) {
 
   return (
     <Container>
+      <HeaderTitle>ORGANISATIONS</HeaderTitle>
       <CanI perform={ADD_ORGANISATION}>
-        <AddOrganisationButton onClick={addOrganisationHandler}>
+        <AddOrganisation onClick={addOrganisationHandler}>
           ADD ORGANISATION
-        </AddOrganisationButton>
+        </AddOrganisation>
       </CanI>
       <SearchContainer>
         <SearchWrapper>
@@ -163,7 +169,7 @@ function ListOrganisations(props) {
           <SearchButton onClick={searchButtonHandler}>
             APPLY FILTERS
           </SearchButton>
-          <Clear onClick={clearSearchHandler}>clear</Clear>
+          <Clear onClick={clearSearchHandler}>CLEAR</Clear>
         </Wrapper>
       </SearchContainer>
       <Table>

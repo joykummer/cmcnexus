@@ -5,13 +5,12 @@ import { RedButton } from "../../styles/Buttons";
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #ebebeb;
-  padding: 50px;
+  background-color: #EBEBEB;
+  padding: 40px 60px 40px 60px;
   overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-end;
 `;
 
 export const SearchContainer = styled.div`
@@ -19,6 +18,7 @@ export const SearchContainer = styled.div`
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 `;
 
 export const SearchWrapper = styled.div`
@@ -29,12 +29,11 @@ export const SearchWrapper = styled.div`
 `;
 
 export const Card = styled.div`
-  margin: 0 25px;
-  height: auto;
+  width: 30%;
+  color: #777;
+  font-size: 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  flex-grow: 1;
 `;
 
 export const SearchInput = styled.input`
@@ -49,6 +48,8 @@ export const SearchInput = styled.input`
 export const Filter = styled(Dropdown)`
   width: 100%;
   height: 40px;
+  border-radius: 0px;
+  border: none;
   border-bottom: 1px solid red;
 `;
 
@@ -64,8 +65,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Clear = styled.div`
-  font-size: 14px;
+  font-size: 11px;
+  color: #777;
   :hover {
     color: red;
+    cursor: pointer;
   }
 `;

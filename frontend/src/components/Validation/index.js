@@ -8,12 +8,11 @@ import {rejectCaseFunction} from '../../store/actions/Cases/rejectCaseAction';
 
 const ButtonContainer = styled.div`
 display: flex; 
-justify-content: center; 
 margin-top: 3%; 
 `;
 
 const Button = styled(RedButton)`
- height: 50px;
+ height: 40px;
  width: 100px; 
  margin: 3%;    
 `;
