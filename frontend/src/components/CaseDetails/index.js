@@ -23,7 +23,7 @@ import RejectCase from "../RejectCase";
 import CloseCase from "../CloseCase";
 import styled from "styled-components";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
-import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
+import {Stripe, DetailsHeader, DetailsKey, DetailsValue} from "../../styles/Details";
 
 const ButtonContainer = styled.div`
 width: 225px;
@@ -66,85 +66,93 @@ function CaseDetails(props) {
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Title</DetailsKey>
+              <DetailsValue>
               {caseDetails.title}
+              </DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Patient ID</DetailsKey>
-              {caseDetails.patient_id}
+              <DetailsValue>{caseDetails.patient_id}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Language</DetailsKey>
-              {caseDetails.language}
+              <DetailsValue>{caseDetails.language}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Nature of Referral</DetailsKey>
-              {caseDetails.nature_of_referral}
+              <DetailsValue>{caseDetails.nature_of_referral}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Age</DetailsKey>
-              {caseDetails.age}
+              <DetailsValue>{caseDetails.age}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Date of Birth</DetailsKey>
-              {caseDetails.birth_date}
+              <DetailsValue>{caseDetails.birth_date}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Sex</DetailsKey>
-              {caseDetails.sex}
+              <DetailsValue>{caseDetails.sex}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Location</DetailsKey>
-              {caseDetails.location}
+              <DetailsValue>{caseDetails.location}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Country</DetailsKey>
-              {caseDetails.country}
+              <DetailsValue>{caseDetails.country}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Consent</DetailsKey>
+              <DetailsValue>
               {caseDetails.consent ? "Yes" : "No"}
+              </DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Category</DetailsKey>
+              <DetailsValue>
                 {caseDetails
                   ? caseDetails.categories.map((category) => category.name).join(', ')
                   : null}
+              </DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
           <Stripe>Medical details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Presenting Complaint</DetailsKey>
-              {caseDetails.description}
+              <DetailsValue>{caseDetails.description}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>History of Presenting Complaint</DetailsKey>
-              {caseDetails.history_description}
+              <DetailsValue>{caseDetails.history_description}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Past Medical History</DetailsKey>
-              {caseDetails.past_medical_history}
+              <DetailsValue>{caseDetails.past_medical_history}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Diagnosis</DetailsKey>
-              {caseDetails.diagnosis}
+              <DetailsValue>{caseDetails.diagnosis}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Physical examination</DetailsKey>
-              {caseDetails.physical_examination}
+              <DetailsValue>{caseDetails.physical_examinatino}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>Justification</DetailsKey> {caseDetails.justification}
+              <DetailsKey>Justification</DetailsKey>
+              <DetailsValue>{caseDetails.justification}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Recommendation</DetailsKey>
-              {caseDetails.recommendation}
+              <DetailsValue>{caseDetails.recommendation}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
           <Stripe>Status</Stripe>
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Partners' Status</DetailsKey>
+              <DetailsValue>
               <Vertical>
               {caseDetails.match_stats ?
                 caseDetails.match_stats.map(stat => {
@@ -157,14 +165,15 @@ function CaseDetails(props) {
                   })
                 : null}
               </Vertical>
+              </DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              {caseDetails.status}
+              <DetailsValue>{caseDetails.status}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Outcome</DetailsKey>
-              {caseDetails.outcome}
+              <DetailsValue>{caseDetails.outcome}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
 

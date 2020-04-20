@@ -46,8 +46,7 @@ function MatchActionable({singleCase, organisation, dispatch}) {
     dispatch(unmatchOrganisationsFunction(singleCase.id, organisation.id));
   };
   return <>{
-    isStatus(singleCase, organisation, "matched") 
-      && isStatus(singleCase, organisation, "open")
+    isStatus(singleCase, organisation, "matched")
       ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
       : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
 
