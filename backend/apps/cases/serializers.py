@@ -4,6 +4,7 @@ from rest_framework_guardian.serializers import ObjectPermissionsAssignmentMixin
 
 from apps.cases.models import Case, PartnerWorkflow
 from apps.users.serializer import UserForCaseSerializer
+from apps.comments.serializers import CommentSerializer
 
 from apps.categories.serializer import CategorySerializer
 
@@ -12,6 +13,8 @@ class CaseSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
     created_by = UserForCaseSerializer(read_only=True)
     match_stats = serializers.SerializerMethodField()
+    comments = CommentSerializer(many=True)
+
 
     def get_match_stats(self, obj):
         status_count = []
@@ -46,3 +49,36 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
             'change_case': [doctor, med_co, case_coordinator],
             'delete_case': [doctor],
         }
+
+
+class GeneralInfoSerializer(serializers.ModelSerializer):
+    created_by = FullUserSerializer(read_only=True)
+    partnered_organisations = PartnershipSerializer(many=True)
+
+    class Meta:
+        model = Case
+        fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age', 'birth_date', 'categories', 'created_by', 'partnered_organisations']
+
+
+class MedicalInfoSerializer(serializers.ModelSerializer):
+    created_by = FullUserSerializer(read_only=True)
+    partnered_organisations = PartnershipSerializer(many=True)
+
+    class Meta:
+        model = Case
+        fields = ['description', 'history_description', 'diagnosis', 'past_medical_history', 'physical_examination',
+                  'investigations', 'current_treatment', 'justification', 'recommendation', 'consent', 'sex',
+                  'comments', 'outcome', 'status']
+
+
+def get_general_or_medical_info(request):
+    if request.method == 'GET':
+        if request.user.has_perms(["cases.view_general_info", "cases.view_medical_info"]):
+            return CaseSerializer
+        elif request.user.has_perm("cases.view_general_info"):
+            return GeneralInfoSerializer
+    else:
+        if request.user.has_perms(["cases.update_general_info", "cases.update_medical_info"]):
+            return CreateCaseSerializer
+        else:
+            return GeneralInfoSerializer

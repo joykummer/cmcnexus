@@ -10,7 +10,7 @@ from apps.cases.permissions import ValidatePermission, MatchOrganisationPermissi
     AssignOrganisationPermission, AcceptRejectCasePermission
 from apps.cases.models import Case, Partnership
 from apps.cases.permissions import ClosePermission, RejectPermission
-from apps.cases.serializers import CaseSerializer
+from apps.cases.serializers import CaseSerializer, get_general_or_medical_info
 from apps.helpers.permissions import CustomDjangoModelPermission
 from apps.cases.serializers import CreateCaseSerializer
 from apps.organisations.models import Organisation
@@ -18,9 +18,11 @@ from apps.organisations.models import Organisation
 
 class ListCaseView(ListAPIView):
     queryset = Case.objects.none()
-    serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission]
     filter_backends = [ObjectPermissionsFilter]
+
+    def get_serializer_class(self):
+        return get_general_or_medical_info(self.request)
 
     def get_queryset(self):
         return Case.objects.filter(Q(title__icontains=self.request.query_params.get('search', '')) | Q(
@@ -39,9 +41,11 @@ class CreateCaseView(CreateAPIView):
 
 class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
     queryset = Case.objects.all()
-    serializer_class = CaseSerializer
     permission_classes = [CustomDjangoModelPermission]
     lookup_url_kwarg = 'id'
+
+    def get_serializer_class(self):
+        return get_general_or_medical_info(self.request)
 
 
 class ValidateCaseView(UpdateAPIView):

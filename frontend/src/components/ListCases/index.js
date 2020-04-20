@@ -5,11 +5,8 @@ import {
   searchTitleFunction,
   searchStatusFunction,
 } from "../../store/actions/Cases/searchCasesAction";
-import CanI from "../Permissions";
-import { ADD_CASE } from "../Permissions/permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
-import { Dropdown } from "../../styles/Dropdowns";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import {
   Table,
@@ -31,6 +28,7 @@ import {
   Wrapper,
   Clear,
 } from "./styles";
+import {HeaderTitle} from "../AddOrganisation/styles";
 
 function ListCases(props) {
   const [title, setTitle] = useState("");
@@ -86,6 +84,7 @@ function ListCases(props) {
 
   return (
     <Container>
+      <HeaderTitle>CASES</HeaderTitle>
       <SearchContainer>
         <SearchWrapper>
           <Card>
@@ -135,7 +134,7 @@ function ListCases(props) {
           <SearchButton onClick={searchButtonHandler}>
             APPLY FILTERS
           </SearchButton>
-          <Clear onClick={clearSearchHandler}>clear</Clear>
+          <Clear onClick={clearSearchHandler}>CLEAR</Clear>
         </Wrapper>
       </SearchContainer>
       <Table>

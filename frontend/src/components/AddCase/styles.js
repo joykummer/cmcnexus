@@ -4,33 +4,28 @@ import { RedButton } from "../../styles/Buttons";
 import { Dropdown } from "../../styles/Dropdowns";
 
 
-export const CategoryDropdown = styled(Dropdown)`
-width: 300px;
-height: auto;
-margin-top: 5px;
-`;
-
 export const AddButton = styled(RedButton)`
-width: 75px;
-height: 50px;
+width: 100px;
+height: 75px;
 margin-top: 20px;
 margin-bottom: 50px; 
 `;
 
 export const Checkbox = styled.input`
-width: 30px;
-height: 30px;
-margin-top: 5px; 
+margin-top: 2px; 
+margin-right: 10px;
 `;
 
-export const CountryDropdown = styled(Dropdown)`
-width: 200px;
-height: 40px;
-margin-top: 5px;
+export const CategoryDropdown = styled(Dropdown)`
+width: 300px;
+height: auto;
+margin-top: 2px;
+padding: 10px 0px 10px 0px;
+ background: none;
 `;
 
-export const SexDropdown = styled(Dropdown)`
-width: 200px;
-height: 40px;
-margin-top: 5px;
+export const CaseDropdown = styled(Dropdown)`
+  width: 200px;
+  height: 40px;
+  margin-top: 2px;
 `;

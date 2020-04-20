@@ -16,6 +16,7 @@ import {
 import styled from "styled-components";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {ORGANISATIONS} from '../Navigation/states';
+import {casesFunction} from "../../store/actions/Cases/casesAction";
 
   const MatchAssignButton = styled(RedButton)`
     width: 150px;
@@ -84,6 +85,7 @@ function MatchAssignOrg(props) {
 
   useEffect(() => {
     dispatch(organisationsFunction());
+    dispatch(casesFunction());
     dispatch(setNavigationAction(ORGANISATIONS));
   }, [dispatch]);
 

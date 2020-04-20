@@ -9,7 +9,7 @@ import userprofile from '../../assets/userprofile.png'
 import addcase from '../../assets/addcase.png'
 import {
   NavigationContainer, Logo, Options,
-  Button, NavItem
+  Button, NavItem, OptionsWrapper
 } from './style';
 import {logoutAction} from '../../store/actions/Authentication/loginActions';
 import CanI from '../Permissions';
@@ -40,6 +40,7 @@ function NavigationBar() {
   return (
     <NavigationContainer>
       <Logo src={msf_logo}/>
+      <OptionsWrapper />
       <Options>
         <NavItem selected={selected===DASHBOARD} onClick={() => onClickHandler(DASHBOARD)}>
           <img src={dashboard} alt="Dashboard" style={{paddingRight: 35, height: 45}}/>
@@ -68,6 +69,7 @@ function NavigationBar() {
           Profile
         </NavItem>
       </Options>
+      <OptionsWrapper/>
       <Empty/>
       <Button onClick={logoutHandler}>Log out</Button>
     </NavigationContainer>
