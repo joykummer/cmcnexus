@@ -82,7 +82,7 @@ class Command(BaseCommand):
             else:
                 self.stdout.write(
                     self.style.WARNING('Group "%s" already exists.' % default_groups_permission["name"])
-                    +  " Adding missing permissions...")
+                    + " Adding missing permissions...")
             for permission_codename in default_groups_permission["permissions"]:
                 if Permission.objects.filter(codename=permission_codename).exists():
                     permission = Permission.objects.get(codename=permission_codename)
@@ -92,4 +92,3 @@ class Command(BaseCommand):
                 else:
                     self.stdout.write((' |- Permission "%s" does not exist... ' % permission_codename)
                                       + self.style.ERROR("FAIL"))
-
