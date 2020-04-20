@@ -37,6 +37,7 @@ export const DetailsHeader = styled.div`
 export const DetailsKey = styled.div`
   width: 10%;
   min-width: 150px;
+  color: #777;
 `;
 
 export const CategoryWrapper = styled.div`
