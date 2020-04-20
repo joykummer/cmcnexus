@@ -8,26 +8,23 @@ import CaseYearlyWidget from './Widgets/caseYearly';
 import {getStats} from '../../store/actions/Statistics/getStatisticsAction';
 import {categoriesFunction} from '../../store/actions/Categories/categoriesAction';
 import Counter from './Widgets/counter';
+import {HeaderTitle} from "../CaseDetails/styles";
 
 
 const Wrapper = styled.div`
-  padding: 20px;
-  background-color: #ebebeb;
 	height: 100%;
-  
+  	background-color: #EBEBEB;
+  	padding: 40px 60px 40px 60px;
+  	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	align-items: center;
-	
-  overflow: auto;
 `;
 
 const Container = styled.div`
 	height: 100%;
 	width: 100%;
 	max-width: 1200px;
-  
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -54,6 +51,7 @@ export default function Dashboard (props) {
 
 	return (
 		<Wrapper>
+			<HeaderTitle>DASHBOARD</HeaderTitle>
 			{stats && stats.cases ?
 				<Container>
 					<Counter data={{

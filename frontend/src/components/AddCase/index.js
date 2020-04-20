@@ -2,21 +2,39 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import countryList from "react-select-country-list";
 import { connect } from "react-redux";
-import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
+import { categoriesFunction } from "../../store/actions/Categories/categoriesAction"
 import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
-import {setNavigationAction} from '../../store/actions/Navigation';
-import {CASES_ADD} from '../Navigation/states';
-
-import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, FieldInputLarge} from "../AddOrganisation/styles";
-import {CategoryDropdown, AddButton, Checkbox, CountryDropdown, SexDropdown} from "./styles"
-
+import { setNavigationAction } from "../../store/actions/Navigation";
+import { CASES_ADD } from "../Navigation/states";
+import {
+  Container,
+  HeaderTitle,
+  DetailsContainer,
+  Label,
+  FieldInput,
+  FieldInputLarge,
+} from "../AddOrganisation/styles";
+import {
+  CategoryDropdown,
+  AddButton,
+  Checkbox,
+  CountryDropdown,
+  SexDropdown,
+} from "./styles";
 
 const ErrorMessage = styled.div`
   font-size: 10px;
-  color: red;
-  margin-bottom: 10px;
+  color: red;git
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Text = styled.div`
+  color: black;
+`;
 
 function AddCase(props) {
   const [title, setTitle] = useState("");
@@ -51,8 +69,8 @@ function AddCase(props) {
 
   const setCategoryHandler = (e) => {
     const selectedOptions = Array.from(e.target.selectedOptions);
-    setCategories(selectedOptions.map(option => option.value));
-    setCategoryIds(selectedOptions.map(option => option.id));
+    setCategories(selectedOptions.map((option) => option.value));
+    setCategoryIds(selectedOptions.map((option) => option.id));
   };
 
   const validate = () => {
@@ -149,115 +167,140 @@ function AddCase(props) {
     <Container>
       <HeaderTitle>Add case</HeaderTitle>
       <DetailsContainer>
-        <Label style={{"marginTop":"25px"}}>Title
-        <FieldInput
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          required
-        />
-        </Label>
+        <Label>
+          Title
+          <FieldInput
+            name="title"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            required
+          />
           <ErrorMessage>{titleError}</ErrorMessage>
-      <Label>Description
-      <FieldInputLarge
-        name="description"
-        onChange={(e) => setDescription(e.target.value)}
-        value={description}
-        required
-      />
-      </Label>
-           <ErrorMessage>{descriptionError}</ErrorMessage>
-      <Label>Diagnosis
-      <FieldInputLarge
-        name="diagnosis"
-        onChange={(e) => setDiagnosis(e.target.value)}
-        value={diagnosis}
-        required
-      />
-      </Label>
+        </Label>
+        <Label>
+          Description
+          <FieldInputLarge
+            name="description"
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+            required
+          />
+          <ErrorMessage>{descriptionError}</ErrorMessage>
+        </Label>
+        <Label>
+          Diagnosis
+          <FieldInputLarge
+            name="diagnosis"
+            onChange={(e) => setDiagnosis(e.target.value)}
+            value={diagnosis}
+            required
+          />
           <ErrorMessage>{diagnosisError}</ErrorMessage>
-      <Label>Justification
-      <FieldInputLarge
-        name="justification"
-        onChange={(e) => setJustification(e.target.value)}
-        value={justification}
-        required
-      />
-      </Label>
+        </Label>
+        <Label>
+          Justification
+          <FieldInputLarge
+            name="justification"
+            onChange={(e) => setJustification(e.target.value)}
+            value={justification}
+            required
+          />
           <ErrorMessage>{justificationError}</ErrorMessage>
-      <Label>Recommendation
-      <FieldInputLarge
-        name="recommendation"
-        onChange={(e) => setRecommendation(e.target.value)}
-        value={recommendation}
-        required
-      />
-      </Label>
+        </Label>
+        <Label>
+          Recommendation
+          <FieldInputLarge
+            name="recommendation"
+            onChange={(e) => setRecommendation(e.target.value)}
+            value={recommendation}
+            required
+          />
           <ErrorMessage>{recommendationError}</ErrorMessage>
-      <Label>Patient's consent
-      <Checkbox
-        type="checkbox"
-        name="consent"
-        onChange={() => setConsent(true)}
-        value="consent"
-        required
-      />
-      </Label>
+        </Label>
+        <Label>
+          Patient's consent
+          <Wrapper>
+            <Checkbox
+              type="checkbox"
+              name="consent"
+              onChange={() => setConsent(true)}
+              value="consent"
+              required
+            />
+            <Text>
+              By ticking this box, I confirm that informed consent has been
+              obtained from the patient.
+            </Text>
+          </Wrapper>
           <ErrorMessage>{consentError}</ErrorMessage>
-      <Label>Age
-      <FieldInput
-        name="age"
-        type="number"
-        onChange={(e) => setAge(e.target.value)}
-        value={age}
-        min="0"
-        required
-      />
-      </Label>
+        </Label>
+        <Label>
+          Age
+          <FieldInput
+            name="age"
+            type="number"
+            onChange={(e) => setAge(e.target.value)}
+            value={age}
+            min="0"
+            required
+            style={{"width":"75px"}}
+          />
           <ErrorMessage>{ageError}</ErrorMessage>
-      <Label>Sex
-      <SexDropdown
-        name="sex"
-        onChange={(e) => setSex(e.target.value)}
-        value={sex}
-        required
-      >
-          <option value="" disabled>Please choose here...</option>
-          <option key={1}>F</option>
-          <option key={2}>M</option>
-      </SexDropdown>
         </Label>
+        <Label>
+          Sex
+          <SexDropdown
+            name="sex"
+            onChange={(e) => setSex(e.target.value)}
+            value={sex}
+            required
+          >
+            <option value="" disabled>
+              Please choose here...
+            </option>
+            <option key={1}>F</option>
+            <option key={2}>M</option>
+          </SexDropdown>
           <ErrorMessage>{sexError}</ErrorMessage>
-      <Label>Country
-      <CountryDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
-          <option value="default" disabled>Please choose here...</option>
-          {countries
-          ? countries.map((country) => {
-              return (
-                <option key={country.value}>{country.label}</option>
-              );
-            })
-          : null
-          }
-      </CountryDropdown>
         </Label>
+        <Label>
+          Country
+          <CountryDropdown
+            defaultValue={"default"}
+            onChange={(e) => setCountry(e.target.value)}
+          >
+            <option value="default" disabled>
+              Please choose here...
+            </option>
+            {countries
+              ? countries.map((country) => {
+                  return <option key={country.value}>{country.label}</option>;
+                })
+              : null}
+          </CountryDropdown>
           <ErrorMessage>{countryError}</ErrorMessage>
-      <Label style={{"marginBottom":"25px"}}>Category
-      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
-          {/*<option value="default" disabled>Please choose here...</option>*/}
-        {props.categories
-          ? props.categories.map((category) => {
-              return (
-                <option key={category.id} id={category.id}>
-                  {category.name}
-                </option>
-              );
-            })
-          : null}
-      </CategoryDropdown>
-      </Label>
+        </Label>
+        <Label>
+          Category
+          <CategoryDropdown
+            value={categories}
+            onChange={setCategoryHandler}
+            multiple
+          >
+            {/*<option value="default" disabled>Please choose here...</option>*/}
+            {props.categories
+              ? props.categories.map((category) => {
+                  return (
+                    <option key={category.id} id={category.id}>
+                      {category.name}
+                    </option>
+                  );
+                })
+              : null}
+          </CategoryDropdown>
           <ErrorMessage>{categoriesError}</ErrorMessage>
-        </DetailsContainer>
+        </Label>
+      </DetailsContainer>
       <AddButton onClick={addCaseHandler}>Submit</AddButton>
     </Container>
   );
