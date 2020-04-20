@@ -170,7 +170,7 @@ function CaseDetails(props) {
             <Validation id={caseDetails.id} />
           </CanI>
           <CanI perform={CLOSE_CASE}>
-            <CloseCase id={caseDetails.id} />
+            <CloseCase id={caseDetails} />
           </CanI>
           {caseDetails.status === "open" ? (
             <>

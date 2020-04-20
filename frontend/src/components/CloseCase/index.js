@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RedButton } from "../../styles/Buttons";
 import styled from "styled-components";
 import {closeCaseFunction} from "../../store/actions/Cases/closeCase";
+import {reopenCaseFunction} from "../../store/actions/Cases/reopenCase";
 
 
   const CloseButton = styled(RedButton)`
@@ -10,7 +11,7 @@ import {closeCaseFunction} from "../../store/actions/Cases/closeCase";
     height: 40px;
     margin: 25px 50px;
     border: none;
-    background-color: #e60000;
+    background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
     transition: all 0.7s ease;
     :hover {
         cursor: pointer;
@@ -23,15 +24,17 @@ export default function CloseCase(singleCase) {
   const dispatch = useDispatch();
 
   const closeCase = () => {
-    dispatch(closeCaseFunction(singleCase.id))
+    console.log(singleCase)
+    dispatch(closeCaseFunction(singleCase.id.id))
+  };
+  const reopenCase = () => {
+    dispatch(reopenCaseFunction(singleCase.id.id))
   };
   return<>
       {
-          singleCase.status === "closed"
-          ? <CloseButton onClick={closeCase}>Close</CloseButton>
-          : "The case is closed."
-
-
+          singleCase.id.status === "closed"
+          ? <CloseButton onClick={reopenCase}>Reopen</CloseButton>
+          : <CloseButton onClick={closeCase} clicked={true}>Close</CloseButton>
       }
       </>;
 }
