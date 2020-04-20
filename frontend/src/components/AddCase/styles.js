@@ -16,22 +16,16 @@ margin-top: 2px;
 margin-right: 10px;
 `;
 
-export const CountryDropdown = styled(Dropdown)`
-width: 300px;
-height: 40px;
-margin-top: 2px;
-`;
-
-export const SexDropdown = styled(Dropdown)`
-width: 200px;
-height: 40px;
-margin-top: 2px;
-`;
-
 export const CategoryDropdown = styled(Dropdown)`
 width: 300px;
 height: auto;
 margin-top: 2px;
 padding: 10px 0px 10px 0px;
-  background: none;
+ background: none;
+`;
+
+export const CaseDropdown = styled(Dropdown)`
+  width: 200px;
+  height: 40px;
+  margin-top: 2px;
 `;

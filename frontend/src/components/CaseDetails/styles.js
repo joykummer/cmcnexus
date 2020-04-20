@@ -66,3 +66,18 @@ export const Match = styled(RedButton)`
 
 export const EditButton = styled(AddButton)`
 `; 
+
+export const Vertical = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Horizontal = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Status = styled.div`
+  width: 100px;
+  margin-right: 10px;
+`;
