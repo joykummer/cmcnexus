@@ -16,6 +16,8 @@ export default function UserProfile() {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
+  console.log('USER', user);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -36,15 +38,11 @@ export default function UserProfile() {
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Last Name</DetailsKey>
-          {user.last}
+          {user.last_name}
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Phone</DetailsKey>
           {user.phone}
-        </DetailsHeader>
-        <DetailsHeader>
-          <DetailsKey>Role</DetailsKey>
-          {user.role}
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Organisation</DetailsKey>
@@ -56,9 +54,7 @@ export default function UserProfile() {
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Created</DetailsKey>
-          <div id="time">
-            <Time value={user ? user.date_joined : ""} format="DD/MM/YYYY" />
-          </div>
+            <Time value={user.date_joined ? user.date_joined : ""} format="DD/MM/YYYY" />
         </DetailsHeader>
       </DetailsContainer>
         <AddButton onClick={onClickHandler}>Edit</AddButton>
