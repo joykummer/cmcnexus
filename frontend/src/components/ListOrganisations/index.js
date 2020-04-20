@@ -32,6 +32,7 @@ import {
   Wrapper,
   Clear,
 } from "../ListCases/styles";
+import {HeaderTitle} from "../AddOrganisation/styles";
 
 export const Container = styled.div`
   width: 100%;
@@ -42,7 +43,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-end;
 `;
 
 const AddOrganisation = styled.div`
@@ -110,6 +110,7 @@ function ListOrganisations(props) {
 
   return (
     <Container>
+      <HeaderTitle>ORGANISATIONS</HeaderTitle>
       <CanI perform={ADD_ORGANISATION}>
         <AddOrganisation onClick={addOrganisationHandler}>
           ADD ORGANISATION

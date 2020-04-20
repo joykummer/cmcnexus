@@ -33,13 +33,13 @@ function OrganisationDetails(props) {
       {organisationDetails ? (
         <>
           <HeaderTitle>Organisation Details of {organisationDetails.name}</HeaderTitle>
-          <Stripe>name</Stripe>
+          <Stripe>Name</Stripe>
           <DetailsContainer>{organisationDetails.name}</DetailsContainer>
-          <Stripe>description</Stripe>
+          <Stripe>Description</Stripe>
           <DetailsContainer>{organisationDetails.description}</DetailsContainer>
-          <Stripe>service</Stripe>
+          <Stripe>Service</Stripe>
           <DetailsContainer>{organisationDetails.services}</DetailsContainer>
-          <Stripe>category</Stripe>
+          <Stripe>Category</Stripe>
           <DetailsContainer>
               <CategoryWrapper>
               {organisationDetails.categories.map(category => {
@@ -49,11 +49,11 @@ function OrganisationDetails(props) {
           })}
               </CategoryWrapper>
           </DetailsContainer>
-          <Stripe>tag</Stripe>
+          <Stripe>Tag</Stripe>
           <DetailsContainer>
             {organisationDetails.tag}
           </DetailsContainer>
-          <Stripe>members</Stripe>
+          <Stripe>Members</Stripe>
           <DetailsContainer>
             {organisationDetails.members}
           </DetailsContainer>

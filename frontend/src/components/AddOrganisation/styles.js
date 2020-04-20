@@ -53,9 +53,9 @@ export const FieldInputLarge = styled.textarea`
   margin-top: 2px;
   box-sizing: border-box;
   background-color: white;
-  outline: solid 1px gray;
-  border: none;
+  border: solid 1px darkgray;
   border-radius: 5px;
+  outline-color: gray;
   padding: 10px;
 `;
 
@@ -63,6 +63,8 @@ export const CategoryDropdown = styled(Dropdown)`
   width: 200px;
   height: auto;
   margin-top: 2px;
+  border: solid 1px darkgray;
+  outline-color: gray;
 `;
 
 export const AddButton = styled(RedButton)`

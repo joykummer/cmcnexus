@@ -49,27 +49,27 @@ function CaseDetails(props) {
           <Stripe>Patient's details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>title</DetailsKey>
+              <DetailsKey>Title</DetailsKey>
               {caseDetails.title}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>age</DetailsKey>
+              <DetailsKey>Age</DetailsKey>
               {caseDetails.age}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>sex</DetailsKey>
+              <DetailsKey>Sex</DetailsKey>
               {caseDetails.sex}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>country</DetailsKey>
+              <DetailsKey>Country</DetailsKey>
               {caseDetails.country}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>consent</DetailsKey>
-              {caseDetails.consent ? "yes" : "no"}
+              <DetailsKey>Consent</DetailsKey>
+              {caseDetails.consent ? "Yes" : "No"}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>category</DetailsKey>
+              <DetailsKey>Category</DetailsKey>
               <CategoryWrapper>
                 {caseDetails
                   ? caseDetails.categories.map((category) => {
@@ -113,11 +113,11 @@ function CaseDetails(props) {
                 : null}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>status</DetailsKey>
+              <DetailsKey>Status</DetailsKey>
               {caseDetails.status}
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>outcome</DetailsKey>
+              <DetailsKey>Outcome</DetailsKey>
               {caseDetails.outcome}
             </DetailsHeader>
           </DetailsContainer>
