@@ -16,9 +16,7 @@ export default function UserProfile() {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  console.log('USER', user);
-
-  const history = useHistory();
+	const history = useHistory();
 
   useEffect(() => {
     dispatch(setNavigationAction(USERPROFILE));
@@ -46,7 +44,7 @@ export default function UserProfile() {
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Organisation</DetailsKey>
-          {user.organisation}
+          {user.organisation.name}
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Department</DetailsKey>

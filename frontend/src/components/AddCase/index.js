@@ -33,13 +33,23 @@ const Text = styled.div`
 
 function AddCase(props) {
   const [title, setTitle] = useState("");
+  const [language, setLanguage] = useState("");
+  const [nature_of_referral, setNatureOfReferral] = useState("");
+  const [patient_id, setPatientId] = useState("");
   const [description, setDescription] = useState("");
+  const [history_description, setHistoryDescription] = useState("");
   const [diagnosis, setDiagnosis] = useState("");
+  const [past_medical_history, setMedicalHistory] = useState("");
+  const [physical_examination, setPhysicalExamination] = useState("");
+  const [investigations, setInvestigations] = useState("");
+  const [current_treatment, setCurrentTreatment] = useState("");
   const [justification, setJustification] = useState("");
   const [recommendation, setRecommendation] = useState("");
   const [consent, setConsent] = useState(false);
+  const [birth_date, setBirthDate] = useState("");
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("");
+  const [location, setLocation] = useState("");
   const countries = countryList().getData();
   const [country, setCountry] = useState("");
   const [categories, setCategories] = useState(["default"]);
@@ -143,13 +153,23 @@ function AddCase(props) {
     if (isValid) {
       const data = {
         title: title,
+        language: language,
+        nature_of_referral: nature_of_referral,
+        patient_id: patient_id,
         description: description,
+        history_description: history_description,
         diagnosis: diagnosis,
+        past_medical_history: past_medical_history,
+        physical_examination: physical_examination,
+        investigations: investigations,
+        current_treatment: current_treatment,
         justification: justification,
         recommendation: recommendation,
         consent: consent,
+        birth_date: birth_date,
         age: age,
         sex: sex,
+        location: location,
         country: country,
         categories: categoryIds,
       };
@@ -172,48 +192,119 @@ function AddCase(props) {
           />
           <ErrorMessage>{titleError}</ErrorMessage>
         </Label>
-        <Label>
-          Description
-          <FieldInputLarge
-            name="description"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            required
-          />
-          <ErrorMessage>{descriptionError}</ErrorMessage>
+        <Label>Language
+        <BasicDropdown
+          name="language"
+          onChange={(e) => setLanguage(e.target.value)}
+          value={language}
+          required
+        >
+          <option value="" disabled>Please choose here...</option>
+          <option key={1}>French</option>
+          <option key={2}>English</option>
+          <option key={3}>Spanish</option>
+        </BasicDropdown>
         </Label>
-        <Label>
-          Diagnosis
-          <FieldInputLarge
-            name="diagnosis"
-            onChange={(e) => setDiagnosis(e.target.value)}
-            value={diagnosis}
-            required
-          />
-          <ErrorMessage>{diagnosisError}</ErrorMessage>
+        <Label>Nature of Referral
+        <BasicDropdown
+          name="nature_of_referral"
+          onChange={(e) => setNatureOfReferral(e.target.value)}
+          value={nature_of_referral}
+          required
+        >
+          <option value="" disabled>Please choose here...</option>
+          <option key={1}>Life changing</option>
+          <option key={2}>Emergency</option>
+          <option key={3}>Urgent</option>
+        </BasicDropdown>
         </Label>
-        <Label>
-          Justification
-          <FieldInputLarge
-            name="justification"
-            onChange={(e) => setJustification(e.target.value)}
-            value={justification}
-            required
-          />
+        <Label>Patient ID
+        <FieldInput
+          name="patient_id"
+          type="number"
+          onChange={(e) => setPatientId(e.target.value)}
+          value={patient_id}
+          min="0"
+          required
+      />
+      </Label>
+      <Label>Presenting Complaint
+      <FieldInputLarge
+        name="description"
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
+        required
+      />
+      </Label>
+      <Label>History of Presenting Complaint
+      <FieldInputLarge
+        name="history_description"
+        onChange={(e) => setHistoryDescription(e.target.value)}
+        value={history_description}
+        required
+      />
+           <ErrorMessage>{descriptionError}</ErrorMessage>
+      </Label>
+      <Label>Diagnosis
+      <FieldInputLarge
+        name="diagnosis"
+        onChange={(e) => setDiagnosis(e.target.value)}
+        value={diagnosis}
+        required
+      />
+      <ErrorMessage>{diagnosisError}</ErrorMessage>
+      </Label>
+      <Label>Past medical history
+      <FieldInputLarge
+        name="past_medical_history"
+        onChange={(e) => setMedicalHistory(e.target.value)}
+        value={past_medical_history}
+        required
+      />
+      </Label>
+      <Label>Physical examination
+      <FieldInputLarge
+        name="physical_examination"
+        onChange={(e) => setPhysicalExamination(e.target.value)}
+        value={physical_examination}
+        required
+      />
+      </Label>
+      <Label>Investigations
+      <FieldInputLarge
+        name="investigations"
+        onChange={(e) => setInvestigations(e.target.value)}
+        value={investigations}
+        required
+      />
+      </Label>
+      <Label>Current treatment
+      <FieldInputLarge
+        name="current_treatment"
+        onChange={(e) => setCurrentTreatment(e.target.value)}
+        value={current_treatment}
+        required
+      />
+      </Label>
+      <Label>Justification
+      <FieldInputLarge
+        name="justification"
+        onChange={(e) => setJustification(e.target.value)}
+        value={justification}
+        required
+      />
           <ErrorMessage>{justificationError}</ErrorMessage>
-        </Label>
-        <Label>
-          Recommendation
-          <FieldInputLarge
-            name="recommendation"
-            onChange={(e) => setRecommendation(e.target.value)}
-            value={recommendation}
-            required
-          />
-          <ErrorMessage>{recommendationError}</ErrorMessage>
-        </Label>
-        <Label>
-          Patient's consent
+      </Label>
+      <Label>Recommendation
+      <FieldInputLarge
+        name="recommendation"
+        onChange={(e) => setRecommendation(e.target.value)}
+        value={recommendation}
+        required
+      />
+        <ErrorMessage>{recommendationError}</ErrorMessage>
+      </Label>
+      <Label>Patient's consent
           <Wrapper>
             <Checkbox
               type="checkbox"
@@ -228,52 +319,60 @@ function AddCase(props) {
             </Text>
           </Wrapper>
           <ErrorMessage>{consentError}</ErrorMessage>
-        </Label>
-        <Label>
-          Age
-          <FieldInput
-            name="age"
-            type="number"
-            onChange={(e) => setAge(e.target.value)}
-            value={age}
-            min="0"
-            required
-            style={{"width":"75px"}}
-          />
+      </Label>
+      <Label>Birth date
+      <FieldInput
+        name="birth_date"
+        type="text"
+        onChange={(e) => setBirthDate(e.target.value)}
+        value={birth_date}
+      />
+      </Label>
+      <Label>Age
+      <FieldInput
+        name="age"
+        type="number"
+        onChange={(e) => setAge(e.target.value)}
+        value={age}
+        min="0"
+        required
+      />
+      </Label>
           <ErrorMessage>{ageError}</ErrorMessage>
-        </Label>
-        <Label>
-          Sex
-          <BasicDropdown
-            name="sex"
-            onChange={(e) => setSex(e.target.value)}
-            value={sex}
-            required
-          >
-            <option value="" disabled>
-              Please choose here...
-            </option>
-            <option key={1}>F</option>
-            <option key={2}>M</option>
-          </BasicDropdown>
-          <ErrorMessage>{sexError}</ErrorMessage>
-        </Label>
-        <Label>
-          Country
-          <BasicDropdown
-            defaultValue={"default"}
-            onChange={(e) => setCountry(e.target.value)}
-          >
-            <option value="default" disabled>
-              Please choose here...
-            </option>
-            {countries
-              ? countries.map((country) => {
-                  return <option key={country.value}>{country.label}</option>;
-                })
-              : null}
-          </BasicDropdown>
-          <ErrorMessage>{countryError}</ErrorMessage>
+      <Label>Sex
+      <BasicDropdown
+        name="sex"
+        onChange={(e) => setSex(e.target.value)}
+        value={sex}
+        required
+      >
+          <option value="" disabled>Please choose here...</option>
+          <option key={1}>F</option>
+          <option key={2}>M</option>
+      </BasicDropdown>
+      </Label>
+      <ErrorMessage>{sexError}</ErrorMessage>
+      <Label>Location
+      <FieldInput
+          name="location"
+          onChange={(e) => setLocation(e.target.value)}
+          value={location}
+          required
+      />
+      </Label>
+      <Label>Country
+      <BasicDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
+          <option value="default" disabled>Please choose here...</option>
+          {countries
+          ? countries.map((country) => {
+              return (
+                <option key={country.value}>{country.label}</option>
+              );
+            })
+          : null
+          }
+      </BasicDropdown>
+      <ErrorMessage>{countryError}</ErrorMessage>
         </Label>
         <Label>
           Category
@@ -293,8 +392,8 @@ function AddCase(props) {
                 })
               : null}
           </CategoryDropdown>
-          <ErrorMessage>{categoriesError}</ErrorMessage>
         </Label>
+          <ErrorMessage>{categoriesError}</ErrorMessage>
       </DetailsContainer>
       <AddButton onClick={addCaseHandler}>Submit</AddButton>
     </Container>

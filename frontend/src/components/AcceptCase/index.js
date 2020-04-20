@@ -1,41 +1,29 @@
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Cases/acceptCaseAction";
 import { AcceptRejectButton } from "../../styles/Buttons";
 
-const isAccepted = (singleCase, user) => {
-    return singleCase.partnered_organisations.filter(org => org.status === "accepted")
-        .some((org) => org.organisation.id === user.organisation)
-}
-
-function AcceptCase(props) {
-
-  const user = useSelector(state => state.auth.user);
+export default function AcceptCase({singleCase}) {
+  const dispatch = useDispatch();
+  const organisation = useSelector(state => state.auth.user ? state.auth.user.organisation : null);
+  const organisation_id = organisation ? organisation.id : null;
+  console.log('org', organisation);
+  const status = (organisation && organisation.partnered_cases) ?
+    organisation.partnered_cases.find(el => el.case === singleCase.id).status
+    : null;
 
   const acceptCaseByOrg = () => {
-    props.dispatch(acceptCaseByOrgFunction(props.singleCase.id, user.organisation))
+    dispatch(acceptCaseByOrgFunction(singleCase.id, organisation_id))
   };
   const unacceptCaseByOrg = () => {
-    props.dispatch(unacceptCaseByOrgFunction(props.singleCase.id, user.organisation));
+    dispatch(unacceptCaseByOrgFunction(singleCase.id, organisation_id));
   };
   return(
     <>
       {
-      isAccepted(props.singleCase, user)
+        status && status === "accepted"
           ? <AcceptRejectButton onClick={unacceptCaseByOrg}>Undo</AcceptRejectButton>
           : <AcceptRejectButton onClick={acceptCaseByOrg} clicked={true} >Accept</AcceptRejectButton>
       }
     </>
 )}
-
-const mapStateToProps = (state) => {
-  return {
-    organisations: state.organisations,
-    cases: state.cases,
-  };
-};
-
-export default connect(mapStateToProps)(AcceptCase);
-
-
-

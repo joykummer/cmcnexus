@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import { RedButton } from "../../styles/Buttons";
+import {AddButton, RedButton} from "../../styles/Buttons";
+import {
+  Vertical,
+  Status,
+  Horizontal,
+} from "./styles";
 import CanI from "../Permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
@@ -36,10 +41,14 @@ function CaseDetails(props) {
   }, [dispatch]);
 
   const matchingHandler = (id) => {
-    props.history.push({
-      pathname: `/cases/match/${id}`,
-    });
-  };
+        props.history.push({
+            pathname: `/cases/match/${id}`,
+          });
+    };
+
+  const redirectHandler = () => {
+        props.history.push(`/cases/edit/${caseDetails.id}/`)
+    }
 
   const caseDetails = props.cases
     ? props.cases.find((file) => file.id === Number(props.match.params.id))
@@ -57,12 +66,32 @@ function CaseDetails(props) {
               {caseDetails.title}
             </DetailsHeader>
             <DetailsHeader>
+              <DetailsKey>Patient ID</DetailsKey>
+              {caseDetails.patient_id}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Language</DetailsKey>
+              {caseDetails.language}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Nature of Referral</DetailsKey>
+              {caseDetails.nature_of_referral}
+            </DetailsHeader>
+            <DetailsHeader>
               <DetailsKey>Age</DetailsKey>
               {caseDetails.age}
             </DetailsHeader>
             <DetailsHeader>
+              <DetailsKey>Date of Birth</DetailsKey>
+              {caseDetails.birth_date}
+            </DetailsHeader>
+            <DetailsHeader>
               <DetailsKey>Sex</DetailsKey>
               {caseDetails.sex}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Location</DetailsKey>
+              {caseDetails.location}
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Country</DetailsKey>
@@ -82,12 +111,24 @@ function CaseDetails(props) {
           <Stripe>Medical details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>Description</DetailsKey>
+              <DetailsKey>Presenting Complaint</DetailsKey>
               {caseDetails.description}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>History of Presenting Complaint</DetailsKey>
+              {caseDetails.history_description}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Past Medical History</DetailsKey>
+              {caseDetails.past_medical_history}
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Diagnosis</DetailsKey>
               {caseDetails.diagnosis}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Physical examination</DetailsKey>
+              {caseDetails.physical_examination}
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Justification</DetailsKey> {caseDetails.justification}
@@ -100,17 +141,19 @@ function CaseDetails(props) {
           <Stripe>Status</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>Partners</DetailsKey>
-              {caseDetails
-                ? caseDetails.partnered_organisations.map((partner) => {
-                    return (
-                      <div key={partner.organisation.id}>
-                        <b>{partner.organisation.name}</b>{" "}
-                        <i>{partner.status}</i>
-                      </div>
+              <DetailsKey>Partners' Status</DetailsKey>
+              <Vertical>
+              {caseDetails.match_stats ?
+                caseDetails.match_stats.map(stat => {
+                  return (
+                    <Horizontal key={stat.status}>
+                      <Status>{stat.status}</Status>
+                      <b>{stat.count}</b>
+                    </Horizontal>
                     );
                   })
                 : null}
+              </Vertical>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
@@ -144,6 +187,7 @@ function CaseDetails(props) {
       ) : (
         <div>No case to show</div>
       )}
+       <AddButton onClick={redirectHandler}>Edit</AddButton>
     </Container>
   );
 }

@@ -73,8 +73,6 @@ function ListCases(props) {
     }
   };
 
-  console.log('PROPPPPPS', props);
-
   const caseDetailsHandler = (id) => {
     props.history.push({
       pathname: `/cases/details/${id}/`,

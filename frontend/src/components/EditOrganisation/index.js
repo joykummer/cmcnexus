@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { editOrganisationFunction } from "../../store/actions/editOrganisationAction";
+import { editOrganisationFunction } from "../../store/actions/Organisations/editOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import { Label } from "../AddOrganisation/styles";
 import { AddButton } from "../../styles/Buttons";

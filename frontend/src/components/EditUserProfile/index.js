@@ -168,16 +168,19 @@ return (user ?<Wrapper>
 					</MissingElements>
 				</Column>
 			</GeneralElements>
-			<GeneralElements>
-				<FieldName>
-					Organisation
-				</FieldName>
-				<Column>
-					<MissingElements>
-						{user.organisation}
-					</MissingElements>
-				</Column>
-			</GeneralElements>
+			{user.organisation ?
+				<GeneralElements>
+					<FieldName>
+						Organisation
+					</FieldName>
+					<Column>
+						<MissingElements>
+							{user.organisation.name}
+						</MissingElements>
+					</Column>
+				</GeneralElements>
+				: null
+			}
 			<GeneralElements>
 				<FieldName>
 					Department

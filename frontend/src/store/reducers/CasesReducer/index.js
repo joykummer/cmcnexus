@@ -1,4 +1,4 @@
-import { SET_CASES, ADD_CASE, UPDATE_CASE } from "../../actions/actionTypes";
+import { SET_CASES, ADD_CASE, UPDATE_CASE} from "../../actions/actionTypes";
 
 export default function cases(state = [], action) {
   switch (action.type) {
