@@ -88,6 +88,7 @@ function MatchAssignOrg(props) {
   };
 
   const organisationsMatchingByCategory = filteredOrganisations()
+
   const headers = ["Name", "Description", "Category", "Tag(s)"];
 
   return (

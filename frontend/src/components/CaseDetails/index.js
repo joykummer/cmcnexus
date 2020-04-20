@@ -49,6 +49,7 @@ function CaseDetails(props) {
           });
     };
 
+
   const redirectHandler = () => {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
     }

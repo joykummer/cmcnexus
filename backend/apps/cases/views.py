@@ -10,7 +10,7 @@ from apps.cases.permissions import ValidatePermission, MatchOrganisationPermissi
     AssignOrganisationPermission, AcceptRejectCasePermission, ReopenPermission
 from apps.cases.models import Case, Partnership
 from apps.cases.permissions import ClosePermission, RejectPermission
-from apps.cases.serializers import CaseSerializer, get_general_or_medical_info
+from apps.cases.serializers import CaseSerializer, get_general_or_medical_info, GeneralInfoSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
 from apps.cases.serializers import CreateCaseSerializer
 from apps.organisations.models import Organisation
@@ -146,7 +146,7 @@ class AssignOrganisation(GenericAPIView):
 
 class AcceptCaseAsOrg(GenericAPIView):
     queryset = Case
-    serializer_class = CaseSerializer
+    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, AcceptRejectCasePermission]
     lookup_url_kwarg = 'case_id'
 
@@ -167,7 +167,7 @@ class AcceptCaseAsOrg(GenericAPIView):
 
 class RefuseCaseAsOrg(GenericAPIView):
     queryset = Case
-    serializer_class = CaseSerializer
+    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, AcceptRejectCasePermission]
     lookup_url_kwarg = 'case_id'
 

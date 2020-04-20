@@ -13,7 +13,7 @@ default_groups_permissions = [
             "view_general_info",
             "view_medical_info",
             "update_general_info",
-            "update_medical_info"
+            "update_medical_info",
         ]
     },
     {
