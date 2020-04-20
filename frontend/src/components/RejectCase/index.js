@@ -23,7 +23,7 @@ export default function RejectCase({singleCase}) {
 
   return<>
     {
-      status && status === "rejected"
+      status === "rejected"
         ? <AcceptRejectButton onClick={unRejectCaseByOrg}>Undo</AcceptRejectButton>
         : <AcceptRejectButton onClick={rejectCaseByOrg} clicked={true} >Reject</AcceptRejectButton>
     }
