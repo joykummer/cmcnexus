@@ -16,6 +16,7 @@ import {
   MATCH_ORGANISATIONS,
   UPDATE_MATCH,
   CHANGE_CASE,
+  CLOSE_CASE
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
