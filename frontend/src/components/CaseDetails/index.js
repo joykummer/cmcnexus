@@ -2,12 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import {
-  DetailsHeader,
-  DetailsKey,
-  Stripe,
-  Match,
-} from "./styles";
+import { RedButton } from "../../styles/Buttons";
 import CanI from "../Permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
@@ -20,11 +15,16 @@ import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
 import styled from "styled-components";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
 
 const ButtonContainer = styled.div`
 width: 225px;
 display: flex;
 justify-content: space-between; 
+`;
+
+const Match = styled(RedButton)`
+  width: 225px;
 `;
 
 function CaseDetails(props) {

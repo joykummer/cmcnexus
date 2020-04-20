@@ -2,15 +2,11 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom'
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
-import {
-  Stripe,
-  DetailsKey,
-  DetailsHeader
-} from "../CaseDetails/styles";
 import { setNavigationAction } from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
 import { AddButton } from "../../styles/Buttons";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
 
 
 function OrganisationDetails(props) {
