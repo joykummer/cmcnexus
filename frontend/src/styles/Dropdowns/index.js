@@ -22,13 +22,13 @@ export const Dropdown = styled.select`
 
 export const CountryDropdown = styled(Dropdown)`
   width: 300px;
-  height: 40px;
+  height: 35px;
   margin-top: 2px;
 `;
 
 export const SexDropdown = styled(Dropdown)`
   width: 200px;
-  height: 40px;
+  height: 35px;
   margin-top: 2px;
 `;
 

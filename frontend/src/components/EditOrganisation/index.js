@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { editOrganisationFunction } from "../../store/actions/editOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
-import { Label, FieldInput,
-      FieldInputLarge } from "../AddOrganisation/styles";
+import { Label } from "../AddOrganisation/styles";
 import { AddButton } from "../../styles/Buttons";
 import { CategoryDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
 
 
 function EditOrganisation(props) {

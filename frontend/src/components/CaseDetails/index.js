@@ -7,7 +7,6 @@ import {
   DetailsKey,
   Stripe,
   Match,
-  CategoryWrapper,
 } from "./styles";
 import CanI from "../Permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
@@ -75,13 +74,9 @@ function CaseDetails(props) {
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Category</DetailsKey>
-              <CategoryWrapper>
                 {caseDetails
-                  ? caseDetails.categories.map((category) => {
-                      return <div key={category.id}>{category.name}</div>;
-                    })
+                  ? caseDetails.categories.map((category) => category.name).join(', ')
                   : null}
-              </CategoryWrapper>
             </DetailsHeader>
           </DetailsContainer>
           <Stripe>Medical details</Stripe>

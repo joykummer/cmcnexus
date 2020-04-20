@@ -6,14 +6,11 @@ import { categoriesFunction } from "../../store/actions/Categories/categoriesAct
 import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
-import {
-  Label,
-  FieldInput,
-  FieldInputLarge,
-} from "../AddOrganisation/styles";
+import { Label } from "../AddOrganisation/styles";
 import { AddButton } from "../../styles/Buttons";
 import { CategoryDropdown, CountryDropdown, SexDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
 
 const Wrapper = styled.div`
   display: flex;

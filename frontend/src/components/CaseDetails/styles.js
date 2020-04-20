@@ -12,11 +12,6 @@ export const DetailsKey = styled.div`
   color: #777;
 `;
 
-export const CategoryWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const Stripe = styled.div`
   width: auto;
   color: red;

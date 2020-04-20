@@ -4,11 +4,11 @@ import { addOrganisationFunction } from "../../store/actions/Organisations/addOr
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
-import { Label, FieldInput,
-      FieldInputLarge } from "./styles"
+import { Label } from "./styles"
 import { AddButton } from "../../styles/Buttons";
 import { CategoryDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
 
 
 function AddOrganisation(props) {

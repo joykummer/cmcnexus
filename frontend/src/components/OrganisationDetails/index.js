@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import {
   Stripe,
-  CategoryWrapper,
   DetailsKey,
   DetailsHeader
 } from "../CaseDetails/styles";
@@ -55,13 +54,9 @@ function OrganisationDetails(props) {
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Category</DetailsKey>
-              <CategoryWrapper>
-              {organisationDetails.categories.map(category => {
-            return (
-                <div key={category.id}>{category.name}</div>
-                    )
-          })}
-              </CategoryWrapper>
+              {organisationDetails
+                  ? organisationDetails.categories.map((category) => category.name).join(', ')
+                  : null}
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Tag</DetailsKey>

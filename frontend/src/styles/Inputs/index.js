@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const GreyRoundInput = styled.input`
-  background-color: white;
-  color: #777;
   box-sizing: border-box;
   border: solid 1px darkgray;
   border-radius: 5px;
@@ -11,4 +9,22 @@ export const GreyRoundInput = styled.input`
   padding-left: 10px;
 `;
 
+export const FieldInput = styled(GreyRoundInput)`
+  width: 100%;
+  height: 35px;
+  margin-top: 2px;
+`;
+
+export const FieldInputLarge = styled.textarea`
+  height: 170px;
+  width: 100%;
+  resize: none;
+  margin-top: 2px;
+  box-sizing: border-box;
+  background-color: white;
+  border: solid 1px darkgray;
+  border-radius: 5px;
+  outline-color: gray;
+  padding: 10px;
+`;
 
