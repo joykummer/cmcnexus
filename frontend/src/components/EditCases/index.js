@@ -3,7 +3,7 @@ import styled from "styled-components";
 import countryList from "react-select-country-list";
 import { connect } from "react-redux";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
-import { editCaseFunction } from "../../store/actions/editCaseAction";
+import { editCaseFunction } from "../../store/actions/Cases/editCaseAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES_ADD} from '../Navigation/states';
 

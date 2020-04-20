@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { editOrganisationFunction } from "../../store/actions/editOrganisationAction";
+import { editOrganisationFunction } from "../../store/actions/Organisations/editOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, 
       FieldInputLarge, CategoryDropdown, AddButton} from "../AddOrganisation/styles"
