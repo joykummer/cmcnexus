@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import { connect } from "react-redux";
 import { addOrganisationFunction } from "../../store/actions/Organisations/addOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
@@ -16,7 +17,7 @@ function AddOrganisation(props) {
   const [categories, setCategories] = useState(["default"]);
   const [categoryIds, setCategoryIds] = useState([]);
   const dispatch = props.dispatch;
-
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     dispatch(categoriesFunction());
@@ -32,6 +33,7 @@ function AddOrganisation(props) {
 
   const addOrganisationHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = {
       name: name,
       description: description,
@@ -39,7 +41,9 @@ function AddOrganisation(props) {
       categories: categoryIds,
       tag: tag,
     };
-    dispatch(addOrganisationFunction(data));
+    await dispatch(addOrganisationFunction(data));
+    // console.log("response", response)
+    setLoading(false);
     props.history.push("/organisations/");
   };
 
@@ -103,7 +107,8 @@ function AddOrganisation(props) {
       </CategoryDropdown>
       </Label>
       </DetailsContainer>
-      <AddButton onClick={addOrganisationHandler}>Add</AddButton>
+      <AddButton onClick={addOrganisationHandler}>{loading ? <ClipLoader size={35} color={"white"} height={15}/> :  "SUBMIT"}</AddButton>
+      {/* {loading ? <ClipLoader size={35} color={"#ff0000"} loading={true}/> :  "ADD"} */}
     </Container>
   );
 }

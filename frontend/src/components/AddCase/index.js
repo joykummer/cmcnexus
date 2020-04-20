@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 import countryList from "react-select-country-list";
 import { connect } from "react-redux";
@@ -68,7 +69,7 @@ function AddCase(props) {
   const [sexError, setSexError] = useState("");
   const [countryError, setCountryError] = useState("");
   const [categoriesError, setCategoriesError] = useState("");
-
+  const [loading, setLoading] = useState(false)
   const dispatch = props.dispatch;
 
   useEffect(() => {
@@ -153,6 +154,7 @@ function AddCase(props) {
   };
 
   const addCaseHandler = async (e) => {
+    setLoading(true);
     const isValid = validate();
     if (isValid) {
       const data = {
@@ -177,7 +179,8 @@ function AddCase(props) {
         country: country,
         categories: categoryIds,
       };
-      dispatch(addCaseFunction(data));
+      await dispatch(addCaseFunction(data));
+      setLoading(false);
       props.history.push("/cases/");
     }
   };
@@ -400,7 +403,7 @@ function AddCase(props) {
 
           <ErrorMessage>{categoriesError}</ErrorMessage>
       </DetailsContainer>
-      <AddButton onClick={addCaseHandler}>Submit</AddButton>
+      <AddButton onClick={addCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} height={15}/> :  "SUBMIT"}</AddButton>
     </Container>
   );
 }
