@@ -5,7 +5,7 @@ import CanI from "../Permissions";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import { setNavigationAction } from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
-import { AddButton } from "../../styles/Buttons";
+import {EditSaveButton} from "../../styles/Buttons";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
 import {CHANGE_ORGANISATION} from "../Permissions/permissions";
@@ -60,18 +60,14 @@ function OrganisationDetails(props) {
               <DetailsKey>Tag</DetailsKey>
               {organisationDetails.tag}
             </DetailsHeader>
-            <DetailsHeader>
-              <DetailsKey>Members</DetailsKey>
-              {organisationDetails.members}
-            </DetailsHeader>
           </DetailsContainer>
+          <CanI perform={CHANGE_ORGANISATION}>
+          <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
+          </CanI>
         </>
       ) : (
         <div>This organisation does not exist.</div>
       )}
-      <CanI perform={CHANGE_ORGANISATION}>
-      <AddButton onClick={redirectHandler}>Edit</AddButton>
-      </CanI>
     </Container>
   );
 }

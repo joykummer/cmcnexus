@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { editOrganisationFunction } from "../../store/actions/Organisations/editOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import { Label } from "../AddOrganisation/styles";
-import { AddButton } from "../../styles/Buttons";
+import { EditSaveButton } from "../../styles/Buttons";
 import { CategoryDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
@@ -105,7 +105,7 @@ function EditOrganisation(props) {
       ) :(
         <div>This organisation does not exist.</div>
       )}
-      <AddButton onClick={editOrganisationHandler}>Save</AddButton>
+      <EditSaveButton onClick={editOrganisationHandler}>Save</EditSaveButton>
     </Container>
   );
 }
