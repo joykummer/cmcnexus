@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { RedButton } from "../../styles/Buttons";
+import {AddButton} from "../AddOrganisation/styles";
 
 export const Container = styled.div`
   width: 100%;
@@ -62,6 +63,9 @@ export const Match = styled(RedButton)`
   height: 70px;
   margin-top: 20px;
 `;
+
+export const EditButton = styled(AddButton)`
+`; 
 
 export const Vertical = styled.div`
   display: flex;

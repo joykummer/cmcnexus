@@ -11,6 +11,7 @@ import {
   Stripe,
   Match,
   CategoryWrapper,
+  EditButton,
   Vertical,
   Status,
   Horizontal,
@@ -26,6 +27,7 @@ import {
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
 
+
 function CaseDetails(props) {
   const dispatch = props.dispatch;
 
@@ -35,10 +37,14 @@ function CaseDetails(props) {
   }, [dispatch]);
 
   const matchingHandler = (id) => {
-    props.history.push({
-      pathname: `/cases/match/${id}`,
-    });
-  };
+        props.history.push({
+            pathname: `/cases/match/${id}`,
+          });
+    };
+
+  const redirectHandler = () => {
+        props.history.push(`/cases/edit/${caseDetails.id}/`)
+    }  
 
   const caseDetails = props.cases
     ? props.cases.find((file) => file.id === Number(props.match.params.id))
@@ -180,6 +186,7 @@ function CaseDetails(props) {
       ) : (
         <div>No case to show</div>
       )}
+       <EditButton onClick={redirectHandler}>Edit</EditButton>
     </Container>
   );
 }
