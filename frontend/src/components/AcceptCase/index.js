@@ -17,8 +17,8 @@ import styled from "styled-components";
         opacity: 0.8;
     }
   `;
-
-  export default function AcceptCase({singleCase}) {
+  
+export default function AcceptCase({singleCase}) {
   const dispatch = useDispatch();
   const organisation = useSelector(state => state.auth.user ? state.auth.user.organisation : null);
   const organisation_id = organisation ? organisation.id : null;
