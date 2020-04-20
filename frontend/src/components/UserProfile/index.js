@@ -44,7 +44,7 @@ export default function UserProfile() {
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Organisation</DetailsKey>
-          {user.organisation.name}
+          {user.organisation ? user.organisation.name : null}
         </DetailsHeader>
         <DetailsHeader>
           <DetailsKey>Department</DetailsKey>

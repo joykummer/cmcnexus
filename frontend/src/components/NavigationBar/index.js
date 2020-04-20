@@ -30,16 +30,16 @@ function NavigationBar() {
       pathname: "/login",
       state: { from: "/" }
     });
-  }
+  };
 
   const onClickHandler = navigationTarget => {
     dispatch(setNavigationAction(navigationTarget));
     history.push(`/${navigationTarget}/`);
-  }
+  };
 
   return (
     <NavigationContainer>
-      <Logo src={msf_logo}/>
+      <Logo src={msf_logo} onClick={() => onClickHandler(CASES)}/>
       <OptionsWrapper />
       <Options>
         <NavItem selected={selected===DASHBOARD} onClick={() => onClickHandler(DASHBOARD)}>

@@ -38,6 +38,8 @@ const AddOrganisation = styled.div`
   font-size: 16px;
   margin-bottom: 25px;
   color: red;
+  text-align: right;
+  vertical-align: middle;
   :hover {
     text-decoration: underline;
     cursor: pointer;
@@ -99,12 +101,12 @@ function ListOrganisations(props) {
 
   return (
     <Container>
-      <HeaderTitle>ORGANISATIONS</HeaderTitle>
       <CanI perform={ADD_ORGANISATION}>
         <AddOrganisation onClick={addOrganisationHandler}>
-          ADD ORGANISATION
+          + ADD ORGANISATION
         </AddOrganisation>
       </CanI>
+      <HeaderTitle>ORGANISATIONS</HeaderTitle>
       <SearchContainer>
         <SearchWrapper>
           <Card>

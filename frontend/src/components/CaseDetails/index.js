@@ -14,7 +14,7 @@ import { CASES } from "../Navigation/states";
 import {
   VALIDATE_CASE,
   MATCH_ORGANISATIONS,
-  UPDATE_MATCH,
+  UPDATE_MATCH, CHANGE_CASE,
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
@@ -187,7 +187,9 @@ function CaseDetails(props) {
       ) : (
         <div>No case to show</div>
       )}
+      <CanI perform={CHANGE_CASE}>
        <AddButton onClick={redirectHandler}>Edit</AddButton>
+      </CanI>
     </Container>
   );
 }

@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import CanI from "../Permissions";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import { setNavigationAction } from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
 import { AddButton } from "../../styles/Buttons";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
+import {CHANGE_ORGANISATION} from "../Permissions/permissions";
 
 
 function OrganisationDetails(props) {
@@ -67,7 +69,9 @@ function OrganisationDetails(props) {
       ) : (
         <div>This organisation does not exist.</div>
       )}
+      <CanI perform={CHANGE_ORGANISATION}>
       <AddButton onClick={redirectHandler}>Edit</AddButton>
+      </CanI>
     </Container>
   );
 }
