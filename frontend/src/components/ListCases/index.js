@@ -28,6 +28,27 @@ import {
   Clear,
 } from "../../styles/SearchesFilters/index";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import CanI from "../Permissions";
+import {ADD_ORGANISATION} from "../Permissions/permissions";
+import styled from "styled-components";
+
+const HeaderTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+`;
+
+const AddCase = styled.div`
+  font-size: 18px;
+  color: red;
+  text-align: right;
+  vertical-align: middle;
+  :hover {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
 
 function ListCases(props) {
   const [title, setTitle] = useState("");
@@ -79,11 +100,23 @@ function ListCases(props) {
     });
   };
 
+  const addCaseHandler = (e) => {
+    e.preventDefault();
+    props.history.push("/cases/add/");
+  };
+
   const headers = ["Title", "Country", "Category", "Status"];
 
   return (
     <Container>
+      <HeaderTitleWrapper>
       <HeaderTitle>CASES</HeaderTitle>
+       <CanI perform={ADD_ORGANISATION}>
+        <AddCase onClick={addCaseHandler}>
+          + ADD CASE
+        </AddCase>
+      </CanI>
+      </HeaderTitleWrapper>
       <SearchContainer>
         <SearchWrapper>
           <Card>

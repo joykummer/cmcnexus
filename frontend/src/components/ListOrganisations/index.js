@@ -33,10 +33,14 @@ import {
 } from "../../styles/SearchesFilters/index";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
+const HeaderTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+`;
 
 const AddOrganisation = styled.div`
-  font-size: 16px;
-  margin-bottom: 25px;
+  font-size: 18px;
   color: red;
   text-align: right;
   vertical-align: middle;
@@ -101,12 +105,14 @@ function ListOrganisations(props) {
 
   return (
     <Container>
+      <HeaderTitleWrapper>
+      <HeaderTitle>ORGANISATIONS</HeaderTitle>
       <CanI perform={ADD_ORGANISATION}>
         <AddOrganisation onClick={addOrganisationHandler}>
           + ADD ORGANISATION
         </AddOrganisation>
       </CanI>
-      <HeaderTitle>ORGANISATIONS</HeaderTitle>
+      </HeaderTitleWrapper>
       <SearchContainer>
         <SearchWrapper>
           <Card>
