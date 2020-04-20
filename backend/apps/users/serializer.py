@@ -1,11 +1,14 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from apps.organisations.serializer import OrganisationSerializer
+
 User = get_user_model()
 
 
 class FullUserSerializer(serializers.ModelSerializer):
     permissions = serializers.SerializerMethodField()
+    organisation = OrganisationSerializer(read_only=True)
 
     def get_permissions(self, obj):
         return [perm.split('.')[1] for perm in obj.get_all_permissions()]

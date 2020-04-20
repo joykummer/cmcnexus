@@ -45,7 +45,7 @@ function CaseDetails(props) {
                 <DetailsHeader><DetailsKey>country:</DetailsKey>{caseDetails.country}</DetailsHeader>
                 <DetailsHeader><DetailsKey>consent:</DetailsKey>{caseDetails.consent ?"yes":"no"}</DetailsHeader>
                 <DetailsHeader><DetailsKey>category:</DetailsKey>{
-              caseDetails ?
+              caseDetails.categories ?
                   caseDetails.categories.map(category => {
                     return (
                         <div key={category.id}><b>{category.name}</b></div>
@@ -62,11 +62,11 @@ function CaseDetails(props) {
             </DetailsContainer>
             <Stripe>Status</Stripe>
             <DetailsContainer> 
-            <DetailsHeader><DetailsKey>Partners:</DetailsKey>{
-              caseDetails && caseDetails.partnered_organisations ?
-                  caseDetails.partnered_organisations.map(partner => {
+            <DetailsHeader><DetailsKey>Matching process:</DetailsKey>{
+              caseDetails.match_stats ?
+                  caseDetails.match_stats.map(stat => {
                     return (
-                        <div key={partner.organisation.id}><b>{partner.organisation.name}</b> <i>{partner.status}</i></div>
+                        <div key={stat.status}>{stat.status}<b>{stat.count}</b></div>
                     )
                   }) : null
               }</DetailsHeader>
