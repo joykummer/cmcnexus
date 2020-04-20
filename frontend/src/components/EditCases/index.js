@@ -60,6 +60,15 @@ function EditCases(props) {
     setCategoryIds(selectedOptions.map(option => option.id));
   };
 
+  // const consentChecker =(e) => {
+  //   if (e.target.ckecked){
+  //     setConsent(true)
+  //   }else{
+  //     setConsent(false)
+  //   }
+  // console.log("hello it is the checker", e.target.checked)
+  // }
+
   const validate = () => {
     let titleError = "";
     let descriptionError = "";
@@ -152,6 +161,10 @@ function EditCases(props) {
     }
   };
 
+  // const checkHandler = (e) => {
+  //  return caseDetails.consent ? consent.checked : !consent.checked
+  // }
+
   return (
     <Container>
       <HeaderTitle>Edit case</HeaderTitle>
@@ -207,13 +220,15 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{recommendationError}</ErrorMessage>
       <Label>Patient's consent
+        {console.log("here we are", caseDetails.consent)}
       <Checkbox
         type="checkbox"
         placeholder ={caseDetails.consent}
         name="consent"
-        onChange={() => setConsent(true)}
-        value="consent"
+        // onChange={consentChecker}
+        value="checked"
         required
+        checked ={consent}
       />
       </Label>
           <ErrorMessage>{consentError}</ErrorMessage>
