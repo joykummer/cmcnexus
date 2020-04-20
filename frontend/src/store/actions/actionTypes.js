@@ -15,4 +15,4 @@ export const VALIDATE_CASE = 'VALIDATE_CASE';
 export const SET_NAVIGATION = 'SET_NAVIGATION';
 export const REJECT_CASE = 'REJECT_CASE';
 export const EDIT_ORGANISATION = 'EDIT_ORGANISATION';
-
+export const EDIT_CASE = 'EDIT_CASE'; 
