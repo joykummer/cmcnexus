@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const HeaderTitle = styled.div`
   font-size: 30px;
   text-transform: uppercase;
-  margin-bottom: 25px;
+  padding-bottom: 15px;
 `;
 
 export const DetailsContainer = styled.div`

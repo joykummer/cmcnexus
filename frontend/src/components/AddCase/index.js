@@ -24,8 +24,7 @@ import {
 
 const ErrorMessage = styled.div`
   font-size: 10px;
-  color: red;
-  margin-bottom: 10px;
+  color: red;git
 `;
 
 const Wrapper = styled.div`
@@ -176,8 +175,8 @@ function AddCase(props) {
             value={title}
             required
           />
+          <ErrorMessage>{titleError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{titleError}</ErrorMessage>
         <Label>
           Description
           <FieldInputLarge
@@ -186,8 +185,8 @@ function AddCase(props) {
             value={description}
             required
           />
+          <ErrorMessage>{descriptionError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{descriptionError}</ErrorMessage>
         <Label>
           Diagnosis
           <FieldInputLarge
@@ -196,8 +195,8 @@ function AddCase(props) {
             value={diagnosis}
             required
           />
+          <ErrorMessage>{diagnosisError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{diagnosisError}</ErrorMessage>
         <Label>
           Justification
           <FieldInputLarge
@@ -206,8 +205,8 @@ function AddCase(props) {
             value={justification}
             required
           />
+          <ErrorMessage>{justificationError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{justificationError}</ErrorMessage>
         <Label>
           Recommendation
           <FieldInputLarge
@@ -216,8 +215,8 @@ function AddCase(props) {
             value={recommendation}
             required
           />
+          <ErrorMessage>{recommendationError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{recommendationError}</ErrorMessage>
         <Label>
           Patient's consent
           <Wrapper>
@@ -233,8 +232,8 @@ function AddCase(props) {
               obtained from the patient.
             </Text>
           </Wrapper>
+          <ErrorMessage>{consentError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{consentError}</ErrorMessage>
         <Label>
           Age
           <FieldInput
@@ -246,8 +245,8 @@ function AddCase(props) {
             required
             style={{"width":"75px"}}
           />
+          <ErrorMessage>{ageError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{ageError}</ErrorMessage>
         <Label>
           Sex
           <SexDropdown
@@ -262,8 +261,8 @@ function AddCase(props) {
             <option key={1}>F</option>
             <option key={2}>M</option>
           </SexDropdown>
+          <ErrorMessage>{sexError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{sexError}</ErrorMessage>
         <Label>
           Country
           <CountryDropdown
@@ -279,8 +278,8 @@ function AddCase(props) {
                 })
               : null}
           </CountryDropdown>
+          <ErrorMessage>{countryError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{countryError}</ErrorMessage>
         <Label>
           Category
           <CategoryDropdown
@@ -299,8 +298,8 @@ function AddCase(props) {
                 })
               : null}
           </CategoryDropdown>
+          <ErrorMessage>{categoriesError}</ErrorMessage>
         </Label>
-        <ErrorMessage>{categoriesError}</ErrorMessage>
       </DetailsContainer>
       <AddButton onClick={addCaseHandler}>Submit</AddButton>
     </Container>
