@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { addOrganisationFunction } from "../../store/actions/addOrganisationAction";
-import { categoriesFunction } from "../../store/actions/categoriesAction";
+import { addOrganisationFunction } from "../../store/actions/Organisations/addOrganisationAction";
+import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {ORGANISATIONS} from '../Navigation/states';
 import {Container, HeaderTitle, DetailsContainer, Label, FieldInput,
@@ -47,7 +47,7 @@ function AddOrganisation(props) {
     <Container>
       <HeaderTitle>Add organisation</HeaderTitle>
       <DetailsContainer>
-        <Label>Name
+        <Label style={{"marginTop":"25px"}}>Name
       <FieldInput
         name="name"
         type = "text"
@@ -88,7 +88,7 @@ function AddOrganisation(props) {
         required
       />
       </Label>
-      <Label>Category
+      <Label style={{"marginBottom":"25px"}}>Category
       <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
         <option value={"default"} disabled>Select a category...</option>
         {props.categories

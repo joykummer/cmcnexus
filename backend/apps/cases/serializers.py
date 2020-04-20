@@ -17,7 +17,7 @@ class PartnershipSerializer(serializers.ModelSerializer):
         fields = ['status', 'organisation']
 
 
-class CaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):
+class CaseSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
     created_by = FullUserSerializer(read_only=True)
     partnered_organisations = PartnershipSerializer(many=True)
@@ -25,14 +25,6 @@ class CaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializ
     class Meta:
         model = Case
         exclude = ('organisations',)
-
-    def get_permissions_map(self, created):
-        current_user = self.context['request'].user
-
-        return {
-            'view_case': [current_user],
-            'change_case': [current_user]
-        }
 
 
 class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):

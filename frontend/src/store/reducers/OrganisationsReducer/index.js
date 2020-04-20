@@ -8,7 +8,7 @@ export default function organisations(state = [], action) {
     case ADD_ORGANISATION: {
       return [...state, action.payload];
     }
-    case EDIT_ORGANISATION:{
+    case EDIT_ORGANISATION: {
       return state.map((org) => org.id === action.payload.id ? action.payload : org)
     }
     default:

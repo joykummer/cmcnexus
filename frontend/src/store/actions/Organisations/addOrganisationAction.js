@@ -1,5 +1,5 @@
-import Axios from "../../axios/authenticated";
-import { ADD_ORGANISATION } from "./actionTypes";
+import Axios from "../../../axios/authenticated";
+import { ADD_ORGANISATION } from "../actionTypes";
 
 export const addOrganisationAction = (organisations) => {
   return {
@@ -13,6 +13,6 @@ export const addOrganisationFunction = (data) => async (dispatch) => {
     const response = await Axios.post("organisations/add/", data);
     dispatch(addOrganisationAction(response.data));
   } catch (e) {
-    console.log(e.response);
+    return e;
   }
 };

@@ -31,6 +31,7 @@ default_groups_permissions = [
             "add_organisation",
             "change_organisation",
             "delete_organisation",
+            "view_dashboard",
         ]
     },
     {
@@ -47,6 +48,7 @@ default_groups_permissions = [
         "permissions": [
             "view_case",
             "reject_case",
+            "view_dashboard",
         ]
     },
 ]

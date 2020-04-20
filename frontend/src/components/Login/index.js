@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
 
-import {login} from '../../store/actions/loginActions';
+import {login} from '../../store/actions/Authentication/loginActions';
 import isEmail from '../../helpers/isEmail';
 
 import {CardBox} from '../../styles/GenericBoxes';
@@ -22,7 +22,7 @@ justify-content: flex-start;
 `;
 
 const Card = styled(CardBox)`
-box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
 padding: 60px;
 width: 50%;
 max-width: 500px;

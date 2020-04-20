@@ -1,7 +1,7 @@
 import React from "react";
 import {connect, useSelector} from "react-redux";
 import { RedButton } from "../../styles/Buttons";
-import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/acceptCaseAction";
+import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Cases/acceptCaseAction";
 import styled from "styled-components";
 
 
