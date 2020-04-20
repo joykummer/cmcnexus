@@ -14,10 +14,12 @@ import { CASES } from "../Navigation/states";
 import {
   VALIDATE_CASE,
   MATCH_ORGANISATIONS,
-  UPDATE_MATCH, CHANGE_CASE,
+  UPDATE_MATCH,
+  CHANGE_CASE,
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
+import CloseCase from "../CloseCase";
 import styled from "styled-components";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
@@ -167,6 +169,9 @@ function CaseDetails(props) {
 
           <CanI perform={VALIDATE_CASE}>
             <Validation id={caseDetails.id} />
+          </CanI>
+          <CanI perform={CLOSE_CASE}>
+            <CloseCase id={caseDetails} />
           </CanI>
           {caseDetails.status === "open" ? (
             <>
