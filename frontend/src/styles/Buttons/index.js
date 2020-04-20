@@ -16,8 +16,14 @@ export const RedButton = styled.button`
   }
 `;
 
+export const NewButton = styled(RedButton)`
+  width: 125px;
+  height: 40px;
+`;
+
 export const AddButton = styled(RedButton)`
-  width: 100px;
+  width: 125px;
+  height: 40px;
   margin-bottom: 50px;
 `;
 

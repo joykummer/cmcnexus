@@ -10,9 +10,13 @@ const updateCaseAction = (file) => {
 };
 
 export const matchOrganisationsFunction = (caseId, orgId) => async (dispatch) => {
+  try {
   const response = await Axios.post(`cases/${caseId}/match/`, {partner_ids: [orgId]});
   dispatch(getOrganisation(orgId));
   dispatch(updateCaseAction(response.data));
+  } catch (e) {
+    return e;
+  }
 };
 
 export const unmatchOrganisationsFunction = (caseId, orgId) => async (dispatch) => {

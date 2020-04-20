@@ -12,13 +12,17 @@ export const Stripe = styled.div`
   align-self: end;
 `;
 
+export const DetailsHeader = styled.div`
+  display: flex;
+  padding: 5px;
+`;
+
 export const DetailsKey = styled.div`
-  width: 10%;
+  width: 15%;
   min-width: 150px;
   color: #777;
 `;
 
-export const DetailsHeader = styled.div`
-  display: flex;
-  padding: 5px;
+export const DetailsValue = styled.div`
+    padding-left: 15px;
 `;

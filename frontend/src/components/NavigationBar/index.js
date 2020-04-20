@@ -30,16 +30,16 @@ function NavigationBar() {
       pathname: "/login",
       state: { from: "/" }
     });
-  }
+  };
 
   const onClickHandler = navigationTarget => {
     dispatch(setNavigationAction(navigationTarget));
     history.push(`/${navigationTarget}/`);
-  }
+  };
 
   return (
     <NavigationContainer>
-      <Logo src={msf_logo}/>
+      <Logo src={msf_logo} onClick={() => onClickHandler(CASES)}/>
       <OptionsWrapper />
       <Options>
         <NavItem selected={selected===DASHBOARD} onClick={() => onClickHandler(DASHBOARD)}>
@@ -50,12 +50,6 @@ function NavigationBar() {
           <NavItem selected={selected===CASES} onClick={() => onClickHandler(CASES)}>
             <img src={folder} alt="Cases" style={{paddingRight: 35, height: 45}}/>
             Cases
-          </NavItem>
-        </CanI>
-        <CanI perform={ADD_CASE}>
-          <NavItem selected={selected===CASES_ADD} onClick={() => onClickHandler(CASES_ADD)}>
-            <img src={addcase} alt="Add Cases" style={{paddingRight: 35, height: 45, WebkitFilter: "grayscale(1)"}} />
-            Add Case
           </NavItem>
         </CanI>
         <CanI perform={VIEW_ORGANISATION}>
