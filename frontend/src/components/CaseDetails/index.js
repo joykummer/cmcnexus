@@ -49,7 +49,7 @@ function CaseDetails(props) {
           <Stripe>Patient's details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>name</DetailsKey>
+              <DetailsKey>title</DetailsKey>
               {caseDetails.title}
             </DetailsHeader>
             <DetailsHeader>

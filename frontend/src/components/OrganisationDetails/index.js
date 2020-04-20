@@ -32,7 +32,9 @@ function OrganisationDetails(props) {
     <Container>
       {organisationDetails ? (
         <>
-          <HeaderTitle>{organisationDetails.name}</HeaderTitle>
+          <HeaderTitle>Organisation Details of {organisationDetails.name}</HeaderTitle>
+          <Stripe>name</Stripe>
+          <DetailsContainer>{organisationDetails.name}</DetailsContainer>
           <Stripe>description</Stripe>
           <DetailsContainer>{organisationDetails.description}</DetailsContainer>
           <Stripe>service</Stripe>

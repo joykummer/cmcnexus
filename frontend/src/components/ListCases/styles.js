@@ -69,5 +69,6 @@ export const Clear = styled.div`
   color: #777;
   :hover {
     color: red;
+    cursor: pointer;
   }
 `;

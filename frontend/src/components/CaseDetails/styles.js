@@ -24,7 +24,6 @@ export const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  margin-top: 15px;
   margin-bottom: 30px;
   background-color: white;
   border-radius: 5px;
@@ -49,8 +48,8 @@ export const CategoryWrapper = styled.div`
 
 export const Stripe = styled.div`
   width: auto;
-  background: red;
-  color: white;
+  color: red;
+  font-weight: bold;
   font-size: 20px;
   border-radius: 5px;
   padding: 5px 15px 5px 15px;

@@ -45,10 +45,15 @@ export const Container = styled.div`
   align-items: flex-end;
 `;
 
-const AddOrganisationButton = styled(RedButton)`
-  width: 200px;
-  height: 40px;
+const AddOrganisation = styled.div`
+  font-size: 16px;
   margin-bottom: 25px;
+  color: red;
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+  }
 `;
 
 function ListOrganisations(props) {
@@ -106,9 +111,9 @@ function ListOrganisations(props) {
   return (
     <Container>
       <CanI perform={ADD_ORGANISATION}>
-        <AddOrganisationButton onClick={addOrganisationHandler}>
+        <AddOrganisation onClick={addOrganisationHandler}>
           ADD ORGANISATION
-        </AddOrganisationButton>
+        </AddOrganisation>
       </CanI>
       <SearchContainer>
         <SearchWrapper>
