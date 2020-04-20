@@ -12,8 +12,8 @@ from apps.categories.serializer import CategorySerializer
 class CaseSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
     created_by = UserForCaseSerializer(read_only=True)
-    match_stats = serializers.SerializerMethodField()
     comments = CommentSerializer(many=True)
+    match_stats = serializers.SerializerMethodField()
 
 
     def get_match_stats(self, obj):
@@ -52,17 +52,26 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
 
 
 class GeneralInfoSerializer(serializers.ModelSerializer):
-    created_by = FullUserSerializer(read_only=True)
-    partnered_organisations = PartnershipSerializer(many=True)
+    created_by = UserForCaseSerializer(read_only=True)
+    match_stats = serializers.SerializerMethodField()
 
+    def get_match_stats(self, obj):
+        status_count = []
+        for state in PartnerWorkflow.states:
+            count = obj.partnered_organisations.filter(status=state).count()
+            status_count.append({
+                "status": state.name,
+                "count": count
+            })
+        return status_count
     class Meta:
         model = Case
-        fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age', 'birth_date', 'categories', 'created_by', 'partnered_organisations']
+        fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age',
+                  'birth_date', 'categories', 'created_by', 'match_stats']
 
 
 class MedicalInfoSerializer(serializers.ModelSerializer):
-    created_by = FullUserSerializer(read_only=True)
-    partnered_organisations = PartnershipSerializer(many=True)
+    created_by = UserForCaseSerializer(read_only=True)
 
     class Meta:
         model = Case
