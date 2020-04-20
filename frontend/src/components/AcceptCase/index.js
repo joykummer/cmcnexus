@@ -2,8 +2,23 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Cases/acceptCaseAction";
 import { AcceptRejectButton } from "../../styles/Buttons";
+import styled from "styled-components";
 
-export default function AcceptCase({singleCase}) {
+
+  const AcceptRejectButton = styled(RedButton)`
+    width: 150px;
+    height: 40px;
+    margin: 25px 50px;
+    border: none;
+    background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
+    transition: all 0.7s ease;
+    :hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+  `;
+
+  export default function AcceptCase({singleCase}) {
   const dispatch = useDispatch();
   const organisation = useSelector(state => state.auth.user ? state.auth.user.organisation : null);
   const organisation_id = organisation ? organisation.id : null;
@@ -20,7 +35,7 @@ export default function AcceptCase({singleCase}) {
   return(
     <>
       {
-        status && status === "accepted"
+        status === "accepted"
           ? <AcceptRejectButton onClick={unacceptCaseByOrg}>Undo</AcceptRejectButton>
           : <AcceptRejectButton onClick={acceptCaseByOrg} clicked={true} >Accept</AcceptRejectButton>
       }

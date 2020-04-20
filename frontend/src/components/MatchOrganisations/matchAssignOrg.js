@@ -33,6 +33,10 @@ import {casesFunction} from "../../store/actions/Cases/casesAction";
     color: red;
   `;
 
+  const isOpen = (singleCase) => {
+    return singleCase.status === "open"
+  };
+
   const isMatch = (singleCase, organisation) => {
     return organisation.partnered_cases.filter(el => el.case === singleCase.id).status === "matched"
   };
@@ -53,7 +57,7 @@ function MatchActionable({singleCase, organisation, dispatch}) {
     dispatch(unmatchOrganisationsFunction(singleCase.id, organisation.id));
   };
   return <>{
-    isMatch(singleCase, organisation)
+    isMatch(singleCase, organisation) && isOpen(singleCase)
       ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
       : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
 
@@ -68,7 +72,7 @@ function AssignActionable({singleCase, organisation, dispatch}) {
     dispatch(unassignOrganisationsFunction(singleCase.id, organisation.id));
   };
   return <>{
-    isAccepted(singleCase, organisation)
+    isAccepted(singleCase, organisation) && isOpen(singleCase)
       ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
       : isAssigned(singleCase, organisation)
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
