@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Organisations/acceptCaseAction";
 import { AcceptRejectButton } from "../../styles/Buttons";
 
+
 export default function AcceptCase({singleCase}) {
   const dispatch = useDispatch();
   const organisation = useSelector(state => state.auth.user ? state.auth.user.organisation : null);
@@ -20,7 +21,7 @@ export default function AcceptCase({singleCase}) {
   return(
     <>
       {
-        status && status === "accepted"
+        status === "accepted"
           ? <AcceptRejectButton onClick={unacceptCaseByOrg}>Undo</AcceptRejectButton>
           : <AcceptRejectButton onClick={acceptCaseByOrg} clicked={true} >Accept</AcceptRejectButton>
       }

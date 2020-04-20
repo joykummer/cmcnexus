@@ -89,5 +89,7 @@ def get_general_or_medical_info(request):
     else:
         if request.user.has_perms(["cases.update_general_info", "cases.update_medical_info"]):
             return CreateCaseSerializer
-        else:
+        elif request.user.has_perm("cases.update_general_info"):
             return GeneralInfoSerializer
+        else:
+            return MedicalInfoSerializer

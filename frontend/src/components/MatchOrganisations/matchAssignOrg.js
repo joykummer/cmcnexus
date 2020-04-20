@@ -45,9 +45,9 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   const unmatch = () => {
     dispatch(unmatchOrganisationsFunction(singleCase.id, organisation.id));
   };
-  console.log(isStatus(singleCase, organisation, "matched"))
   return <>{
-    isStatus(singleCase, organisation, "matched")
+    isStatus(singleCase, organisation, "matched") 
+      && isStatus(singleCase, organisation, "open")
       ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
       : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
 
@@ -62,7 +62,8 @@ function AssignActionable({singleCase, organisation, dispatch}) {
     dispatch(unassignOrganisationsFunction(singleCase.id, organisation.id));
   };
   return <>{
-    isStatus(singleCase, organisation, "accepted")
+    isStatus(singleCase, organisation, "accepted") 
+      && isStatus(singleCase, organisation, "open")
       ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
       : isStatus(singleCase, organisation, "assigned")
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
