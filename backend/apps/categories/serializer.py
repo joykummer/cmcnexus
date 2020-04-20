@@ -13,3 +13,4 @@ class CategorySerializer(serializers.ModelSerializer):
     @staticmethod
     def get_name(category):
         return category.get_id_display()
+
