@@ -11,6 +11,9 @@ import {
   Stripe,
   Match,
   CategoryWrapper,
+  Vertical,
+  Status,
+  Horizontal,
 } from "./styles";
 import CanI from "../Permissions";
 import { setNavigationAction } from "../../store/actions/Navigation";
@@ -133,17 +136,19 @@ function CaseDetails(props) {
           <Stripe>Status</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>Partners</DetailsKey>
+              <DetailsKey>Partners status</DetailsKey>
+              <Vertical>
               {caseDetails.match_stats ?
                 caseDetails.match_stats.map(stat => {
                   return (
-                    <div key={stat.status}>
-                      <i>{stat.status}</i>
+                    <Horizontal key={stat.status}>
+                      <Status>{stat.status}</Status>
                       <b>{stat.count}</b>
-                    </div>
+                    </Horizontal>
                     );
                   })
                 : null}
+              </Vertical>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
