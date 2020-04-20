@@ -20,14 +20,8 @@ export const Dropdown = styled.select`
   }
 `;
 
-export const CountryDropdown = styled(Dropdown)`
+export const BasicDropdown = styled(Dropdown)`
   width: 300px;
-  height: 35px;
-  margin-top: 2px;
-`;
-
-export const SexDropdown = styled(Dropdown)`
-  width: 200px;
   height: 35px;
   margin-top: 2px;
 `;

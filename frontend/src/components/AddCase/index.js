@@ -8,7 +8,7 @@ import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
 import { Label } from "../AddOrganisation/styles";
 import { AddButton } from "../../styles/Buttons";
-import { CategoryDropdown, CountryDropdown, SexDropdown } from "../../styles/Dropdowns";
+import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
 
@@ -244,7 +244,7 @@ function AddCase(props) {
         </Label>
         <Label>
           Sex
-          <SexDropdown
+          <BasicDropdown
             name="sex"
             onChange={(e) => setSex(e.target.value)}
             value={sex}
@@ -255,12 +255,12 @@ function AddCase(props) {
             </option>
             <option key={1}>F</option>
             <option key={2}>M</option>
-          </SexDropdown>
+          </BasicDropdown>
           <ErrorMessage>{sexError}</ErrorMessage>
         </Label>
         <Label>
           Country
-          <CountryDropdown
+          <BasicDropdown
             defaultValue={"default"}
             onChange={(e) => setCountry(e.target.value)}
           >
@@ -272,7 +272,7 @@ function AddCase(props) {
                   return <option key={country.value}>{country.label}</option>;
                 })
               : null}
-          </CountryDropdown>
+          </BasicDropdown>
           <ErrorMessage>{countryError}</ErrorMessage>
         </Label>
         <Label>
