@@ -29,7 +29,7 @@ import {
 } from "../../styles/SearchesFilters/index";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
 import CanI from "../Permissions";
-import {ADD_ORGANISATION} from "../Permissions/permissions";
+import {ADD_CASE} from "../Permissions/permissions";
 import styled from "styled-components";
 
 const HeaderTitleWrapper = styled.div`
@@ -111,7 +111,7 @@ function ListCases(props) {
     <Container>
       <HeaderTitleWrapper>
       <HeaderTitle>CASES</HeaderTitle>
-       <CanI perform={ADD_ORGANISATION}>
+       <CanI perform={ADD_CASE}>
         <AddCase onClick={addCaseHandler}>
           + ADD CASE
         </AddCase>
