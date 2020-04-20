@@ -23,7 +23,7 @@ class CommentInline(admin.TabularInline):
 
 
 class CustomGuardedModelAdmin(GuardedModelAdmin):
-    inlines = (PartnershipInline,CommentInline)
+    inlines = (PartnershipInline, CommentInline)
 
     def get_obj_perms_user_select_form(self, request):
         return EmailUserManage

@@ -15,7 +15,6 @@ class CaseSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
     match_stats = serializers.SerializerMethodField()
 
-
     def get_match_stats(self, obj):
         status_count = []
         for state in PartnerWorkflow.states:
@@ -64,6 +63,7 @@ class GeneralInfoSerializer(serializers.ModelSerializer):
                 "count": count
             })
         return status_count
+
     class Meta:
         model = Case
         fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age',
