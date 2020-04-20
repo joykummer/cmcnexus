@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
 import {
-  DetailsContainer,
   DetailsHeader,
   DetailsKey,
   Stripe,
@@ -21,7 +20,7 @@ import {
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
 import styled from "styled-components";
-import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 
 const ButtonContainer = styled.div`
 width: 225px;

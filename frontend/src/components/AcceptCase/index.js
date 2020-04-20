@@ -1,7 +1,7 @@
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Cases/acceptCaseAction";
-import { AcceptRejectButton } from "../Validation";
+import { AcceptRejectButton } from "../../styles/Buttons";
 
 const isAccepted = (singleCase, user) => {
     return singleCase.partnered_organisations.filter(org => org.status === "accepted")

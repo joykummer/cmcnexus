@@ -16,3 +16,15 @@ export const HeaderTitle = styled.div`
   text-transform: uppercase;
   padding-bottom: 15px;
 `;
+
+export const DetailsContainer = styled.div`
+  height: auto;
+  padding: 25px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+`;

@@ -30,7 +30,7 @@ import {
   Card,
   Wrapper,
   Clear,
-} from "../ListCases/styles";
+} from "../../styles/SearchesFilters/index";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
 
@@ -185,9 +185,7 @@ function ListOrganisations(props) {
                     <TableData>{organisation.name}</TableData>
                     <TableData>
                       {organisation.categories
-                        ? organisation.categories.map((category) => {
-                            return <div key={category.id}>{category.name}</div>;
-                          })
+                        ? organisation.categories.map((category) => category.name).join(', ')
                         : []}
                     </TableData>
                     <TableData>{organisation.tag}</TableData>

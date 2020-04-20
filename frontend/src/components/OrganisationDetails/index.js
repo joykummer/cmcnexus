@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import {
   Stripe,
-  DetailsContainer,
   CategoryWrapper,
   DetailsKey,
   DetailsHeader
@@ -12,7 +11,7 @@ import {
 import { setNavigationAction } from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
 import { AddButton } from "../../styles/Buttons";
-import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 
 
 function OrganisationDetails(props) {

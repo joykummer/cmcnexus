@@ -1,17 +1,5 @@
 import styled from "styled-components";
-
 import { RedButton } from "../../styles/Buttons";
-
-export const DetailsContainer = styled.div`
-  height: auto;
-  padding: 20px;
-  margin-bottom: 30px;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  display: flex;
-  flex-direction: column;
-`;
 
 export const DetailsHeader = styled.div`
   display: flex;

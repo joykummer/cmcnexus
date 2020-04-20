@@ -1,7 +1,7 @@
 import React from "react";
 import {connect, useSelector} from "react-redux";
 import { rejectCaseByOrgFunction, unrejectCaseByOrgFunction } from "../../store/actions/Organisations/rejectByOrgAction";
-import { AcceptRejectButton } from "../Validation";
+import { AcceptRejectButton } from "../../styles/Buttons";
 
 
 const isRejected = (singleCase, user) => {

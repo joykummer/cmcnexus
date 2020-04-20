@@ -7,24 +7,27 @@ import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
 import {
-  DetailsContainer,
   Label,
   FieldInput,
   FieldInputLarge,
 } from "../AddOrganisation/styles";
-import { Checkbox } from "./styles";
 import { AddButton } from "../../styles/Buttons";
 import { CategoryDropdown, CountryDropdown, SexDropdown } from "../../styles/Dropdowns";
-import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const ErrorMessage = styled.div`
   font-size: 10px;
   color: red;git
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
+const Checkbox = styled.input`
+  margin-top: 2px;
+  margin-right: 10px;
 `;
 
 const Text = styled.div`

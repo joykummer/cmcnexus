@@ -1,17 +1,6 @@
 import styled from "styled-components";
 import { GreyRoundInput } from "../../styles/Inputs";
 
-export const DetailsContainer = styled.div`
-  height: auto;
-  padding: 25px;
-  background-color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  border-radius: 5px;
-  margin-bottom: 30px;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
 export const Label = styled.label`
   width: 100%;
   font-size: 14px;
