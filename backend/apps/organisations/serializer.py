@@ -1,11 +1,22 @@
+from django.contrib.auth.models import Group
 from rest_framework import serializers
+from rest_framework_guardian.serializers import ObjectPermissionsAssignmentMixin
 
-from .models import Organisation
-from ..categories.serializer import CategorySerializer
+from apps.organisations.models import Organisation
+from apps.cases.models import Partnership
+from apps.categories.serializer import CategorySerializer
+
+
+class PartnershipSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Partnership
+        fields = ['status', 'case']
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
+    partnered_cases = PartnershipSerializer(many=True)
 
     class Meta:
         model = Organisation
@@ -16,11 +27,11 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'services',
             'categories',
             'tag',
+            'partnered_cases',
         ]
 
 
-class CreateOrganisationSerializer(serializers.ModelSerializer):
-
+class CreateOrganisationSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSerializer):
     class Meta:
         model = Organisation
         fields = [
@@ -30,3 +41,13 @@ class CreateOrganisationSerializer(serializers.ModelSerializer):
             'categories',
             'tag',
         ]
+
+    def get_permissions_map(self, created):
+        case_coordinator = Group.objects.get(name="Case Coordinator")
+        med_co = Group.objects.get(name="Medical Coordinator")
+
+        return {
+            'view_organisation': [case_coordinator, med_co],
+            'change_organisation': [case_coordinator],
+            'delete_organisation': [case_coordinator],
+        }

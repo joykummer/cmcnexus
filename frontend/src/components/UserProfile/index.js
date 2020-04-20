@@ -135,16 +135,19 @@ return (user ?
 							</MissingElements>
 					</Column>
 				</GeneralElements>
-				<GeneralElements>
-					<FieldName>
+				{user.organisation ?
+					<GeneralElements>
+						<FieldName>
 							Organisation
-					</FieldName>
-					<Column>
+						</FieldName>
+						<Column>
 							<MissingElements>
-								{user.organisation}
+								{user.organisation.name}
 							</MissingElements>
-					</Column>
-				</GeneralElements>
+						</Column>
+					</GeneralElements>
+					: null
+				}
 				<GeneralElements>
 					<FieldName>
 							Department
