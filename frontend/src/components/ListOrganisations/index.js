@@ -6,7 +6,6 @@ import {
   searchNameFunction,
   searchTagFunction,
 } from "../../store/actions/Organisations/searchOrganisationsAction";
-import { RedButton } from "../../styles/Buttons";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { ORGANISATIONS } from "../Navigation/states";
 import { ADD_ORGANISATION } from "../Permissions/permissions";
@@ -32,18 +31,8 @@ import {
   Wrapper,
   Clear,
 } from "../ListCases/styles";
-import {HeaderTitle} from "../AddOrganisation/styles";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #ebebeb;
-  padding: 25px 50px 50px 50px;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
 
 const AddOrganisation = styled.div`
   font-size: 16px;

@@ -19,8 +19,6 @@ import {ORGANISATIONS} from '../Navigation/states';
 
   const MatchAssignButton = styled(RedButton)`
     width: 150px;
-    height: 40px;
-    margin: 25px 50px;
     border: none;
     background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
     transition: all 0.7s ease;
@@ -31,8 +29,7 @@ import {ORGANISATIONS} from '../Navigation/states';
   `;
 
   const NotAccepted = styled.p`
-    color: #e60000;
-    padding: 35px;
+    color: red;
   `;
 
   const isMatch = (singleCase, organisationId) => {

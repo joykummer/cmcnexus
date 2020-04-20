@@ -7,14 +7,14 @@ import {rejectCaseFunction} from '../../store/actions/Cases/rejectCaseAction';
 
 
 const ButtonContainer = styled.div`
-display: flex; 
-margin-top: 3%; 
+width: 225px;
+display: flex;
+justify-content: space-between; 
 `;
 
-const Button = styled(RedButton)`
+export const AcceptRejectButton = styled(RedButton)`
  height: 40px;
- width: 100px; 
- margin: 3%;    
+ width: 100px;  
 `;
 
 
@@ -33,8 +33,8 @@ class Validation extends Component {
     render() {
         return (
             <ButtonContainer>
-                <Button onClick={this.acceptHandler}>Accept</Button> 
-                <Button onClick ={this.rejectHandler}>Reject</Button> 
+                <AcceptRejectButton onClick={this.acceptHandler}>Accept</AcceptRejectButton>
+                <AcceptRejectButton onClick ={this.rejectHandler}>Reject</AcceptRejectButton>
             </ButtonContainer>
         )
     }

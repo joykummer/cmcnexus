@@ -2,17 +2,6 @@ import styled from "styled-components";
 import { Dropdown } from "../../styles/Dropdowns";
 import { RedButton } from "../../styles/Buttons";
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #EBEBEB;
-  padding: 40px 60px 40px 60px;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
 export const SearchContainer = styled.div`
   width: 100%;
   padding-bottom: 20px;

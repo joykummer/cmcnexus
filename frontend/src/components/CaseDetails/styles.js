@@ -2,22 +2,6 @@ import styled from "styled-components";
 
 import { RedButton } from "../../styles/Buttons";
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #EBEBEB;
-  padding: 40px 60px 40px 60px;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const HeaderTitle = styled.div`
-  font-size: 30px;
-  text-transform: uppercase;
-  padding-bottom: 15px;
-`;
-
 export const DetailsContainer = styled.div`
   height: auto;
   padding: 20px;
@@ -58,7 +42,5 @@ export const Stripe = styled.div`
 `;
 
 export const Match = styled(RedButton)`
-  width: 175px;
-  height: 70px;
-  margin-top: 20px;
+  width: 225px;
 `;

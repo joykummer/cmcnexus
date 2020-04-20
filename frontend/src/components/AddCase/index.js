@@ -7,20 +7,15 @@ import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
 import {
-  Container,
-  HeaderTitle,
   DetailsContainer,
   Label,
   FieldInput,
   FieldInputLarge,
 } from "../AddOrganisation/styles";
-import {
-  CategoryDropdown,
-  AddButton,
-  Checkbox,
-  CountryDropdown,
-  SexDropdown,
-} from "./styles";
+import { Checkbox } from "./styles";
+import { AddButton } from "../../styles/Buttons";
+import { CategoryDropdown, CountryDropdown, SexDropdown } from "../../styles/Dropdowns";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
 const ErrorMessage = styled.div`
   font-size: 10px;

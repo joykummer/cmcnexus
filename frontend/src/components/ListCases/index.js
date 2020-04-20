@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "../../styles/Tables";
 import {
-  Container,
   SearchContainer,
   SearchWrapper,
   SearchInput,
@@ -28,7 +27,7 @@ import {
   Wrapper,
   Clear,
 } from "./styles";
-import {HeaderTitle} from "../AddOrganisation/styles";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
 function ListCases(props) {
   const [title, setTitle] = useState("");

@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
 import {
-  Container,
-  HeaderTitle,
   DetailsContainer,
   DetailsHeader,
   DetailsKey,
@@ -22,6 +20,14 @@ import {
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
+import styled from "styled-components";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
+
+const ButtonContainer = styled.div`
+width: 225px;
+display: flex;
+justify-content: space-between; 
+`;
 
 function CaseDetails(props) {
   const dispatch = props.dispatch;
@@ -129,12 +135,14 @@ function CaseDetails(props) {
             <>
               <CanI perform={MATCH_ORGANISATIONS}>
                 <Match onClick={() => matchingHandler(caseDetails.id)}>
-                  Potential Partner Organisations
+                  MATCH ORGANISATIONS
                 </Match>
               </CanI>
               <CanI perform={UPDATE_MATCH}>
+                <ButtonContainer>
                 <AcceptCase singleCase={caseDetails} />
                 <RejectCase singleCase={caseDetails} />
+                </ButtonContainer>
               </CanI>
             </>
           ) : null}

@@ -2,10 +2,17 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom'
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
-import { Container, HeaderTitle, Stripe, DetailsContainer, CategoryWrapper } from "../CaseDetails/styles";
-import { AddButton } from "../AddOrganisation/styles";
+import {
+  Stripe,
+  DetailsContainer,
+  CategoryWrapper,
+  DetailsKey,
+  DetailsHeader
+} from "../CaseDetails/styles";
 import { setNavigationAction } from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
+import { AddButton } from "../../styles/Buttons";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
 
 function OrganisationDetails(props) {
@@ -33,14 +40,22 @@ function OrganisationDetails(props) {
       {organisationDetails ? (
         <>
           <HeaderTitle>Organisation Details of {organisationDetails.name}</HeaderTitle>
-          <Stripe>Name</Stripe>
-          <DetailsContainer>{organisationDetails.name}</DetailsContainer>
-          <Stripe>Description</Stripe>
-          <DetailsContainer>{organisationDetails.description}</DetailsContainer>
-          <Stripe>Service</Stripe>
-          <DetailsContainer>{organisationDetails.services}</DetailsContainer>
-          <Stripe>Category</Stripe>
+          <Stripe>General</Stripe>
           <DetailsContainer>
+            <DetailsHeader>
+              <DetailsKey>Name</DetailsKey>
+              {organisationDetails.name}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Description</DetailsKey>
+              {organisationDetails.description}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Services</DetailsKey>
+              {organisationDetails.services}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Category</DetailsKey>
               <CategoryWrapper>
               {organisationDetails.categories.map(category => {
             return (
@@ -48,14 +63,15 @@ function OrganisationDetails(props) {
                     )
           })}
               </CategoryWrapper>
-          </DetailsContainer>
-          <Stripe>Tag</Stripe>
-          <DetailsContainer>
-            {organisationDetails.tag}
-          </DetailsContainer>
-          <Stripe>Members</Stripe>
-          <DetailsContainer>
-            {organisationDetails.members}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Tag</DetailsKey>
+              {organisationDetails.tag}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Members</DetailsKey>
+              {organisationDetails.members}
+            </DetailsHeader>
           </DetailsContainer>
         </>
       ) : (

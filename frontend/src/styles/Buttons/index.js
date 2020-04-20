@@ -15,3 +15,8 @@ export const RedButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const AddButton = styled(RedButton)`
+  width: 100px;
+  margin-bottom: 50px;
+`;
