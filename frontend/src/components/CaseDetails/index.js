@@ -53,12 +53,32 @@ function CaseDetails(props) {
               {caseDetails.title}
             </DetailsHeader>
             <DetailsHeader>
+              <DetailsKey>patient id:</DetailsKey>
+              {caseDetails.patient_id}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>language:</DetailsKey>
+              {caseDetails.language}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>nature of referral:</DetailsKey>
+              {caseDetails.nature_of_referral}
+            </DetailsHeader>
+            <DetailsHeader>
               <DetailsKey>Age</DetailsKey>
               {caseDetails.age}
             </DetailsHeader>
             <DetailsHeader>
+              <DetailsKey>date of birth:</DetailsKey>
+              {caseDetails.birth_date}
+            </DetailsHeader>
+            <DetailsHeader>
               <DetailsKey>Sex</DetailsKey>
               {caseDetails.sex}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>location:</DetailsKey>
+              {caseDetails.location}
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Country</DetailsKey>
@@ -82,12 +102,25 @@ function CaseDetails(props) {
           <Stripe>Medical details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>Description</DetailsKey>
+              <DetailsKey>Presenting Complaint</DetailsKey>
               {caseDetails.description}
             </DetailsHeader>
             <DetailsHeader>
+              <DetailsKey>History of Presenting complaint</DetailsKey>
+              {caseDetails.history_description}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Past medical history</DetailsKey>
+              {caseDetails.past_medical_history}
+            </DetailsHeader>
+
+            <DetailsHeader>
               <DetailsKey>Diagnosis</DetailsKey>
               {caseDetails.diagnosis}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Physical examination</DetailsKey>
+              {caseDetails.physical_examination}
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Justification</DetailsKey> {caseDetails.justification}

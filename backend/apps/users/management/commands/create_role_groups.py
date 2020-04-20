@@ -10,6 +10,10 @@ default_groups_permissions = [
             "validate_case",
             "reject_case",
             "view_organisation",
+            "view_general_info",
+            "view_medical_info",
+            "update_general_info",
+            "update_medical_info"
         ]
     },
     {
@@ -17,6 +21,7 @@ default_groups_permissions = [
         "permissions": [
             "view_case",
             "update_match",
+            "view_general_info"
         ]
     },
     {
@@ -32,6 +37,9 @@ default_groups_permissions = [
             "change_organisation",
             "delete_organisation",
             "view_dashboard",
+            "view_medical_info",
+            "view_general_info",
+            "update_general_info"
         ]
     },
     {
@@ -41,6 +49,10 @@ default_groups_permissions = [
             "view_case",
             "change_case",
             "delete_case",
+            "view_medical_info",
+            "view_general_info",
+            "update_general_info",
+            "update_medical_info"
         ]
     },
     {
@@ -49,6 +61,8 @@ default_groups_permissions = [
             "view_case",
             "reject_case",
             "view_dashboard",
+            "view_medical_info",
+            "view_general_info"
         ]
     },
 ]
