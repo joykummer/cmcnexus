@@ -33,16 +33,9 @@ import {casesFunction} from "../../store/actions/Cases/casesAction";
     color: red;
   `;
 
-  const isMatch = (singleCase, organisation) => {
-    return organisation.partnered_cases.filter(el => el.case === singleCase.id).status === "matched"
-  };
-
-  const isAccepted = (singleCase, organisation) => {
-    return organisation.partnered_cases.filter(el => el.case === singleCase.id).status === "accepted"
-  };
-
-  const isAssigned = (singleCase, organisation) => {
-    return organisation.partnered_cases.filter(el => el.case === singleCase.id).status === "assigned"
+  const isStatus = (singleCase, organisation, status) => {
+    const partnership = organisation.partnered_cases.find(el => el.case === singleCase.id)
+    return partnership ? partnership.status === status : false
   };
 
 function MatchActionable({singleCase, organisation, dispatch}) {
@@ -52,8 +45,9 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   const unmatch = () => {
     dispatch(unmatchOrganisationsFunction(singleCase.id, organisation.id));
   };
+  console.log(isStatus(singleCase, organisation, "matched"))
   return <>{
-    isMatch(singleCase, organisation)
+    isStatus(singleCase, organisation, "matched")
       ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
       : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
 
@@ -68,9 +62,9 @@ function AssignActionable({singleCase, organisation, dispatch}) {
     dispatch(unassignOrganisationsFunction(singleCase.id, organisation.id));
   };
   return <>{
-    isAccepted(singleCase, organisation)
+    isStatus(singleCase, organisation, "accepted")
       ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
-      : isAssigned(singleCase, organisation)
+      : isStatus(singleCase, organisation, "assigned")
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
         : <NotAccepted>The case has not been accepted.</NotAccepted>
   }</>;

@@ -66,8 +66,8 @@ class GeneralInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        fields = ['title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id', 'age',
-                  'birth_date', 'categories', 'created_by', 'match_stats']
+        fields = ['id', 'status', 'title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id',
+                  'age', 'birth_date', 'categories', 'created_by', 'match_stats']
 
 
 class MedicalInfoSerializer(serializers.ModelSerializer):
