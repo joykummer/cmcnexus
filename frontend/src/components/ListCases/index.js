@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { casesFunction } from "../../store/actions/Cases/casesAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
-import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
 import CanI from "../Permissions";
 import { ADD_CASE } from "../Permissions/permissions";
@@ -33,8 +31,6 @@ function ListCases(props) {
 
   useEffect(() => {
     dispatch(setNavigationAction(CASES));
-    dispatch(casesFunction());
-    dispatch(categoriesFunction());
   }, [dispatch]);
 
 
@@ -53,7 +49,6 @@ function ListCases(props) {
         </AddCase>
       </CanI>
       </HeaderTitleWrapper>
-
       <ListTable/>
     </Container>
   );
@@ -61,8 +56,6 @@ function ListCases(props) {
 
 const mapStateToProps = (state) => {
   return {
-    cases: state.cases,
-    categories: state.categories,
   };
 };
 
