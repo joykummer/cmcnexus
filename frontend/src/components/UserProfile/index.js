@@ -10,7 +10,7 @@ import {
   HeaderTitle,
 } from "../../styles/BaseContainer";
 import { DetailsKey, DetailsHeader } from "../../styles/Details";
-import { AddButton } from "../../styles/Buttons/index"
+import {AddButton, EditSaveButton} from "../../styles/Buttons/index"
 
 export default function UserProfile() {
   const user = useSelector((state) => state.auth.user);
@@ -55,7 +55,7 @@ export default function UserProfile() {
             <Time value={user.date_joined ? user.date_joined : ""} format="DD/MM/YYYY" />
         </DetailsHeader>
       </DetailsContainer>
-        <AddButton onClick={onClickHandler}>Edit</AddButton>
+        <EditSaveButton onClick={onClickHandler}>Edit</EditSaveButton>
     </Container>
   ) : (
     "user not found"

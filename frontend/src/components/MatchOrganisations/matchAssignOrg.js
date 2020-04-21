@@ -11,12 +11,19 @@ import {
   TableHeader,
   TableHeaderRow,
   TableHeaderWrapper,
-  TableRow,
 } from "../../styles/Tables";
 import styled from "styled-components";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {ORGANISATIONS} from '../Navigation/states';
 import {casesFunction} from "../../store/actions/Cases/casesAction";
+
+  const CustomTableRow = styled.tr`
+  width: 100%;
+  text-transform: capitalize;
+  :nth-child(odd) {
+    background: #ebebeb;
+  }
+  `;
 
   const MatchAssignButton = styled(RedButton)`
     width: 150px;
@@ -103,7 +110,7 @@ function MatchAssignOrg(props) {
           {organisationsMatchingByCategory
             ? organisationsMatchingByCategory.map((organisation) => {
                 return (
-                  <TableRow key={organisation.id}>
+                  <CustomTableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
                     <TableData>{organisation.description}</TableData>
                     <TableData>{organisation.categories.map((cat) => cat.name).join(', ')}</TableData>
@@ -114,7 +121,7 @@ function MatchAssignOrg(props) {
                     <TableData>
                       <AssignActionable dispatch={props.dispatch} organisation={organisation} singleCase={singleCase}/>
                     </TableData>
-                  </TableRow>
+                  </CustomTableRow>
                 );
               })
             : null}

@@ -6,7 +6,7 @@ import { categoriesFunction } from "../../store/actions/Categories/categoriesAct
 import { editCaseFunction } from "../../store/actions/Cases/editCaseAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES_ADD} from '../Navigation/states';
-import { AddButton } from "../../styles/Buttons/index"
+import {AddButton, EditSaveButton} from "../../styles/Buttons/index"
 import {Label} from "../AddOrganisation/styles";
 import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
@@ -290,7 +290,7 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{categoriesError}</ErrorMessage>
         </DetailsContainer>
-      <AddButton onClick={editCaseHandler}>Submit</AddButton>
+      <EditSaveButton onClick={editCaseHandler}>Save</EditSaveButton>
     </Container>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import {AddButton, RedButton} from "../../styles/Buttons";
+import {EditSaveButton, RedButton} from "../../styles/Buttons";
 import {
   Vertical,
   Status,
@@ -23,7 +23,7 @@ import RejectCase from "../RejectCase";
 import CloseCase from "../CloseCase";
 import styled from "styled-components";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
-import {Stripe, DetailsHeader, DetailsKey, DetailsValue} from "../../styles/Details";
+import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
 
 const ButtonContainer = styled.div`
 width: 225px;
@@ -148,11 +148,11 @@ function CaseDetails(props) {
               <DetailsValue>{caseDetails.recommendation}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-          <Stripe>Status</Stripe>
+          <Stripe>Status Details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>Partners' Status</DetailsKey>
-              <DetailsValue>
+              <DetailsKey>Organisations Status</DetailsKey>
+              <StatusDetailsValue>
               <Vertical>
               {caseDetails.match_stats ?
                 caseDetails.match_stats.map(stat => {
@@ -165,18 +165,17 @@ function CaseDetails(props) {
                   })
                 : null}
               </Vertical>
-              </DetailsValue>
+              </StatusDetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              <DetailsValue>{caseDetails.status}</DetailsValue>
+              <StatusDetailsValue>{caseDetails.status}</StatusDetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Outcome</DetailsKey>
-              <DetailsValue>{caseDetails.outcome}</DetailsValue>
+              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-
           <CanI perform={VALIDATE_CASE}>
             <Validation id={caseDetails.id} />
           </CanI>
@@ -196,15 +195,15 @@ function CaseDetails(props) {
                 <RejectCase singleCase={caseDetails} />
                 </ButtonContainer>
               </CanI>
+              <CanI perform={CHANGE_CASE}>
+               <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
+              </CanI>
             </>
           ) : null}
         </>
       ) : (
         <div>No case to show</div>
       )}
-      <CanI perform={CHANGE_CASE}>
-       <AddButton onClick={redirectHandler}>Edit</AddButton>
-      </CanI>
     </Container>
   );
 }

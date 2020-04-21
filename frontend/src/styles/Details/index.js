@@ -26,3 +26,8 @@ export const DetailsKey = styled.div`
 export const DetailsValue = styled.div`
     padding-left: 15px;
 `;
+
+export const StatusDetailsValue = styled.div`
+    padding-left: 15px;
+    text-transform: capitalize;
+`;
