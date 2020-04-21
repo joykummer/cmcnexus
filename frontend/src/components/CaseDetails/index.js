@@ -16,7 +16,8 @@ import {
   MATCH_ORGANISATIONS,
   UPDATE_MATCH,
   CHANGE_CASE,
-  CLOSE_CASE
+  CLOSE_CASE,
+  DELETE_CASE
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
@@ -24,6 +25,7 @@ import CloseCase from "../CloseCase";
 import styled from "styled-components";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
+import DeleteCase from "../DeleteCase";
 import {Empty} from "../../styles/GenericBoxes";
 import {
   Table,
@@ -91,6 +93,9 @@ function CaseDetails(props) {
           <HeaderTitleWrapper>
             <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle>
 
+            <CanI perform={DELETE_CASE}>
+              <DeleteCase singleCase={caseDetails} />
+            </CanI>
             <CanI perform={CHANGE_CASE}>
              <RedAddText onClick={redirectHandler}>✎ Edit</RedAddText>
             </CanI>

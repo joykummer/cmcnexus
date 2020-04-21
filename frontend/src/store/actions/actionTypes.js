@@ -1,12 +1,12 @@
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
-
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const EDIT_CURRENT_USER = 'EDIT_CURRENT_USER';
 export const SET_CASES = 'SET_CASES';
 export const ADD_CASE = 'ADD_CASE';
 export const UPDATE_CASE = 'UPDATE_CASE';
+export const DELETE_CASE = 'DELETE_CASE';
 export const ERROR_CASE = 'ERROR_CASE';
 export const SET_ORGANISATIONS = 'SET_ORGANISATIONS';
 export const ADD_ORGANISATION = 'ADD_ORGANISATION';

@@ -158,7 +158,7 @@ function EditCases(props) {
         age: age,
         sex: sex,
         country: country,
-        // categories: categoryIds,
+        categories: categoryIds,
       };
       const caseId = caseDetails.id
       dispatch(editCaseFunction(data, caseId));

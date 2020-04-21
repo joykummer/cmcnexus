@@ -47,7 +47,7 @@ function ListCases(props) {
   const [status, setStatus] = useState("");
   const dispatch = props.dispatch;
 
-  const statusOptions = ["Created", "Open", "Closed", "Rejected"];
+  const statusOptions = ["Requested", "Open", "Closed", "Rejected"];
 
   useEffect(() => {
     dispatch(setNavigationAction(CASES));
