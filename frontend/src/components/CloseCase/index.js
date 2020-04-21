@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import {RedButton, TwoOptionsButton} from "../../styles/Buttons";
+import {TwoOptionsButton} from "../../styles/Buttons";
 import styled from "styled-components";
 import {closeCaseFunction} from "../../store/actions/Cases/closeCase";
 import {reopenCaseFunction} from "../../store/actions/Cases/reopenCase";
 
 
-  const CloseButton = styled(RedButton)`
+  const CloseButton = styled(TwoOptionsButton)`
     width: 150px;
-    background-color: ${(props) => props.clicked ? "white" : "red"};
-    border: ${(props) => props.clicked ? "1px solid red" : "none"};
-    color: ${(props) => props.clicked ? "red" : "white"};
+    background-color: ${(props) => props.clicked ? "red" :"white"};
+    border: ${(props) => props.clicked ? "none" : "1px solid red"};
+    color: ${(props) => props.clicked ? "white" : "red"};
   `;
 
 

@@ -194,11 +194,11 @@ function CaseDetails(props) {
                 <AcceptCase singleCase={caseDetails} />
                 <RejectCase singleCase={caseDetails} />
               </CanI>
+            </>
+          ) : null}
           <CanI perform={CLOSE_CASE}>
             <CloseCase id={caseDetails} />
           </CanI>
-            </>
-          ) : null}
           </ButtonContainer>
         </>
       ) : (
