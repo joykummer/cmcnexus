@@ -22,8 +22,7 @@ const HeaderTitleWrapper = styled.div`
 export default function UserProfile() {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
-	const history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(setNavigationAction(USERPROFILE));

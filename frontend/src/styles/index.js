@@ -26,12 +26,14 @@ export const GlobalStyle = createGlobalStyle`
 export const theme = {
 	colors: {
 		status: {
-			requestedold: "rgba(0,0,255,1)",
-			requested: "rgb(255,191,0)",
-			open: "rgba(0,179,0,1)",
+			requested: "#ffbf00",
+			accepted: "#00f",
+			open: "#00b300",
+			assigned: "#00b300",
 			warning: "#ffbf00",
-			closed: "rgba(0,0,0,1)",
-			rejected: "rgba(255,0,0,1)",
+			matched: "#ffbf00",
+			closed: "#000",
+			rejected: "#f00",
 		},
 	},
 	colorsOpaque: {
