@@ -27,8 +27,11 @@ export const theme = {
 	colors: {
 		status: {
 			requested: "#00f",
+			accepted: "#00f",
 			open: "#00b300",
+			assigned: "#00b300",
 			warning: "#ffbf00",
+			matched: "#ffbf00",
 			closed: "#000",
 			rejected: "#f00",
 		},
