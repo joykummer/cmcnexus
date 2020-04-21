@@ -55,7 +55,9 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   return <>{
     isStatus(singleCase, organisation, "matched")
       ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
-      : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+      : isStatus(singleCase, organisation, "accepted") || isStatus(singleCase, organisation, "assigned")
+          ? <NotAccepted>Ready to be assigned.</NotAccepted>
+            : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
 
   }</>;
 }
@@ -72,7 +74,7 @@ function AssignActionable({singleCase, organisation, dispatch}) {
       ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
       : isStatus(singleCase, organisation, "assigned")
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
-        : <NotAccepted>The case has not been accepted.</NotAccepted>
+        : <NotAccepted>not matched or accepted.</NotAccepted>
   }</>;
 }
 
