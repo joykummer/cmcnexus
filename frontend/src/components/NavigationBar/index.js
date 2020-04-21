@@ -5,11 +5,12 @@ import dashboard from '../../assets/output-onlinepngtools.png'
 import folder from '../../assets/cases.png'
 import organisation from '../../assets/organization.png'
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
+import propulsion_logo from '../../assets/Propulsion_LogoText_horizontalSwiss_Logo Kopie.png'
 import userprofile from '../../assets/userprofile.png'
 import addcase from '../../assets/addcase.png'
 import {
   NavigationContainer, Logo, Options,
-  Button, NavItem, OptionsWrapper
+  Button, NavItem, OptionsWrapper, Title
 } from './style';
 import {logoutAction} from '../../store/actions/Authentication/loginActions';
 import CanI from '../Permissions';
@@ -40,6 +41,7 @@ function NavigationBar() {
   return (
     <NavigationContainer>
       <Logo src={msf_logo} onClick={() => onClickHandler(CASES)}/>
+      <Title>CMC Nexus</Title>
       <OptionsWrapper />
       <Options>
         <NavItem selected={selected===DASHBOARD} onClick={() => onClickHandler(DASHBOARD)}>

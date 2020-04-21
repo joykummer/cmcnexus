@@ -119,7 +119,7 @@ function CaseDetails(props) {
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              <StatusDetailsValue>{caseDetails.status}</StatusDetailsValue>
+              <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
               <Empty/>
               <StatusButtonsContainer>
                 {caseDetails.status === "requested" ? (
