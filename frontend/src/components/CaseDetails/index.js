@@ -195,11 +195,12 @@ function CaseDetails(props) {
                 <RejectCase singleCase={caseDetails} />
                 </ButtonContainer>
               </CanI>
-              <CanI perform={CHANGE_CASE}>
-               <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
-              </CanI>
+
             </>
           ) : null}
+          <CanI perform={CHANGE_CASE}>
+               <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
+          </CanI>
         </>
       ) : (
         <div>No case to show</div>
