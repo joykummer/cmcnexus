@@ -6,7 +6,6 @@ import {
   searchNameFunction,
   searchTagFunction,
 } from "../../store/actions/Organisations/searchOrganisationsAction";
-import { RedButton } from "../../styles/Buttons";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { ORGANISATIONS } from "../Navigation/states";
 import { ADD_ORGANISATION } from "../Permissions/permissions";
@@ -31,24 +30,21 @@ import {
   Card,
   Wrapper,
   Clear,
-} from "../ListCases/styles";
-import {HeaderTitle} from "../AddOrganisation/styles";
+} from "../../styles/SearchesFilters/index";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import OrganisationTable from '../Tables/organisations';
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #ebebeb;
-  padding: 25px 50px 50px 50px;
-  overflow: scroll;
+const HeaderTitleWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-content: center;
 `;
 
 const AddOrganisation = styled.div`
-  font-size: 16px;
-  margin-bottom: 25px;
+  font-size: 18px;
   color: red;
+  text-align: right;
+  vertical-align: middle;
   :hover {
     text-decoration: underline;
     cursor: pointer;
@@ -110,103 +106,16 @@ function ListOrganisations(props) {
 
   return (
     <Container>
+      <HeaderTitleWrapper>
       <HeaderTitle>ORGANISATIONS</HeaderTitle>
       <CanI perform={ADD_ORGANISATION}>
         <AddOrganisation onClick={addOrganisationHandler}>
-          ADD ORGANISATION
+          + ADD ORGANISATION
         </AddOrganisation>
       </CanI>
-      <SearchContainer>
-        <SearchWrapper>
-          <Card>
-            Title
-            <SearchInput
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-          </Card>
-          <Card>
-            Category
-            <Filter
-              defaultValue={"default"}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="default" disabled>
-                Choose here
-              </option>
-              {props.categories
-                ? props.categories.map((category) => {
-                    return (
-                      <option key={category.id} id={category.id}>
-                        {category.name}
-                      </option>
-                    );
-                  })
-                : null}
-            </Filter>
-          </Card>
-          <Card>
-            Tag
-            <Filter
-              defaultValue={"default"}
-              onChange={(e) => setTag(e.target.value)}
-            >
-              <option value="default" disabled>
-                Choose here
-              </option>
-              {props.organisations
-                ? props.organisations.map((organisation) => {
-                    return (
-                      <option key={organisation.id}>{organisation.tag}</option>
-                    );
-                  })
-                : null}
-            </Filter>
-          </Card>
-        </SearchWrapper>
-        <Wrapper>
-          <SearchButton onClick={searchButtonHandler}>
-            APPLY FILTERS
-          </SearchButton>
-          <Clear onClick={clearSearchHandler}>CLEAR</Clear>
-        </Wrapper>
-      </SearchContainer>
-      <Table>
-        <TableHeaderWrapper>
-          <TableHeaderRow>
-            {headers.map((header, id) => {
-              return <TableHeader key={id}>{header}</TableHeader>;
-            })}
-          </TableHeaderRow>
-        </TableHeaderWrapper>
-        <TableBody>
-          {props.organisations
-            ? props.organisations
-                .filter(
-                  (organisation) =>
-                    !category ||
-                    organisation.categories.some((cat) => cat.name === category)
-                )
-                .map((organisation) => (
-                  <TableRow
-                    key={organisation.id}
-                    onClick={() => organisationDetailsHandler(organisation.id)}
-                  >
-                    <TableData>{organisation.name}</TableData>
-                    <TableData>
-                      {organisation.categories
-                        ? organisation.categories.map((category) => {
-                            return <div key={category.id}>{category.name}</div>;
-                          })
-                        : []}
-                    </TableData>
-                    <TableData>{organisation.tag}</TableData>
-                  </TableRow>
-                ))
-            : null}
-        </TableBody>
-      </Table>
+      </HeaderTitleWrapper>
+
+      <OrganisationTable />
     </Container>
   );
 }

@@ -1,30 +1,18 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
-
 import CaseStatusWidget from './Widgets/caseStatus';
 import CaseCategoryWidget from './Widgets/caseCategory';
 import CaseYearlyWidget from './Widgets/caseYearly';
 import {getStats} from '../../store/actions/Statistics/getStatisticsAction';
 import {categoriesFunction} from '../../store/actions/Categories/categoriesAction';
 import Counter from './Widgets/counter';
-import {HeaderTitle} from "../CaseDetails/styles";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
 
 const Wrapper = styled.div`
 	height: 100%;
-  	background-color: #EBEBEB;
-  	padding: 40px 60px 40px 60px;
-  	overflow: auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-`;
-
-const Container = styled.div`
-	height: 100%;
-	width: 100%;
-	max-width: 1200px;
+	max-width: 700px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -50,10 +38,10 @@ export default function Dashboard (props) {
 
 
 	return (
-		<Wrapper>
+		<Container>
 			<HeaderTitle>DASHBOARD</HeaderTitle>
 			{stats && stats.cases ?
-				<Container>
+				<Wrapper>
 					<Counter data={{
 						total: stats.cases.total,
 						open: stats.cases.by_status.find(el => el.status === "open").count,
@@ -64,8 +52,8 @@ export default function Dashboard (props) {
 						<CaseCategoryWidget data={stats.cases.by_category}/>
 					</Horizontal>
 					<CaseYearlyWidget data={stats.cases.yearly}/>
-				</Container>
+				</Wrapper>
 				: null}
-		</Wrapper>
+		</Container>
 	)
 }

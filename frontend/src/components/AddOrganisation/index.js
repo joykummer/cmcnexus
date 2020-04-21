@@ -4,9 +4,13 @@ import { connect } from "react-redux";
 import { addOrganisationFunction } from "../../store/actions/Organisations/addOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
-import {ORGANISATIONS} from '../Navigation/states';
-import {Container, HeaderTitle, DetailsContainer, Label, FieldInput,
-      FieldInputLarge, CategoryDropdown, AddButton} from "./styles"
+import { ORGANISATIONS } from '../Navigation/states';
+import { Label } from "./styles"
+import { AddButton } from "../../styles/Buttons";
+import { CategoryDropdown } from "../../styles/Dropdowns";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
+import {organisationsFunction} from "../../store/actions/Organisations/organisationsAction";
 
 
 function AddOrganisation(props) {
@@ -93,22 +97,25 @@ function AddOrganisation(props) {
       />
       </Label>
       <Label>Category
-      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
-        <option value={"default"} disabled>Select a category...</option>
-        {props.categories
-          ? props.categories.map((category) => {
-              return (
-                <option key={category.id} id={category.id}>
-                  {category.name}
-                </option>
-              );
-            })
-          : null}
-      </CategoryDropdown>
+      <CategoryDropdown
+            value={categories}
+            onChange={setCategoryHandler}
+            multiple
+          >
+            {/*<option value="default" disabled>Please choose here...</option>*/}
+            {props.categories
+              ? props.categories.map((category) => {
+                  return (
+                    <option key={category.id} id={category.id}>
+                      {category.name}
+                    </option>
+                  );
+                })
+              : null}
+          </CategoryDropdown>
       </Label>
       </DetailsContainer>
-      <AddButton onClick={addOrganisationHandler}>{loading ? <ClipLoader size={35} color={"white"} height={15}/> :  "SUBMIT"}</AddButton>
-      {/* {loading ? <ClipLoader size={35} color={"#ff0000"} loading={true}/> :  "ADD"} */}
+      <AddButton onClick={addOrganisationHandler}>{loading ? <ClipLoader size={35} color={"white"}/> :  "SUBMIT"}</AddButton>
     </Container>
   );
 }

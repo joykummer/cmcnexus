@@ -15,3 +15,20 @@ export const RedButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const AddButton = styled(RedButton)`
+  width: 125px;
+  height: auto;
+  margin-bottom: 50px;
+`;
+
+export const EditSaveButton = styled(RedButton)`
+  width: 75px;
+  height: 40px;
+  margin-bottom: 50px;
+`;
+
+export const AcceptRejectButton = styled(RedButton)`
+ width: 100px;  
+ height: 40px;
+`;

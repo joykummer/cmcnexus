@@ -13,6 +13,8 @@ import {useHistory} from "react-router-dom";
 import {CardBox} from '../../styles/GenericBoxes';
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {USERPROFILE} from '../Navigation/states';
+import {EditSaveButton} from "../../styles/Buttons";
+import {Container, DetailsContainer, HeaderTitle} from "../../styles/BaseContainer";
 
 
 const Wrapper = styled.section`
@@ -111,11 +113,11 @@ export default function EditUserProfile() {
 
 
 return (user ?<Wrapper>
-	<Rectangle>
-		<User>
-			USER PROFILE
-		</User>
-		<InfoWrapper>
+	<Container>
+		<HeaderTitle>
+			EDIT USER PROFILE
+		</HeaderTitle>
+		<DetailsContainer>
 			<GeneralElements>
 				<FieldName>
 					First Name
@@ -205,10 +207,10 @@ return (user ?<Wrapper>
 					</div>
 				</Column>
 			</GeneralElements>
-		</InfoWrapper>
-		<Button onClick={onClickHandler}>
-			Edit
-		</Button>
-	</Rectangle>
+		</DetailsContainer>
+		<EditSaveButton onClick={onClickHandler}>
+			Save
+		</EditSaveButton>
+	</Container>
 </Wrapper> : "user not found")
 }

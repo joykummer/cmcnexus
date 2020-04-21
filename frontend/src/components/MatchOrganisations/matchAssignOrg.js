@@ -11,17 +11,22 @@ import {
   TableHeader,
   TableHeaderRow,
   TableHeaderWrapper,
-  TableRow,
 } from "../../styles/Tables";
 import styled from "styled-components";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {ORGANISATIONS} from '../Navigation/states';
 import {casesFunction} from "../../store/actions/Cases/casesAction";
 
+  const CustomTableRow = styled.tr`
+  width: 100%;
+  text-transform: capitalize;
+  :nth-child(odd) {
+    background: #ebebeb;
+  }
+  `;
+
   const MatchAssignButton = styled(RedButton)`
     width: 150px;
-    height: 40px;
-    margin: 25px 50px;
     border: none;
     background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
     transition: all 0.7s ease;
@@ -32,20 +37,12 @@ import {casesFunction} from "../../store/actions/Cases/casesAction";
   `;
 
   const NotAccepted = styled.p`
-    color: #e60000;
-    padding: 35px;
+    color: red;
   `;
 
-  const isMatch = (singleCase, organisation) => {
-    return organisation.partnered_cases.filter(el => el.case === singleCase.id).status === "matched"
-  };
-
-  const isAccepted = (singleCase, organisation) => {
-    return organisation.partnered_cases.filter(el => el.case === singleCase.id).status === "accepted"
-  };
-
-  const isAssigned = (singleCase, organisation) => {
-    return organisation.partnered_cases.filter(el => el.case === singleCase.id).status === "assigned"
+  const isStatus = (singleCase, organisation, status) => {
+    const partnership = organisation.partnered_cases.find(el => el.case === singleCase.id)
+    return partnership ? partnership.status === status : false
   };
 
 function MatchActionable({singleCase, organisation, dispatch}) {
@@ -56,9 +53,11 @@ function MatchActionable({singleCase, organisation, dispatch}) {
     dispatch(unmatchOrganisationsFunction(singleCase.id, organisation.id));
   };
   return <>{
-    isMatch(singleCase, organisation)
+    isStatus(singleCase, organisation, "matched")
       ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
-      : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+      : isStatus(singleCase, organisation, "accepted") || isStatus(singleCase, organisation, "assigned")
+          ? <NotAccepted>Ready to be assigned.</NotAccepted>
+            : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
 
   }</>;
 }
@@ -71,11 +70,11 @@ function AssignActionable({singleCase, organisation, dispatch}) {
     dispatch(unassignOrganisationsFunction(singleCase.id, organisation.id));
   };
   return <>{
-    isAccepted(singleCase, organisation)
+    isStatus(singleCase, organisation, "accepted")
       ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
-      : isAssigned(singleCase, organisation)
+      : isStatus(singleCase, organisation, "assigned")
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
-        : <NotAccepted>The case has not been accepted.</NotAccepted>
+        : <NotAccepted>not matched or accepted.</NotAccepted>
   }</>;
 }
 
@@ -113,7 +112,7 @@ function MatchAssignOrg(props) {
           {organisationsMatchingByCategory
             ? organisationsMatchingByCategory.map((organisation) => {
                 return (
-                  <TableRow key={organisation.id}>
+                  <CustomTableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
                     <TableData>{organisation.description}</TableData>
                     <TableData>{organisation.categories.map((cat) => cat.name).join(', ')}</TableData>
@@ -124,7 +123,7 @@ function MatchAssignOrg(props) {
                     <TableData>
                       <AssignActionable dispatch={props.dispatch} organisation={organisation} singleCase={singleCase}/>
                     </TableData>
-                  </TableRow>
+                  </CustomTableRow>
                 );
               })
             : null}

@@ -1,16 +1,14 @@
 from django.db.models import Q
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, CreateAPIView
-from rest_framework_guardian.filters import ObjectPermissionsFilter
 
-from .models import Organisation
-from .serializer import OrganisationSerializer, CreateOrganisationSerializer
-from ..helpers.permissions import CustomDjangoModelPermission
+from apps.organisations.models import Organisation
+from apps.organisations.serializer import OrganisationSerializer, CreateOrganisationSerializer
+from apps.helpers.permissions import CustomDjangoModelPermission
 
 
 class GetAllOrganisations(ListAPIView):
     queryset = Organisation.objects.none()
     permission_classes = [CustomDjangoModelPermission]
-    filter_backends = [ObjectPermissionsFilter]
     serializer_class = OrganisationSerializer
 
     def get_queryset(self):

@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import CanI from "../Permissions";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
-import { Container, HeaderTitle, Stripe, DetailsContainer, CategoryWrapper } from "../CaseDetails/styles";
-import { AddButton } from "../AddOrganisation/styles";
 import { setNavigationAction } from '../../store/actions/Navigation';
 import { ORGANISATIONS } from '../Navigation/states';
+import {EditSaveButton} from "../../styles/Buttons";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { Stripe, DetailsHeader, DetailsKey } from "../../styles/Details";
+import {CHANGE_ORGANISATION} from "../Permissions/permissions";
 
 
 function OrganisationDetails(props) {
@@ -33,35 +36,38 @@ function OrganisationDetails(props) {
       {organisationDetails ? (
         <>
           <HeaderTitle>Organisation Details of {organisationDetails.name}</HeaderTitle>
-          <Stripe>Name</Stripe>
-          <DetailsContainer>{organisationDetails.name}</DetailsContainer>
-          <Stripe>Description</Stripe>
-          <DetailsContainer>{organisationDetails.description}</DetailsContainer>
-          <Stripe>Service</Stripe>
-          <DetailsContainer>{organisationDetails.services}</DetailsContainer>
-          <Stripe>Category</Stripe>
+          <Stripe>General</Stripe>
           <DetailsContainer>
-              <CategoryWrapper>
-              {organisationDetails.categories.map(category => {
-            return (
-                <div key={category.id}>{category.name}</div>
-                    )
-          })}
-              </CategoryWrapper>
+            <DetailsHeader>
+              <DetailsKey>Name</DetailsKey>
+              {organisationDetails.name}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Description</DetailsKey>
+              {organisationDetails.description}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Services</DetailsKey>
+              {organisationDetails.services}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Category</DetailsKey>
+              {organisationDetails
+                  ? organisationDetails.categories.map((category) => category.name).join(', ')
+                  : null}
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Tag</DetailsKey>
+              {organisationDetails.tag}
+            </DetailsHeader>
           </DetailsContainer>
-          <Stripe>Tag</Stripe>
-          <DetailsContainer>
-            {organisationDetails.tag}
-          </DetailsContainer>
-          <Stripe>Members</Stripe>
-          <DetailsContainer>
-            {organisationDetails.members}
-          </DetailsContainer>
+          <CanI perform={CHANGE_ORGANISATION}>
+          <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
+          </CanI>
         </>
       ) : (
         <div>This organisation does not exist.</div>
       )}
-      <AddButton onClick={redirectHandler}>Edit</AddButton>
     </Container>
   );
 }

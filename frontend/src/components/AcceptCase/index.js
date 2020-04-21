@@ -1,30 +1,15 @@
 import React from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch, useSelector } from "react-redux";
-import { RedButton } from "../../styles/Buttons";
-import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Cases/acceptCaseAction";
-import styled from "styled-components";
-
-
-  const AcceptRejectButton = styled(RedButton)`
-    width: 150px;
-    height: 40px;
-    margin: 25px 50px;
-    border: none;
-    background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
-    transition: all 0.7s ease;
-    :hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
-  `;
+import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Organisations/acceptCaseAction";
+import { AcceptRejectButton } from "../../styles/Buttons";
 
 
 export default function AcceptCase({singleCase}) {
   const dispatch = useDispatch();
   const organisation = useSelector(state => state.auth.user ? state.auth.user.organisation : null);
   const organisation_id = organisation ? organisation.id : null;
-  const status = organisation && organisation.partnered_cases ?
+  const status = (organisation && organisation.partnered_cases) ?
     organisation.partnered_cases.find(el => el.case === singleCase.id).status
     : null;
 
@@ -34,11 +19,12 @@ export default function AcceptCase({singleCase}) {
   const unacceptCaseByOrg = () => {
     dispatch(unacceptCaseByOrgFunction(singleCase.id, organisation_id));
   };
-  return<>
+  return(
+    <>
       {
-        status && status === "accepted"
+        status === "accepted"
           ? <AcceptRejectButton onClick={unacceptCaseByOrg}>Undo</AcceptRejectButton>
           : <AcceptRejectButton onClick={acceptCaseByOrg} clicked={true} >Accept</AcceptRejectButton>
       }
-      </>;
-}
+    </>
+)}

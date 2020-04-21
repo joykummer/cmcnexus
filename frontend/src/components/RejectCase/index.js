@@ -1,23 +1,8 @@
 import React from "react";
-import {connect, useDispatch, useSelector} from "react-redux";
-import { RedButton } from "../../styles/Buttons";
-import { rejectCaseByOrgFunction, unrejectCaseByOrgFunction } from "../../store/actions/Organisations/rejectByOrgAction";
-import styled from "styled-components";
-import {acceptCaseByOrgFunction, unacceptCaseByOrgFunction} from '../../store/actions/Cases/acceptCaseAction';
-
-
-  const AcceptRejectButton = styled(RedButton)`
-    width: 150px;
-    height: 40px;
-    margin: 25px 50px;
-    border: none;
-    background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
-    transition: all 0.7s ease;
-    :hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
-  `;
+import { useDispatch, useSelector } from "react-redux";
+import { AcceptRejectButton } from "../../styles/Buttons";
+import { rejectCaseFunction } from "../../store/actions/Cases/rejectCaseAction";
+import {rejectCaseByOrgFunction, unrejectCaseByOrgFunction} from "../../store/actions/Organisations/rejectByOrgAction";
 
 
 export default function RejectCase({singleCase}) {
@@ -28,17 +13,20 @@ export default function RejectCase({singleCase}) {
     organisation.partnered_cases.find(el => el.case === singleCase.id).status
     : null;
 
-  const acceptCaseByOrg = () => {
-    dispatch(acceptCaseByOrgFunction(singleCase.id, organisation_id))
+  const rejectCaseByOrg = () => {
+    dispatch(rejectCaseByOrgFunction(singleCase.id, organisation_id));
   };
-  const unacceptCaseByOrg = () => {
-    dispatch(unacceptCaseByOrgFunction(singleCase.id, organisation_id));
+
+  const unRejectCaseByOrg = () => {
+    dispatch(unrejectCaseByOrgFunction(singleCase.id, organisation_id));
   };
+
   return<>
     {
-      status && status === "accepted"
-        ? <AcceptRejectButton onClick={unacceptCaseByOrg}>Undo</AcceptRejectButton>
-        : <AcceptRejectButton onClick={acceptCaseByOrg} clicked={true} >Accept</AcceptRejectButton>
+      status === "rejected"
+        ? <AcceptRejectButton onClick={unRejectCaseByOrg}>Undo</AcceptRejectButton>
+        : <AcceptRejectButton onClick={rejectCaseByOrg} clicked={true} >Reject</AcceptRejectButton>
     }
   </>;
 }
+

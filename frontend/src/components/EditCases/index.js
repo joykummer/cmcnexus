@@ -7,10 +7,11 @@ import { categoriesFunction } from "../../store/actions/Categories/categoriesAct
 import { editCaseFunction } from "../../store/actions/Cases/editCaseAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES_ADD} from '../Navigation/states';
-
-import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, FieldInputLarge} from "../AddOrganisation/styles";
-import {CategoryDropdown, AddButton, Checkbox, CaseDropdown, SexDropdown} from "../AddCase/styles";
-
+import {AddButton, EditSaveButton} from "../../styles/Buttons/index"
+import {Label} from "../AddOrganisation/styles";
+import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
 
 const ErrorMessage = styled.div`
   font-size: 10px;
@@ -18,6 +19,10 @@ const ErrorMessage = styled.div`
   margin-bottom: 10px;
 `;
 
+const Checkbox = styled.input`
+  margin-top: 2px;
+  margin-right: 10px;
+`;
 
 function EditCases(props) {
   const caseDetails =
@@ -47,7 +52,6 @@ function EditCases(props) {
   const [sexError, setSexError] = useState("");
   const [countryError, setCountryError] = useState("");
   const [categoriesError, setCategoriesError] = useState("");
-  const [loading, setLoading] = useState(false);
   const dispatch = props.dispatch;
 
   useEffect(() => {
@@ -141,8 +145,7 @@ function EditCases(props) {
   };
 
   const editCaseHandler = async (e) => {
-    // e.preventDefault();
-    // setLoading(true);
+    e.preventDefault();
     const isValid = validate();
     if (isValid) {
       const data = {
@@ -158,8 +161,7 @@ function EditCases(props) {
         // categories: categoryIds,
       };
       const caseId = caseDetails.id
-      await dispatch(editCaseFunction(data, caseId));
-      setLoading(false);
+      dispatch(editCaseFunction(data, caseId));
       props.history.push("/cases/");
     }
   };
@@ -223,12 +225,10 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{recommendationError}</ErrorMessage>
       <Label>Patient's consent
-        {console.log("here we are", caseDetails.consent)}
       <Checkbox
         type="checkbox"
         placeholder ={caseDetails.consent}
         name="consent"
-        // onChange={consentChecker}
         value="checked"
         required
         checked ={consent}
@@ -248,7 +248,7 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{ageError}</ErrorMessage>
       <Label>Sex
-      <CaseDropdown
+      <BasicDropdown
         name="sex"
         placeholder ={caseDetails.sex}
         onChange={(e) => setSex(e.target.value)}
@@ -258,11 +258,11 @@ function EditCases(props) {
           <option value="" disabled>Please choose here...</option>
           <option key={1}>F</option>
           <option key={2}>M</option>
-      </CaseDropdown>
+      </BasicDropdown>
         </Label>
           <ErrorMessage>{sexError}</ErrorMessage>
       <Label>Country
-      <CaseDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
+      <BasicDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
           <option value="default" disabled>Please choose here...</option>
           {countries
           ? countries.map((country) => {
@@ -272,7 +272,7 @@ function EditCases(props) {
             })
           : null
           }
-      </CaseDropdown>
+      </BasicDropdown>
         </Label>
           <ErrorMessage>{countryError}</ErrorMessage>
       <Label>Category
@@ -291,7 +291,7 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{categoriesError}</ErrorMessage>
         </DetailsContainer>
-      <AddButton onClick={editCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} height={15}/> :  "SUBMIT"}</AddButton>
+      <EditSaveButton onClick={editCaseHandler}>SAVE</EditSaveButton>
     </Container>
   );
 }

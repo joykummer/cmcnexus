@@ -13,7 +13,7 @@ default_groups_permissions = [
             "view_general_info",
             "view_medical_info",
             "update_general_info",
-            "update_medical_info"
+            "update_medical_info",
         ]
     },
     {
@@ -30,6 +30,7 @@ default_groups_permissions = [
             "view_case",
             "change_case",
             "close_case",
+            "reopen_case",
             "assign_organisations",
             "match_organisations",
             "view_organisation",
@@ -79,15 +80,16 @@ class Command(BaseCommand):
             if created:
                 self.stdout.write('Created new group "%s"... ' % default_groups_permission["name"]
                                   + self.style.SUCCESS("OK"))
-                for permission_codename in default_groups_permission["permissions"]:
-                    if Permission.objects.filter(codename=permission_codename).exists():
-                        permission = Permission.objects.get(codename=permission_codename)
-                        new_group.permissions.add(permission)
-                        self.stdout.write((' |- Add permission "%s"... ' % permission_codename)
-                                          + self.style.SUCCESS("OK"))
-                    else:
-                        self.stdout.write((' |- Permission "%s" does not exist... ' % permission_codename)
-                                          + self.style.ERROR("FAIL"))
             else:
                 self.stdout.write(
-                    self.style.WARNING('Group "%s" already exists. Continuing.' % default_groups_permission["name"]))
+                    self.style.WARNING('Group "%s" already exists.' % default_groups_permission["name"])
+                    + " Adding missing permissions...")
+            for permission_codename in default_groups_permission["permissions"]:
+                if Permission.objects.filter(codename=permission_codename).exists():
+                    permission = Permission.objects.get(codename=permission_codename)
+                    new_group.permissions.add(permission)
+                    self.stdout.write((' |- Add permission "%s"... ' % permission_codename)
+                                      + self.style.SUCCESS("OK"))
+                else:
+                    self.stdout.write((' |- Permission "%s" does not exist... ' % permission_codename)
+                                      + self.style.ERROR("FAIL"))

@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-import { RedButton } from '../../styles/Buttons';
 import styled from 'styled-components';
 import {validateCaseFunction} from '../../store/actions/Cases/updateCaseAction';
 import {rejectCaseFunction} from '../../store/actions/Cases/rejectCaseAction';
+import { AcceptRejectButton } from "../../styles/Buttons";
 
 
 const ButtonContainer = styled.div`
-display: flex; 
-margin-top: 3%; 
-`;
-
-const Button = styled(RedButton)`
- height: 40px;
- width: 100px; 
- margin: 3%;    
+width: 225px;
+display: flex;
+justify-content: space-between; 
 `;
 
 
@@ -33,8 +28,8 @@ class Validation extends Component {
     render() {
         return (
             <ButtonContainer>
-                <Button onClick={this.acceptHandler}>Accept</Button> 
-                <Button onClick ={this.rejectHandler}>Reject</Button> 
+                <AcceptRejectButton onClick={this.acceptHandler}>Accept</AcceptRejectButton>
+                <AcceptRejectButton onClick ={this.rejectHandler}>Reject</AcceptRejectButton>
             </ButtonContainer>
         )
     }

@@ -7,29 +7,25 @@ import { categoriesFunction } from "../../store/actions/Categories/categoriesAct
 import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
-import {
-  Container,
-  HeaderTitle,
-  DetailsContainer,
-  Label,
-  FieldInput,
-  FieldInputLarge,
-} from "../AddOrganisation/styles";
-import {
-  CategoryDropdown,
-  AddButton,
-  Checkbox,
-  CaseDropdown
-} from "./styles";
+import { Label } from "../AddOrganisation/styles";
+import { AddButton } from "../../styles/Buttons";
+import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const ErrorMessage = styled.div`
   font-size: 10px;
   color: red;git
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
+const Checkbox = styled.input`
+  margin-top: 2px;
+  margin-right: 10px;
 `;
 
 const Text = styled.div`
@@ -198,8 +194,9 @@ function AddCase(props) {
             required
           />
           <ErrorMessage>{titleError}</ErrorMessage>
+        </Label>
         <Label>Language
-        <CaseDropdown
+        <BasicDropdown
           name="language"
           onChange={(e) => setLanguage(e.target.value)}
           value={language}
@@ -209,10 +206,10 @@ function AddCase(props) {
           <option key={1}>French</option>
           <option key={2}>English</option>
           <option key={3}>Spanish</option>
-        </CaseDropdown>
+        </BasicDropdown>
         </Label>
-        <Label>Nature of referral
-        <CaseDropdown
+        <Label>Nature of Referral
+        <BasicDropdown
           name="nature_of_referral"
           onChange={(e) => setNatureOfReferral(e.target.value)}
           value={nature_of_referral}
@@ -222,7 +219,7 @@ function AddCase(props) {
           <option key={1}>Life changing</option>
           <option key={2}>Emergency</option>
           <option key={3}>Urgent</option>
-        </CaseDropdown>
+        </BasicDropdown>
         </Label>
         <Label>Patient ID
         <FieldInput
@@ -258,8 +255,8 @@ function AddCase(props) {
         value={diagnosis}
         required
       />
-      </Label>
       <ErrorMessage>{diagnosisError}</ErrorMessage>
+      </Label>
       <Label>Past medical history
       <FieldInputLarge
         name="past_medical_history"
@@ -299,7 +296,6 @@ function AddCase(props) {
         value={justification}
         required
       />
-      </Label>
           <ErrorMessage>{justificationError}</ErrorMessage>
       </Label>
       <Label>Recommendation
@@ -347,7 +343,7 @@ function AddCase(props) {
       </Label>
           <ErrorMessage>{ageError}</ErrorMessage>
       <Label>Sex
-      <CaseDropdown
+      <BasicDropdown
         name="sex"
         onChange={(e) => setSex(e.target.value)}
         value={sex}
@@ -356,7 +352,7 @@ function AddCase(props) {
           <option value="" disabled>Please choose here...</option>
           <option key={1}>F</option>
           <option key={2}>M</option>
-      </CaseDropdown>
+      </BasicDropdown>
       </Label>
       <ErrorMessage>{sexError}</ErrorMessage>
       <Label>Location
@@ -368,7 +364,7 @@ function AddCase(props) {
       />
       </Label>
       <Label>Country
-      <CaseDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
+      <BasicDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
           <option value="default" disabled>Please choose here...</option>
           {countries
           ? countries.map((country) => {
@@ -378,7 +374,7 @@ function AddCase(props) {
             })
           : null
           }
-      </CaseDropdown>
+      </BasicDropdown>
       <ErrorMessage>{countryError}</ErrorMessage>
         </Label>
         <Label>
@@ -400,10 +396,9 @@ function AddCase(props) {
               : null}
           </CategoryDropdown>
         </Label>
-
           <ErrorMessage>{categoriesError}</ErrorMessage>
       </DetailsContainer>
-      <AddButton onClick={addCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} height={15}/> :  "SUBMIT"}</AddButton>
+      <AddButton onClick={addCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} /> :  "SUBMIT"}</AddButton>
     </Container>
   );
 }

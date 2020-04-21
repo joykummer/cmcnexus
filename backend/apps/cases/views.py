@@ -7,10 +7,10 @@ from rest_framework.response import Response
 from rest_framework_guardian.filters import ObjectPermissionsFilter
 
 from apps.cases.permissions import ValidatePermission, MatchOrganisationPermission, \
-    AssignOrganisationPermission, AcceptRejectCasePermission
+    AssignOrganisationPermission, AcceptRejectCasePermission, ReopenPermission
 from apps.cases.models import Case, Partnership
 from apps.cases.permissions import ClosePermission, RejectPermission
-from apps.cases.serializers import CaseSerializer, get_general_or_medical_info
+from apps.cases.serializers import CaseSerializer, get_general_or_medical_info, GeneralInfoSerializer
 from apps.helpers.permissions import CustomDjangoModelPermission
 from apps.cases.serializers import CreateCaseSerializer
 from apps.organisations.models import Organisation
@@ -20,6 +20,7 @@ class ListCaseView(ListAPIView):
     queryset = Case.objects.none()
     permission_classes = [CustomDjangoModelPermission]
     filter_backends = [ObjectPermissionsFilter]
+    ordering = ['-created']
 
     def get_serializer_class(self):
         return get_general_or_medical_info(self.request)
@@ -69,6 +70,18 @@ class CloseCaseView(UpdateAPIView):
     def update(self, request, *args, **kwargs):
         case = self.get_object()
         case.close()
+        return Response(self.get_serializer(case).data)
+
+
+class ReopenCaseView(UpdateAPIView):
+    queryset = Case.objects.all()
+    serializer_class = CaseSerializer
+    permission_classes = [IsAuthenticated, ReopenPermission]
+    lookup_url_kwarg = 'case_id'
+
+    def update(self, request, *args, **kwargs):
+        case = self.get_object()
+        case.reopen()
         return Response(self.get_serializer(case).data)
 
 
@@ -134,7 +147,7 @@ class AssignOrganisation(GenericAPIView):
 
 class AcceptCaseAsOrg(GenericAPIView):
     queryset = Case
-    serializer_class = CaseSerializer
+    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, AcceptRejectCasePermission]
     lookup_url_kwarg = 'case_id'
 
@@ -155,7 +168,7 @@ class AcceptCaseAsOrg(GenericAPIView):
 
 class RefuseCaseAsOrg(GenericAPIView):
     queryset = Case
-    serializer_class = CaseSerializer
+    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, AcceptRejectCasePermission]
     lookup_url_kwarg = 'case_id'
 

@@ -19,3 +19,17 @@ export const Dropdown = styled.select`
     outline: none;
   }
 `;
+
+export const BasicDropdown = styled(Dropdown)`
+  width: 300px;
+  height: 35px;
+  margin-top: 2px;
+`;
+
+export const CategoryDropdown = styled(Dropdown)`
+  width: 300px;
+  height: auto;
+  margin-top: 2px;
+  padding: 10px 0px 10px 0px;
+  background: none;
+`;

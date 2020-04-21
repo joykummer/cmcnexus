@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { editOrganisationFunction } from "../../store/actions/Organisations/editOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
-import {Container, HeaderTitle, DetailsContainer, Label, FieldInput, 
-      FieldInputLarge, CategoryDropdown, AddButton} from "../AddOrganisation/styles"
+import { Label } from "../AddOrganisation/styles";
+import { EditSaveButton } from "../../styles/Buttons";
+import { CategoryDropdown } from "../../styles/Dropdowns";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
 
 
 function EditOrganisation(props) {
@@ -44,7 +47,7 @@ function EditOrganisation(props) {
     //   categories: categories,
       tag: tag,
     };
-    const organisationId = organisationDetails.id
+    const organisationId = organisationDetails.id;
     await props.dispatch(editOrganisationFunction(data, organisationId));
     props.history.push("/organisations/");
   };
@@ -85,7 +88,7 @@ function EditOrganisation(props) {
       />
       </Label>
       <Label>Category
-      <CategoryDropdown defaultValue={"default"} onChange={setCategoryHandler} multiple> 
+      <CategoryDropdown onChange={setCategoryHandler} multiple>
          {props.categories
           ? props.categories.map((category) => {
               return (
@@ -102,7 +105,7 @@ function EditOrganisation(props) {
       ) :(
         <div>This organisation does not exist.</div>
       )}
-      <AddButton onClick={editOrganisationHandler}>Submit</AddButton>
+      <EditSaveButton onClick={editOrganisationHandler}>Save</EditSaveButton>
     </Container>
   );
 }

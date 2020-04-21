@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "../../styles/Tables";
 import {
-  Container,
   SearchContainer,
   SearchWrapper,
   SearchInput,
@@ -27,8 +26,30 @@ import {
   Card,
   Wrapper,
   Clear,
-} from "./styles";
-import {HeaderTitle} from "../AddOrganisation/styles";
+} from "../../styles/SearchesFilters/index";
+import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import CanI from "../Permissions";
+import {ADD_CASE} from "../Permissions/permissions";
+import styled from "styled-components";
+import ListTable from '../Tables';
+
+const HeaderTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+`;
+
+const AddCase = styled.div`
+  font-size: 18px;
+  color: red;
+  text-align: right;
+  vertical-align: middle;
+  :hover {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
 
 function ListCases(props) {
   const [title, setTitle] = useState("");
@@ -80,99 +101,25 @@ function ListCases(props) {
     });
   };
 
+  const addCaseHandler = (e) => {
+    e.preventDefault();
+    props.history.push("/cases/add/");
+  };
+
   const headers = ["Title", "Country", "Category", "Status"];
 
   return (
     <Container>
+      <HeaderTitleWrapper>
       <HeaderTitle>CASES</HeaderTitle>
-      <SearchContainer>
-        <SearchWrapper>
-          <Card>
-            Title
-            <SearchInput
-              name="title"
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
-            />
-          </Card>
-          <Card>
-            Category
-            <Filter
-              defaultValue="default"
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value={"default"} disabled>
-                Choose here
-              </option>
-              {props.categories
-                ? props.categories.map((category) => {
-                    return (
-                      <option key={category.id} id={category.id}>
-                        {category.name}
-                      </option>
-                    );
-                  })
-                : null}
-            </Filter>
-          </Card>
-          <Card>
-            Status
-            <Filter
-              defaultValue={"default"}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="default" disabled>
-                Choose here
-              </option>
-              {statusOptions.map((status) => {
-                return <option key={status}>{status}</option>;
-              })}
-            </Filter>
-          </Card>
-        </SearchWrapper>
-        <Wrapper>
-          <SearchButton onClick={searchButtonHandler}>
-            APPLY FILTERS
-          </SearchButton>
-          <Clear onClick={clearSearchHandler}>CLEAR</Clear>
-        </Wrapper>
-      </SearchContainer>
-      <Table>
-        <TableHeaderWrapper>
-          <TableHeaderRow>
-            {headers.map((header, id) => {
-              return <TableHeader key={id}>{header}</TableHeader>;
-            })}
-          </TableHeaderRow>
-        </TableHeaderWrapper>
-        <TableBody>
-          {props.cases
-            ? props.cases
-                .filter(
-                  (file) =>
-                    !category ||
-                    file.categories.some((cat) => cat.name === category)
-                )
-                .map((file) => (
-                  <TableRow
-                    key={file.id}
-                    onClick={() => caseDetailsHandler(file.id)}
-                  >
-                    <TableData>{file.title}</TableData>
-                    <TableData>{file.country}</TableData>
-                    <TableData>
-                      {file.categories
-                        ? file.categories.map((category) => {
-                            return <div key={category.id}>{category.name}</div>;
-                          })
-                        : []}
-                    </TableData>
-                    <TableData>{file.status}</TableData>
-                  </TableRow>
-                ))
-            : null}
-        </TableBody>
-      </Table>
+       <CanI perform={ADD_CASE}>
+        <AddCase onClick={addCaseHandler}>
+          + ADD CASE
+        </AddCase>
+      </CanI>
+      </HeaderTitleWrapper>
+
+      <ListTable/>
     </Container>
   );
 }

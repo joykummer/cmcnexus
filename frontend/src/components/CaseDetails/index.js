@@ -2,16 +2,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
+import {EditSaveButton, RedButton} from "../../styles/Buttons";
 import {
-  Container,
-  HeaderTitle,
-  DetailsContainer,
-  DetailsHeader,
-  DetailsKey,
-  Stripe,
-  Match,
-  CategoryWrapper,
-  EditButton,
   Vertical,
   Status,
   Horizontal,
@@ -23,10 +15,25 @@ import {
   VALIDATE_CASE,
   MATCH_ORGANISATIONS,
   UPDATE_MATCH,
+  CHANGE_CASE,
+  CLOSE_CASE
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
+import CloseCase from "../CloseCase";
+import styled from "styled-components";
+import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
 
+const ButtonContainer = styled.div`
+width: 225px;
+display: flex;
+justify-content: space-between; 
+`;
+
+const Match = styled(RedButton)`
+  width: 225px;
+`;
 
 function CaseDetails(props) {
   const dispatch = props.dispatch;
@@ -44,7 +51,7 @@ function CaseDetails(props) {
 
   const redirectHandler = () => {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
-    }  
+    }
 
   const caseDetails = props.cases
     ? props.cases.find((file) => file.id === Number(props.match.params.id))
@@ -59,90 +66,93 @@ function CaseDetails(props) {
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Title</DetailsKey>
+              <DetailsValue>
               {caseDetails.title}
+              </DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>patient id:</DetailsKey>
-              {caseDetails.patient_id}
+              <DetailsKey>Patient ID</DetailsKey>
+              <DetailsValue>{caseDetails.patient_id}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>language:</DetailsKey>
-              {caseDetails.language}
+              <DetailsKey>Language</DetailsKey>
+              <DetailsValue>{caseDetails.language}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>nature of referral:</DetailsKey>
-              {caseDetails.nature_of_referral}
+              <DetailsKey>Nature of Referral</DetailsKey>
+              <DetailsValue>{caseDetails.nature_of_referral}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Age</DetailsKey>
-              {caseDetails.age}
+              <DetailsValue>{caseDetails.age}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>date of birth:</DetailsKey>
-              {caseDetails.birth_date}
+              <DetailsKey>Date of Birth</DetailsKey>
+              <DetailsValue>{caseDetails.birth_date}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Sex</DetailsKey>
-              {caseDetails.sex}
+              <DetailsValue>{caseDetails.sex}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>location:</DetailsKey>
-              {caseDetails.location}
+              <DetailsKey>Location</DetailsKey>
+              <DetailsValue>{caseDetails.location}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Country</DetailsKey>
-              {caseDetails.country}
+              <DetailsValue>{caseDetails.country}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Consent</DetailsKey>
+              <DetailsValue>
               {caseDetails.consent ? "Yes" : "No"}
+              </DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Category</DetailsKey>
-              <CategoryWrapper>
+              <DetailsValue>
                 {caseDetails
-                  ? caseDetails.categories.map((category) => {
-                      return <div key={category.id}>{category.name}</div>;
-                    })
+                  ? caseDetails.categories.map((category) => category.name).join(', ')
                   : null}
-              </CategoryWrapper>
+              </DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
           <Stripe>Medical details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Presenting Complaint</DetailsKey>
-              {caseDetails.description}
+              <DetailsValue>{caseDetails.description}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>History of Presenting complaint</DetailsKey>
-              {caseDetails.history_description}
+              <DetailsKey>History of Presenting Complaint</DetailsKey>
+              <DetailsValue>{caseDetails.history_description}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>Past medical history</DetailsKey>
-              {caseDetails.past_medical_history}
+              <DetailsKey>Past Medical History</DetailsKey>
+              <DetailsValue>{caseDetails.past_medical_history}</DetailsValue>
             </DetailsHeader>
-
             <DetailsHeader>
               <DetailsKey>Diagnosis</DetailsKey>
-              {caseDetails.diagnosis}
+              <DetailsValue>{caseDetails.diagnosis}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Physical examination</DetailsKey>
-              {caseDetails.physical_examination}
+              <DetailsValue>{caseDetails.physical_examinatino}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
-              <DetailsKey>Justification</DetailsKey> {caseDetails.justification}
+              <DetailsKey>Justification</DetailsKey>
+              <DetailsValue>{caseDetails.justification}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Recommendation</DetailsKey>
-              {caseDetails.recommendation}
+              <DetailsValue>{caseDetails.recommendation}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-          <Stripe>Status</Stripe>
+          <Stripe>Status Details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
-              <DetailsKey>Partners status</DetailsKey>
+              <DetailsKey>Organisations Status</DetailsKey>
+              <StatusDetailsValue>
               <Vertical>
               {caseDetails.match_stats ?
                 caseDetails.match_stats.map(stat => {
@@ -155,30 +165,38 @@ function CaseDetails(props) {
                   })
                 : null}
               </Vertical>
+              </StatusDetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              {caseDetails.status}
+              <StatusDetailsValue>{caseDetails.status}</StatusDetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Outcome</DetailsKey>
-              {caseDetails.outcome}
+              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-
           <CanI perform={VALIDATE_CASE}>
             <Validation id={caseDetails.id} />
+          </CanI>
+          <CanI perform={CLOSE_CASE}>
+            <CloseCase id={caseDetails} />
           </CanI>
           {caseDetails.status === "open" ? (
             <>
               <CanI perform={MATCH_ORGANISATIONS}>
                 <Match onClick={() => matchingHandler(caseDetails.id)}>
-                  Potential Partner Organisations
+                  MATCH ORGANISATIONS
                 </Match>
               </CanI>
               <CanI perform={UPDATE_MATCH}>
+                <ButtonContainer>
                 <AcceptCase singleCase={caseDetails} />
                 <RejectCase singleCase={caseDetails} />
+                </ButtonContainer>
+              </CanI>
+              <CanI perform={CHANGE_CASE}>
+               <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
               </CanI>
             </>
           ) : null}
@@ -186,7 +204,6 @@ function CaseDetails(props) {
       ) : (
         <div>No case to show</div>
       )}
-       <EditButton onClick={redirectHandler}>Edit</EditButton>
     </Container>
   );
 }
