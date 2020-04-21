@@ -64,6 +64,13 @@ const Match = styled(RedButton)`
  height: 40px;
 `;
 
+export const RedText = styled.div`
+  font-size: 18px;
+  color: red;
+  vertical-align: middle;
+  margin: 0 10px;
+`;
+
 function CaseDetails(props) {
   const dispatch = props.dispatch;
 
@@ -93,12 +100,19 @@ function CaseDetails(props) {
           <HeaderTitleWrapper>
             <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle>
 
-            <CanI perform={DELETE_CASE}>
-              <DeleteCase singleCase={caseDetails} />
-            </CanI>
-            <CanI perform={CHANGE_CASE}>
-             <RedAddText onClick={redirectHandler}>✎ Edit</RedAddText>
-            </CanI>
+            <Horizontal>
+              <CanI perform={CHANGE_CASE}>
+               <RedAddText onClick={redirectHandler}>✎ Edit</RedAddText>
+              </CanI>
+              <CanI perform={DELETE_CASE}>
+                <CanI perform={CHANGE_CASE}>
+                 <RedText> | </RedText>
+                </CanI>
+              </CanI>
+              <CanI perform={DELETE_CASE}>
+                <DeleteCase singleCase={caseDetails} />
+              </CanI>
+            </Horizontal>
           </HeaderTitleWrapper>
 
           <Stripe>Status Details</Stripe>
