@@ -9,6 +9,7 @@ import { AddButton } from "../../styles/Buttons";
 import { CategoryDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
+import {organisationsFunction} from "../../store/actions/Organisations/organisationsAction";
 
 
 function AddOrganisation(props) {

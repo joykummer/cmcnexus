@@ -16,18 +16,19 @@ export const RedButton = styled.button`
   }
 `;
 
-export const NewButton = styled(RedButton)`
-  width: 125px;
-  height: 40px;
-`;
-
 export const AddButton = styled(RedButton)`
   width: 125px;
   height: 40px;
   margin-bottom: 50px;
 `;
 
+export const EditSaveButton = styled(RedButton)`
+  width: 75px;
+  height: 40px;
+  margin-bottom: 50px;
+`;
+
 export const AcceptRejectButton = styled(RedButton)`
- height: 40px;
  width: 100px;  
+ height: 40px;
 `;

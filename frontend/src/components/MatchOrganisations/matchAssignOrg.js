@@ -11,12 +11,19 @@ import {
   TableHeader,
   TableHeaderRow,
   TableHeaderWrapper,
-  TableRow,
 } from "../../styles/Tables";
 import styled from "styled-components";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {ORGANISATIONS} from '../Navigation/states';
 import {casesFunction} from "../../store/actions/Cases/casesAction";
+
+  const CustomTableRow = styled.tr`
+  width: 100%;
+  text-transform: capitalize;
+  :nth-child(odd) {
+    background: #ebebeb;
+  }
+  `;
 
   const MatchAssignButton = styled(RedButton)`
     width: 150px;
@@ -48,7 +55,9 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   return <>{
     isStatus(singleCase, organisation, "matched")
       ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
-      : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+      : isStatus(singleCase, organisation, "accepted") || isStatus(singleCase, organisation, "assigned")
+          ? <NotAccepted>Ready to be assigned.</NotAccepted>
+            : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
 
   }</>;
 }
@@ -65,7 +74,7 @@ function AssignActionable({singleCase, organisation, dispatch}) {
       ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
       : isStatus(singleCase, organisation, "assigned")
         ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
-        : <NotAccepted>The case has not been accepted.</NotAccepted>
+        : <NotAccepted>not matched or accepted.</NotAccepted>
   }</>;
 }
 
@@ -103,7 +112,7 @@ function MatchAssignOrg(props) {
           {organisationsMatchingByCategory
             ? organisationsMatchingByCategory.map((organisation) => {
                 return (
-                  <TableRow key={organisation.id}>
+                  <CustomTableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
                     <TableData>{organisation.description}</TableData>
                     <TableData>{organisation.categories.map((cat) => cat.name).join(', ')}</TableData>
@@ -114,7 +123,7 @@ function MatchAssignOrg(props) {
                     <TableData>
                       <AssignActionable dispatch={props.dispatch} organisation={organisation} singleCase={singleCase}/>
                     </TableData>
-                  </TableRow>
+                  </CustomTableRow>
                 );
               })
             : null}

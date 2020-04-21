@@ -14,7 +14,13 @@ import AddOrganisation from "../components/AddOrganisation";
 import UserProfile from "../components/UserProfile";
 import EditUserProfile from "../components/EditUserProfile";
 import CaseDetails from "../components/CaseDetails";
-import {ADD_CASE, ADD_ORGANISATION, VIEW_CASE, VIEW_ORGANISATION} from '../components/Permissions/permissions';
+import {
+  ADD_CASE,
+  ADD_ORGANISATION,
+  CHANGE_CASE, CHANGE_ORGANISATION,
+  VIEW_CASE,
+  VIEW_ORGANISATION
+} from '../components/Permissions/permissions';
 import MatchOrganisations from '../components/MatchOrganisations';
 import OrganisationDetails from '../components/OrganisationDetails';
 import EditOrganisation from '../components/EditOrganisation';
@@ -37,14 +43,13 @@ export default function Routes() {
           <Route exact path="/" render={() => <Redirect to='/cases/'/>}/>
           <PrivateRoute path='/dashboard/' component={Dashboard}/>
           <PrivateRoutePerm exact path='/cases/add/' component={AddCase} permission={ADD_CASE}/>
-          <PrivateRoutePerm exact path='/cases/edit/:id' component={EditCases} permission={ADD_CASE}/>
+          <PrivateRoutePerm exact path='/cases/edit/:id' component={EditCases} permission={CHANGE_CASE}/>
           <PrivateRoutePerm exact path='/cases/details/:id/' component={CaseDetails} permission={VIEW_CASE}/>
           <PrivateRoutePerm exact path='/cases/' component={ListCases} permission={VIEW_CASE}/>
           <PrivateRoutePerm exact path='/organisations/add/' component={AddOrganisation} permission={ADD_ORGANISATION}/>
-          <PrivateRoutePerm exact path='/organisations/edit/:id' component={EditOrganisation} permission={ADD_ORGANISATION}/>
+          <PrivateRoutePerm exact path='/organisations/edit/:id' component={EditOrganisation} permission={CHANGE_ORGANISATION}/>
           <PrivateRoutePerm exact path='/organisations/' component={ListOrganisations} permission={VIEW_ORGANISATION}/>
-          <PrivateRoutePerm exact path='/organisations/details/:id'
-                            component={OrganisationDetails} permission={VIEW_ORGANISATION}/>
+          <PrivateRoutePerm exact path='/organisations/details/:id' component={OrganisationDetails} permission={VIEW_ORGANISATION}/>
           <PrivateRoute exact path='/cases/match/:id/' component={MatchOrganisations}/>
           <PrivateRoute exact path='/profile/' component={UserProfile}/>
           <PrivateRoute exact path='/profile/edit/' component={EditUserProfile}/>
