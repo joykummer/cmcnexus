@@ -51,6 +51,7 @@ class CreateCaseSerializer(ObjectPermissionsAssignmentMixin, serializers.ModelSe
 
 
 class GeneralInfoSerializer(serializers.ModelSerializer):
+    categories = CategorySerializer(many=True)
     created_by = UserForCaseSerializer(read_only=True)
     match_stats = serializers.SerializerMethodField()
 
@@ -66,7 +67,7 @@ class GeneralInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        fields = ['id', 'status', 'title', 'country', 'location', 'age', 'language', 'nature_of_referral', 'patient_id',
+        fields = ['id', 'status', 'title', 'country', 'location', 'age', 'consent', 'language', 'nature_of_referral', 'patient_id',
                   'age', 'birth_date', 'categories', 'created_by', 'match_stats']
 
 
@@ -76,7 +77,7 @@ class MedicalInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Case
         fields = ['description', 'history_description', 'diagnosis', 'past_medical_history', 'physical_examination',
-                  'investigations', 'current_treatment', 'justification', 'recommendation', 'consent', 'sex',
+                  'investigations', 'current_treatment', 'justification', 'recommendation', 'sex',
                   'comments', 'outcome', 'status']
 
 
