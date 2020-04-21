@@ -13,18 +13,18 @@ User = get_user_model()
 class CaseWorkflow(xwf_models.Workflow):
     log_model = ''
     states = (
-        ('created', _(u"Created")),
+        ('requested', _(u"Requested")),
         ('open', _(u"Open")),
         ('closed', _(u"Closed")),
         ('rejected', _(u"Rejected"))
     )
     transitions = (
-        ('validate', 'created', 'open'),
-        ('close', 'open', 'closed'),
+        ('validate', 'requested', 'open'),
+        ('close', ('open', 'rejected'), 'closed'),
         ('reopen', 'closed', 'open'),
-        ('reject', ('created', 'open'), 'rejected')
+        ('reject', ('requested', 'open'), 'rejected')
     )
-    initial_state = 'created'
+    initial_state = 'requested'
 
 
 class Case(xwf_models.WorkflowEnabled, models.Model):
