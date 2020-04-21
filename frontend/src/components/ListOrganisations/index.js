@@ -32,6 +32,7 @@ import {
   Clear,
 } from "../../styles/SearchesFilters/index";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import OrganisationTable from '../Tables/organisations';
 
 const HeaderTitleWrapper = styled.div`
   display: flex;
@@ -113,95 +114,8 @@ function ListOrganisations(props) {
         </AddOrganisation>
       </CanI>
       </HeaderTitleWrapper>
-      <SearchContainer>
-        <SearchWrapper>
-          <Card>
-            Title
-            <SearchInput
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-          </Card>
-          <Card>
-            Category
-            <Filter
-              defaultValue={"default"}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="default" disabled>
-                Choose here
-              </option>
-              {props.categories
-                ? props.categories.map((category) => {
-                    return (
-                      <option key={category.id} id={category.id}>
-                        {category.name}
-                      </option>
-                    );
-                  })
-                : null}
-            </Filter>
-          </Card>
-          <Card>
-            Tag
-            <Filter
-              defaultValue={"default"}
-              onChange={(e) => setTag(e.target.value)}
-            >
-              <option value="default" disabled>
-                Choose here
-              </option>
-              {props.organisations
-                ? props.organisations.map((organisation) => {
-                    return (
-                      <option key={organisation.id}>{organisation.tag}</option>
-                    );
-                  })
-                : null}
-            </Filter>
-          </Card>
-        </SearchWrapper>
-        <Wrapper>
-          <SearchButton onClick={searchButtonHandler}>
-            APPLY FILTERS
-          </SearchButton>
-          <Clear onClick={clearSearchHandler}>CLEAR</Clear>
-        </Wrapper>
-      </SearchContainer>
-      <Table>
-        <TableHeaderWrapper>
-          <TableHeaderRow>
-            {headers.map((header, id) => {
-              return <TableHeader key={id}>{header}</TableHeader>;
-            })}
-          </TableHeaderRow>
-        </TableHeaderWrapper>
-        <TableBody>
-          {props.organisations
-            ? props.organisations
-                .filter(
-                  (organisation) =>
-                    !category ||
-                    organisation.categories.some((cat) => cat.name === category)
-                )
-                .map((organisation) => (
-                  <TableRow
-                    key={organisation.id}
-                    onClick={() => organisationDetailsHandler(organisation.id)}
-                  >
-                    <TableData>{organisation.name}</TableData>
-                    <TableData>
-                      {organisation.categories
-                        ? organisation.categories.map((category) => category.name).join(', ')
-                        : []}
-                    </TableData>
-                    <TableData>{organisation.tag}</TableData>
-                  </TableRow>
-                ))
-            : null}
-        </TableBody>
-      </Table>
+
+      <OrganisationTable />
     </Container>
   );
 }
