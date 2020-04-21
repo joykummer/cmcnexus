@@ -24,5 +24,13 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const theme = {
-    
+	colors: {
+		status: {
+			created:"#00f",
+			open: "#00b300",
+			warning: "#ffbf00",
+			closed: "#000",
+			rejected: "#f00",
+		},
+	},
 };
