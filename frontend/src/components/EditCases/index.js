@@ -195,7 +195,7 @@ function EditCases(props) {
       <Label>Patient's consent
       <Checkbox
         type="checkbox"
-        placeholder ={caseDetails.consent}
+        placeholder="true"
         name="consent"
         value="checked"
         required

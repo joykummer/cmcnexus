@@ -50,6 +50,12 @@ export const TwoOptionsButton = styled(RedButton)`
     color: ${(props) => props.clicked ? "red" : "white"};
   `;
 
+export const OtherTwoOptionsButton = styled(RedButton)`
+    width: 100px;
+    background-color: ${(props) => props.clicked ? "red" : "white"};
+    border: ${(props) => props.clicked ? "none" : "1px solid red"};
+    color: ${(props) => props.clicked ? "white" : "red"};
+  `;
 
 export const RedAddText = styled.div`
   font-size: 18px;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AcceptRejectButton } from "../../styles/Buttons";
+import { OtherTwoOptionsButton } from "../../styles/Buttons";
 import {rejectCaseByOrgFunction, unrejectCaseByOrgFunction} from "../../store/actions/Organisations/rejectByOrgAction";
 
 
@@ -23,8 +23,8 @@ export default function RejectCase({singleCase}) {
   return<>
     {
       status === "rejected"
-        ? <AcceptRejectButton onClick={unRejectCaseByOrg}>Undo</AcceptRejectButton>
-        : <AcceptRejectButton onClick={rejectCaseByOrg} clicked={true} >Reject</AcceptRejectButton>
+        ? <OtherTwoOptionsButton onClick={unRejectCaseByOrg}>Undo</OtherTwoOptionsButton>
+        : <OtherTwoOptionsButton onClick={rejectCaseByOrg} clicked={true} >Reject</OtherTwoOptionsButton>
     }
   </>;
 }
