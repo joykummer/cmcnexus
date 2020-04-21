@@ -13,18 +13,18 @@ User = get_user_model()
 class CaseWorkflow(xwf_models.Workflow):
     log_model = ''
     states = (
-        ('created', _(u"Created")),
+        ('requested', _(u"Requested")),
         ('open', _(u"Open")),
         ('closed', _(u"Closed")),
         ('rejected', _(u"Rejected"))
     )
     transitions = (
-        ('validate', 'created', 'open'),
-        ('close', 'open', 'closed'),
+        ('validate', 'requested', 'open'),
+        ('close', ('open', 'rejected'), 'closed'),
         ('reopen', 'closed', 'open'),
-        ('reject', ('created', 'open'), 'rejected')
+        ('reject', ('requested', 'open'), 'rejected')
     )
-    initial_state = 'created'
+    initial_state = 'requested'
 
 
 class Case(xwf_models.WorkflowEnabled, models.Model):
@@ -38,20 +38,20 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         ("English", "English"),
         ("Spanish", "Spanish")
     )
-    NATURE_CHOICES = {
+    NATURE_CHOICES = (
         ("Emergency", "Emergency"),
         ("Urgent", "Urgent"),
         ("Life changing", "Life changing")
-    }
+    )
 
     title = models.CharField(max_length=100)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=10, default='')
     nature_of_referral = models.CharField(choices=NATURE_CHOICES, max_length=20, default='Emergency')
     patient_id = models.IntegerField(default=0)
-    location = models.CharField(max_length=200, default='')
+    location = models.CharField(max_length=200, default='', blank=True)
     country = models.CharField(max_length=100)
     age = models.CharField(max_length=50, blank=True, default='')
-    birth_date = models.CharField(max_length=50, blank=True, null=True)
+    birth_date = models.CharField(max_length=50, blank=True, default='')
     sex = models.CharField(choices=GENDER_CHOICES, default="F", max_length=10)
     description = models.TextField(blank=True, default='')
     history_description = models.TextField(blank=True, default='')
