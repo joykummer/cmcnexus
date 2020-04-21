@@ -54,7 +54,6 @@ function AddCase(props) {
   const [categoryIds, setCategoryIds] = useState([]);
   const [titleError, setTitleError] = useState("");
   const [consentError, setConsentError] = useState("");
-  const [ageError, setAgeError] = useState("");
   const [sexError, setSexError] = useState("");
   const [countryError, setCountryError] = useState("");
   const [categoriesError, setCategoriesError] = useState("");
@@ -75,7 +74,6 @@ function AddCase(props) {
   const validate = () => {
     let titleError = "";
     let consentError = "";
-    let ageError = "";
     let sexError = "";
     let countryError = "";
     let categoriesError = "";
@@ -85,9 +83,6 @@ function AddCase(props) {
     }
     if (!consent) {
       consentError = "The patient must consent";
-    }
-    if (!age) {
-      ageError = "Age must be disclosed";
     }
     if (!sex) {
       sexError = "Sex must be disclosed";
@@ -102,14 +97,12 @@ function AddCase(props) {
     if (
       titleError ||
       consentError ||
-      ageError ||
       sexError ||
       countryError ||
       categoriesError
     ) {
       setTitleError(titleError);
       setConsentError(consentError);
-      setAgeError(ageError);
       setSexError(sexError);
       setCountryError(countryError);
       setCategoriesError(categoriesError);
@@ -294,7 +287,6 @@ function AddCase(props) {
         required
       />
       </Label>
-          <ErrorMessage>{ageError}</ErrorMessage>
       <Label>Sex
       <BasicDropdown
         name="sex"
