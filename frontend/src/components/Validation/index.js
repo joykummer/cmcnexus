@@ -9,6 +9,7 @@ import { AcceptRejectButton } from "../../styles/Buttons";
 const ButtonContainer = styled.div`
 width: 225px;
 display: flex;
+flex-direction: row;
 justify-content: space-between; 
 `;
 
