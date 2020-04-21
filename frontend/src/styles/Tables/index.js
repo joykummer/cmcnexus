@@ -27,7 +27,7 @@ export const TableRow = styled.tr`
   width: 100%;
   text-transform: capitalize;
   :hover {
-    color: red;
+    color: gray;
     cursor: pointer;
   }
   :nth-child(odd) {
@@ -49,4 +49,8 @@ export const ReactTableData = styled.td`
   
   color: ${props => props.children.props.column.Header === "Status" ? 
     props.theme.colors.status[props.children.props.cell.value] : null}}
+  :hover {
+    color: gray;
+    cursor: pointer;
+  }
 `;

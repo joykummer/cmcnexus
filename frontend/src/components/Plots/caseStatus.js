@@ -17,7 +17,7 @@ export default function(props) {
 				label: 'Cases',
 				data: data,
 				backgroundColor: [
-					...props.data.map(entry => theme.colors.status[entry.status])
+					...props.data.map(entry => theme.colorsOpaque.status[entry.status])
 				],
 				borderWidth: 1
 			}]
