@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import { AcceptRejectButton } from "../../styles/Buttons";
+import { RedAddText } from "../../styles/Buttons";
 import {deleteCaseFunction} from "../../store/actions/Cases/deleteCaseAction";
 
 
@@ -16,7 +16,7 @@ export default function DeleteCase(singleCase) {
   return(
     <>
       {
-          <AcceptRejectButton onClick={()=>deleteCaseFunc(singleCase)}>Delete</AcceptRejectButton>
+          <RedAddText onClick={()=>deleteCaseFunc(singleCase)}>Delete</RedAddText>
       }
     </>
 )}

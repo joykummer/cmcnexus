@@ -14,7 +14,10 @@ export const Stripe = styled.div`
 
 export const DetailsHeader = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
   padding: 5px;
+  width: 100%;
 `;
 
 export const DetailsKey = styled.div`

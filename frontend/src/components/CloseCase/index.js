@@ -9,7 +9,6 @@ import {reopenCaseFunction} from "../../store/actions/Cases/reopenCase";
   const CloseButton = styled(RedButton)`
     width: 100px;
     height: 40px;
-    margin: 25px 0px;
     border: none;
     background-color: ${(props) => props.clicked ? "red" : "#009933"};
     transition: all 0.7s ease;

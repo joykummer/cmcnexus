@@ -10,7 +10,14 @@ import {
   HeaderTitle,
 } from "../../styles/BaseContainer";
 import { DetailsKey, DetailsHeader } from "../../styles/Details";
-import {AddButton, EditSaveButton} from "../../styles/Buttons/index"
+import styled from "styled-components";
+import {RedAddText} from "../../styles/Buttons";
+
+const HeaderTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+`;
 
 export default function UserProfile() {
   const user = useSelector((state) => state.auth.user);
@@ -28,7 +35,10 @@ export default function UserProfile() {
 
   return user ? (
     <Container>
-      <HeaderTitle>USER PROFILE</HeaderTitle>
+      <HeaderTitleWrapper>
+        <HeaderTitle>USER PROFILE</HeaderTitle>
+        <RedAddText onClick={onClickHandler}>✎ Edit</RedAddText>
+      </HeaderTitleWrapper>
       <DetailsContainer>
         <DetailsHeader>
           <DetailsKey>First Name</DetailsKey>
@@ -55,7 +65,6 @@ export default function UserProfile() {
             <Time value={user.date_joined ? user.date_joined : ""} format="DD/MM/YYYY" />
         </DetailsHeader>
       </DetailsContainer>
-        <EditSaveButton onClick={onClickHandler}>Edit</EditSaveButton>
     </Container>
   ) : (
     "user not found"
