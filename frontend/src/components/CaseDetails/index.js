@@ -24,6 +24,7 @@ import CloseCase from "../CloseCase";
 import styled from "styled-components";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
+import DeleteCase from "../DeleteCase";
 
 const ButtonContainer = styled.div`
 width: 225px;
@@ -52,6 +53,7 @@ function CaseDetails(props) {
   const redirectHandler = () => {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
     }
+
 
   const caseDetails = props.cases
     ? props.cases.find((file) => file.id === Number(props.match.params.id))
@@ -182,6 +184,9 @@ function CaseDetails(props) {
           <CanI perform={CLOSE_CASE}>
             <CloseCase id={caseDetails} />
           </CanI>
+
+            <DeleteCase singleCase={caseDetails} history={props.history} />
+
           {caseDetails.status === "open" ? (
             <>
               <CanI perform={MATCH_ORGANISATIONS}>
