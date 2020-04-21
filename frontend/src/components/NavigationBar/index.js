@@ -16,7 +16,7 @@ import CanI from '../Permissions';
 import {Empty} from '../../styles/GenericBoxes';
 import {CASES, CASES_ADD, DASHBOARD, ORGANISATIONS, USERPROFILE} from '../Navigation/states';
 import {setNavigationAction} from '../../store/actions/Navigation';
-import {ADD_CASE, VIEW_CASE, VIEW_ORGANISATION} from '../Permissions/permissions';
+import {ADD_CASE, VIEW_CASE, VIEW_DASHBOARD, VIEW_ORGANISATION} from '../Permissions/permissions';
 
 
 function NavigationBar() {
@@ -42,10 +42,12 @@ function NavigationBar() {
       <Logo src={msf_logo} onClick={() => onClickHandler(CASES)}/>
       <OptionsWrapper />
       <Options>
+        <CanI perform={VIEW_DASHBOARD}>
         <NavItem selected={selected===DASHBOARD} onClick={() => onClickHandler(DASHBOARD)}>
           <img src={dashboard} alt="Dashboard" style={{paddingRight: 35, height: 45}}/>
           Dashboard
         </NavItem>
+        </CanI>
         <CanI perform={VIEW_CASE}>
           <NavItem selected={selected===CASES} onClick={() => onClickHandler(CASES)}>
             <img src={folder} alt="Cases" style={{paddingRight: 35, height: 45}}/>
