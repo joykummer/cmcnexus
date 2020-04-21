@@ -49,3 +49,15 @@ export const TwoOptionsButton = styled(RedButton)`
     border: ${(props) => props.clicked ? "1px solid red" : "none"};
     color: ${(props) => props.clicked ? "red" : "white"};
   `;
+
+
+export const RedAddText = styled.div`
+  font-size: 18px;
+  color: red;
+  text-align: right;
+  vertical-align: middle;
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;

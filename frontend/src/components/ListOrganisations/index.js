@@ -32,24 +32,14 @@ import {
   Clear,
 } from "../../styles/SearchesFilters/index";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
+
 import OrganisationTable from '../Tables/organisations';
+import {RedAddText} from "../../styles/Buttons";
 
 const HeaderTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-content: center;
-`;
-
-const AddOrganisation = styled.div`
-  font-size: 18px;
-  color: red;
-  text-align: right;
-  vertical-align: middle;
-  :hover {
-    text-decoration: underline;
-    cursor: pointer;
-    font-weight: bold;
-  }
 `;
 
 function ListOrganisations(props) {
@@ -109,9 +99,9 @@ function ListOrganisations(props) {
       <HeaderTitleWrapper>
       <HeaderTitle>ORGANISATIONS</HeaderTitle>
       <CanI perform={ADD_ORGANISATION}>
-        <AddOrganisation onClick={addOrganisationHandler}>
+        <RedAddText onClick={addOrganisationHandler}>
           + ADD ORGANISATION
-        </AddOrganisation>
+        </RedAddText>
       </CanI>
       </HeaderTitleWrapper>
 

@@ -14,9 +14,16 @@ align-items: center;
 box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
 `;
 
-export const Logo = styled.img`
+export const Title = styled.div`
+font-size: 40px;
+font-weight: 700;
 margin: 30px 0px;
-width: 300px;
+`;
+
+export const Logo = styled.img`
+margin: 20px 0px;
+width: 250px;
+cursor: pointer;
 `;
 
 export const Name = styled.h2`

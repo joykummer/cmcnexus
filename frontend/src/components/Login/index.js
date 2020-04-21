@@ -8,6 +8,7 @@ import {CardBox} from '../../styles/GenericBoxes';
 import {GreyRoundInput} from '../../styles/Inputs';
 import {RedButton} from '../../styles/Buttons';
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
+import propulsion_logo from "../../assets/Propulsion_LogoText_horizontalSwiss_Logo Kopie.png";
 
 
 const Background = styled.div`
@@ -60,6 +61,13 @@ height: 200px;
 margin: 40px;
 `;
 
+export const PropulsionLogo = styled.img`
+position: absolute;
+bottom: 0;
+right: 0;
+align-self: flex-end;
+height: 40px;
+`;
 
 export function Login() {
 	const is_authenticated = useSelector(state => state.auth.is_authenticated)
@@ -101,5 +109,7 @@ export function Login() {
 				<ForgotBox>
 					<Span>Forgot password?</Span>
 				</ForgotBox>
-			</Background>);
+				<PropulsionLogo src={propulsion_logo}/>
+			</Background>
+	);
 }

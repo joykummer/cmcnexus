@@ -7,11 +7,14 @@ import CanI from "../Permissions";
 import { ADD_CASE } from "../Permissions/permissions";
 import ListTable from '../Tables';
 import {ClickLink} from "../../styles/Buttons";
+import {RedAddText} from "../../styles/Buttons";
 
 
 
 function ListCases(props) {
   const dispatch = props.dispatch;
+
+  const statusOptions = ["Requested", "Open", "Closed", "Rejected"];
 
   useEffect(() => {
     dispatch(setNavigationAction(CASES));
@@ -28,9 +31,9 @@ function ListCases(props) {
       <HeaderTitleWrapper>
       <HeaderTitle>CASES</HeaderTitle>
        <CanI perform={ADD_CASE}>
-        <ClickLink onClick={addCaseHandler}>
+        <RedAddText onClick={addCaseHandler}>
           + ADD CASE
-        </ClickLink>
+        </RedAddText>
       </CanI>
       </HeaderTitleWrapper>
       <ListTable/>
