@@ -40,3 +40,13 @@ export const TableData = styled.td`
   max-width: 150px;
   padding: 10px;
 `;
+
+
+export const ReactTableData = styled.td`
+  height: 25px;
+  max-width: 150px;
+  padding: 10px;
+  
+  color: ${props => props.children.props.column.Header === "Status" ? 
+    props.theme.colors.status[props.children.props.cell.value] : null}}
+`;

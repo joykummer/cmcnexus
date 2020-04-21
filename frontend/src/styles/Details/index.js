@@ -30,4 +30,7 @@ export const DetailsValue = styled.div`
 export const StatusDetailsValue = styled.div`
     padding-left: 15px;
     text-transform: capitalize;
+    
+    
+  color: ${props => props.status ? props.theme.colors.status[props.status] : null}}
 `;

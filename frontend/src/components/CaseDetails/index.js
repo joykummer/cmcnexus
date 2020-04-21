@@ -172,7 +172,7 @@ function CaseDetails(props) {
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              <StatusDetailsValue>{caseDetails.status}</StatusDetailsValue>
+              <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Outcome</DetailsKey>
