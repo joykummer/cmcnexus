@@ -10,7 +10,6 @@ export default function DeleteCase(singleCase) {
 
   const deleteCaseFunc = (singleCase) => {
     dispatch(deleteCaseFunction(singleCase.singleCase.id))
-
   };
 
   return(
