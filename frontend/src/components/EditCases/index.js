@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 import countryList from "react-select-country-list";
 import { connect } from "react-redux";
@@ -51,7 +52,6 @@ function EditCases(props) {
   const [sexError, setSexError] = useState("");
   const [countryError, setCountryError] = useState("");
   const [categoriesError, setCategoriesError] = useState("");
-
   const dispatch = props.dispatch;
 
   useEffect(() => {
@@ -145,6 +145,7 @@ function EditCases(props) {
   };
 
   const editCaseHandler = async (e) => {
+    e.preventDefault();
     const isValid = validate();
     if (isValid) {
       const data = {
@@ -159,7 +160,7 @@ function EditCases(props) {
         country: country,
         // categories: categoryIds,
       };
-      const caseId = caseDetails.id;
+      const caseId = caseDetails.id
       dispatch(editCaseFunction(data, caseId));
       props.history.push("/cases/");
     }
@@ -290,7 +291,7 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{categoriesError}</ErrorMessage>
         </DetailsContainer>
-      <EditSaveButton onClick={editCaseHandler}>Save</EditSaveButton>
+      <EditSaveButton onClick={editCaseHandler}>SAVE</EditSaveButton>
     </Container>
   );
 }
