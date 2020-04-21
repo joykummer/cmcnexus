@@ -38,7 +38,6 @@ function AddCase(props) {
   const [patient_id, setPatientId] = useState("");
   const [description, setDescription] = useState("");
   const [history_description, setHistoryDescription] = useState("");
-  const [diagnosis, setDiagnosis] = useState("");
   const [past_medical_history, setMedicalHistory] = useState("");
   const [physical_examination, setPhysicalExamination] = useState("");
   const [investigations, setInvestigations] = useState("");
@@ -49,16 +48,11 @@ function AddCase(props) {
   const [birth_date, setBirthDate] = useState("");
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("");
-  const [location, setLocation] = useState("");
   const countries = countryList().getData();
   const [country, setCountry] = useState("");
   const [categories, setCategories] = useState(["default"]);
   const [categoryIds, setCategoryIds] = useState([]);
   const [titleError, setTitleError] = useState("");
-  const [descriptionError, setDescriptionError] = useState("");
-  const [diagnosisError, setDiagnosisError] = useState("");
-  const [justificationError, setJustificationError] = useState("");
-  const [recommendationError, setRecommendationError] = useState("");
   const [consentError, setConsentError] = useState("");
   const [ageError, setAgeError] = useState("");
   const [sexError, setSexError] = useState("");
@@ -80,10 +74,6 @@ function AddCase(props) {
 
   const validate = () => {
     let titleError = "";
-    let descriptionError = "";
-    let diagnosisError = "";
-    let justificationError = "";
-    let recommendationError = "";
     let consentError = "";
     let ageError = "";
     let sexError = "";
@@ -92,18 +82,6 @@ function AddCase(props) {
 
     if (!title) {
       titleError = "Title cannot be blank";
-    }
-    if (!description) {
-      descriptionError = "Description cannot be blank";
-    }
-    if (!diagnosis) {
-      diagnosisError = "Diagnosis cannot be blank";
-    }
-    if (!justification) {
-      justificationError = "Justification cannot be blank";
-    }
-    if (!recommendation) {
-      recommendationError = "Recommendation cannot be blank";
     }
     if (!consent) {
       consentError = "The patient must consent";
@@ -123,10 +101,6 @@ function AddCase(props) {
 
     if (
       titleError ||
-      descriptionError ||
-      diagnosisError ||
-      justificationError ||
-      recommendationError ||
       consentError ||
       ageError ||
       sexError ||
@@ -134,10 +108,6 @@ function AddCase(props) {
       categoriesError
     ) {
       setTitleError(titleError);
-      setDescriptionError(descriptionError);
-      setDiagnosisError(diagnosisError);
-      setJustificationError(justificationError);
-      setRecommendationError(recommendationError);
       setConsentError(consentError);
       setAgeError(ageError);
       setSexError(sexError);
@@ -158,7 +128,6 @@ function AddCase(props) {
         patient_id: patient_id,
         description: description,
         history_description: history_description,
-        diagnosis: diagnosis,
         past_medical_history: past_medical_history,
         physical_examination: physical_examination,
         investigations: investigations,
@@ -169,7 +138,6 @@ function AddCase(props) {
         birth_date: birth_date,
         age: age,
         sex: sex,
-        location: location,
         country: country,
         categories: categoryIds,
       };
@@ -243,16 +211,6 @@ function AddCase(props) {
         value={history_description}
         required
       />
-           <ErrorMessage>{descriptionError}</ErrorMessage>
-      </Label>
-      <Label>Diagnosis
-      <FieldInputLarge
-        name="diagnosis"
-        onChange={(e) => setDiagnosis(e.target.value)}
-        value={diagnosis}
-        required
-      />
-      <ErrorMessage>{diagnosisError}</ErrorMessage>
       </Label>
       <Label>Past medical history
       <FieldInputLarge
@@ -293,7 +251,6 @@ function AddCase(props) {
         value={justification}
         required
       />
-          <ErrorMessage>{justificationError}</ErrorMessage>
       </Label>
       <Label>Recommendation
       <FieldInputLarge
@@ -302,7 +259,6 @@ function AddCase(props) {
         value={recommendation}
         required
       />
-        <ErrorMessage>{recommendationError}</ErrorMessage>
       </Label>
       <Label>Patient's consent
           <Wrapper>
@@ -352,14 +308,6 @@ function AddCase(props) {
       </BasicDropdown>
       </Label>
       <ErrorMessage>{sexError}</ErrorMessage>
-      <Label>Location
-      <FieldInput
-          name="location"
-          onChange={(e) => setLocation(e.target.value)}
-          value={location}
-          required
-      />
-      </Label>
       <Label>Country
       <BasicDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
           <option value="default" disabled>Please choose here...</option>
