@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { RedButton } from "../../styles/Buttons";
+import { TwoOptionsButton } from "../../styles/Buttons";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import { matchOrganisationsFunction, unmatchOrganisationsFunction } from "../../store/actions/Cases/matchOrganisationsAction";
 import { assignOrganisationsFunction, unassignOrganisationsFunction } from "../../store/actions/Organisations/assignOrganisationsAction";
@@ -25,12 +25,6 @@ import {casesFunction} from "../../store/actions/Cases/casesAction";
   }
   `;
 
-  const MatchAssignButton = styled(RedButton)`
-    width: 150px;
-    background-color: ${(props) => props.clicked ? "red" : "#009933"};
-    transition: all 0.7s ease;
-  `;
-
   const NotAccepted = styled.p`
     color: red;
   `;
@@ -49,10 +43,10 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   };
   return <>{
     isStatus(singleCase, organisation, "matched")
-      ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
+      ? <TwoOptionsButton onClick={unmatch} clicked={true}>Unmatch</TwoOptionsButton>
       : isStatus(singleCase, organisation, "accepted") || isStatus(singleCase, organisation, "assigned")
           ? <NotAccepted>Ready to be assigned.</NotAccepted>
-            : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+            : <TwoOptionsButton onClick={match}>Match</TwoOptionsButton>
 
   }</>;
 }
@@ -66,9 +60,9 @@ function AssignActionable({singleCase, organisation, dispatch}) {
   };
   return <>{
     isStatus(singleCase, organisation, "accepted")
-      ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
+      ? <TwoOptionsButton onClick={assign}>Assign</TwoOptionsButton>
       : isStatus(singleCase, organisation, "assigned")
-        ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
+        ? <TwoOptionsButton onClick={unassign} clicked={true}>Unassign</TwoOptionsButton>
         : <NotAccepted>not matched or accepted.</NotAccepted>
   }</>;
 }

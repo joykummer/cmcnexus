@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import {RedButton} from '../../styles/Buttons'
 
 
@@ -61,10 +60,4 @@ ${props => props.selected ? "font-weight: bold; opacity: 1; color: red;" : ""}
 export const Button = styled(RedButton)`
 margin-bottom: 20px;
 width: 150px; 
-height: 50px; 
-text-transform: uppercase; 
-:hover {
-       cursor: pointer;
-       box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
-   }
 `;

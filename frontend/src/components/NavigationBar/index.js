@@ -6,7 +6,6 @@ import folder from '../../assets/cases.png'
 import organisation from '../../assets/organization.png'
 import msf_logo from '../../assets/MSF_logo_international_small.jpg'
 import userprofile from '../../assets/userprofile.png'
-import addcase from '../../assets/addcase.png'
 import {
   NavigationContainer, Logo, Options,
   Button, NavItem, OptionsWrapper
@@ -14,9 +13,9 @@ import {
 import {logoutAction} from '../../store/actions/Authentication/loginActions';
 import CanI from '../Permissions';
 import {Empty} from '../../styles/GenericBoxes';
-import {CASES, CASES_ADD, DASHBOARD, ORGANISATIONS, USERPROFILE} from '../Navigation/states';
+import {CASES, DASHBOARD, ORGANISATIONS, USERPROFILE} from '../Navigation/states';
 import {setNavigationAction} from '../../store/actions/Navigation';
-import {ADD_CASE, VIEW_CASE, VIEW_DASHBOARD, VIEW_ORGANISATION} from '../Permissions/permissions';
+import {VIEW_CASE, VIEW_DASHBOARD, VIEW_ORGANISATION} from '../Permissions/permissions';
 
 
 function NavigationBar() {

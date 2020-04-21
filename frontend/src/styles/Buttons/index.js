@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const RedButton = styled.button`
   height: 40px;
-  background: #ff0000;
+  background: red;
   padding: 10px;
   border-radius: 7px;
   border: none;
   outline: none;
-  color: #ffffff;
+  color: white;
   margin-right: 15px;
   text-transform: uppercase;
   transition: all 0.7s ease;
@@ -42,3 +42,10 @@ export const ClickLink = styled.div`
     cursor: pointer;
   }
 `;
+
+export const TwoOptionsButton = styled(RedButton)`
+    width: 150px;
+    background-color: ${(props) => props.clicked ? "white" : "red"};
+    border: ${(props) => props.clicked ? "1px solid red" : "none"};
+    color: ${(props) => props.clicked ? "red" : "white"};
+  `;
