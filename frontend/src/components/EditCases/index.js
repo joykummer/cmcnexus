@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 import countryList from "react-select-country-list";
 import { connect } from "react-redux";
@@ -46,7 +47,7 @@ function EditCases(props) {
   const [sexError, setSexError] = useState("");
   const [countryError, setCountryError] = useState("");
   const [categoriesError, setCategoriesError] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const dispatch = props.dispatch;
 
   useEffect(() => {
@@ -140,6 +141,8 @@ function EditCases(props) {
   };
 
   const editCaseHandler = async (e) => {
+    // e.preventDefault();
+    // setLoading(true);
     const isValid = validate();
     if (isValid) {
       const data = {
@@ -155,8 +158,8 @@ function EditCases(props) {
         // categories: categoryIds,
       };
       const caseId = caseDetails.id
-      console.log('data', data);
-      dispatch(editCaseFunction(data, caseId));
+      await dispatch(editCaseFunction(data, caseId));
+      setLoading(false);
       props.history.push("/cases/");
     }
   };
@@ -288,13 +291,12 @@ function EditCases(props) {
       </Label>
           <ErrorMessage>{categoriesError}</ErrorMessage>
         </DetailsContainer>
-      <AddButton onClick={editCaseHandler}>Submit</AddButton>
+      <AddButton onClick={editCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} height={15}/> :  "SUBMIT"}</AddButton>
     </Container>
   );
 }
 
 const mapStateToProps = (state) => {
-    console.log("This is the remix", state)
   return {
     cases: state.cases,
     categories: state.categories,
