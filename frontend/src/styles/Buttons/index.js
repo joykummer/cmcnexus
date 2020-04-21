@@ -32,3 +32,15 @@ export const AcceptRejectButton = styled(RedButton)`
  width: 100px;  
  height: 40px;
 `;
+
+export const ClickLink = styled.div`
+  font-size: 18px;
+  color: red;
+  text-align: right;
+  vertical-align: middle;
+  :hover {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;

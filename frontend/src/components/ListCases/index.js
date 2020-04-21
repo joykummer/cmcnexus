@@ -2,29 +2,13 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES } from "../Navigation/states";
-import { Container, HeaderTitle } from "../../styles/BaseContainer";
+import { Container, HeaderTitle, HeaderTitleWrapper } from "../../styles/BaseContainer";
 import CanI from "../Permissions";
 import { ADD_CASE } from "../Permissions/permissions";
-import styled from "styled-components";
 import ListTable from '../Tables';
+import {ClickLink} from "../../styles/Buttons";
 
-const HeaderTitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-`;
 
-const AddCase = styled.div`
-  font-size: 18px;
-  color: red;
-  text-align: right;
-  vertical-align: middle;
-  :hover {
-    font-weight: bold;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-`;
 
 function ListCases(props) {
   const dispatch = props.dispatch;
@@ -44,9 +28,9 @@ function ListCases(props) {
       <HeaderTitleWrapper>
       <HeaderTitle>CASES</HeaderTitle>
        <CanI perform={ADD_CASE}>
-        <AddCase onClick={addCaseHandler}>
+        <ClickLink onClick={addCaseHandler}>
           + ADD CASE
-        </AddCase>
+        </ClickLink>
       </CanI>
       </HeaderTitleWrapper>
       <ListTable/>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import {EditSaveButton, RedButton} from "../../styles/Buttons";
+import {ClickLink, EditSaveButton, RedButton} from "../../styles/Buttons";
 import {
   Vertical,
   Status,
@@ -22,7 +22,7 @@ import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
 import CloseCase from "../CloseCase";
 import styled from "styled-components";
-import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import {Container, DetailsContainer, HeaderTitle, HeaderTitleWrapper} from "../../styles/BaseContainer";
 import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
 
 const ButtonContainer = styled.div`
@@ -49,7 +49,7 @@ function CaseDetails(props) {
           });
     };
 
-  const redirectHandler = () => {
+  const editCaseHandler = () => {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
     }
 
@@ -61,7 +61,40 @@ function CaseDetails(props) {
     <Container>
       {caseDetails ? (
         <>
+          <HeaderTitleWrapper>
           <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle>
+            <CanI perform={CHANGE_CASE}>
+            <ClickLink onClick={editCaseHandler}>EDIT</ClickLink>
+            </CanI>
+          </HeaderTitleWrapper>
+          <Stripe>Status Details</Stripe>
+          <DetailsContainer>
+            <DetailsHeader>
+              <DetailsKey>Organisations Status</DetailsKey>
+              <StatusDetailsValue>
+              <Vertical>
+              {caseDetails.match_stats ?
+                caseDetails.match_stats.map(stat => {
+                  return (
+                    <Horizontal key={stat.status}>
+                      <Status>{stat.status}</Status>
+                      <b>{stat.count}</b>
+                    </Horizontal>
+                    );
+                  })
+                : null}
+              </Vertical>
+              </StatusDetailsValue>
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Status</DetailsKey>
+              <StatusDetailsValue>{caseDetails.status}</StatusDetailsValue>
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Outcome</DetailsKey>
+              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
+            </DetailsHeader>
+          </DetailsContainer>
           <Stripe>Patient's details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
@@ -148,34 +181,6 @@ function CaseDetails(props) {
               <DetailsValue>{caseDetails.recommendation}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-          <Stripe>Status Details</Stripe>
-          <DetailsContainer>
-            <DetailsHeader>
-              <DetailsKey>Organisations Status</DetailsKey>
-              <StatusDetailsValue>
-              <Vertical>
-              {caseDetails.match_stats ?
-                caseDetails.match_stats.map(stat => {
-                  return (
-                    <Horizontal key={stat.status}>
-                      <Status>{stat.status}</Status>
-                      <b>{stat.count}</b>
-                    </Horizontal>
-                    );
-                  })
-                : null}
-              </Vertical>
-              </StatusDetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
-              <DetailsKey>Status</DetailsKey>
-              <StatusDetailsValue>{caseDetails.status}</StatusDetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
-              <DetailsKey>Outcome</DetailsKey>
-              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
-            </DetailsHeader>
-          </DetailsContainer>
           <CanI perform={VALIDATE_CASE}>
             <Validation id={caseDetails.id} />
           </CanI>
@@ -194,9 +199,6 @@ function CaseDetails(props) {
                 <AcceptCase singleCase={caseDetails} />
                 <RejectCase singleCase={caseDetails} />
                 </ButtonContainer>
-              </CanI>
-              <CanI perform={CHANGE_CASE}>
-               <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
               </CanI>
             </>
           ) : null}
