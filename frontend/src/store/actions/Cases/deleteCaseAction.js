@@ -1,19 +1,17 @@
 import Axios from "../../../axios/authenticated";
 import {DELETE_CASE} from "../actionTypes";
-import {casesFunction} from "./casesAction";
 
-const deleteCaseAction = (file) => {
+const deleteCaseAction = (caseId) => {
   return {
     type: DELETE_CASE,
-    payload: file,
+    payload: caseId,
   };
 };
 
-export const deleteCaseFunction = (caseId, history) => async (dispatch) => {
+export const deleteCaseFunction = (caseId) => async (dispatch) => {
   try {
-    const response = await Axios.delete(`cases/${caseId}/`);
-    dispatch(deleteCaseAction(response.data));
-    dispatch(casesFunction());
+    await Axios.delete(`cases/${caseId}/`);
+    dispatch(deleteCaseAction(caseId));
   } catch (e) {
     return e;
   }
