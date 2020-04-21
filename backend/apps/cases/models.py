@@ -38,11 +38,11 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         ("English", "English"),
         ("Spanish", "Spanish")
     )
-    NATURE_CHOICES = {
+    NATURE_CHOICES = (
         ("Emergency", "Emergency"),
         ("Urgent", "Urgent"),
         ("Life changing", "Life changing")
-    }
+    )
 
     title = models.CharField(max_length=100)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=10, default='')

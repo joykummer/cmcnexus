@@ -99,7 +99,7 @@ class RejectCaseView(UpdateAPIView):
 
 class MatchOrganisation(GenericAPIView):
     queryset = Case
-    serializer_class = CaseSerializer
+    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, MatchOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
@@ -124,7 +124,7 @@ class MatchOrganisation(GenericAPIView):
 
 class AssignOrganisation(GenericAPIView):
     queryset = Case
-    serializer_class = CaseSerializer
+    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, AssignOrganisationPermission]
     lookup_url_kwarg = 'case_id'
 
