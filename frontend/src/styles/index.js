@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     * {
     margin: 0;
     padding: 0;
-    font-family: Helvetica, sans-serif;
+    font-family: Trebuchet, sans-serif;
     font-size: 16px;
     box-sizing: border-box;
     }
@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
 export const theme = {
 	colors: {
 		status: {
-			created:"#00f",
+			requested: "#00f",
 			open: "#00b300",
 			warning: "#ffbf00",
 			closed: "#000",

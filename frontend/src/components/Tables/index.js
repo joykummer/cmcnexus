@@ -8,7 +8,7 @@ import {useHistory} from 'react-router-dom';
 import {
 	Table,
 	TableBody,
-	TableData,
+	ReactTableData,
 	TableHeader,
 	TableHeaderRow,
 	TableHeaderWrapper,
@@ -252,7 +252,7 @@ export default () => {
 				return (
 					<TableRow {...row.getRowProps({onClick: () => history.push(`details/${row.values.id}/`)})}>
 						{row.cells.map(cell => {
-							return <TableData  {...cell.getCellProps()} >{cell.render('Cell')}</TableData>
+							return <ReactTableData  {...cell.getCellProps()} >{cell.render('Cell')}</ReactTableData>
 						})}
 					</TableRow>
 				)
