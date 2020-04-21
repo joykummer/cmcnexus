@@ -16,7 +16,8 @@ import {
   MATCH_ORGANISATIONS,
   UPDATE_MATCH,
   CHANGE_CASE,
-  CLOSE_CASE
+  CLOSE_CASE,
+  DELETE_CASE
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
@@ -184,9 +185,9 @@ function CaseDetails(props) {
           <CanI perform={CLOSE_CASE}>
             <CloseCase id={caseDetails} />
           </CanI>
-
-            <DeleteCase singleCase={caseDetails} history={props.history} />
-
+          <CanI perform={DELETE_CASE}>
+            <DeleteCase singleCase={caseDetails} />
+          </CanI>
           {caseDetails.status === "open" ? (
             <>
               <CanI perform={MATCH_ORGANISATIONS}>
