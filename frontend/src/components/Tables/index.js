@@ -3,6 +3,7 @@ import {useFilters, useSortBy, useTable} from 'react-table';
 import matchSorter from 'match-sorter';
 import {useDispatch, useSelector} from 'react-redux';
 import {casesFunction} from '../../store/actions/Cases/casesAction';
+import {useHistory} from 'react-router-dom';
 
 import {
 	Table,
@@ -74,6 +75,7 @@ function SelectColumnFilter({
 }
 
 export default () => {
+	const history = useHistory();
 	const dispatch = useDispatch()
 	const cases = useSelector(state => state.cases)
 	const tableCases = React.useMemo(() => {
@@ -191,7 +193,7 @@ export default () => {
 			{rows.map((row, i) => {
 				prepareRow(row)
 				return (
-					<TableRow {...row.getRowProps({onClick: () => console.log(row.values.id)})}>
+					<TableRow {...row.getRowProps({onClick: () => history.push(`details/${row.values.id}/`)})}>
 						{row.cells.map(cell => {
 							return <TableData  {...cell.getCellProps()}>{cell.render('Cell')}</TableData>
 						})}
