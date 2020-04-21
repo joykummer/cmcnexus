@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const RedButton = styled.button`
+  height: 40px;
   background: #ff0000;
-  border-radius: 5px;
   padding: 10px;
+  border-radius: 7px;
+  border: none;
   outline: none;
   color: #ffffff;
+  margin-right: 15px;
   text-transform: uppercase;
+  transition: all 0.7s ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,26 +22,20 @@ export const RedButton = styled.button`
 
 export const AddButton = styled(RedButton)`
   width: 125px;
-  height: 40px;
-  margin-bottom: 50px;
 `;
 
 export const EditSaveButton = styled(RedButton)`
   width: 75px;
-  height: 40px;
-  margin-bottom: 50px;
 `;
 
 export const AcceptRejectButton = styled(RedButton)`
  width: 100px;  
- height: 40px;
 `;
 
 export const ClickLink = styled.div`
   font-size: 18px;
   color: red;
   text-align: right;
-  vertical-align: middle;
   :hover {
     font-weight: bold;
     text-decoration: underline;

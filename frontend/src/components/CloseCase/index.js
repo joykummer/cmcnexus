@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { RedButton } from "../../styles/Buttons";
 import styled from "styled-components";
 import {closeCaseFunction} from "../../store/actions/Cases/closeCase";
@@ -8,15 +8,7 @@ import {reopenCaseFunction} from "../../store/actions/Cases/reopenCase";
 
   const CloseButton = styled(RedButton)`
     width: 100px;
-    height: 40px;
-    margin: 25px 0px;
-    border: none;
     background-color: ${(props) => props.clicked ? "red" : "#009933"};
-    transition: all 0.7s ease;
-    :hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
   `;
 
 

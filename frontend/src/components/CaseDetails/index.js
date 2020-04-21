@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import {ClickLink, EditSaveButton, RedButton} from "../../styles/Buttons";
+import {ClickLink, RedButton} from "../../styles/Buttons";
 import {
   Vertical,
   Status,
@@ -26,9 +26,7 @@ import {Container, DetailsContainer, HeaderTitle, HeaderTitleWrapper} from "../.
 import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
 
 const ButtonContainer = styled.div`
-width: 225px;
 display: flex;
-justify-content: space-between; 
 `;
 
 const Match = styled(RedButton)`
@@ -181,11 +179,9 @@ function CaseDetails(props) {
               <DetailsValue>{caseDetails.recommendation}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
+          <ButtonContainer>
           <CanI perform={VALIDATE_CASE}>
             <Validation id={caseDetails.id} />
-          </CanI>
-          <CanI perform={CLOSE_CASE}>
-            <CloseCase id={caseDetails} />
           </CanI>
           {caseDetails.status === "open" ? (
             <>
@@ -195,13 +191,15 @@ function CaseDetails(props) {
                 </Match>
               </CanI>
               <CanI perform={UPDATE_MATCH}>
-                <ButtonContainer>
                 <AcceptCase singleCase={caseDetails} />
                 <RejectCase singleCase={caseDetails} />
-                </ButtonContainer>
               </CanI>
+          <CanI perform={CLOSE_CASE}>
+            <CloseCase id={caseDetails} />
+          </CanI>
             </>
           ) : null}
+          </ButtonContainer>
         </>
       ) : (
         <div>No case to show</div>

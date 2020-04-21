@@ -27,13 +27,8 @@ import {casesFunction} from "../../store/actions/Cases/casesAction";
 
   const MatchAssignButton = styled(RedButton)`
     width: 150px;
-    border: none;
-    background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
+    background-color: ${(props) => props.clicked ? "red" : "#009933"};
     transition: all 0.7s ease;
-    :hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
   `;
 
   const NotAccepted = styled.p`
