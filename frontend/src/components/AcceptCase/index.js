@@ -1,5 +1,4 @@
 import React from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptCaseByOrgFunction, unacceptCaseByOrgFunction } from "../../store/actions/Organisations/acceptCaseAction";
 import { AcceptRejectButton } from "../../styles/Buttons";

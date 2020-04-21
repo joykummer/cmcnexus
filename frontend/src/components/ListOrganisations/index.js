@@ -1,38 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
-import {
-  searchNameFunction,
-  searchTagFunction,
-} from "../../store/actions/Organisations/searchOrganisationsAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { ORGANISATIONS } from "../Navigation/states";
 import { ADD_ORGANISATION } from "../Permissions/permissions";
 import CanI from "../Permissions";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
-import { useHistory } from "react-router-dom";
-import {
-  Table,
-  TableBody,
-  TableData,
-  TableHeader,
-  TableHeaderRow,
-  TableHeaderWrapper,
-  TableRow,
-} from "../../styles/Tables";
-import {
-  SearchContainer,
-  SearchWrapper,
-  SearchInput,
-  SearchButton,
-  Filter,
-  Card,
-  Wrapper,
-  Clear,
-} from "../../styles/SearchesFilters/index";
 import { Container, HeaderTitle } from "../../styles/BaseContainer";
-
 import OrganisationTable from '../Tables/organisations';
 import {RedAddText} from "../../styles/Buttons";
 
@@ -43,11 +18,8 @@ const HeaderTitleWrapper = styled.div`
 `;
 
 function ListOrganisations(props) {
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [tag, setTag] = useState("");
   const dispatch = props.dispatch;
-  const history = useHistory();
+
 
   useEffect(() => {
     dispatch(setNavigationAction(ORGANISATIONS));
@@ -55,43 +27,16 @@ function ListOrganisations(props) {
     dispatch(categoriesFunction());
   }, [dispatch]);
 
-  const organisationDetailsHandler = (id) => {
-    history.push({
-      pathname: `/organisations/details/${id}/`,
-    });
-  };
-
-  const headers = ["Name", "Category", "Tag"];
-
   useEffect(() => {
     dispatch(setNavigationAction(ORGANISATIONS));
     dispatch(organisationsFunction());
     dispatch(categoriesFunction());
   }, [dispatch]);
 
-  const searchButtonHandler = (e) => {
-    e.preventDefault();
-    if (name) {
-      const query = {
-        name: name,
-      };
-      props.dispatch(searchNameFunction(query));
-    }
-    if (tag) {
-      const query = {
-        tag: tag,
-      };
-      props.dispatch(searchTagFunction(query));
-    }
-  };
 
   const addOrganisationHandler = (e) => {
     e.preventDefault();
     props.history.push("/organisations/add/");
-  };
-
-  const clearSearchHandler = () => {
-    window.location.reload();
   };
 
   return (
@@ -104,7 +49,6 @@ function ListOrganisations(props) {
         </RedAddText>
       </CanI>
       </HeaderTitleWrapper>
-
       <OrganisationTable />
     </Container>
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AcceptRejectButton } from "../../styles/Buttons";
-import { rejectCaseFunction } from "../../store/actions/Cases/rejectCaseAction";
 import {rejectCaseByOrgFunction, unrejectCaseByOrgFunction} from "../../store/actions/Organisations/rejectByOrgAction";
 
 

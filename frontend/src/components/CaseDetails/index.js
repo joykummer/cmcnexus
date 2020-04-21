@@ -2,10 +2,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import {EditSaveButton, RedAddText, RedButton} from "../../styles/Buttons";
+import {RedAddText, RedButton} from "../../styles/Buttons";
 import {
-  Vertical,
-  Status,
   Horizontal,
 } from "./styles";
 import CanI from "../Permissions";
@@ -36,10 +34,6 @@ import {
   TableHeaderWrapper,
   TableRow
 } from "../../styles/Tables";
-
-const ButtonContainer = styled.div`
-display: flex;
-`;
 
 const StatusButtonsContainer = styled.div`
   display: flex;
@@ -85,7 +79,7 @@ function CaseDetails(props) {
 
   const editCaseHandler = () => {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
-    }
+    };
 
   const caseDetails = props.cases
     ? props.cases.find((file) => file.id === Number(props.match.params.id))
