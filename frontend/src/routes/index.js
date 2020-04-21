@@ -27,12 +27,14 @@ import EditOrganisation from '../components/EditOrganisation';
 import PermissionDenied from "../components/PermissionDenied";
 import EditCases from "../components/EditCases";
 import Dashboard from "../components/Dashboard";
+import TestTable from '../components/Tables';
 
 
 export default function Routes() {
   return (
     <Router>
       <Switch>
+        <Route  path="/testtable/" component={TestTable}/>
         <Route path='/login' component={Login}/>
         <PrivateRoute path='/404' component={UnderConstruction}/>
 

@@ -12,8 +12,7 @@ import { Container, HeaderTitle } from "../../styles/BaseContainer";
 
 const Wrapper = styled.div`
 	height: 100%;
-	width: 100%;
-	max-width: 1200px;
+	max-width: 700px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;

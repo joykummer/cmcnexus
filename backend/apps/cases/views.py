@@ -20,6 +20,7 @@ class ListCaseView(ListAPIView):
     queryset = Case.objects.none()
     permission_classes = [CustomDjangoModelPermission]
     filter_backends = [ObjectPermissionsFilter]
+    ordering = ['-created']
 
     def get_serializer_class(self):
         return get_general_or_medical_info(self.request)

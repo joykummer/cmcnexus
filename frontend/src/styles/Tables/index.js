@@ -14,7 +14,7 @@ export const TableHeaderWrapper = styled.thead``;
 export const TableHeader = styled.th`
   height: 40px;
   text-align: left;
-    padding: 10px;
+    padding: 10px 0;
 `;
 
 export const TableHeaderRow = styled.tr``;
