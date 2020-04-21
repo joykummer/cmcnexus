@@ -1,5 +1,6 @@
 import Axios from "../../../axios/authenticated";
 import { ADD_CASE } from "../actionTypes";
+import {casesFunction} from "./casesAction";
 
 export const addCaseAction = (cases) => {
   return {
@@ -11,6 +12,7 @@ export const addCaseAction = (cases) => {
 export const addCaseFunction = (data) => async (dispatch) => {
   try {
     const response = await Axios.post("cases/add/", data);
+    dispatch(casesFunction())
     dispatch(addCaseAction(response.data));
   } catch (e) {
     return (e)
