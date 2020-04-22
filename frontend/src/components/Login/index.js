@@ -2,10 +2,8 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import styled from 'styled-components';
-
 import {login} from '../../store/actions/Authentication/loginActions';
 import isEmail from '../../helpers/isEmail';
-
 import {CardBox} from '../../styles/GenericBoxes';
 import {GreyRoundInput} from '../../styles/Inputs';
 import {RedButton} from '../../styles/Buttons';

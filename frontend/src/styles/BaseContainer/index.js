@@ -17,6 +17,12 @@ export const HeaderTitle = styled.div`
   padding-bottom: 15px;
 `;
 
+export const HeaderTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+`;
+
 export const DetailsContainer = styled.div`
   height: auto;
   padding: 25px;

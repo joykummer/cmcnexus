@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { RedButton } from "../../styles/Buttons";
+import { TwoOptionsButton, RedButton } from "../../styles/Buttons";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import { matchOrganisationsFunction, unmatchOrganisationsFunction } from "../../store/actions/Cases/matchOrganisationsAction";
 import { assignOrganisationsFunction, unassignOrganisationsFunction } from "../../store/actions/Organisations/assignOrganisationsAction";
@@ -57,13 +57,13 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   };
   const getButton = () => {
     if (isStatus(singleCase, organisation, "matched")) {
-      return <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
+      return <TwoOptionsButton onClick={unmatch} clicked={true}>Unmatch</TwoOptionsButton>
     } else if (isStatus(singleCase, organisation, "accepted")) {
-      return <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
+      return <TwoOptionsButton onClick={unmatch} clicked={true}>Unmatch</TwoOptionsButton>
     } else if (isStatus(singleCase, organisation, "assigned")) {
       return <Green>Case assigned.</Green>
     } else {
-      return <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+      return <TwoOptionsButton onClick={match}>Match</TwoOptionsButton>
     }
   }
 
@@ -81,9 +81,9 @@ function AssignActionable({singleCase, organisation, dispatch}) {
   };
   const getButton = () => {
     if (isStatus(singleCase, organisation, "accepted")) {
-      return <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
+      return <TwoOptionsButton onClick={assign}>Assign</TwoOptionsButton>
     } else if (isStatus(singleCase, organisation, "assigned")) {
-      return <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
+      return <TwoOptionsButton onClick={unassign} clicked={true}>Unassign</TwoOptionsButton>
     } else if (isStatus(singleCase, organisation, "matched")) {
       return <Red>Case not accepted.</Red>
     } else {

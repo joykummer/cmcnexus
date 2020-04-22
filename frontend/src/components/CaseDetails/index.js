@@ -2,10 +2,8 @@ import React, { useEffect } from "react";
 import {connect} from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import {EditSaveButton, RedAddText, RedButton} from "../../styles/Buttons";
+import {RedAddText, RedButton} from "../../styles/Buttons";
 import {
-  Vertical,
-  Status,
   Horizontal,
 } from "./styles";
 import CanI from "../Permissions";
@@ -23,7 +21,7 @@ import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
 import CloseCase from "../CloseCase";
 import styled from "styled-components";
-import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import {Container, DetailsContainer, HeaderTitle, HeaderTitleWrapper} from "../../styles/BaseContainer";
 import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
 import DeleteCase from "../DeleteCase";
 import {Empty} from "../../styles/GenericBoxes";
@@ -36,12 +34,6 @@ import {
   TableHeaderWrapper,
   TableRow
 } from "../../styles/Tables";
-
-const HeaderTitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-`;
 
 const StatusButtonsContainer = styled.div`
   display: flex;
@@ -90,9 +82,9 @@ function CaseDetails(props) {
           });
     };
 
-  const redirectHandler = () => {
+  const editCaseHandler = () => {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
-    }
+    };
 
 
   return (
@@ -101,10 +93,9 @@ function CaseDetails(props) {
         <>
           <HeaderTitleWrapper>
             <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle>
-
             <Horizontal>
               <CanI perform={CHANGE_CASE}>
-               <RedAddText onClick={redirectHandler}>✎ Edit</RedAddText>
+               <RedAddText onClick={editCaseHandler}>✎ Edit</RedAddText>
               </CanI>
               <CanI perform={DELETE_CASE}>
                 <CanI perform={CHANGE_CASE}>
@@ -116,7 +107,6 @@ function CaseDetails(props) {
               </CanI>
             </Horizontal>
           </HeaderTitleWrapper>
-
           <Stripe>Status</Stripe>
           <DetailsContainer>
             <DetailsHeader>
@@ -250,7 +240,6 @@ function CaseDetails(props) {
               </DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-
           <Stripe>Medical details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
@@ -282,7 +271,6 @@ function CaseDetails(props) {
               <DetailsValue>{caseDetails.recommendation}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-
         </>
       ) : (
         <div>No case to show</div>

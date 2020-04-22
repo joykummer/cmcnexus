@@ -2,15 +2,9 @@ import React, {useEffect, useState} from 'react';
 import Time from "react-time";
 import { useDispatch } from 'react-redux';
 import { editUser } from "../../store/actions/Authentication/editUserActions";
-
-import {
-  Button
-} from './style';
-
 import styled from 'styled-components';
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {CardBox} from '../../styles/GenericBoxes';
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {USERPROFILE} from '../Navigation/states';
 import {EditSaveButton} from "../../styles/Buttons";
@@ -27,17 +21,6 @@ height: 100%;
 background: #ebebeb;
 `;
 
-const Rectangle = styled(CardBox)`
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: center;
-max-width: 850px;
-width: 80%;
-margin: 40px;
-padding: 40px;
-`;
-
 const Column = styled.div`
 display: flex;
 justify-content: flex-start;
@@ -49,16 +32,6 @@ display: flex;
 justify-content: flex-start;
 width: 30%;
 min-width: 40px;
-`;
-
-const User = styled.div`
-display: flex;
-justify-content: center;
-border-bottom: 3px solid #FF0000;
-font-size: 35px;
-line-height: 56px;
-color: #000000;
-padding: 0 10px;
 `;
 
 const GeneralElements = styled.div`
@@ -76,14 +49,6 @@ const MissingElements = styled.div`
 color: red;
 font-weight: bold;
 `;
-
-const InfoWrapper = styled.div`
-display: flex;
-flex-direction: column;
-width: 100%;
-padding: 30px;
-`;
-
 
 export default function EditUserProfile() {
 	const user = useSelector(state => state.auth.user);
