@@ -66,5 +66,5 @@ ${props => props.selected ? "font-weight: bold; opacity: 1; color: red;" : ""}
 
 export const Button = styled(RedButton)`
 margin-bottom: 20px;
-width: 150px; 
+width: 125px; 
 `;
