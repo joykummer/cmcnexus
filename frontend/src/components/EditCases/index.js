@@ -124,7 +124,7 @@ function EditCases(props) {
 
   const editCaseHandler = async (e) => {
     e.preventDefault();
-    //setLoading(true);
+    setLoading(true);
     const isValid = validate();
     if (isValid) {
       const data = {
@@ -150,9 +150,9 @@ function EditCases(props) {
       };
       const caseId = caseDetails.id;
       await dispatch(editCaseFunction(data, caseId));
-      //setLoading(false);
       props.history.push("/cases/");
     }
+    setLoading(false);
   };
 
 
