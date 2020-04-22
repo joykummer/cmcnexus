@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 
 const ErrorMessage = styled.div`
   font-size: 10px;
-  color: red;git
+  color: red;
 `;
 
 const Checkbox = styled.input`
@@ -58,7 +58,7 @@ function AddCase(props) {
   const [sexError, setSexError] = useState("");
   const [countryError, setCountryError] = useState("");
   const [categoriesError, setCategoriesError] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const dispatch = props.dispatch;
 
   useEffect(() => {

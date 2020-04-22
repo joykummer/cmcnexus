@@ -26,6 +26,7 @@ export const AddButton = styled(RedButton)`
 
 export const EditSaveButton = styled(RedButton)`
   width: 75px;
+  height: auto; 
 `;
 
 export const AcceptRejectButton = styled(RedButton)`
