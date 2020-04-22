@@ -77,7 +77,6 @@ function CaseDetails(props) {
   const partnership = Boolean(props.user && props.user.organisation && caseDetails)
       ? props.user.organisation.partnered_cases.find(cse => cse.case === caseDetails.id) : null;
   const partnership_status = partnership ? partnership.status : null;
-  console.log(caseDetails)
 
   useEffect(() => {
     dispatch(casesFunction());
@@ -126,7 +125,7 @@ function CaseDetails(props) {
                 caseDetails.status === "closed" ?
                       <CloseReason>{caseDetails.closing_reason}</CloseReason>
                     : null
-                  }
+                }
               <Empty/>
               <StatusButtonsContainer>
                 {caseDetails.status === "requested" ? (
