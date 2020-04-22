@@ -321,7 +321,7 @@ function EditCases(props) {
             <Checkbox
               type="checkbox"
               name="consent"
-              onChnage ={(e) => setConsent(false)}
+              onChange ={(e) => setConsent(false)}
               value="checked"
               required
               defaultChecked={caseDetails.consent} 
