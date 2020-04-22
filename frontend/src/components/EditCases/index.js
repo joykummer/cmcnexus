@@ -52,7 +52,6 @@ function EditCases(props) {
   const [current_treatment, setCurrentTreatment] = useState(caseDetails.current_treatment);
   const [justification, setJustification] = useState(caseDetails.justification);
   const [recommendation, setRecommendation] = useState(caseDetails.recommendation);
-  const [consent, setConsent] = useState(true);
   const [birth_date, setBirthDate] = useState(caseDetails.birth_date);
   const [age, setAge] = useState(caseDetails.age);
   const [sex, setSex] = useState(caseDetails.sex);
@@ -90,7 +89,6 @@ function EditCases(props) {
     let descriptionError = "";
     let justificationError = "";
     let recommendationError = "";
-    let consentError = "";
     let ageError = "";
     let sexError = "";
     let countryError = "";
@@ -111,9 +109,6 @@ function EditCases(props) {
     }
     if (!recommendation) {
       recommendationError = "Recommendation cannot be blank";
-    }
-    if (!consent) {
-      consentError = "The patient must consent";
     }
     if (!age) {
       ageError = "Age must be disclosed";
@@ -174,7 +169,6 @@ function EditCases(props) {
         current_treatment: current_treatment,
         justification: justification,
         recommendation: recommendation,
-        consent: consent,
         birth_date: birth_date,
         age: age,
         sex: sex,
@@ -316,23 +310,6 @@ function EditCases(props) {
       />
         <ErrorMessage>{recommendationError}</ErrorMessage>
       </Label>
-      <Label>Patient's consent
-          <Wrapper>
-            <Checkbox
-              type="checkbox"
-              name="consent"
-              onChange ={(e) => setConsent(false)}
-              value="checked"
-              required
-              defaultChecked={caseDetails.consent} 
-            />
-            <Text>
-              By ticking this box, I confirm that informed consent has been
-              obtained from the patient.
-            </Text>
-          </Wrapper>
-          <ErrorMessage>{consentError}</ErrorMessage>
-      </Label>
       <Label>Birth date
       <FieldInput
         name="birth_date"
@@ -387,25 +364,6 @@ function EditCases(props) {
       </BasicDropdown>
       <ErrorMessage>{countryError}</ErrorMessage>
         </Label>
-        <Label>
-          Category
-          <CategoryDropdown
-            value={categories}
-            onChange={setCategoryHandler}
-            multiple
-          >
-            {props.categories
-              ? props.categories.map((category) => {
-                  return (
-                    <option key={category.id} id={category.id}>
-                      {category.name}
-                    </option>
-                  );
-                })
-              : null}
-          </CategoryDropdown>
-        </Label>
-          <ErrorMessage>{countryError}</ErrorMessage>
       <Label>Category
       <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
         {props.categories
