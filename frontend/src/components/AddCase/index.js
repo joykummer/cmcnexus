@@ -137,9 +137,9 @@ function AddCase(props) {
         categories: categoryIds,
       };
       await dispatch(addCaseFunction(data));
-      setLoading(false);
       props.history.push("/cases/");
     }
+    setLoading(false);
   };
 
   return (

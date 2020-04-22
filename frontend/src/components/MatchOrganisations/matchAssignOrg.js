@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { TwoOptionsButton } from "../../styles/Buttons";
+import { TwoOptionsButton, RedButton } from "../../styles/Buttons";
 import { organisationsFunction } from "../../store/actions/Organisations/organisationsAction";
 import { matchOrganisationsFunction, unmatchOrganisationsFunction } from "../../store/actions/Cases/matchOrganisationsAction";
 import { assignOrganisationsFunction, unassignOrganisationsFunction } from "../../store/actions/Organisations/assignOrganisationsAction";
@@ -25,7 +25,21 @@ import {casesFunction} from "../../store/actions/Cases/casesAction";
   }
   `;
 
-  const NotAccepted = styled.p`
+  const MatchAssignButton = styled(RedButton)`
+    width: 150px;
+    border: none;
+    background-color: ${(props) => props.clicked ? "#e60000" : "#009933"};
+    transition: all 0.7s ease;
+    :hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+  `;
+
+  const Red = styled.p`
+    color: red;
+  `;
+  const Green = styled.p`
     color: red;
   `;
 
@@ -41,13 +55,20 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   const unmatch = () => {
     dispatch(unmatchOrganisationsFunction(singleCase.id, organisation.id));
   };
-  return <>{
-    isStatus(singleCase, organisation, "matched")
-      ? <TwoOptionsButton onClick={unmatch} clicked={true}>Unmatch</TwoOptionsButton>
-      : isStatus(singleCase, organisation, "accepted") || isStatus(singleCase, organisation, "assigned")
-          ? <NotAccepted>Ready to be assigned.</NotAccepted>
-            : <TwoOptionsButton onClick={match}>Match</TwoOptionsButton>
+  const getButton = () => {
+    if (isStatus(singleCase, organisation, "matched")) {
+      return <TwoOptionsButton onClick={unmatch} clicked={true}>Unmatch</TwoOptionsButton>
+    } else if (isStatus(singleCase, organisation, "accepted")) {
+      return <TwoOptionsButton onClick={unmatch} clicked={true}>Unmatch</TwoOptionsButton>
+    } else if (isStatus(singleCase, organisation, "assigned")) {
+      return <Green>Case assigned.</Green>
+    } else {
+      return <TwoOptionsButton onClick={match}>Match</TwoOptionsButton>
+    }
+  }
 
+  return <>{
+    getButton()
   }</>;
 }
 
@@ -58,12 +79,20 @@ function AssignActionable({singleCase, organisation, dispatch}) {
   const unassign = () => {
     dispatch(unassignOrganisationsFunction(singleCase.id, organisation.id));
   };
+  const getButton = () => {
+    if (isStatus(singleCase, organisation, "accepted")) {
+      return <TwoOptionsButton onClick={assign}>Assign</TwoOptionsButton>
+    } else if (isStatus(singleCase, organisation, "assigned")) {
+      return <TwoOptionsButton onClick={unassign} clicked={true}>Unassign</TwoOptionsButton>
+    } else if (isStatus(singleCase, organisation, "matched")) {
+      return <Red>Case not accepted.</Red>
+    } else {
+      return <Red>Case not matched.</Red>
+    }
+  }
+
   return <>{
-    isStatus(singleCase, organisation, "accepted")
-      ? <TwoOptionsButton onClick={assign}>Assign</TwoOptionsButton>
-      : isStatus(singleCase, organisation, "assigned")
-        ? <TwoOptionsButton onClick={unassign} clicked={true}>Unassign</TwoOptionsButton>
-        : <NotAccepted>not matched or accepted.</NotAccepted>
+    getButton()
   }</>;
 }
 

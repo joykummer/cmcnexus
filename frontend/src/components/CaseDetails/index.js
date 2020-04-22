@@ -70,8 +70,6 @@ function CaseDetails(props) {
   const partnership = Boolean(props.user && props.user.organisation && caseDetails)
       ? props.user.organisation.partnered_cases.find(cse => cse.case === caseDetails.id) : null;
   const partnership_status = partnership ? partnership.status : null;
-  console.log(Boolean(props.user && props.user.organisation && caseDetails))
-  console.log(caseDetails, partnership, partnership_status)
 
   useEffect(() => {
     dispatch(casesFunction());

@@ -11,14 +11,14 @@ from apps.cases.permissions import ValidatePermission, MatchOrganisationPermissi
 from apps.cases.models import Case, Partnership
 from apps.cases.permissions import ClosePermission, RejectPermission
 from apps.cases.serializers import CaseSerializer, get_general_or_medical_info, GeneralInfoSerializer
-from apps.helpers.permissions import CustomDjangoModelPermission
+from apps.helpers.permissions import CustomDjangoObjectPermission
 from apps.cases.serializers import CreateCaseSerializer
 from apps.organisations.models import Organisation
 
 
 class ListCaseView(ListAPIView):
     queryset = Case.objects.none()
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoObjectPermission]
     filter_backends = [ObjectPermissionsFilter]
     ordering = ['-created']
 
@@ -34,7 +34,7 @@ class ListCaseView(ListAPIView):
 class CreateCaseView(CreateAPIView):
     queryset = Case.objects.none()
     serializer_class = CreateCaseSerializer
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoObjectPermission]
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
@@ -42,7 +42,7 @@ class CreateCaseView(CreateAPIView):
 
 class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
     queryset = Case.objects.all()
-    permission_classes = [CustomDjangoModelPermission]
+    permission_classes = [CustomDjangoObjectPermission]
     lookup_url_kwarg = 'id'
 
     def get_serializer_class(self):
@@ -109,7 +109,9 @@ class MatchOrganisation(GenericAPIView):
         for organisation_id in organisation_ids:
             Partnership(case_id=case.id, organisation_id=organisation_id).save()
             organisation_members = Organisation.objects.get(pk=organisation_id).member.all()
-            assign_perm("view_case", organisation_members, case)
+            for member in organisation_members:
+                if not member.has_perm("view_case", case):
+                    assign_perm("view_case", member, case)
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
@@ -118,7 +120,9 @@ class MatchOrganisation(GenericAPIView):
         for organisation_id in organisation_ids:
             Partnership.objects.get(case_id=case.id, organisation_id=organisation_id).delete()
             organisation_members = Organisation.objects.get(pk=organisation_id).member.all()
-            remove_perm("view_case", organisation_members, case)
+            for member in organisation_members:
+                if member.has_perm("view_case", case):
+                    remove_perm("view_case", member, case)
         return Response(self.get_serializer(case).data)
 
 

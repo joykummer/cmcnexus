@@ -106,9 +106,6 @@ export function Login() {
 						</Controls>
 					</form>
 				</Card>
-				<ForgotBox>
-					<Span>Forgot password?</Span>
-				</ForgotBox>
 				<PropulsionLogo src={propulsion_logo}/>
 			</Background>
 	);
