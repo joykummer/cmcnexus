@@ -24,9 +24,13 @@ class CreateOrganisations(CreateAPIView):
 
 class GetUpdateByIdView(RetrieveUpdateAPIView):
     queryset = Organisation.objects.all()
-    serializer_class = OrganisationSerializer
     lookup_url_kwarg = 'id'
     permission_classes = [CustomDjangoModelPermission]
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return OrganisationSerializer
+        return CreateOrganisationSerializer
 
 
 class ListOrganisationsByCategory(ListAPIView):
