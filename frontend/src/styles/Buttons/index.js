@@ -24,7 +24,7 @@ export const AddButton = styled(RedButton)`
 
 export const EditSaveButton = styled(RedButton)`
   width: 75px;
-  height: 40px;
+  height: auto;
   margin-bottom: 50px;
 `;
 

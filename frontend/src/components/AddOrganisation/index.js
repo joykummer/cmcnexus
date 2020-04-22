@@ -60,7 +60,6 @@ function AddOrganisation(props) {
         name="name"
         type = "text"
         maxLength = "100"
-        // onkeydown = {lengthChecker}
         onChange={(e) => setName(e.target.value)}
         value={name}
         required

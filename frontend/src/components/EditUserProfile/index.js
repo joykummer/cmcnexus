@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import ClipLoader from "react-spinners/ClipLoader";
 import Time from "react-time";
 import { useDispatch } from 'react-redux';
 import { editUser } from "../../store/actions/Authentication/editUserActions";
@@ -94,13 +95,14 @@ export default function EditUserProfile() {
 	const [last_name, setLastName] = useState(user.last_name);
 	const [phone, setPhone] = useState(user.phone);
 	const [department, setDepartment] = useState(user.department);
-
+	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
 		dispatch(setNavigationAction(USERPROFILE));
 	}, [dispatch]);
 
 	const onClickHandler = async (e) => {
+		setLoading(true)
 		const data = {
 			first_name: first_name,
 			last_name: last_name,
@@ -108,6 +110,7 @@ export default function EditUserProfile() {
 			department: department,
 		};
 		await dispatch(editUser(data));
+		setLoading(false)
 		history.push(`/profile/`);
 	};
 
@@ -209,7 +212,7 @@ return (user ?<Wrapper>
 			</GeneralElements>
 		</DetailsContainer>
 		<EditSaveButton onClick={onClickHandler}>
-			Save
+			{loading ? <ClipLoader size={35} color={"white"}/> : "SAVE"}
 		</EditSaveButton>
 	</Container>
 </Wrapper> : "user not found")

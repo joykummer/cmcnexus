@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import { connect } from "react-redux";
 import { editOrganisationFunction } from "../../store/actions/Organisations/editOrganisationAction";
 import { categoriesFunction } from "../../store/actions/Categories/categoriesAction";
 import { Label } from "../AddOrganisation/styles";
+import { ORGANISATIONS } from '../Navigation/states';
+import {setNavigationAction} from '../../store/actions/Navigation';
 import { EditSaveButton } from "../../styles/Buttons";
 import { CategoryDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
@@ -17,38 +20,39 @@ function EditOrganisation(props) {
       )
     : null;
 
-  const [name, setName] = useState(organisationDetails.name);
-  const [description, setDescription] = useState(organisationDetails.description);
-  const [services, setServices] = useState(organisationDetails.services);
-  const [tag, setTag] = useState(organisationDetails.tag);
-  const dispatch = props.dispatch;
-  const categories = [];
-
-  useEffect(() => {
-    dispatch(categoriesFunction());
-  }, [dispatch]);
-
-
-  const setCategoryHandler = (e) => {
-    const id = e.target.options.selectedIndex;
-    const categoryOption = e.target.options;
-    if ((categoryOption[id].selected === true) && !(categories.some((category) => category === id)) ) {
-        categories.push(id)
-    }
-  };
-
+    const [name, setName] = useState(organisationDetails.name);
+    const [description, setDescription] = useState(organisationDetails.description);
+    const [services, setServices] = useState(organisationDetails.services);
+    const [tag, setTag] = useState(organisationDetails.tag);
+    const [categories, setCategories] = useState(organisationDetails.categories.map(category => category.name));
+    const [categoryIds, setCategoryIds] = useState(props.categories.id);
+    const dispatch = props.dispatch;
+    const [loading, setLoading] = useState(false)
+  
+    useEffect(() => {
+      dispatch(categoriesFunction());
+      dispatch(setNavigationAction(ORGANISATIONS));
+    }, [dispatch]);
+  
+    const setCategoryHandler = (e) => {
+      const selectedOptions = Array.from(e.target.selectedOptions);
+      setCategories(selectedOptions.map(option => option.value));
+      setCategoryIds(selectedOptions.map(option => option.id));
+    };  
 
   const editOrganisationHandler = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const data = {
       name: name,
       description: description,
       services: services,
-    //   categories: categories,
+      categories: categoryIds,
       tag: tag,
     };
     const organisationId = organisationDetails.id;
-    await props.dispatch(editOrganisationFunction(data, organisationId));
+    await dispatch(editOrganisationFunction(data, organisationId));
+    setLoading(false)
     props.history.push("/organisations/");
   };
 
@@ -88,24 +92,28 @@ function EditOrganisation(props) {
       />
       </Label>
       <Label>Category
-      <CategoryDropdown onChange={setCategoryHandler} multiple>
-         {props.categories
-          ? props.categories.map((category) => {
-              return (
-                <option key={category.id} id={category.id}>
-                  {category.name}
-                </option>
-              );
-            })
-          : null}
-      </CategoryDropdown>
+      <CategoryDropdown
+            value={categories}
+            onChange={setCategoryHandler}
+            multiple
+          >
+            {props.categories
+              ? props.categories.map((category) => {
+                  return (
+                    <option key={category.id} id={category.id}>
+                      {category.name}
+                    </option>
+                  );
+                })
+              : null}
+          </CategoryDropdown>
       </Label>
       </DetailsContainer>
       </>
       ) :(
         <div>This organisation does not exist.</div>
       )}
-      <EditSaveButton onClick={editOrganisationHandler}>Save</EditSaveButton>
+      <EditSaveButton onClick={editOrganisationHandler}>{loading ? <ClipLoader size={35} color={"white"}/> : "SAVE"}</EditSaveButton>
     </Container>
   );
 }
