@@ -28,3 +28,7 @@ export const FieldInputLarge = styled.textarea`
   padding: 10px;
 `;
 
+export const FilterInput = styled(GreyRoundInput)`
+    width: 100%;
+    height: 25px;
+`;
