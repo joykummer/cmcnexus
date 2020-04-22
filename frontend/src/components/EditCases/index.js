@@ -62,10 +62,6 @@ function EditCases(props) {
   const [categoryIds, setCategoryIds] = useState(props.categories.id);
   const [titleError, setTitleError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-  const [diagnosisError, setDiagnosisError] = useState("");
-  const [justificationError, setJustificationError] = useState("");
-  const [recommendationError, setRecommendationError] = useState("");
-  const [consentError, setConsentError] = useState("");
   const [ageError, setAgeError] = useState("");
   const [sexError, setSexError] = useState("");
   const [countryError, setCountryError] = useState("");
@@ -87,31 +83,15 @@ function EditCases(props) {
   const validate = () => {
     let titleError = "";
     let descriptionError = "";
-    let justificationError = "";
-    let recommendationError = "";
-    let ageError = "";
     let sexError = "";
     let countryError = "";
     let categoriesError = "";
-    let diagnosisError = "";
 
     if (!title) {
       titleError = "Title cannot be blank";
     }
     if (!description) {
       descriptionError = "Description cannot be blank";
-    }
-    if (!justification) {
-      justificationError = "Justification cannot be blank";
-    }
-    if (!diagnosis) {
-      diagnosisError = "Diagnosis cannot be blank";
-    }
-    if (!recommendation) {
-      recommendationError = "Recommendation cannot be blank";
-    }
-    if (!age) {
-      ageError = "Age must be disclosed";
     }
     if (!sex) {
       sexError = "Sex must be disclosed";
@@ -126,22 +106,14 @@ function EditCases(props) {
     if (
       titleError ||
       descriptionError ||
-      justificationError ||
-      recommendationError ||
-      consentError ||
       ageError ||
       sexError ||
-      diagnosisError ||
       countryError ||
       categoriesError
     ) {
       setTitleError(titleError);
       setDescriptionError(descriptionError);
-      setJustificationError(justificationError);
-      setRecommendationError(recommendationError);
-      setConsentError(consentError);
       setAgeError(ageError);
-      setDiagnosisError(diagnosisError);
       setSexError(sexError);
       setCountryError(countryError);
       setCategoriesError(categoriesError);
@@ -152,7 +124,7 @@ function EditCases(props) {
 
   const editCaseHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    //setLoading(true);
     const isValid = validate();
     if (isValid) {
       const data = {
@@ -176,9 +148,9 @@ function EditCases(props) {
         country: country,
         categories: categoryIds,
       };
-      const caseId = caseDetails.id
+      const caseId = caseDetails.id;
       await dispatch(editCaseFunction(data, caseId));
-      setLoading(false);
+      //setLoading(false);
       props.history.push("/cases/");
     }
   };
@@ -242,30 +214,26 @@ function EditCases(props) {
         required
       />
       </Label>
+      <ErrorMessage>{descriptionError}</ErrorMessage>
       <Label>History of Presenting Complaint
       <FieldInputLarge
         name="history_description"
         onChange={(e) => setHistoryDescription(e.target.value)}
         value={history_description}
-        required
       />
-      <ErrorMessage>{descriptionError}</ErrorMessage>
       </Label>
       <Label>Diagnosis
       <FieldInputLarge
         name="diagnosis"
         onChange={(e) => setDiagnosis(e.target.value)}
         value={diagnosis}
-        required
       />
-      <ErrorMessage>{diagnosisError}</ErrorMessage>
       </Label>
       <Label>Past medical history
       <FieldInputLarge
         name="past_medical_history"
         onChange={(e) => setMedicalHistory(e.target.value)}
         value={past_medical_history}
-        required
       />
       </Label>
       <Label>Physical examination
@@ -273,7 +241,6 @@ function EditCases(props) {
         name="physical_examination"
         onChange={(e) => setPhysicalExamination(e.target.value)}
         value={physical_examination}
-        required
       />
       </Label>
       <Label>Investigations
@@ -281,7 +248,6 @@ function EditCases(props) {
         name="investigations"
         onChange={(e) => setInvestigations(e.target.value)}
         value={investigations}
-        required
       />
       </Label>
       <Label>Current treatment
@@ -289,7 +255,6 @@ function EditCases(props) {
         name="current_treatment"
         onChange={(e) => setCurrentTreatment(e.target.value)}
         value={current_treatment}
-        required
       />
       </Label>
       <Label>Justification
@@ -297,18 +262,14 @@ function EditCases(props) {
         name="justification"
         onChange={(e) => setJustification(e.target.value)}
         value={justification}
-        required
       />
-          <ErrorMessage>{justificationError}</ErrorMessage>
       </Label>
       <Label>Recommendation
       <FieldInputLarge
         name="recommendation"
         onChange={(e) => setRecommendation(e.target.value)}
         value={recommendation}
-        required
       />
-        <ErrorMessage>{recommendationError}</ErrorMessage>
       </Label>
       <Label>Birth date
       <FieldInput
@@ -325,7 +286,6 @@ function EditCases(props) {
         onChange={(e) => setAge(e.target.value)}
         value={age}
         min="0"
-        required
       />
       </Label>
           <ErrorMessage>{ageError}</ErrorMessage>
@@ -347,7 +307,6 @@ function EditCases(props) {
           name="location"
           onChange={(e) => setLocation(e.target.value)}
           value={location}
-          required
       />
       </Label>
       <Label>Country
