@@ -109,7 +109,9 @@ class MatchOrganisation(GenericAPIView):
         for organisation_id in organisation_ids:
             Partnership(case_id=case.id, organisation_id=organisation_id).save()
             organisation_members = Organisation.objects.get(pk=organisation_id).member.all()
-            assign_perm("view_case", organisation_members, case)
+            for member in organisation_members:
+                if not member.has_perm("view_case", case):
+                    assign_perm("view_case", member, case)
         return Response(self.get_serializer(case).data)
 
     def delete(self, request, *args, **kwargs):
@@ -118,7 +120,9 @@ class MatchOrganisation(GenericAPIView):
         for organisation_id in organisation_ids:
             Partnership.objects.get(case_id=case.id, organisation_id=organisation_id).delete()
             organisation_members = Organisation.objects.get(pk=organisation_id).member.all()
-            remove_perm("view_case", organisation_members, case)
+            for member in organisation_members:
+                if member.has_perm("view_case", case):
+                    remove_perm("view_case", member, case)
         return Response(self.get_serializer(case).data)
 
 

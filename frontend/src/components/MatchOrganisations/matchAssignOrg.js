@@ -36,7 +36,10 @@ import {casesFunction} from "../../store/actions/Cases/casesAction";
     }
   `;
 
-  const NotAccepted = styled.p`
+  const Red = styled.p`
+    color: red;
+  `;
+  const Green = styled.p`
     color: red;
   `;
 
@@ -52,13 +55,20 @@ function MatchActionable({singleCase, organisation, dispatch}) {
   const unmatch = () => {
     dispatch(unmatchOrganisationsFunction(singleCase.id, organisation.id));
   };
-  return <>{
-    isStatus(singleCase, organisation, "matched")
-      ? <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
-      : isStatus(singleCase, organisation, "accepted") || isStatus(singleCase, organisation, "assigned")
-          ? <NotAccepted>Ready to be assigned.</NotAccepted>
-            : <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+  const getButton = () => {
+    if (isStatus(singleCase, organisation, "matched")) {
+      return <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
+    } else if (isStatus(singleCase, organisation, "accepted")) {
+      return <MatchAssignButton onClick={unmatch} clicked={true}>Unmatch</MatchAssignButton>
+    } else if (isStatus(singleCase, organisation, "assigned")) {
+      return <Green>Case assigned.</Green>
+    } else {
+      return <MatchAssignButton onClick={match}>Match</MatchAssignButton>
+    }
+  }
 
+  return <>{
+    getButton()
   }</>;
 }
 
@@ -69,12 +79,20 @@ function AssignActionable({singleCase, organisation, dispatch}) {
   const unassign = () => {
     dispatch(unassignOrganisationsFunction(singleCase.id, organisation.id));
   };
+  const getButton = () => {
+    if (isStatus(singleCase, organisation, "accepted")) {
+      return <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
+    } else if (isStatus(singleCase, organisation, "assigned")) {
+      return <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
+    } else if (isStatus(singleCase, organisation, "matched")) {
+      return <Red>Case not accepted.</Red>
+    } else {
+      return <Red>Case not matched.</Red>
+    }
+  }
+
   return <>{
-    isStatus(singleCase, organisation, "accepted")
-      ? <MatchAssignButton onClick={assign}>Assign</MatchAssignButton>
-      : isStatus(singleCase, organisation, "assigned")
-        ? <MatchAssignButton onClick={unassign} clicked={true}>Unassign</MatchAssignButton>
-        : <NotAccepted>not matched or accepted.</NotAccepted>
+    getButton()
   }</>;
 }
 
