@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
 import {RedAddText, RedButton} from "../../styles/Buttons";
@@ -65,6 +65,13 @@ export const RedText = styled.div`
 
 function CaseDetails(props) {
   const dispatch = props.dispatch;
+  const caseDetails = props.cases
+    ? props.cases.find((file) => file.id === Number(props.match.params.id)) : null;
+  const partnership = Boolean(props.user && props.user.organisation && caseDetails)
+      ? props.user.organisation.partnered_cases.find(cse => cse.case === caseDetails.id) : null;
+  const partnership_status = partnership ? partnership.status : null;
+  console.log(Boolean(props.user && props.user.organisation && caseDetails))
+  console.log(caseDetails, partnership, partnership_status)
 
   useEffect(() => {
     dispatch(casesFunction());
@@ -81,9 +88,6 @@ function CaseDetails(props) {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
     };
 
-  const caseDetails = props.cases
-    ? props.cases.find((file) => file.id === Number(props.match.params.id))
-    : null;
 
   return (
     <Container>
@@ -105,11 +109,14 @@ function CaseDetails(props) {
               </CanI>
             </Horizontal>
           </HeaderTitleWrapper>
-          <Stripe>Status Details</Stripe>
+          <Stripe>Status</Stripe>
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
+              {partnership_status ?
+                  <StatusDetailsValue status={partnership_status}>{partnership_status}</StatusDetailsValue>
+                  : <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
+                  }
               <Empty/>
               <StatusButtonsContainer>
                 {caseDetails.status === "requested" ? (
@@ -277,6 +284,7 @@ function CaseDetails(props) {
 const mapStateToProps = (state) => {
   return {
     cases: state.cases,
+    user: state.auth.user,
   };
 };
 
