@@ -16,6 +16,7 @@ import {
 import {categoriesFunction} from '../../store/actions/Categories/categoriesAction';
 import styled from 'styled-components';
 import {organisationsFunction} from '../../store/actions/Organisations/organisationsAction';
+import {FilterInput} from "../../styles/Inputs";
 
 const Title = styled.div`
 padding: 10px;
@@ -32,7 +33,7 @@ function DefaultColumnFilter({
 	const count = preFilteredRows.length
 
 	return (
-		<input
+		<FilterInput
 			value={filterValue || ''}
 			onChange={e => {
 				setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely

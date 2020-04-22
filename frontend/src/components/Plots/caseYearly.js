@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
-
 import Chart from '.';
-import {useSelector} from 'react-redux';
 
 
 export default function(props) {

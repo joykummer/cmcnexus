@@ -10,7 +10,6 @@ import { AddButton } from "../../styles/Buttons";
 import { CategoryDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
-import {organisationsFunction} from "../../store/actions/Organisations/organisationsAction";
 
 
 function AddOrganisation(props) {
@@ -46,7 +45,6 @@ function AddOrganisation(props) {
       tag: tag,
     };
     await dispatch(addOrganisationFunction(data));
-    // console.log("response", response)
     setLoading(false);
     props.history.push("/organisations/");
   };
@@ -101,7 +99,6 @@ function AddOrganisation(props) {
             onChange={setCategoryHandler}
             multiple
           >
-            {/*<option value="default" disabled>Please choose here...</option>*/}
             {props.categories
               ? props.categories.map((category) => {
                   return (

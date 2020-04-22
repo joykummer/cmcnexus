@@ -7,7 +7,7 @@ import { categoriesFunction } from "../../store/actions/Categories/categoriesAct
 import { editCaseFunction } from "../../store/actions/Cases/editCaseAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES_ADD} from '../Navigation/states';
-import {AddButton, EditSaveButton} from "../../styles/Buttons/index"
+import {EditSaveButton} from "../../styles/Buttons/index"
 import {Label} from "../AddOrganisation/styles";
 import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
@@ -88,7 +88,6 @@ function EditCases(props) {
   const validate = () => {
     let titleError = "";
     let descriptionError = "";
-    let diagnosisError = "";
     let justificationError = "";
     let recommendationError = "";
     let consentError = "";
@@ -96,6 +95,7 @@ function EditCases(props) {
     let sexError = "";
     let countryError = "";
     let categoriesError = "";
+    let diagnosisError = "";
 
     if (!title) {
       titleError = "Title cannot be blank";
@@ -103,11 +103,11 @@ function EditCases(props) {
     if (!description) {
       descriptionError = "Description cannot be blank";
     }
-    if (!diagnosis) {
-      diagnosisError = "Diagnosis cannot be blank";
-    }
     if (!justification) {
       justificationError = "Justification cannot be blank";
+    }
+    if (!diagnosis) {
+      diagnosisError = "Diagnosis cannot be blank";
     }
     if (!recommendation) {
       recommendationError = "Recommendation cannot be blank";
@@ -131,22 +131,22 @@ function EditCases(props) {
     if (
       titleError ||
       descriptionError ||
-      diagnosisError ||
       justificationError ||
       recommendationError ||
       consentError ||
       ageError ||
       sexError ||
+      diagnosisError ||
       countryError ||
       categoriesError
     ) {
       setTitleError(titleError);
       setDescriptionError(descriptionError);
-      setDiagnosisError(diagnosisError);
       setJustificationError(justificationError);
       setRecommendationError(recommendationError);
       setConsentError(consentError);
       setAgeError(ageError);
+      setDiagnosisError(diagnosisError);
       setSexError(sexError);
       setCountryError(countryError);
       setCategoriesError(categoriesError);
@@ -255,7 +255,7 @@ function EditCases(props) {
         value={history_description}
         required
       />
-           <ErrorMessage>{descriptionError}</ErrorMessage>
+      <ErrorMessage>{descriptionError}</ErrorMessage>
       </Label>
       <Label>Diagnosis
       <FieldInputLarge
@@ -405,9 +405,23 @@ function EditCases(props) {
               : null}
           </CategoryDropdown>
         </Label>
+          <ErrorMessage>{countryError}</ErrorMessage>
+      <Label>Category
+      <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
+        {props.categories
+          ? props.categories.map((category) => {
+              return (
+                <option key={category.id} id={category.id}>
+                  {category.name}
+                </option>
+              );
+            })
+          : null}
+      </CategoryDropdown>
+      </Label>
           <ErrorMessage>{categoriesError}</ErrorMessage>
       </DetailsContainer>
-      <AddButton onClick={editCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} /> :  "SUBMIT"}</AddButton>
+      <EditSaveButton onClick={editCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} /> :  "SUBMIT"}</EditSaveButton>
     </Container>
   );
 }
