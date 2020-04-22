@@ -143,7 +143,6 @@ function CaseDetails(props) {
                   <CloseCase id={caseDetails}/>
                 </CanI>
               </StatusButtonsContainer>
-
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Organisations Progress</DetailsKey>
@@ -178,13 +177,11 @@ function CaseDetails(props) {
                 </Table>
               </StatusDetailsValueOrgs>
             </DetailsHeader>
-
             <DetailsHeader>
               <DetailsKey>Outcome</DetailsKey>
               <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-
           <Stripe>Patient's details</Stripe>
           <DetailsContainer>
             <DetailsHeader>

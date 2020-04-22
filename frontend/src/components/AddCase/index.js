@@ -136,8 +136,7 @@ function AddCase(props) {
         country: country,
         categories: categoryIds,
       };
-      await dispatch(addCaseFunction(data));
-      props.history.push("/cases/");
+      await dispatch(addCaseFunction(data, props.history));
     }
     setLoading(false);
   };
@@ -317,7 +316,7 @@ function AddCase(props) {
           >
             {/*<option value="default" disabled>Please choose here...</option>*/}
             {props.categories
-              ? props.categories.map((category) => {
+              ? props.categories.filter((c) => c.id !== 0).map((category) => {
                   return (
                     <option key={category.id} id={category.id}>
                       {category.name}

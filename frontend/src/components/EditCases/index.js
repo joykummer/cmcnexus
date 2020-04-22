@@ -326,7 +326,7 @@ function EditCases(props) {
       <Label>Category
       <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
         {props.categories
-          ? props.categories.map((category) => {
+          ? props.categories.filter((c) => c.id !== 0).map((category) => {
               return (
                 <option key={category.id} id={category.id}>
                   {category.name}
