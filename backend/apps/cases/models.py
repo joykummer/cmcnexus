@@ -67,7 +67,6 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
     categories = models.ManyToManyField(
         to=Category,
         related_name='cases',
-        blank=True
     )
     consent = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
