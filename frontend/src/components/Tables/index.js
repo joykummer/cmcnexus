@@ -129,13 +129,28 @@ function SelectStatusFilter({
 	)
 }
 
+function getSafe(fn, defaultVal) {
+    try {
+        return fn();
+    } catch (e) {
+        return defaultVal;
+    }
+}
+
 export default () => {
 	const history = useHistory();
 	const dispatch = useDispatch()
 	const cases = useSelector(state => state.cases)
+	const user = useSelector(state => state.auth.user)
+  	const partnerships = Boolean(user && user.organisation)
+      ? user.organisation.partnered_cases : null; //
+  const getStatus = singleCase => partnerships ?
+	  getSafe(() => partnerships.find(cse => cse.case === singleCase.id).status)
+	  : singleCase.status;
 	const tableCases = React.useMemo(() => {
 		return cases.map(singleCase => ({
 			...singleCase,
+			status: getStatus(singleCase),
 			categories: ("categories" in singleCase) ? singleCase.categories.map(cat => cat.name).join(', ') : "",
 		}))
 	}, [cases])
