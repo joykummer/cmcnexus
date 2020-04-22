@@ -149,8 +149,7 @@ function EditCases(props) {
         categories: categoryIds,
       };
       const caseId = caseDetails.id;
-      await dispatch(editCaseFunction(data, caseId));
-      props.history.push("/cases/");
+      await dispatch(editCaseFunction(data, caseId, props.history));
     }
     setLoading(false);
   };

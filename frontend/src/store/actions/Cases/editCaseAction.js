@@ -9,7 +9,9 @@ export const editCase = cases => {
     }
   };
 
-export const editCaseFunction = (data, case_id) => async (dispatch) => {
-const response = await Axios.patch(`cases/${case_id}/`, data)
-dispatch(editCase(response.data))
+export const editCaseFunction = (data, case_id, history) => async (dispatch) => {
+    const response = await Axios.patch(`cases/${case_id}/`, data)
+    dispatch(editCase(response.data))
+    const caseId = response.data.id;
+    history.push(`/cases/details/${caseId}`);
 }
