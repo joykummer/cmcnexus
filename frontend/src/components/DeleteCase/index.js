@@ -9,8 +9,11 @@ export default function DeleteCase(singleCase) {
 
 
   const deleteCaseFunc = (singleCase) => {
-    dispatch(deleteCaseFunction(singleCase.singleCase.id))
-
+    if (singleCase.singleCase.status === "requested" || singleCase.singleCase.status === "closed") {
+      dispatch(deleteCaseFunction(singleCase.singleCase.id))
+    } else {
+      return null;
+    }
   };
 
   return(

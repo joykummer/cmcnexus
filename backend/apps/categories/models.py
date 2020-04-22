@@ -4,7 +4,6 @@ from django.db import models
 class Category(models.Model):
 
     CATEGORY_CHOICES = (
-        (0, "Undefined"),
         (1, "Medical"),
         (2, "Administrative"),
         (3, "Logistics"),
@@ -12,7 +11,7 @@ class Category(models.Model):
 
     id = models.IntegerField(
         choices=CATEGORY_CHOICES,
-        default=0,
+        default=1,
         primary_key=True
     )
 

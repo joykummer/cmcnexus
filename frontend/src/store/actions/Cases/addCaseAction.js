@@ -9,11 +9,13 @@ export const addCaseAction = (cases) => {
   };
 };
 
-export const addCaseFunction = (data) => async (dispatch) => {
+export const addCaseFunction = (data, history) => async (dispatch) => {
   try {
     const response = await Axios.post("cases/add/", data);
     dispatch(casesFunction())
     dispatch(addCaseAction(response.data));
+    const caseId = response.data.id
+    history.push(`/cases/details/${caseId}/`);
   } catch (e) {
     return (e)
   }

@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const ChildrenBox = styled.div`
 flex-grow: 1;
 height: 100%;
-overflow: scroll;
+overflow: auto;
 width: 100%;
 `;
 

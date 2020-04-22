@@ -5,10 +5,10 @@ export const Container = styled.div`
   height: 100%;
   background-color: #EBEBEB;
   padding: 40px 60px 40px 60px;
-  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  overflow: auto;
 `;
 
 export const HeaderTitle = styled.div`

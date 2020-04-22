@@ -143,7 +143,6 @@ function CaseDetails(props) {
                   <CloseCase id={caseDetails}/>
                 </CanI>
               </StatusButtonsContainer>
-
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Organisations Progress</DetailsKey>
@@ -178,13 +177,11 @@ function CaseDetails(props) {
                 </Table>
               </StatusDetailsValueOrgs>
             </DetailsHeader>
-
             <DetailsHeader>
               <DetailsKey>Outcome</DetailsKey>
               <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-
           <Stripe>Patient's details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
@@ -260,7 +257,15 @@ function CaseDetails(props) {
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Physical examination</DetailsKey>
-              <DetailsValue>{caseDetails.physical_examinatino}</DetailsValue>
+              <DetailsValue>{caseDetails.physical_examination}</DetailsValue>
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Investigations</DetailsKey>
+              <DetailsValue>{caseDetails.investigations}</DetailsValue>
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Current treatment</DetailsKey>
+              <DetailsValue>{caseDetails.current_treatment}</DetailsValue>
             </DetailsHeader>
             <DetailsHeader>
               <DetailsKey>Justification</DetailsKey>
