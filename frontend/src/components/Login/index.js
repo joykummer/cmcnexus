@@ -33,6 +33,12 @@ color: #717171;
 margin-bottom: 7px;
 `;
 
+const RedText = styled.div`
+font-size: 12px;
+color: red;
+margin-bottom: 3px;
+`;
+
 const Span = styled.span`
 font-size: 15px;
 color: #717171;
@@ -72,14 +78,21 @@ height: 40px;
 export function Login() {
 	const is_authenticated = useSelector(state => state.auth.is_authenticated)
 	const [email, setEmail] = useState('')
+	const [error, setError] = useState('')
 	const [password, setPassword] = useState('');
 	const [rememberMe, setRememberMe] = useState(true);
 	const dispatch = useDispatch();
 
-	const LoginSubmitHandler = e => {
+	const LoginSubmitHandler = async e => {
 		e.preventDefault();
 		if (isEmail(email) && password) {
-			login({email, password, rememberMe})(dispatch);
+			const resp = await dispatch(login({email, password, rememberMe}));
+			if (resp.statusText !== "OK") {
+				console.log(resp.response.data.detail)
+				setError(resp.response.data.detail);
+			} else {
+				setError("");
+			}
 		}
 	}
 
@@ -96,6 +109,7 @@ export function Login() {
 						<Text>Password</Text>
 						<LoginInput name={'password'} type={'password'} value={password}
 												onChange={e => setPassword(e.target.value)}/>
+						<RedText>{error}</RedText>
 
 						<Controls>
 							<label>
