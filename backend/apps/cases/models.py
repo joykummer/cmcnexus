@@ -43,6 +43,13 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         ("Urgent", "Urgent"),
         ("Life changing", "Life changing")
     )
+    CLOSING_REASON_CHOICES = (
+        (0, "Success/Transfer Accepted"),
+        (1, "Patient died"),
+        (2, "Not fulfilling criteria"),
+        (3, "No Partner Organisation found"),
+        (4, "Other"),
+    )
 
     title = models.CharField(max_length=100)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=10, default='')
@@ -83,6 +90,7 @@ class Case(xwf_models.WorkflowEnabled, models.Model):
         blank=True,
         null=True
     )
+    closing_reason = models.IntegerField(choices=CLOSING_REASON_CHOICES, default=4)
 
     @xworkflows.transition_check("reject")
     def hook(self, *args, **kwargs):

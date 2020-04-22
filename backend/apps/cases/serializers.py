@@ -68,7 +68,7 @@ class GeneralInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Case
         fields = ['id', 'status', 'title', 'country', 'location', 'age', 'consent', 'language', 'nature_of_referral', 'patient_id',
-                  'age', 'birth_date', 'categories', 'created_by', 'match_stats']
+                  'age', 'birth_date', 'categories', 'created_by', 'match_stats', 'closing_reason']
 
 
 class MedicalInfoSerializer(serializers.ModelSerializer):
@@ -79,6 +79,13 @@ class MedicalInfoSerializer(serializers.ModelSerializer):
         fields = ['description', 'history_description', 'diagnosis', 'past_medical_history', 'physical_examination',
                   'investigations', 'current_treatment', 'justification', 'recommendation', 'sex',
                   'comments', 'outcome', 'status']
+
+
+class CloseCaseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Case
+        fields = ['closing_reason']
 
 
 def get_general_or_medical_info(request):
