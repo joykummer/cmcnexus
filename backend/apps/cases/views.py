@@ -55,7 +55,8 @@ class ClosingReasons(APIView):
     permission_classes = [IsAuthenticated, ClosePermission]
 
     def get(self, request):
-        return Response(Case.CLOSING_REASON_CHOICES)
+        closing_reasons = [{"id": reason[0], "name": reason[1]} for reason in Case.CLOSING_REASON_CHOICES]
+        return Response(closing_reasons)
 
 
 class ValidateCaseView(UpdateAPIView):
@@ -89,7 +90,8 @@ class CloseCaseView(UpdateAPIView):
             instance._prefetched_objects_cache = {}
 
         instance.close()
-        return Response(serializer.data)
+        case_serializer = CaseSerializer(instance)
+        return Response(case_serializer.data)
 
 
 class ReopenCaseView(UpdateAPIView):

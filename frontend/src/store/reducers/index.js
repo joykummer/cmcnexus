@@ -5,6 +5,7 @@ import organisations from './OrganisationsReducer';
 import categories from './CategoriesReducer';
 import navigation from './NavigationReducer';
 import stats from './StatisticsReducer';
+import closingReasons from "./ClosingReasons";
 
 const rootReducer = combineReducers({
 	auth,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
 	categories,
 	navigation,
 	stats,
+	closingReasons,
 });
 
 export default rootReducer

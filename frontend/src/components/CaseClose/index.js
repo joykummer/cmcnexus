@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {RedButton} from "../../styles/Buttons";
 import {BasicDropdown} from "../../styles/Dropdowns";
 import {CardBox} from "../../styles/GenericBoxes";
+import {useSelector} from "react-redux";
 
 export const RedText = styled.div`
   font-size: 14px;
@@ -37,12 +38,14 @@ cursor: pointer;
 export default function({closeFunction, closeCase}) {
     const [closeReason, setCloseReason] = useState('default');
     const [showError, setShowError] = useState(false);
+    const closingReasons = useSelector(state => state.closingReasons)
 
     const closeHandler = () => {
         if (closeReason === 'default') {
             setShowError(true);
         }
-        closeCase();
+        closeCase(closeReason);
+        closeFunction();
     };
 
     const selectHandler = e => {
@@ -58,8 +61,8 @@ export default function({closeFunction, closeCase}) {
                 {showError ? <RedText>Please select a valid choice.</RedText> : null}
                 <CloseDropdown value={closeReason} onChange={selectHandler}>
                     <option value={"default"} disabled>--Select--</option>
-                    <option>One</option>
-                    <option>Two</option>
+                    {closingReasons ? closingReasons.map(
+                        rsn => <option key={rsn.id} value={rsn.id}>{rsn.name}</option>) : null}
                 </CloseDropdown>
                 <RedButton onClick={closeHandler}>Close case</RedButton>
             </Vertical>
