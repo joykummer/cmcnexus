@@ -8,9 +8,9 @@ const updateCaseAction = (file) => {
   };
 };
 
-export const closeCaseFunction = (caseId) => async (dispatch) => {
+export const closeCaseFunction = (caseId, closingReasonId) => async (dispatch) => {
   try {
-    const response = await Axios.patch(`cases/${caseId}/close/`);
+    const response = await Axios.patch(`cases/${caseId}/close/`, {closing_reason: closingReasonId});
     dispatch(updateCaseAction(response.data));
   } catch (e) {
     return e;

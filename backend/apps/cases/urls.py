@@ -2,7 +2,7 @@ from django.urls import path
 
 from apps.cases.views import RetrieveUpdateDeleteCaseView, ValidateCaseView, CloseCaseView, \
     RejectCaseView, MatchOrganisation, AssignOrganisation, AcceptCaseAsOrg, RefuseCaseAsOrg, ListCaseView, \
-    CreateCaseView, ReopenCaseView
+    CreateCaseView, ReopenCaseView, ClosingReasons
 
 urlpatterns = [
     path('', ListCaseView.as_view()),
@@ -16,4 +16,5 @@ urlpatterns = [
     path('<int:case_id>/assign/', AssignOrganisation.as_view()),
     path('<int:case_id>/accept/', AcceptCaseAsOrg.as_view()),
     path('<int:case_id>/refuse/', RefuseCaseAsOrg.as_view()),
+    path('closingreasons/', ClosingReasons.as_view()),
 ]

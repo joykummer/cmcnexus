@@ -4,13 +4,15 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, UpdateAPIView,
     ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_guardian.filters import ObjectPermissionsFilter
 
 from apps.cases.permissions import ValidatePermission, MatchOrganisationPermission, \
     AssignOrganisationPermission, AcceptRejectCasePermission, ReopenPermission
 from apps.cases.models import Case, Partnership
 from apps.cases.permissions import ClosePermission, RejectPermission
-from apps.cases.serializers import CaseSerializer, get_general_or_medical_info, GeneralInfoSerializer
+from apps.cases.serializers import CaseSerializer, get_general_or_medical_info, GeneralInfoSerializer, \
+    CloseCaseSerializer
 from apps.helpers.permissions import CustomDjangoObjectPermission
 from apps.cases.serializers import CreateCaseSerializer
 from apps.organisations.models import Organisation
@@ -49,6 +51,14 @@ class RetrieveUpdateDeleteCaseView(RetrieveUpdateDestroyAPIView):
         return get_general_or_medical_info(self.request)
 
 
+class ClosingReasons(APIView):
+    permission_classes = [IsAuthenticated, ClosePermission]
+
+    def get(self, request):
+        closing_reasons = [{"id": reason[0], "name": reason[1]} for reason in Case.CLOSING_REASON_CHOICES]
+        return Response(closing_reasons)
+
+
 class ValidateCaseView(UpdateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
@@ -63,14 +73,25 @@ class ValidateCaseView(UpdateAPIView):
 
 class CloseCaseView(UpdateAPIView):
     queryset = Case.objects.all()
-    serializer_class = CaseSerializer
+    serializer_class = CloseCaseSerializer
     permission_classes = [IsAuthenticated, ClosePermission]
     lookup_url_kwarg = 'case_id'
 
     def update(self, request, *args, **kwargs):
-        case = self.get_object()
-        case.close()
-        return Response(self.get_serializer(case).data)
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
+        instance.close()
+        case_serializer = CaseSerializer(instance)
+        return Response(case_serializer.data)
 
 
 class ReopenCaseView(UpdateAPIView):
