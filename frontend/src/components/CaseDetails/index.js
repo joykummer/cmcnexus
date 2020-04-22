@@ -63,6 +63,13 @@ export const RedText = styled.div`
   margin: 0 10px;
 `;
 
+export const CloseReason = styled.div`
+  font-size: 16px;
+  color: red;
+  vertical-align: middle;
+  margin: 0 10px;
+`;
+
 function CaseDetails(props) {
   const dispatch = props.dispatch;
   const caseDetails = props.cases
@@ -70,6 +77,7 @@ function CaseDetails(props) {
   const partnership = Boolean(props.user && props.user.organisation && caseDetails)
       ? props.user.organisation.partnered_cases.find(cse => cse.case === caseDetails.id) : null;
   const partnership_status = partnership ? partnership.status : null;
+  console.log(caseDetails)
 
   useEffect(() => {
     dispatch(casesFunction());
@@ -114,6 +122,10 @@ function CaseDetails(props) {
               {partnership_status ?
                   <StatusDetailsValue status={partnership_status}>{partnership_status}</StatusDetailsValue>
                   : <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
+              }{
+                caseDetails.status === "closed" ?
+                      <CloseReason>{caseDetails.closing_reason}</CloseReason>
+                    : null
                   }
               <Empty/>
               <StatusButtonsContainer>

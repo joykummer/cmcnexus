@@ -14,6 +14,11 @@ class CaseSerializer(serializers.ModelSerializer):
     created_by = UserForCaseSerializer(read_only=True)
     comments = CommentSerializer(many=True)
     match_stats = serializers.SerializerMethodField()
+    closing_reason = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_closing_reason(case):
+        return case.get_closing_reason_display()
 
     def get_match_stats(self, obj):
         status_count = []
