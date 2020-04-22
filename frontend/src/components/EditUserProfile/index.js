@@ -128,16 +128,6 @@ return (user ?<Wrapper>
 					/>
 				</Column>
 			</GeneralElements>
-			<GeneralElements>
-				<FieldName>
-					Role
-				</FieldName>
-				<Column>
-					<MissingElements>
-						{user.role}
-					</MissingElements>
-				</Column>
-			</GeneralElements>
 			{user.organisation ?
 				<GeneralElements>
 					<FieldName>
