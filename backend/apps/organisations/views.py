@@ -31,7 +31,7 @@ class GetUpdateByIdView(RetrieveUpdateAPIView):
         if self.request.method == 'GET':
             return OrganisationSerializer
         return CreateOrganisationSerializer
-        
+
 
 class ListOrganisationsByCategory(ListAPIView):
     queryset = Organisation.objects.none()
