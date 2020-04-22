@@ -4,7 +4,6 @@ import matchSorter from 'match-sorter';
 import {useDispatch, useSelector} from 'react-redux';
 import {casesFunction} from '../../store/actions/Cases/casesAction';
 import {useHistory} from 'react-router-dom';
-
 import {
 	Table,
 	TableBody,
@@ -16,6 +15,7 @@ import {
 } from "../../styles/Tables";
 import {categoriesFunction} from '../../store/actions/Categories/categoriesAction';
 import styled from 'styled-components';
+import {FilterInput} from "../../styles/Inputs";
 
 const Title = styled.div`
 padding: 10px;
@@ -32,7 +32,7 @@ function DefaultColumnFilter({
 	const count = preFilteredRows.length
 
 	return (
-		<input
+		<FilterInput
 			value={filterValue || ''}
 			onChange={e => {
 				setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
@@ -49,12 +49,12 @@ function SelectColumnFilter({
 	// Calculate the options for filtering
 	// using the preFilteredRows
 	const options = React.useMemo(() => {
-		const options = new Set()
+		const options = new Set();
 		preFilteredRows.forEach(row => {
 			options.add(row.values[id])
 		})
 		return [...options.values()]
-	}, [id, preFilteredRows])
+	}, [id, preFilteredRows]);
 
 	// Render a multi-select box
 	return (

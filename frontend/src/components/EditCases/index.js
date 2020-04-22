@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 import countryList from "react-select-country-list";
 import { connect } from "react-redux";
@@ -7,7 +6,7 @@ import { categoriesFunction } from "../../store/actions/Categories/categoriesAct
 import { editCaseFunction } from "../../store/actions/Cases/editCaseAction";
 import {setNavigationAction} from '../../store/actions/Navigation';
 import {CASES_ADD} from '../Navigation/states';
-import {AddButton, EditSaveButton} from "../../styles/Buttons/index"
+import {EditSaveButton} from "../../styles/Buttons/index"
 import {Label} from "../AddOrganisation/styles";
 import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
@@ -32,7 +31,6 @@ function EditCases(props) {
     
   const [title, setTitle] = useState(caseDetails.title);
   const [description, setDescription] = useState(caseDetails.description);
-  const [diagnosis, setDiagnosis] = useState(caseDetails.diagnosis);
   const [justification, setJustification] = useState(caseDetails.justification);
   const [recommendation, setRecommendation] = useState(caseDetails.recommendation);
   const [consent, setConsent] = useState(caseDetails.consent);
@@ -44,7 +42,6 @@ function EditCases(props) {
   const [categoryIds, setCategoryIds] = useState([]);
   const [titleError, setTitleError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-  const [diagnosisError, setDiagnosisError] = useState("");
   const [justificationError, setJustificationError] = useState("");
   const [recommendationError, setRecommendationError] = useState("");
   const [consentError, setConsentError] = useState("");
@@ -65,19 +62,10 @@ function EditCases(props) {
     setCategoryIds(selectedOptions.map(option => option.id));
   };
 
-  // const consentChecker =(e) => {
-  //   if (e.target.ckecked){
-  //     setConsent(true)
-  //   }else{
-  //     setConsent(false)
-  //   }
-  // console.log("hello it is the checker", e.target.checked)
-  // }
 
   const validate = () => {
     let titleError = "";
     let descriptionError = "";
-    let diagnosisError = "";
     let justificationError = "";
     let recommendationError = "";
     let consentError = "";
@@ -91,9 +79,6 @@ function EditCases(props) {
     }
     if (!description) {
       descriptionError = "Description cannot be blank";
-    }
-    if (!diagnosis) {
-      diagnosisError = "Diagnosis cannot be blank";
     }
     if (!justification) {
       justificationError = "Justification cannot be blank";
@@ -120,7 +105,6 @@ function EditCases(props) {
     if (
       titleError ||
       descriptionError ||
-      diagnosisError ||
       justificationError ||
       recommendationError ||
       consentError ||
@@ -131,7 +115,6 @@ function EditCases(props) {
     ) {
       setTitleError(titleError);
       setDescriptionError(descriptionError);
-      setDiagnosisError(diagnosisError);
       setJustificationError(justificationError);
       setRecommendationError(recommendationError);
       setConsentError(consentError);
@@ -151,7 +134,6 @@ function EditCases(props) {
       const data = {
         title: title,
         description: description,
-        diagnosis: diagnosis,
         justification: justification,
         recommendation: recommendation,
         consent: consent,
@@ -160,15 +142,11 @@ function EditCases(props) {
         country: country,
         categories: categoryIds,
       };
-      const caseId = caseDetails.id
+      const caseId = caseDetails.id;
       dispatch(editCaseFunction(data, caseId));
       props.history.push("/cases/");
     }
   };
-
-  // const checkHandler = (e) => {
-  //  return caseDetails.consent ? consent.checked : !consent.checked
-  // }
 
   return (
     <Container>
@@ -194,16 +172,6 @@ function EditCases(props) {
       />
       </Label>
            <ErrorMessage>{descriptionError}</ErrorMessage>
-      <Label>Diagnosis
-      <FieldInputLarge
-        name="diagnosis"
-        placeholder ={caseDetails.diagnosis}
-        onChange={(e) => setDiagnosis(e.target.value)}
-        value={diagnosis}
-        required
-      />
-      </Label>
-          <ErrorMessage>{diagnosisError}</ErrorMessage>
       <Label>Justification
       <FieldInputLarge
         name="justification"
@@ -227,7 +195,7 @@ function EditCases(props) {
       <Label>Patient's consent
       <Checkbox
         type="checkbox"
-        placeholder ={caseDetails.consent}
+        placeholder="true"
         name="consent"
         value="checked"
         required
@@ -277,7 +245,6 @@ function EditCases(props) {
           <ErrorMessage>{countryError}</ErrorMessage>
       <Label>Category
       <CategoryDropdown value={categories} onChange={setCategoryHandler} multiple>
-          {/*<option value="default" disabled>Please choose here...</option>*/}
         {props.categories
           ? props.categories.map((category) => {
               return (
