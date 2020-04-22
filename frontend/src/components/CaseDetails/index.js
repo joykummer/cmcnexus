@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
-import {EditSaveButton, RedButton} from "../../styles/Buttons";
+import {EditSaveButton, RedAddText, RedButton} from "../../styles/Buttons";
 import {
   Vertical,
   Status,
@@ -16,7 +16,8 @@ import {
   MATCH_ORGANISATIONS,
   UPDATE_MATCH,
   CHANGE_CASE,
-  CLOSE_CASE
+  CLOSE_CASE,
+  DELETE_CASE
 } from "../Permissions/permissions";
 import AcceptCase from "../AcceptCase";
 import RejectCase from "../RejectCase";
@@ -24,19 +25,61 @@ import CloseCase from "../CloseCase";
 import styled from "styled-components";
 import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
 import {Stripe, DetailsHeader, DetailsKey, DetailsValue, StatusDetailsValue} from "../../styles/Details";
+import DeleteCase from "../DeleteCase";
+import {Empty} from "../../styles/GenericBoxes";
+import {
+  Table,
+  TableBody,
+  TableData,
+  TableHeader,
+  TableHeaderRow,
+  TableHeaderWrapper,
+  TableRow
+} from "../../styles/Tables";
 
-const ButtonContainer = styled.div`
-width: 225px;
-display: flex;
-justify-content: space-between; 
+const HeaderTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+`;
+
+const StatusButtonsContainer = styled.div`
+  display: flex;
+  fllex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+`;
+
+const StatusDetailsValueOrgs = styled(StatusDetailsValue)`
+margin: 20px 0 0 0;
+flex-grow: 1;
+`;
+
+const Spacer = styled.div`
+width: 1%;
 `;
 
 const Match = styled(RedButton)`
   width: 225px;
+ height: 40px;
+`;
+
+export const RedText = styled.div`
+  font-size: 18px;
+  color: red;
+  vertical-align: middle;
+  margin: 0 10px;
 `;
 
 function CaseDetails(props) {
   const dispatch = props.dispatch;
+  const caseDetails = props.cases
+    ? props.cases.find((file) => file.id === Number(props.match.params.id)) : null;
+  const partnership = Boolean(props.user && props.user.organisation && caseDetails)
+      ? props.user.organisation.partnered_cases.find(cse => cse.case === caseDetails.id) : null;
+  const partnership_status = partnership ? partnership.status : null;
+  console.log(Boolean(props.user && props.user.organisation && caseDetails))
+  console.log(caseDetails, partnership, partnership_status)
 
   useEffect(() => {
     dispatch(casesFunction());
@@ -53,15 +96,107 @@ function CaseDetails(props) {
         props.history.push(`/cases/edit/${caseDetails.id}/`)
     }
 
-  const caseDetails = props.cases
-    ? props.cases.find((file) => file.id === Number(props.match.params.id))
-    : null;
 
   return (
     <Container>
       {caseDetails ? (
         <>
-          <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle>
+          <HeaderTitleWrapper>
+            <HeaderTitle>Case Details of {caseDetails.title}</HeaderTitle>
+
+            <Horizontal>
+              <CanI perform={CHANGE_CASE}>
+               <RedAddText onClick={redirectHandler}>✎ Edit</RedAddText>
+              </CanI>
+              <CanI perform={DELETE_CASE}>
+                <CanI perform={CHANGE_CASE}>
+                 <RedText> | </RedText>
+                </CanI>
+              </CanI>
+              <CanI perform={DELETE_CASE}>
+                <DeleteCase singleCase={caseDetails} />
+              </CanI>
+            </Horizontal>
+          </HeaderTitleWrapper>
+
+          <Stripe>Status</Stripe>
+          <DetailsContainer>
+            <DetailsHeader>
+              <DetailsKey>Status</DetailsKey>
+              {partnership_status ?
+                  <StatusDetailsValue status={partnership_status}>{partnership_status}</StatusDetailsValue>
+                  : <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
+                  }
+              <Empty/>
+              <StatusButtonsContainer>
+                {caseDetails.status === "requested" ? (
+                    <CanI perform={VALIDATE_CASE}>
+                      <Validation id={caseDetails.id}/>
+                    </CanI>
+                ) : null}
+                {caseDetails.status === "open" ? (
+                    <>
+                      <CanI perform={MATCH_ORGANISATIONS}>
+                        <Spacer/>
+                        <Match onClick={() => matchingHandler(caseDetails.id)}>
+                          MATCH ORGANISATIONS
+                        </Match>
+                      </CanI>
+                      <CanI perform={UPDATE_MATCH}>
+                        <Spacer/>
+                        <AcceptCase singleCase={caseDetails}/>
+                        <Spacer/>
+                        <RejectCase singleCase={caseDetails}/>
+                      </CanI>
+                    </>
+                ) : null}
+                <CanI perform={CLOSE_CASE}>
+                  <Spacer/>
+                  <CloseCase id={caseDetails}/>
+                </CanI>
+              </StatusButtonsContainer>
+
+            </DetailsHeader>
+            <DetailsHeader>
+              <DetailsKey>Organisations Progress</DetailsKey>
+              <StatusDetailsValueOrgs>
+                <Table>
+                  <TableHeaderWrapper>
+                    <TableHeaderRow>
+                      {caseDetails.match_stats ?
+                          caseDetails.match_stats.map(stat => {
+                            return (
+                                <TableHeader key={stat.status}>
+                                  {stat.status}
+                                </TableHeader>
+                            );
+                          })
+                          : null}
+                    </TableHeaderRow>
+                  </TableHeaderWrapper>
+                  <TableBody>
+                    <TableRow>
+                      {caseDetails.match_stats ?
+                          caseDetails.match_stats.map(stat => {
+                            return (
+                                <TableData key={stat.status}>
+                                  <b>{stat.count}</b>
+                                </TableData>
+                            );
+                          })
+                          : null}
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </StatusDetailsValueOrgs>
+            </DetailsHeader>
+
+            <DetailsHeader>
+              <DetailsKey>Outcome</DetailsKey>
+              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
+            </DetailsHeader>
+          </DetailsContainer>
+
           <Stripe>Patient's details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
@@ -117,6 +252,7 @@ function CaseDetails(props) {
               </DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
+
           <Stripe>Medical details</Stripe>
           <DetailsContainer>
             <DetailsHeader>
@@ -148,58 +284,7 @@ function CaseDetails(props) {
               <DetailsValue>{caseDetails.recommendation}</DetailsValue>
             </DetailsHeader>
           </DetailsContainer>
-          <Stripe>Status Details</Stripe>
-          <DetailsContainer>
-            <DetailsHeader>
-              <DetailsKey>Organisations Status</DetailsKey>
-              <StatusDetailsValue>
-              <Vertical>
-              {caseDetails.match_stats ?
-                caseDetails.match_stats.map(stat => {
-                  return (
-                    <Horizontal key={stat.status}>
-                      <Status>{stat.status}</Status>
-                      <b>{stat.count}</b>
-                    </Horizontal>
-                    );
-                  })
-                : null}
-              </Vertical>
-              </StatusDetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
-              <DetailsKey>Status</DetailsKey>
-              <StatusDetailsValue>{caseDetails.status}</StatusDetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
-              <DetailsKey>Outcome</DetailsKey>
-              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
-            </DetailsHeader>
-          </DetailsContainer>
-          <CanI perform={VALIDATE_CASE}>
-            <Validation id={caseDetails.id} />
-          </CanI>
-          <CanI perform={CLOSE_CASE}>
-            <CloseCase id={caseDetails} />
-          </CanI>
-          {caseDetails.status === "open" ? (
-            <>
-              <CanI perform={MATCH_ORGANISATIONS}>
-                <Match onClick={() => matchingHandler(caseDetails.id)}>
-                  MATCH ORGANISATIONS
-                </Match>
-              </CanI>
-              <CanI perform={UPDATE_MATCH}>
-                <ButtonContainer>
-                <AcceptCase singleCase={caseDetails} />
-                <RejectCase singleCase={caseDetails} />
-                </ButtonContainer>
-              </CanI>
-              <CanI perform={CHANGE_CASE}>
-               <EditSaveButton onClick={redirectHandler}>Edit</EditSaveButton>
-              </CanI>
-            </>
-          ) : null}
+
         </>
       ) : (
         <div>No case to show</div>
@@ -211,6 +296,7 @@ function CaseDetails(props) {
 const mapStateToProps = (state) => {
   return {
     cases: state.cases,
+    user: state.auth.user,
   };
 };
 

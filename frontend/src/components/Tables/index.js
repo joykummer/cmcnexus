@@ -8,7 +8,7 @@ import {useHistory} from 'react-router-dom';
 import {
 	Table,
 	TableBody,
-	TableData,
+	ReactTableData,
 	TableHeader,
 	TableHeaderRow,
 	TableHeaderWrapper,
@@ -74,6 +74,61 @@ function SelectColumnFilter({
 	)
 }
 
+function SelectCategoriesFilter({
+																	column: { filterValue, setFilter, preFilteredRows, id },
+																}) {
+	// Calculate the options for filtering
+	// using the preFilteredRows
+	const options = useSelector(state => state.categories).map(cat => cat.name);
+
+	// Render a multi-select box
+	return (
+		<select
+			value={filterValue}
+			onChange={e => {
+				setFilter(e.target.value || undefined)
+			}}
+		>
+			<option value="">All</option>
+			{options.sort((a, b) => a - b).map((option, i) => (
+				<option key={i} value={option}>
+					{option}
+				</option>
+			))}
+		</select>
+	)
+}
+
+function SelectStatusFilter({
+																	column: { filterValue, setFilter, preFilteredRows, id },
+																}) {
+	// Calculate the options for filtering
+	// using the preFilteredRows
+	const case_names = useSelector(state => state.cases).map(casee => casee.status);
+
+	const options = React.useMemo(() => {
+		const options = new Set(case_names)
+		return [...options.values()]
+	}, [id, preFilteredRows])
+
+	// Render a multi-select box
+	return (
+		<select
+			value={filterValue}
+			onChange={e => {
+				setFilter(e.target.value || undefined)
+			}}
+		>
+			<option value="">All</option>
+			{options.sort((a, b) => a - b).map((option, i) => (
+				<option key={i} value={option}>
+					{option}
+				</option>
+			))}
+		</select>
+	)
+}
+
 export default () => {
 	const history = useHistory();
 	const dispatch = useDispatch()
@@ -98,7 +153,7 @@ export default () => {
 				accessor: 'id',
 				filter: 'fuzzyText',
 				Filter: SelectColumnFilter,
-				width: 20
+				width: 20,
 			},
 			{
 				Header: 'Title',
@@ -109,6 +164,7 @@ export default () => {
 				Header: 'Status',
 				accessor: 'status',
 				filter: 'fuzzyText',
+				Filter: SelectStatusFilter,
 			},
 			{
 				Header: 'Country',
@@ -118,6 +174,7 @@ export default () => {
 			{
 				Header: 'Categories',
 				accessor: 'categories',
+				Filter: SelectCategoriesFilter,
 			},
 		],
 		[]
@@ -195,7 +252,7 @@ export default () => {
 				return (
 					<TableRow {...row.getRowProps({onClick: () => history.push(`details/${row.values.id}/`)})}>
 						{row.cells.map(cell => {
-							return <TableData  {...cell.getCellProps()}>{cell.render('Cell')}</TableData>
+							return <ReactTableData  {...cell.getCellProps()} >{cell.render('Cell')}</ReactTableData>
 						})}
 					</TableRow>
 				)

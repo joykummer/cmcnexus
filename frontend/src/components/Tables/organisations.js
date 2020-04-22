@@ -74,6 +74,31 @@ function SelectColumnFilter({
 	)
 }
 
+function SelectCategoriesFilter({
+																	column: { filterValue, setFilter, preFilteredRows, id },
+																}) {
+	// Calculate the options for filtering
+	// using the preFilteredRows
+	const options = useSelector(state => state.categories).map(cat => cat.name);
+
+	// Render a multi-select box
+	return (
+		<select
+			value={filterValue}
+			onChange={e => {
+				setFilter(e.target.value || undefined)
+			}}
+		>
+			<option value="">All</option>
+			{options.sort((a, b) => a - b).map((option, i) => (
+				<option key={i} value={option}>
+					{option}
+				</option>
+			))}
+		</select>
+	)
+}
+
 export default () => {
 	const history = useHistory();
 	const dispatch = useDispatch()
@@ -108,6 +133,7 @@ export default () => {
 			{
 				Header: 'Categories',
 				accessor: 'categories',
+				Filter: SelectCategoriesFilter,
 			},
 			{
 				Header: 'Tag',

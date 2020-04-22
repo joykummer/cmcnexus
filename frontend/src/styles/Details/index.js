@@ -14,7 +14,10 @@ export const Stripe = styled.div`
 
 export const DetailsHeader = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
   padding: 5px;
+  width: 100%;
 `;
 
 export const DetailsKey = styled.div`
@@ -30,4 +33,7 @@ export const DetailsValue = styled.div`
 export const StatusDetailsValue = styled.div`
     padding-left: 15px;
     text-transform: capitalize;
+    
+    
+  color: ${props => props.status ? props.theme.colors.status[props.status] : null}}
 `;

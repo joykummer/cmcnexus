@@ -238,22 +238,20 @@ function AddCase(props) {
         value={description}
         required
       />
+      <ErrorMessage>{descriptionError}</ErrorMessage>
       </Label>
       <Label>History of Presenting Complaint
       <FieldInputLarge
         name="history_description"
         onChange={(e) => setHistoryDescription(e.target.value)}
         value={history_description}
-        required
       />
-           <ErrorMessage>{descriptionError}</ErrorMessage>
       </Label>
       <Label>Diagnosis
       <FieldInputLarge
         name="diagnosis"
         onChange={(e) => setDiagnosis(e.target.value)}
         value={diagnosis}
-        required
       />
       <ErrorMessage>{diagnosisError}</ErrorMessage>
       </Label>
@@ -262,7 +260,6 @@ function AddCase(props) {
         name="past_medical_history"
         onChange={(e) => setMedicalHistory(e.target.value)}
         value={past_medical_history}
-        required
       />
       </Label>
       <Label>Physical examination
@@ -270,7 +267,6 @@ function AddCase(props) {
         name="physical_examination"
         onChange={(e) => setPhysicalExamination(e.target.value)}
         value={physical_examination}
-        required
       />
       </Label>
       <Label>Investigations
@@ -278,7 +274,6 @@ function AddCase(props) {
         name="investigations"
         onChange={(e) => setInvestigations(e.target.value)}
         value={investigations}
-        required
       />
       </Label>
       <Label>Current treatment
@@ -286,7 +281,6 @@ function AddCase(props) {
         name="current_treatment"
         onChange={(e) => setCurrentTreatment(e.target.value)}
         value={current_treatment}
-        required
       />
       </Label>
       <Label>Justification
@@ -294,7 +288,6 @@ function AddCase(props) {
         name="justification"
         onChange={(e) => setJustification(e.target.value)}
         value={justification}
-        required
       />
           <ErrorMessage>{justificationError}</ErrorMessage>
       </Label>
@@ -303,7 +296,6 @@ function AddCase(props) {
         name="recommendation"
         onChange={(e) => setRecommendation(e.target.value)}
         value={recommendation}
-        required
       />
         <ErrorMessage>{recommendationError}</ErrorMessage>
       </Label>
@@ -314,7 +306,6 @@ function AddCase(props) {
               name="consent"
               onChange={() => setConsent(true)}
               value="consent"
-              required
             />
             <Text>
               By ticking this box, I confirm that informed consent has been
@@ -338,7 +329,6 @@ function AddCase(props) {
         onChange={(e) => setAge(e.target.value)}
         value={age}
         min="0"
-        required
       />
       </Label>
           <ErrorMessage>{ageError}</ErrorMessage>
@@ -360,7 +350,6 @@ function AddCase(props) {
           name="location"
           onChange={(e) => setLocation(e.target.value)}
           value={location}
-          required
       />
       </Label>
       <Label>Country
