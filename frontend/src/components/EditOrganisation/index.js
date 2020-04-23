@@ -24,7 +24,7 @@ function EditOrganisation(props) {
     const [description, setDescription] = useState(organisationDetails.description);
     const [services, setServices] = useState(organisationDetails.services);
     const [tag, setTag] = useState(organisationDetails.tag);
-    const [categories, setCategories] = useState(organisationDetails.categories.map(category => category.name));
+    const [categories, setCategories] = useState(organisationDetails.categories.filter((c) => c.id !== 0).map(category => category.name));
     const [categoryIds, setCategoryIds] = useState(props.categories.id);
     const dispatch = props.dispatch;
     const [loading, setLoading] = useState(false)
@@ -98,7 +98,7 @@ function EditOrganisation(props) {
             multiple
           >
             {props.categories
-              ? props.categories.map((category) => {
+              ? props.categories.filter((c) => c.id !== 0).map((category) => {
                   return (
                     <option key={category.id} id={category.id}>
                       {category.name}

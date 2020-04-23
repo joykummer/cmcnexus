@@ -58,7 +58,7 @@ function EditCases(props) {
   const [location, setLocation] = useState(caseDetails.location);
   const countries = countryList().getData();
   const [country, setCountry] = useState(caseDetails.country);
-  const [categories, setCategories] = useState(caseDetails.categories.map(category => category.name));
+  const [categories, setCategories] = useState(caseDetails.categories.filter((c) => c.id !== 0).map(category => category.name));
   const [categoryIds, setCategoryIds] = useState(props.categories.id);
   const [titleError, setTitleError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
