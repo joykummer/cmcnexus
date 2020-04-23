@@ -148,10 +148,13 @@ function CaseDetails(props) {
                       </CanI>
                     </>
                 ) : null}
-                <CanI perform={CLOSE_CASE}>
-                  <Spacer/>
-                  <CloseCase caseDetails={caseDetails}/>
-                </CanI>
+                {
+                  caseDetails.status !== "requested"?(
+                  <CanI perform={CLOSE_CASE}>
+                    <Spacer/>
+                    <CloseCase caseDetails={caseDetails}/>
+                  </CanI>
+                  ): null}
               </StatusButtonsContainer>
             </DetailsHeader>
             <DetailsHeader>
