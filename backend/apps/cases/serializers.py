@@ -109,4 +109,4 @@ def get_general_or_medical_info(request):
         elif request.user.organisation.categories.filter(pk=1).exists():
             return CaseSerializer
         else:
-            return MedicalInfoSerializer
+            return GeneralInfoSerializer
