@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import { casesFunction } from "../../store/actions/Cases/casesAction";
 import Validation from "../Validation";
@@ -32,7 +32,6 @@ import {
   TableHeader,
   TableHeaderRow,
   TableHeaderWrapper,
-  TableRow
 } from "../../styles/Tables";
 
 const StatusButtonsContainer = styled.div`
@@ -68,6 +67,14 @@ export const CloseReason = styled.div`
   color: red;
   vertical-align: middle;
   margin: 0 10px;
+`;
+
+const CustomTableRow = styled.tr`
+  width: 100%;
+  text-transform: capitalize;
+  :nth-child(odd) {
+    background: #ebebeb;
+  }
 `;
 
 function CaseDetails(props) {
@@ -173,7 +180,7 @@ function CaseDetails(props) {
                     </TableHeaderRow>
                   </TableHeaderWrapper>
                   <TableBody>
-                    <TableRow>
+                    <CustomTableRow>
                       {caseDetails.match_stats ?
                           caseDetails.match_stats.map(stat => {
                             return (
@@ -183,7 +190,7 @@ function CaseDetails(props) {
                             );
                           })
                           : null}
-                    </TableRow>
+                    </CustomTableRow>
                   </TableBody>
                 </Table>
               </StatusDetailsValueOrgs>
