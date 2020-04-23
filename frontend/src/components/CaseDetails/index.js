@@ -117,7 +117,7 @@ function CaseDetails(props) {
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              {partnership_status ?
+              {partnership_status  && caseDetails.status === "open" ?
                   <StatusDetailsValue status={partnership_status}>{partnership_status}</StatusDetailsValue>
                   : <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
               }{
