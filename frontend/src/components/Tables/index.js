@@ -104,12 +104,21 @@ function SelectStatusFilter({
 																}) {
 	// Calculate the options for filtering
 	// using the preFilteredRows
-	const case_names = useSelector(state => state.cases).map(casee => casee.status);
+
+	const user = useSelector(state => state.auth.user);
+	const partnerships = Boolean(user && user.organisation)
+		? user.organisation.partnered_cases : null;
+
+	const case_statuses = useSelector(state => state.cases).map(casee => casee.status);
+	const partnership_statuses = () => partnerships.map(partnership => partnership.status);
+
+	const statuses = partnerships ? partnership_statuses() : case_statuses;
+	statuses.push("closed");
 
 	const options = React.useMemo(() => {
-		const options = new Set(case_names)
+		const options = new Set(statuses);
 		return [...options.values()]
-	}, [id, preFilteredRows])
+	}, [id, preFilteredRows]);
 
 	// Render a multi-select box
 	return (
@@ -139,14 +148,21 @@ function getSafe(fn, defaultVal) {
 
 export default () => {
 	const history = useHistory();
-	const dispatch = useDispatch()
-	const cases = useSelector(state => state.cases)
-	const user = useSelector(state => state.auth.user)
+	const dispatch = useDispatch();
+	const cases = useSelector(state => state.cases);
+	const user = useSelector(state => state.auth.user);
   	const partnerships = Boolean(user && user.organisation)
-      ? user.organisation.partnered_cases : null; //
-  const getStatus = singleCase => partnerships ?
-	  getSafe(() => partnerships.find(cse => cse.case === singleCase.id).status)
-	  : singleCase.status;
+      ? user.organisation.partnered_cases : null;
+
+  	const getPartnershipStatus = singleCase => {
+  		if (singleCase.status === "closed") {
+  			return "closed";
+		}
+	  return getSafe(() => partnerships.find(cse => cse.case === singleCase.id).status);
+	}
+
+  const getStatus = singleCase => partnerships ? getPartnershipStatus(singleCase) : singleCase.status;
+
 	const tableCases = React.useMemo(() => {
 		return cases.map(singleCase => ({
 			...singleCase,

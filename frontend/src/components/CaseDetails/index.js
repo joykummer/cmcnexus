@@ -68,6 +68,15 @@ export const CloseReason = styled.div`
   margin: 0 10px;
 `;
 
+const PatientsDetailsContainer = styled(DetailsContainer)`
+flex-direction: row;
+`;
+
+const PatientsDetailsHeader = styled(DetailsHeader)`
+width: 50%;
+padding-right: 20px;
+`;
+
 const CustomTableRow = styled.tr`
   width: 100%;
   text-transform: capitalize;
@@ -124,14 +133,11 @@ function CaseDetails(props) {
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              {partnership_status ?
+              {
+                partnership_status  && caseDetails.status === "open" ?
                   <StatusDetailsValue status={partnership_status}>{partnership_status}</StatusDetailsValue>
                   : <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
-              }{
-                caseDetails.status === "closed" ?
-                      <CloseReason>{caseDetails.closing_reason}</CloseReason>
-                    : null
-                }
+              }
               <Empty/>
               <StatusButtonsContainer>
                 {caseDetails.status === "requested" ? (
@@ -164,6 +170,14 @@ function CaseDetails(props) {
                   ): null}
               </StatusButtonsContainer>
             </DetailsHeader>
+            {
+              caseDetails.status === "closed" ? (
+                <DetailsHeader>
+                  <DetailsKey>Outcome</DetailsKey>
+                  <StatusDetailsValue>{caseDetails.closing_reason}</StatusDetailsValue>
+                </DetailsHeader>
+                ) : null
+              }
             <DetailsHeader>
               <DetailsKey>Organisations Progress</DetailsKey>
               <StatusDetailsValueOrgs>
@@ -197,66 +211,64 @@ function CaseDetails(props) {
                 </Table>
               </StatusDetailsValueOrgs>
             </DetailsHeader>
-            <DetailsHeader>
-              <DetailsKey>Outcome</DetailsKey>
-              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
-            </DetailsHeader>
           </DetailsContainer>
+
           <Stripe>Patient's details</Stripe>
-          <DetailsContainer>
-            <DetailsHeader>
+          <PatientsDetailsContainer>
+            <PatientsDetailsHeader>
               <DetailsKey>Title</DetailsKey>
               <DetailsValue>
               {caseDetails.title}
               </DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Patient ID</DetailsKey>
               <DetailsValue>{caseDetails.patient_id}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Language</DetailsKey>
               <DetailsValue>{caseDetails.language}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Nature of Referral</DetailsKey>
               <DetailsValue>{caseDetails.nature_of_referral}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Age</DetailsKey>
               <DetailsValue>{caseDetails.age}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Date of Birth</DetailsKey>
               <DetailsValue>{caseDetails.birth_date}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Sex</DetailsKey>
               <DetailsValue>{caseDetails.sex}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Location</DetailsKey>
               <DetailsValue>{caseDetails.location}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Country</DetailsKey>
               <DetailsValue>{caseDetails.country}</DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Consent</DetailsKey>
               <DetailsValue>
               {caseDetails.consent ? "Yes" : "No"}
               </DetailsValue>
-            </DetailsHeader>
-            <DetailsHeader>
+            </PatientsDetailsHeader>
+            <PatientsDetailsHeader>
               <DetailsKey>Category</DetailsKey>
               <DetailsValue>
                 {caseDetails
                   ? caseDetails.categories.map((category) => category.name).join(', ')
                   : null}
               </DetailsValue>
-            </DetailsHeader>
-          </DetailsContainer>
+            </PatientsDetailsHeader>
+          </PatientsDetailsContainer>
+
           <Stripe>Medical details</Stripe>
           <DetailsContainer>
             <DetailsHeader>

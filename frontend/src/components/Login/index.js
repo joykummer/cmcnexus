@@ -88,7 +88,9 @@ export function Login() {
 		if (isEmail(email) && password) {
 			const resp = await dispatch(login({email, password, rememberMe}));
 			if (resp.statusText !== "OK") {
-				setError(resp.response.data.detail);
+				try {
+					setError(resp.response.data.detail);
+				} catch {}
 			} else {
 				setError("");
 			}

@@ -7,15 +7,21 @@ import { categoriesFunction } from "../../store/actions/Categories/categoriesAct
 import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
-import { Label } from "../AddOrganisation/styles";
-import { AddButton } from "../../styles/Buttons";
+import {Label, Label50} from "../AddOrganisation/styles";
+import {AddButton, RedAddText} from "../../styles/Buttons";
 import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
-import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import {Container, DetailsContainer, HeaderTitle, HeaderTitleWrapper} from "../../styles/BaseContainer";
 import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
+import ExampleCase from "../Examples/case1";
+import {Empty} from "../../styles/GenericBoxes";
+import CanI from "../Permissions";
+import {Horizontal} from "../CaseDetails/styles";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
+  margin: 5px 0;
 `;
 
 const ErrorMessage = styled.div`
@@ -24,12 +30,20 @@ const ErrorMessage = styled.div`
 `;
 
 const Checkbox = styled.input`
-  margin-top: 2px;
   margin-right: 10px;
 `;
 
 const Text = styled.div`
   color: black;
+`;
+
+const HorizontalWrap = styled(Horizontal)`
+flex-wrap: wrap;
+`;
+
+const BasicDropdown50 = styled(BasicDropdown)`
+width: 100%;
+min-width: 160px;
 `;
 
 function AddCase(props) {
@@ -50,9 +64,10 @@ function AddCase(props) {
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("");
   const countries = countryList().getData();
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("default");
   const [categories, setCategories] = useState(["default"]);
   const [categoryIds, setCategoryIds] = useState([]);
+
   const [titleError, setTitleError] = useState("");
   const [consentError, setConsentError] = useState("");
   const [sexError, setSexError] = useState("");
@@ -71,6 +86,23 @@ function AddCase(props) {
     setCategories(selectedOptions.map((option) => option.value));
     setCategoryIds(selectedOptions.map((option) => option.id));
   };
+
+  const fillExampleCase = () => {
+      setTitle(ExampleCase["Title"]);
+      setPatientId(ExampleCase["Patient ID"]);
+      setLanguage(ExampleCase["Language"]);
+      setNatureOfReferral(ExampleCase["Nature of referral"]);
+      setAge(ExampleCase["Age"]);
+      setSex(ExampleCase["Sex"]);
+      setCategoryIds([ExampleCase["Category"].id]);
+      setCategories([ExampleCase["Category"].name]);
+      setConsent(ExampleCase["Consent"]);
+      setCountry(ExampleCase["Country"]);
+      setDescription(ExampleCase["Presenting complaint"]);
+      setHistoryDescription(ExampleCase["History of presenting complaint"]);
+      setPhysicalExamination(ExampleCase["Physical examination"]);
+      setInvestigations(ExampleCase["Investigations"]);
+  }
 
   const validate = () => {
     let titleError = "";
@@ -143,7 +175,11 @@ function AddCase(props) {
 
   return (
     <Container>
-      <HeaderTitle>Add case</HeaderTitle>
+      <HeaderTitleWrapper>
+        <HeaderTitle>Add case</HeaderTitle>
+        <Empty/>
+        <RedAddText onClick={fillExampleCase}>+ Form Magic</RedAddText>
+      </HeaderTitleWrapper>
       <DetailsContainer>
         <Label>
           Title
@@ -155,32 +191,90 @@ function AddCase(props) {
           />
           <ErrorMessage>{titleError}</ErrorMessage>
         </Label>
-        <Label>Language
-        <BasicDropdown
+
+      <Horizontal>
+          <div>
+        <Label>
+          Category
+          <CategoryDropdown
+            value={categories}
+            onChange={setCategoryHandler}
+            multiple
+          >
+            {/*<option value="default" disabled>--Select--</option>*/}
+            {props.categories
+              ? props.categories.filter((c) => c.id !== 0).map((category) => {
+                  return (
+                    <option key={category.id} id={category.id}>
+                      {category.name}
+                    </option>
+                  );
+                })
+              : null}
+          </CategoryDropdown>
+        </Label>
+        <ErrorMessage>{categoriesError}</ErrorMessage>
+              </div>
+
+      <HorizontalWrap>
+        <Label50>Language
+        <BasicDropdown50
           name="language"
           onChange={(e) => setLanguage(e.target.value)}
           value={language}
           required
         >
-          <option value="" disabled>Please choose here...</option>
+          <option value="" disabled>--Select--</option>
           <option key={1}>French</option>
           <option key={2}>English</option>
           <option key={3}>Spanish</option>
-        </BasicDropdown>
-        </Label>
-        <Label>Nature of Referral
-        <BasicDropdown
+        </BasicDropdown50>
+        </Label50>
+        <Label50>Nature of Referral
+        <BasicDropdown50
           name="nature_of_referral"
           onChange={(e) => setNatureOfReferral(e.target.value)}
           value={nature_of_referral}
           required
         >
-          <option value="" disabled>Please choose here...</option>
+          <option value="" disabled>--Select--</option>
           <option key={1}>Life changing</option>
           <option key={2}>Emergency</option>
           <option key={3}>Urgent</option>
-        </BasicDropdown>
-        </Label>
+        </BasicDropdown50>
+        </Label50>
+
+      <Label50>Sex
+      <BasicDropdown50
+        name="sex"
+        onChange={(e) => setSex(e.target.value)}
+        value={sex}
+        required
+      >
+          <option value="" disabled>--Select--</option>
+          <option key={1}>F</option>
+          <option key={2}>M</option>
+      </BasicDropdown50>
+      </Label50>
+      <ErrorMessage>{sexError}</ErrorMessage>
+      <Label50>Country
+      <BasicDropdown50 value={country} onChange={(e) => setCountry(e.target.value)}>
+          <option value="default" disabled>--Select--</option>
+          {countries
+          ? countries.map((country) => {
+              return (
+                <option key={country.value}>{country.label}</option>
+              );
+            })
+          : null
+          }
+      </BasicDropdown50>
+      <ErrorMessage>{countryError}</ErrorMessage>
+        </Label50>
+        </HorizontalWrap>
+      </Horizontal>
+
+      <Horizontal>
         <Label>Patient ID
         <FieldInput
           name="patient_id"
@@ -190,6 +284,39 @@ function AddCase(props) {
           min="0"
           required
       />
+      </Label>
+      <Label>Birth date
+      <FieldInput
+        name="birth_date"
+        type="text"
+        onChange={(e) => setBirthDate(e.target.value)}
+        value={birth_date}
+      />
+      </Label>
+      <Label>Age
+      <FieldInput
+        name="age"
+        type="number"
+        onChange={(e) => setAge(e.target.value)}
+        value={age}
+        min="0"
+      />
+      </Label>
+      </Horizontal>
+      <Label>Patient's consent
+          <Wrapper>
+            <Checkbox
+              type="checkbox"
+              name="consent"
+              onChange={() => setConsent(!consent)}
+              checked={consent}
+            />
+            <Text>
+              By ticking this box, I confirm that informed consent has been
+              obtained from the patient.
+            </Text>
+          </Wrapper>
+          <ErrorMessage>{consentError}</ErrorMessage>
       </Label>
       <Label>Presenting Complaint
       <FieldInputLarge
@@ -248,87 +375,11 @@ function AddCase(props) {
         value={recommendation}
       />
       </Label>
-      <Label>Patient's consent
-          <Wrapper>
-            <Checkbox
-              type="checkbox"
-              name="consent"
-              onChange={() => setConsent(true)}
-              value="consent"
-            />
-            <Text>
-              By ticking this box, I confirm that informed consent has been
-              obtained from the patient.
-            </Text>
-          </Wrapper>
-          <ErrorMessage>{consentError}</ErrorMessage>
-      </Label>
-      <Label>Birth date
-      <FieldInput
-        name="birth_date"
-        type="text"
-        onChange={(e) => setBirthDate(e.target.value)}
-        value={birth_date}
-      />
-      </Label>
-      <Label>Age
-      <FieldInput
-        name="age"
-        type="number"
-        onChange={(e) => setAge(e.target.value)}
-        value={age}
-        min="0"
-      />
-      </Label>
-      <Label>Sex
-      <BasicDropdown
-        name="sex"
-        onChange={(e) => setSex(e.target.value)}
-        value={sex}
-        required
-      >
-          <option value="" disabled>Please choose here...</option>
-          <option key={1}>F</option>
-          <option key={2}>M</option>
-      </BasicDropdown>
-      </Label>
-      <ErrorMessage>{sexError}</ErrorMessage>
-      <Label>Country
-      <BasicDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
-          <option value="default" disabled>Please choose here...</option>
-          {countries
-          ? countries.map((country) => {
-              return (
-                <option key={country.value}>{country.label}</option>
-              );
-            })
-          : null
-          }
-      </BasicDropdown>
-      <ErrorMessage>{countryError}</ErrorMessage>
-        </Label>
-        <Label>
-          Category
-          <CategoryDropdown
-            value={categories}
-            onChange={setCategoryHandler}
-            multiple
-          >
-            {/*<option value="default" disabled>Please choose here...</option>*/}
-            {props.categories
-              ? props.categories.filter((c) => c.id !== 0).map((category) => {
-                  return (
-                    <option key={category.id} id={category.id}>
-                      {category.name}
-                    </option>
-                  );
-                })
-              : null}
-          </CategoryDropdown>
-        </Label>
-          <ErrorMessage>{categoriesError}</ErrorMessage>
+
       </DetailsContainer>
-      <AddButton onClick={addCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} /> :  "SUBMIT"}</AddButton>
+      <AddButton onClick={addCaseHandler}>
+          {loading ? <ClipLoader size={18} color={"white"} /> :  "SUBMIT"}
+      </AddButton>
     </Container>
   );
 }
