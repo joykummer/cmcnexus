@@ -8,10 +8,13 @@ import { addCaseFunction } from "../../store/actions/Cases/addCaseAction";
 import { setNavigationAction } from "../../store/actions/Navigation";
 import { CASES_ADD } from "../Navigation/states";
 import { Label } from "../AddOrganisation/styles";
-import { AddButton } from "../../styles/Buttons";
+import {AddButton, RedAddText} from "../../styles/Buttons";
 import { CategoryDropdown, BasicDropdown } from "../../styles/Dropdowns";
-import { Container, DetailsContainer, HeaderTitle } from "../../styles/BaseContainer";
+import {Container, DetailsContainer, HeaderTitle, HeaderTitleWrapper} from "../../styles/BaseContainer";
 import { FieldInput, FieldInputLarge } from "../../styles/Inputs";
+import ExampleCase from "../Examples/case1";
+import {Empty} from "../../styles/GenericBoxes";
+import CanI from "../Permissions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,9 +53,10 @@ function AddCase(props) {
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("");
   const countries = countryList().getData();
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("default");
   const [categories, setCategories] = useState(["default"]);
   const [categoryIds, setCategoryIds] = useState([]);
+
   const [titleError, setTitleError] = useState("");
   const [consentError, setConsentError] = useState("");
   const [sexError, setSexError] = useState("");
@@ -71,6 +75,23 @@ function AddCase(props) {
     setCategories(selectedOptions.map((option) => option.value));
     setCategoryIds(selectedOptions.map((option) => option.id));
   };
+
+  const fillExampleCase = () => {
+      setTitle(ExampleCase["Title"]);
+      setPatientId(ExampleCase["Patient ID"]);
+      setLanguage(ExampleCase["Language"]);
+      setNatureOfReferral(ExampleCase["Nature of referral"]);
+      setAge(ExampleCase["Age"]);
+      setSex(ExampleCase["Sex"]);
+      setCategoryIds([ExampleCase["Category"].id]);
+      setCategories([ExampleCase["Category"].name]);
+      setConsent(ExampleCase["Consent"]);
+      setCountry(ExampleCase["Country"]);
+      setDescription(ExampleCase["Presenting complaint"]);
+      setHistoryDescription(ExampleCase["History of presenting complaint"]);
+      setPhysicalExamination(ExampleCase["Physical examination"]);
+      setInvestigations(ExampleCase["Investigations"]);
+  }
 
   const validate = () => {
     let titleError = "";
@@ -143,7 +164,11 @@ function AddCase(props) {
 
   return (
     <Container>
-      <HeaderTitle>Add case</HeaderTitle>
+      <HeaderTitleWrapper>
+        <HeaderTitle>Add case</HeaderTitle>
+        <Empty/>
+        <RedAddText onClick={fillExampleCase}>+ Form Magic</RedAddText>
+      </HeaderTitleWrapper>
       <DetailsContainer>
         <Label>
           Title
@@ -254,7 +279,7 @@ function AddCase(props) {
               type="checkbox"
               name="consent"
               onChange={() => setConsent(true)}
-              value="consent"
+              checked={consent}
             />
             <Text>
               By ticking this box, I confirm that informed consent has been
@@ -294,7 +319,7 @@ function AddCase(props) {
       </Label>
       <ErrorMessage>{sexError}</ErrorMessage>
       <Label>Country
-      <BasicDropdown defaultValue={"default"} onChange={(e) => setCountry(e.target.value)}>
+      <BasicDropdown value={country} onChange={(e) => setCountry(e.target.value)}>
           <option value="default" disabled>Please choose here...</option>
           {countries
           ? countries.map((country) => {
@@ -328,7 +353,9 @@ function AddCase(props) {
         </Label>
           <ErrorMessage>{categoriesError}</ErrorMessage>
       </DetailsContainer>
-      <AddButton onClick={addCaseHandler}>{loading ? <ClipLoader size={35} color={"white"} /> :  "SUBMIT"}</AddButton>
+      <AddButton onClick={addCaseHandler}>
+          {loading ? <ClipLoader size={18} color={"white"} /> :  "SUBMIT"}
+      </AddButton>
     </Container>
   );
 }

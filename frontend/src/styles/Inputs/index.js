@@ -16,7 +16,7 @@ export const FieldInput = styled(GreyRoundInput)`
 `;
 
 export const FieldInputLarge = styled.textarea`
-  height: 170px;
+  height: 100px;
   width: 100%;
   resize: none;
   margin-top: 2px;

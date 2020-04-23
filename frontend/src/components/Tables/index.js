@@ -110,9 +110,9 @@ function SelectStatusFilter({
 		? user.organisation.partnered_cases : null;
 
 	const case_statuses = useSelector(state => state.cases).map(casee => casee.status);
-	const partnership_statuses = partnerships.map(partnership => partnership.status);
+	const partnership_statuses = () => partnerships.map(partnership => partnership.status);
 
-	const statuses = partnerships ? partnership_statuses : case_statuses;
+	const statuses = partnerships ? partnership_statuses() : case_statuses;
 	statuses.push("closed");
 
 	const options = React.useMemo(() => {
