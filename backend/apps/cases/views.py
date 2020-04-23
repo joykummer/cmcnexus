@@ -172,9 +172,11 @@ class AssignOrganisation(GenericAPIView):
 
 class AcceptCaseAsOrg(GenericAPIView):
     queryset = Case
-    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, AcceptRejectCasePermission]
     lookup_url_kwarg = 'case_id'
+
+    def get_serializer_class(self):
+        return get_general_or_medical_info(self.request)
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()
@@ -193,9 +195,11 @@ class AcceptCaseAsOrg(GenericAPIView):
 
 class RefuseCaseAsOrg(GenericAPIView):
     queryset = Case
-    serializer_class = GeneralInfoSerializer
     permission_classes = [IsAuthenticated, AcceptRejectCasePermission]
     lookup_url_kwarg = 'case_id'
+
+    def get_serializer_class(self):
+        return get_general_or_medical_info(self.request)
 
     def post(self, request, *args, **kwargs):
         case = self.get_object()

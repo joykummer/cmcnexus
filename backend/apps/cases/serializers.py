@@ -106,5 +106,7 @@ def get_general_or_medical_info(request):
             return CreateCaseSerializer
         elif request.user.has_perm("cases.update_general_info"):
             return GeneralInfoSerializer
+        elif request.user.organisation.categories.filter(pk=1).exists():
+            return CaseSerializer
         else:
             return MedicalInfoSerializer
