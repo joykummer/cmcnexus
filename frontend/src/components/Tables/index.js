@@ -79,7 +79,7 @@ function SelectCategoriesFilter({
 																}) {
 	// Calculate the options for filtering
 	// using the preFilteredRows
-	const options = useSelector(state => state.categories).map(cat => cat.name);
+	const options = useSelector(state => state.categories).filter((c) => c.id !== 0).map(cat => cat.name);
 
 	// Render a multi-select box
 	return (
