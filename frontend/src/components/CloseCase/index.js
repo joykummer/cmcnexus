@@ -8,7 +8,7 @@ import {Container} from "../../styles/BaseContainer";
 import {getClosingReasons} from "../../store/actions/ClosingReasons/getClosingReasonsAction";
 
 
-export default function CloseCase(singleCase) {
+export default function CloseCase(props) {
   const dispatch = useDispatch();
   const [showClosePopup, setShowClosePopup] = useState(false);
 
@@ -16,17 +16,18 @@ export default function CloseCase(singleCase) {
     dispatch(getClosingReasons());
   }, [])
   const closeCase = closingReasonId => {
-    dispatch(closeCaseFunction(singleCase.id.id, closingReasonId))
+    console.log(props.caseDetails)
+    dispatch(closeCaseFunction(props.caseDetails.id, closingReasonId))
   };
   const reopenCase = () => {
-    dispatch(reopenCaseFunction(singleCase.id.id))
+    dispatch(reopenCaseFunction(props.caseDetails.id))
   };
   return <>
     {showClosePopup ? <Popup
         closeFunction={() => setShowClosePopup(false)}
         closeCase={closeCase}/> : null}
     {
-      singleCase.id.status === "closed"
+      props.caseDetails.status === "closed"
         ? (
           <OtherTwoOptionsButton onClick={reopenCase}>
             Reopen

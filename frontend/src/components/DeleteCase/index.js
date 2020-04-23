@@ -4,13 +4,13 @@ import { RedAddText } from "../../styles/Buttons";
 import {deleteCaseFunction} from "../../store/actions/Cases/deleteCaseAction";
 
 
-export default function DeleteCase(singleCase) {
+export default function DeleteCase(props) {
   const dispatch = useDispatch();
 
 
   const deleteCaseFunc = (singleCase) => {
-    if (singleCase.singleCase.status === "requested" || singleCase.singleCase.status === "closed") {
-      dispatch(deleteCaseFunction(singleCase.singleCase.id))
+    if (singleCase.status === "requested" || singleCase.status === "closed") {
+      dispatch(deleteCaseFunction(singleCase.id))
     } else {
       return null;
     }
@@ -19,7 +19,7 @@ export default function DeleteCase(singleCase) {
   return(
     <>
       {
-          <RedAddText onClick={()=>deleteCaseFunc(singleCase)}>Delete</RedAddText>
+          <RedAddText onClick={()=>deleteCaseFunc(props.singleCase)}>Delete</RedAddText>
       }
     </>
 )}

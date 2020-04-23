@@ -66,7 +66,6 @@ export const RedText = styled.div`
 export const CloseReason = styled.div`
   font-size: 16px;
   color: red;
-  vertical-align: middle;
   margin: 0 10px;
 `;
 
@@ -151,7 +150,7 @@ function CaseDetails(props) {
                 ) : null}
                 <CanI perform={CLOSE_CASE}>
                   <Spacer/>
-                  <CloseCase id={caseDetails}/>
+                  <CloseCase caseDetails={caseDetails}/>
                 </CanI>
               </StatusButtonsContainer>
             </DetailsHeader>
