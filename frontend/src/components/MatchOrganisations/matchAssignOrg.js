@@ -114,8 +114,8 @@ function MatchAssignOrg(props) {
     return props.organisations.filter(org => commonCategories(org, singleCase).length !== 0)
   };
 
-  const organisationsMatchingByCategory = filteredOrganisations()
-  const headers = ["Name", "Category", "Tag"];
+  const organisationsMatchingByCategory = filteredOrganisations();
+  const headers = ["Name", "Category"];
 
   return (
       <Table>
@@ -133,7 +133,6 @@ function MatchAssignOrg(props) {
                   <CustomTableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
                     <TableData>{organisation.categories.map((cat) => cat.name).join(', ')}</TableData>
-                    <TableData>{organisation.tag}</TableData>
                     <TableData>
                       <MatchActionable dispatch={props.dispatch} organisation={organisation} singleCase={singleCase}/>
                     </TableData>
