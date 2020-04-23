@@ -5,7 +5,7 @@ import { Container, HeaderTitle } from "../../styles/BaseContainer";
 function MatchOrganisations(props) {
     return (
     <Container>
-        <HeaderTitle>MATCH ORGANISATIONS</HeaderTitle>
+        <HeaderTitle>FIND ORGANISATIONS</HeaderTitle>
       <MatchAssignOrg caseId={parseInt(props.match.params.id)}/>
     </Container>
   );
