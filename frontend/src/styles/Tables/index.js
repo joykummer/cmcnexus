@@ -14,7 +14,7 @@ export const TableHeaderWrapper = styled.thead``;
 export const TableHeader = styled.th`
   height: 40px;
   text-align: left;
-    padding: 10px 0;
+    padding: 10px;
 `;
 
 export const TableHeaderRow = styled.tr``;
@@ -46,7 +46,6 @@ export const ReactTableData = styled.td`
   height: 25px;
   max-width: 150px;
   padding: 10px;
-  
   color: ${props => props.children.props.column.Header === "Status" ? 
     props.theme.colors.status[props.children.props.cell.value] : null}}
   :hover {

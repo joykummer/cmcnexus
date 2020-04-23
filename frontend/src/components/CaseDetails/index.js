@@ -138,7 +138,7 @@ function CaseDetails(props) {
                       <CanI perform={MATCH_ORGANISATIONS}>
                         <Spacer/>
                         <Match onClick={() => matchingHandler(caseDetails.id)}>
-                          MATCH ORGANISATIONS
+                          FIND ORGANISATIONS
                         </Match>
                       </CanI>
                       <CanI perform={UPDATE_MATCH}>
