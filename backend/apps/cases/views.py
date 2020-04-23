@@ -11,8 +11,7 @@ from apps.cases.permissions import ValidatePermission, MatchOrganisationPermissi
     AssignOrganisationPermission, AcceptRejectCasePermission, ReopenPermission
 from apps.cases.models import Case, Partnership
 from apps.cases.permissions import ClosePermission, RejectPermission
-from apps.cases.serializers import CaseSerializer, get_general_or_medical_info, GeneralInfoSerializer, \
-    CloseCaseSerializer
+from apps.cases.serializers import CaseSerializer, get_general_or_medical_info, CloseCaseSerializer
 from apps.helpers.permissions import CustomDjangoObjectPermission
 from apps.cases.serializers import CreateCaseSerializer
 from apps.organisations.models import Organisation
