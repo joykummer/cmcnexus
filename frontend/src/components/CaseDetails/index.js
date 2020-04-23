@@ -117,14 +117,11 @@ function CaseDetails(props) {
           <DetailsContainer>
             <DetailsHeader>
               <DetailsKey>Status</DetailsKey>
-              {partnership_status  && caseDetails.status === "open" ?
+              {
+                partnership_status  && caseDetails.status === "open" ?
                   <StatusDetailsValue status={partnership_status}>{partnership_status}</StatusDetailsValue>
                   : <StatusDetailsValue status={caseDetails.status}>{caseDetails.status}</StatusDetailsValue>
-              }{
-                caseDetails.status === "closed" ?
-                      <CloseReason>{caseDetails.closing_reason}</CloseReason>
-                    : null
-                }
+              }
               <Empty/>
               <StatusButtonsContainer>
                 {caseDetails.status === "requested" ? (
@@ -157,6 +154,14 @@ function CaseDetails(props) {
                   ): null}
               </StatusButtonsContainer>
             </DetailsHeader>
+            {
+              caseDetails.status === "closed" ? (
+                <DetailsHeader>
+                  <DetailsKey>Outcome</DetailsKey>
+                  <StatusDetailsValue>{caseDetails.closing_reason}</StatusDetailsValue>
+                </DetailsHeader>
+                ) : null
+              }
             <DetailsHeader>
               <DetailsKey>Organisations Progress</DetailsKey>
               <StatusDetailsValueOrgs>
@@ -189,10 +194,6 @@ function CaseDetails(props) {
                   </TableBody>
                 </Table>
               </StatusDetailsValueOrgs>
-            </DetailsHeader>
-            <DetailsHeader>
-              <DetailsKey>Outcome</DetailsKey>
-              <StatusDetailsValue>{caseDetails.outcome}</StatusDetailsValue>
             </DetailsHeader>
           </DetailsContainer>
           <Stripe>Patient's details</Stripe>

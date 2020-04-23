@@ -113,6 +113,7 @@ function SelectStatusFilter({
 	const partnership_statuses = partnerships.map(partnership => partnership.status);
 
 	const statuses = partnerships ? partnership_statuses : case_statuses;
+	statuses.push("closed");
 
 	const options = React.useMemo(() => {
 		const options = new Set(statuses);
@@ -152,9 +153,16 @@ export default () => {
 	const user = useSelector(state => state.auth.user);
   	const partnerships = Boolean(user && user.organisation)
       ? user.organisation.partnered_cases : null;
-  const getStatus = singleCase => partnerships ?
-	  getSafe(() => partnerships.find(cse => cse.case === singleCase.id).status)
-	  : singleCase.status;
+
+  	const getPartnershipStatus = singleCase => {
+  		if (singleCase.status === "closed") {
+  			return "closed";
+		}
+	  return getSafe(() => partnerships.find(cse => cse.case === singleCase.id).status);
+	}
+
+  const getStatus = singleCase => partnerships ? getPartnershipStatus(singleCase) : singleCase.status;
+
 	const tableCases = React.useMemo(() => {
 		return cases.map(singleCase => ({
 			...singleCase,
