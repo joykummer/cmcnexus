@@ -115,7 +115,7 @@ function MatchAssignOrg(props) {
   };
 
   const organisationsMatchingByCategory = filteredOrganisations()
-  const headers = ["Name", "Description", "Category", "Tag"];
+  const headers = ["Name", "Category", "Tag"];
 
   return (
       <Table>
@@ -132,7 +132,6 @@ function MatchAssignOrg(props) {
                 return (
                   <CustomTableRow key={organisation.id}>
                     <TableData>{organisation.name}</TableData>
-                    <TableData>{organisation.description}</TableData>
                     <TableData>{organisation.categories.map((cat) => cat.name).join(', ')}</TableData>
                     <TableData>{organisation.tag}</TableData>
                     <TableData>
