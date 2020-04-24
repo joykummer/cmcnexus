@@ -164,7 +164,7 @@ export default () => {
   const getStatus = singleCase => partnerships ? getPartnershipStatus(singleCase) : singleCase.status;
 
 	const tableCases = React.useMemo(() => {
-		return cases.map(singleCase => ({
+		return cases.sort((a, b) => b.id - a.id).map(singleCase => ({
 			...singleCase,
 			status: getStatus(singleCase),
 			categories: ("categories" in singleCase) ? singleCase.categories.map(cat => cat.name).join(', ') : "",

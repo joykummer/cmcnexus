@@ -21,8 +21,9 @@ export const DetailsHeader = styled.div`
 `;
 
 export const DetailsKey = styled.div`
-  width: 15%;
-  min-width: 150px;
+  width: 170px;
+  max-width: 170px;
+  min-width: 170px;
   color: #777;
 `;
 
