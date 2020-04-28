@@ -34,7 +34,6 @@ export default function Routes() {
   return (
     <Router>
       <Switch>
-        <Route  path="/testtable/" component={TestTable}/>
         <Route path='/login' component={Login}/>
         <PrivateRoute path='/404' component={UnderConstruction}/>
 
